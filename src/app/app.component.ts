@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
-import { RESTService } from './QLKTX/Service/rest.service';
-import * as Globals from './QLKTX/Service/global.service';
+import { RESTService } from './Service/rest.service';
+import * as Globals from './Service/global.service';
 
 @Component({
   selector: 'app-root',

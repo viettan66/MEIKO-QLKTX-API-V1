@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
               $(':text').val('')
             }
             else{
+              console.log(data)
               that.cookie.set('MKV9999_ID',data.MKV9999_ID+'')
               that.cookie.set('manhansu',data.manhansu+'')
               that.cookie.set('id',data.id+'')
@@ -35,7 +36,7 @@ export class LoginComponent implements OnInit {
               that.cookie.set('dienthoai_nharieng',data.dienthoai_nharieng+'')
               that.cookie.set('email',data.email+'')
               that.cookie.set('tinhtrangnhansu',data.tinhtrangnhansu+'')
-              //window.location.assign('')
+              window.location.assign('')
             }
         })
       })
