@@ -1,6 +1,5 @@
 export class MKV9982{
     public  MKV9982_ID :number     ;
-    public  MKV9999_ID : number    ;
     public  TENMENU :string     ;
     public  LINKMENU :   string  ;
     public  CAPMENU :number     ;

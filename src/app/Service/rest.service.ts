@@ -20,6 +20,12 @@ export class RESTService {
     headers.set('Content-Type', 'application/json');
     return this.http.post<Type>(Global.APIUrl+uri,post, {headers: headers});
   }
+  PutDataToAPI<Type> (post,uri) {
+    let data = JSON.stringify(post);
+    let headers = new HttpHeaders(); 
+    headers.set('Content-Type', 'application/json');
+    return this.http.put<Type>(Global.APIUrl+uri,post, {headers: headers});
+  }
 
   
 }

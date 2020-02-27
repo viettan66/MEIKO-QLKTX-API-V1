@@ -1,0 +1,27 @@
+<DIV class="row no-gutters">
+    <div class="col-4 px-1">
+        <div class="card">
+            <h5 class="card-header">TÀI KHOẢN</h5>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>chucvu</th>
+                            <th>Bộ phận</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taikhoan">
+                        <tr *ngFor="let element of listacc">
+                            <td>{{element.manhansu}}</td>
+                            <td>{{element.hodem+' '+element.ten}}</td>
+                            <td>{{element.chucvu}}</td>
+                            <td>{{element.phong_id}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</DIV>

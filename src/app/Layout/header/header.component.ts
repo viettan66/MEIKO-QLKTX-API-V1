@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public cookie:CookieService) { }
 
   ngOnInit() {
   }
-
+  logout(){
+    this.cookie.deleteAll();
+    window.location.reload();
+  }
 }

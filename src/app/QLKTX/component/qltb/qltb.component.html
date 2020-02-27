@@ -1,0 +1,96 @@
+<div class="row no-gutters h-100">
+    <app-menu></app-menu>
+      <div class="col" id="contentmenu">
+          <div class="row no-gutters px-2">
+            <div class="col-8 px-1">
+              <div class="card" >
+                <div class="card-header">
+                  DANH SÁCH ĐỒ DÙNG / THIẾT BỊ
+                  <!-- <button title="Thêm thủ công" style="margin-left: 10px;"  id="themKHU" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button> -->
+                </div>
+                <div class="card-body " style="">
+                    <TABLE class="table tabledodung">
+                      <thead>
+                        <TR>
+
+                        <td>STT</td>
+                        <td>TÊN ĐỒ DÙNG/TB</td>
+                        <td>GIÁ TIỀN</td>
+                        <td>GHI CHÚ</td>
+                        <td>TRẠNG THÁI</td>
+                        <td>CHỨC NĂNG</td>
+                        </TR>
+                      </thead>
+                      <TBOdy>
+                          <TR *ngFor="let element of ktx0010;let index=index">
+                            <td>{{index+1}}<input type="hidden" disabled class="form-control none" name=""  value="{{element.KTX0010_ID }}" ></td>
+                            <td><input type="text" disabled class="form-control none" name="ten"  value="{{element.ten }}" ></td>
+                            <td><input type="text" disabled class="form-control none" name="giatien"  value="{{element.giatien }}"></td>
+                            <td><input type="text" disabled class="form-control none" name="ghichu"  value="{{element.ghichu }}"></td>
+                            <td>
+                              <select class="none form-control" disabled name="trangthai">
+                                <option selected value="{{element.trangthai }}">{{element.trangthai?"Kích hoạt":"Tắt" }}</option>
+                                <option  value="true">Kích hoạt</option>
+                                <option  value="false">Tắt</option>
+                                </select>
+                              </td>
+                            <td><button title="Sửa" class="btn btn-secondary edititem"><i class="fa fa-edit"></i></button></td>
+                          </TR>
+                      </TBOdy>
+                    </TABLE>
+                </div>
+                
+              </div> 
+            </div>
+            <div class="col-4 px-1">
+              <div class="card" >
+                <div class="card-header">
+                  THÊM THIẾT BỊ
+                  <!-- <button title="Thêm thủ công" style="margin-left: 10px;"  id="themKHU" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button> -->
+                </div>
+                <div class="card-body " style="">
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">Tên đồ dùng/thiết bị</div>
+                      </div>
+                        <input type="text"  id="tendodung" class="form-control new">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">Giá tiền</div>
+                      </div>
+                        <input type="text"  id="giatien" class="form-control new">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">Ghi chú</div>
+                      </div>
+                        <input type="text"  id="ghichu" class="form-control new">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">Trạng thái</div>
+                      </div>
+                        <select class="new form-control" id="trangthai">
+                          <option value="1">Kích hoạt</option>
+                          <option value="0">Tắt</option>
+                        </select>
+                    </div>
+                  <button id="savedodung" class="btn btn-primary form-control"><i class="fa fa-save"></i></button>
+                  
+                  </div>
+                </div>
+                
+              </div> 
+            </div>
+          </div>
+      </div>
+  </div>
+  

@@ -16,16 +16,7 @@ public menu:MKV9982[]=[]
   ngOnInit() {
     let that = this
     $(document).ready(function () {
-      let id = window.location.href.replace(Global.HostUrl, '').split('|')[0]
-      that.rest.GetDataFromAPI<MKV9982[]>('Category/GetApps/Menu/'+id).subscribe(data=>{
-        that.menu=data;
-      })
-      /////////////////////////////////////
-      $('#contentmenu').load('ktx-dashboard.component.html')
-///////////////////////
-$(document).on('click','.menuclick',function(){
-  
-})
+      
       ////////////////////////
     })
   }

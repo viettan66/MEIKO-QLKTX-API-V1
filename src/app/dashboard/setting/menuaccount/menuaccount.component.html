@@ -1,0 +1,75 @@
+<div class="row no-gutters">
+    
+    <div class="col-4 px-1">
+        <div class="card">
+            <div class="card-header"><h5 class="float-left ">ỨNG DỤNG</h5><button class="btn addapp float-right"><i class="fa fa-plus"></i></button></div>
+            <div class="card-body" style="padding: 0;">
+                <ul class="list-group list-group-flush" id="listapp">
+                    <li id="{{element.MKV9982_ID}}" class="list-group-item" *ngFor="let element of listapp">{{element.TENMENU}}</li>
+                  </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-4 px-1">
+        <div class="card">
+            <div class="card-header"><h5 class="float-left ">CHỨC NĂNG</h5><button class="btn addmenu float-right"><i class="fa fa-plus"></i></button></div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush" id="listfunction">
+                    <li id="{{element.MKV9982_ID}}" class="list-group-item" *ngFor="let element of listmenu">{{element.TENMENU}}</li>
+                  </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade " id="addMKV9982" role="dialog" >
+	<div class="modal-dialog   modal-lg" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">{{title}}</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+                
+          <div class="col-12 my-1">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Tên ứng dụng</div>
+              </div>
+              <input type="text" class="form-control" id="ten" placeholder="Tên ứng dụng" value="1">
+            </div>
+          </div>   
+          <div class="col-12 my-1">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Link</div>
+              </div>
+              <input type="text" class="form-control" id="link" placeholder="link menu theo angular" value="1">
+            </div>
+          </div> 
+          <div class="col-12 my-1">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Ghi chú</div>
+              </div>
+              <input type="text" class="form-control" id="ghichu" placeholder="Ghi chú" value="1">
+            </div>
+          </div>
+          <div class="col-12 my-1">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Ảnh ứng dụng</div>
+              </div>
+              <input type="file" class="form-control" id="anh" placeholder="Ảnh ứng dụng" value="1">
+              <input type="hidden" name="fileHidden" id="avatar"> 
+            </div>
+          </div>
+
+			</div>
+			<div class="modal-footer">
+				<button id="savemodal" type="button" class="userbutton btn btn-warning float-right"  ><i class="fa fa-save"></i></button>
+			</div>
+		</div>
+	</div>
+</div>

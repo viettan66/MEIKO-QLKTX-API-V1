@@ -1,0 +1,14 @@
+<div class="row no-gutters">
+    <div class="col col-auto h-100  no-gutters" >
+        <ul class="list-group list-group-flush bg-dark listmenu">
+            <li class="list-group-item active">Tài khoản</li>
+            <li class="list-group-item">Menu</li>
+            <li class="list-group-item">Nhóm</li>
+        </ul>
+    </div>
+    <div class="col" style="padding: 5px;">
+        <app-taikhoan *ngIf="tabindex==0"></app-taikhoan>
+        <app-menuaccount *ngIf="tabindex==1"></app-menuaccount>
+        <app-nhom *ngIf="tabindex==2"></app-nhom>
+    </div>
+</div>

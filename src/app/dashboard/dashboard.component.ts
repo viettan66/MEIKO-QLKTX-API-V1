@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
 
         data.forEach(val=>{
           console.log(val)
-            $('#contentapp').append(`<div class="card" style="width: 18rem;margin:10px">
+            $('#contentapp').append(`<div class="card" style="width: 18rem;margin:10px;height:300px">
             <img class="card-img-top" src="`+val.IMAGE+`" alt="`+val.TENMENU+`">
             <div class="card-body">
             

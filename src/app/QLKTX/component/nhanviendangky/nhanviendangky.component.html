@@ -1,0 +1,238 @@
+<div class="row no-gutters h-100">
+  <app-menu></app-menu>
+  <div class="col" id="contentmenu" style="padding: 10px;">
+    <div class="row no-gutters">
+
+      <div class="col no-gutters">
+        <div class="card">
+          <div class="card-header">
+            DANH SÁCH ĐƠN
+            <button title="Đơn xin ở ký túc xá" style="margin-left: 10px;" id="themdon"
+              class="btn btn-secondary float-right"><i class="fas fa-city"></i></button>
+          </div>
+          <div class="card-body d-flex justify-content-start" style="padding: 5px;">
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<div class="modal fade " id="formdangdyokytucxa" role="dialog">
+  <div class="modal-dialog   modal-75">
+    <div class="modal-content ">
+      <div class="modal-header">
+        <TABLE class="table " style="padding: 0;">
+          <tr style="padding: 0;">
+            <td style="width: 200px;"><img src="../../../../assets/image/icon/logo-1.jpg" width="200" alt=""></td>
+            <td style="text-align: center;">
+              <span style="font-size: 18px;font-weight: bold;">ĐƠN XIN Ở KÝ TÚC XÁ</span><br>
+              <span>(Viết kèm BẢN KHAI NHÂN KHẨU)</span>
+            </td>
+          </tr>
+        </TABLE>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body ">
+        <span>Chú ý: Nộp đơn cho BP Hành chính vào các ngày trong tuần và làm thủ tục bàn giao phòng KTX tại phòng ban
+          quản lý KTX lúc 17:00 thứ 2 hàng tuần.</span>
+        <table class="table  table-bordered tb">
+          <tr style="background-color: rgb(224, 233, 235);">
+            <td>Họ và tên</td>
+            <td><input disabled type="text" name="" class="formcontrol none" value="{{cookie.get('hodem')+' '+cookie.get('ten')}}"></td>
+            <td>Giới tính</td>
+            <td style="width: 100px;">
+              <select name="" disabled class="formcontrol none">
+                <option selected value="{{cookie.get('gioitinh')}}">{{cookie.get('gioitinh')=='true'?"Nam":"Nữ"}}</option>
+                <option value="true">Nam</option>
+                <option value="false">Nữ</option>
+              </select>
+            </td>
+            <td>Mã ID</td>
+            <td><input type="text" disabled name="" class="formcontrol none" value="{{cookie.get('manhansu')}}"></td>
+            <td>Quốc tịch</td>
+            <td style="width:100px;"><input type="text" disabled name="" class="formcontrol none" value="{{cookie.get('datnuoc_id')}}"></td>
+          </tr>
+          <tr style="background-color: rgb(224, 233, 235);">
+            <td>Cấp bậc</td>
+            <td colspan="7" style="border: none;">{{cookie.get('chucvu')}}</td>
+          </tr>
+          <tr style="background-color: rgb(224, 233, 235);">
+            <td>Phòng</td>
+            <td><input type="text" disabled name="" class="formcontrol none" value="{{cookie.get('bpbophan_ten')}}"></td>
+            <td>Bộ phận</td>
+            <td><input type="text" disabled name="" class="formcontrol none" value="{{cookie.get('bpbophan_ten')}}"></td>
+            <td>Ban</td>
+            <td><input type="text" disabled name="" class="formcontrol none" value="{{cookie.get('banbophan_ten')}}"></td>
+            <td>Công đoạn</td>
+            <td><input type="text" disabled name="" class="formcontrol none" value=""></td>
+          </tr>
+          <tr>
+            <td colspan="8">
+              <div class="row">
+                <div class="col-3">Nội dung đăng ký</div>
+                <div class="col-3">
+                  <input type="checkbox" name="noidungdangky" id="id1"><label for="id1">Ở ký túc xá</label><br>
+                  <input type="checkbox" name="noidungdangky" id="id2"><label for="id2">Quay lại ký túc xá</label><br>
+                  (Thời gian trả lần trước)
+
+                </div>
+                <div class="col">
+                  Từ ngày:&nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;"  type="date" name="" id="" class=""><br>
+                  Từ ngày:&nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;"  type="date" name="" id="" class=""><br>
+                  &nbsp;&nbsp;&nbsp;Ngày: &nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;"  type="date" name="" id="" class=""><br>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="8">
+
+              <div class="form-group row">
+                <label for="inputPassword" class="col-auto col-form-label">Lý do đăng ký ở KTX:</label>
+                <div class="col">
+                  <input type="text" name="" id="" class="formcontrol">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="inputPassword" class="col-auto col-form-label">Nguyện vọng ở phòng số:</label>
+                <div class="col-2">
+                  <input type="text" name="" id="" class="formcontrol">
+                </div>
+                <label for="inputPassword" class="col-auto col-form-label">Lý do:</label>
+                <div class="col">
+                  <input type="text" name="" id="" class="formcontrol">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="inputPassword" class="col-auto col-form-label">Điện thoại liên lạc: Số máy lẻ: </label>
+                <div class="col-2">
+                  <input type="text" name="" id="" class="formcontrol">
+                </div>
+                <label for="inputPassword" class="col-auto col-form-label">Di động:</label>
+                <div class="col">
+                  <input type="text" name="" id="" class="formcontrol">
+                </div>
+                <label for="inputPassword" class="col-auto col-form-label">Nhà riêng:</label>
+                <div class="col">
+                  <input type="text" name="" id="" class="formcontrol">
+                </div>
+              </div>
+
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="6"><b>Phần xử lý</b> </td>
+            <td colspan="4">Phòng ban làm việc phê duyệt</td>
+            <td colspan="3">Phòng Hành chính Nhân sự phê duyệt</td>
+          </tr>
+          <tr>
+            <td colspan="2">Chủ nhiệm</td>
+            <td colspan="2">Trưởng phòng</td>
+            <td colspan="1">Ban QLKTX</td>
+            <td colspan="2">Chủ nhiệm/Trưởng phòng</td>
+          </tr>
+          <tr>
+            <td colspan="2"><input class="formcontrol" type="text" name="" id=""></td>
+            <td colspan="2"><input class="formcontrol" type="text" name="" id=""></td>
+            <td colspan="1"><input class="formcontrol" type="text" name="" id=""></td>
+            <td colspan="2"><input class="formcontrol" type="text" name="" id=""></td>
+          </tr>
+          <tr>
+            <td colspan="1" rowspan="3">Ban QLKT</td>
+            <td colspan="1">Số phòng</td>
+            <td colspan="2"><input class="formcontrol" type="text" name="" id=""></td>
+            <td colspan="1">Số tủ</td>
+            <td colspan="2"><input class="formcontrol" type="text" name="" id=""></td>
+          </tr>
+          <tr>
+            <td colspan="1">Khóa phòng</td>
+            <td colspan="2"><input class="formcontrol" type="text" name="" id=""></td>
+            <td colspan="1">Số khóa tủ</td>
+            <td colspan="2"><input class="formcontrol" type="text" name="" id=""></td>
+          </tr>
+          <tr>
+            <td colspan="1">Số giường</td>
+            <td colspan="2"><input class="formcontrol" type="text" name="" id=""></td>
+            <td colspan="1">Ngày có hiêu lực</td>
+            <td colspan="2"><input class="formcontrol" type="text" name="" id=""></td>
+          </tr>
+          <tr>
+            <td colspan="8">
+              TIÊU CHUẨN CẤP PHÁT ĐỒ DÙNG CÁ NHÂN
+            </td>
+          </tr>
+          <tr>
+            <td colspan="8">
+              <div class="row">
+                <div class="col-2">
+                  Vật dụng được cấp phát
+                </div>
+                <div class="col dfff">
+                  
+                      <div class="col-12 my-1"  *ngFor="let element of ktx10">
+                        <div class="custom-control custom-checkbox mr-sm-2">
+                          <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                          <label class="custom-control-label" for="customControlAutosizing">{{element.ten}}</label>&nbsp;&nbsp;&nbsp;
+                          <input style="width: 60px;border: none;border-bottom: dotted 2px gray;" type="text" class="" name="" id="">Chiếc
+
+                        </div>
+                      </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td rowspan="3"><b> Phần ký nhận</b></td>
+            <td colspan="4">Bên giao (Ban QLKTX)</td>
+            <td colspan="3">Bên nhận (Người lao động)</td>
+          </tr>
+          <tr >
+            <td colspan="2">Họ và tên</td>
+            <td colspan="2">Ký nhận</td>
+            <td colspan="2">Họ và tên</td>
+            <td colspan="1">Ký nhận</td>
+          </tr>
+          <tr>
+            <td colspan="2"><input type="text" class="formcontrol" name="" id=""></td>
+            <td colspan="2"><input type="text" class="formcontrol" name="" id=""></td>
+            <td colspan="2"><input type="text" class="formcontrol" name="" id=""></td>
+            <td colspan="1"><input type="text" class="formcontrol" name="" id=""></td>
+          </tr>
+        </table>
+
+        <hr>
+      </div>
+        <div class="modal-body ">
+          <div class="row">
+            <div class="col">
+              <h5 class="w-100" style="text-align: center;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h5>
+              <h6 class="w-100" style="text-align: center;">Độc lập - Tự do - Hạnh phúc</h6>
+              <h6 class="w-100" style="text-align: center;">------------</h6>
+            </div>
+            <div class="col-2">Mẫu KH01 ban hành theo QD số 698/2007/QD-BCA (C11)</div>
+          </div>
+          <div class="row  justify-content-md-center">
+            <h4>BẢN KHAI NHÂN KHẨU</h4>
+            <SPAN>(Dùng cho người đủ từ 14 tuổi trở lên)</SPAN>
+          </div>
+          <div class="row" style="border:solid 1px gray"></div>
+          <div class="col-12">
+            <div class="row">
+              <label for="nk1" class="col-a">1. Họ và tên khai sinh:(1)</label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="UPDATEinfo" type="button" class="userbutton btn btn-warning float-right"><i
+              class="fa fa-save"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
