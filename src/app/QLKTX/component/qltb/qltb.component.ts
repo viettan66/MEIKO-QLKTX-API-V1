@@ -31,6 +31,7 @@ public ktx0010:KTX0010[]=[]
       temp.ten=$('#tendodung').val()
       temp.giatien=$('#giatien').val()
       temp.ghichu=$('#ghichu').val()
+      temp.loai=$('#loai').val()
       temp.trangthai=true
       temp.thutu=1
       temparr.push(temp)
@@ -62,6 +63,7 @@ public ktx0010:KTX0010[]=[]
         temp.ghichu=rowtr.find('input[name=ghichu]').val()
         temp.trangthai=rowtr.find('select[name=trangthai]').val()
         temp.thutu=1
+        temp.loai=rowtr.find('select[name=loai]').val()
         that.rest.PutDataToAPI<result<KTX0010>>(temp,'KTX0010/edit').subscribe(val=>{
             if(val.code=='OK'){
               $(this).find('.fa-save').removeClass('fa-save').addClass('fa-edit')

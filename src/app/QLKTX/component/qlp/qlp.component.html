@@ -45,21 +45,45 @@
             </div>
             <div class="col">
                 <div class="card" >
-            <div class="card-header">
-              DANH SÁCH PHÒNG 
-              <button title="Thêm thủ công" style="margin-left: 10px;"  id="themphongthemphong" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
-            </div>
-            <div class="card-body d-flex justify-content-start" style="padding: 5px;">
-                <div class="card "  *ngFor="let element of listphong" style="width: 8em;">
-                    <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-                    <div class="card-body"  style="padding: 5px;">
-                      <h5 class="card-title">{{element.ten}}</h5>
-                      <p class="card-text">Trống: 3/{{element.slot}} </p>
+                  <div class="card-header">
+                    DANH SÁCH PHÒNG 
+                    <button title="Thêm thủ công" style="margin-left: 10px;"  id="themphongthemphong" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
+                  </div>
+                  <div class="card-body" style="padding: 5px;">
+                    <div class="row no-gutters">
+
+                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}"  *ngFor="let element of listphong" style="width: 8em;">
+                          <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                          <div class="card-body"  style="padding: 5px;">
+                            <h5 class="card-title">{{element.ten}}</h5>
+                            <p class="card-text">Trống: 3/{{element.slot}} </p>
+                          </div>
+                        </div>
                     </div>
                   </div>
+                  
+                </div>
             </div>
-            
-          </div>
+            <div class="col-2">
+                <div class="card" >
+                  <div class="card-header">
+                    GIƯỜNG PHÒNG {{tenphong}}
+                    <button title="Thêm thủ công" style="margin-left: 10px;"  id="themgiuong" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
+                  </div>
+                  <div class="card-body" style="padding: 5px;">
+                    <div class="row no-gutters">
+
+                      <div class="card giuongclick"  *ngFor="let element of listgiuong" style="width: 8em;">
+                          <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                          <div class="card-body"  style="padding: 5px;">
+                            <h5 class="card-title">{{element.ten}}</h5>
+                            <p class="card-text">Trống: 3/{{element.slot}} </p>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  
+                </div>
             </div>
         </div>
         
@@ -95,7 +119,7 @@
 
 
 <div class="modal fade " id="themphongmodal2" role="dialog" >
-	<div class="modal-dialog   modal-lg" >
+	<div class="modal-dialog   modal-25" >
 		<div class="modal-content " >
 			<div class="modal-header">
 				<h5 class="modal-title">THÊM PHÒNG</h5>

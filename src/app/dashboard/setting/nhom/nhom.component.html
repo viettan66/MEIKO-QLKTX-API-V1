@@ -1,1 +1,131 @@
-<p>nhom works!</p>
+<div class="row no-gutters">   
+    <div class="col-2 px-1">
+    <div class="card">
+        <div class="card-header"><h5 class="float-left ">NHÓM</h5><button class="btn addgroup float-right"><i class="fa fa-plus"></i></button></div>
+        <div class="card-body" style="padding: 0;">
+            <ul class="list-group list-group-flush" id="listgroup">
+                <li id="{{element.MKV9983_ID}}" class="list-group-item" *ngFor="let element of listgroup">{{element.TENNHOM}}</li>
+              </ul>
+        </div>
+    </div>
+</div>
+ 
+    <div class="col-3 px-1">
+        <div class="card">
+            <div class="card-header"><h5 class="float-left ">QUYỀN</h5></div>
+            <div class="card-body" style="padding: 0;">
+                <ul class="list-group list-group-flush" id="listper">
+                    <li id="{{element.MKV9980_ID}}" class="list-group-item" *ngFor="let element of listper">{{element.TENQUYEN}}</li>
+                  </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-3 px-1">
+        <div class="card">
+            <div class="card-header"><h5 class="float-left ">HÀNH ĐỘNG</h5></div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush" id="listfunction">
+                    <li id="{{element.MKV9981_ID}}" class="list-group-item {{element['check'].length!=0?'active':''}}" *ngFor="let element of listaction">{{element.TENHANHDONG}}</li>
+                  </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row no-gutters py-2">
+    <div class="col px-1">
+        <div class="card">
+            <h5 class="card-header">DANH SÁCH TÀI KHOẢN</h5>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>chucvu</th>
+                            <th>Bộ phận</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taikhoan">
+                        <tr *ngFor="let element of listacc">
+                        <input type="hidden" value="{{element.MKV9999_ID}}" name="MKV9999_ID">
+                            <td>{{element.manhansu}}</td>
+                            <td>{{element.hodem+' '+element.ten}}</td>
+                            <td>{{element.chucvu}}</td>
+                            <td>{{element.phong_id}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-auto px-1">
+        <div class="row no-gutters py-2">
+            <button class="btn btn-primary" id="addacctogroup"><i class="fas fa-angle-double-right"></i></button>
+        </div>
+        <div class="row no-gutters py-2">
+            <button class="btn btn-primary" id="removeacctogroup"><i class="fas fa-angle-double-left"></i></button>
+        </div>
+    </div>
+    <div class="col px-1">
+        <div class="card">
+            <h5 class="card-header">TÀI KHOẢN TRONG NHÓM {{NHOM}}</h5>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên</th>
+                            <th>chucvu</th>
+                            <th>Bộ phận</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taikhoanofgr">
+                        <tr *ngFor="let element of listaccofgroup">
+                            <input type="hidden" value="{{element.MKV9999_ID}}" name="MKV9999_ID">
+                            <td>{{element.manhansu}}</td>
+                            <td>{{element.hodem+' '+element.ten}}</td>
+                            <td>{{element.chucvu}}</td>
+                            <td>{{element.phong_id}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade " id="modaladdgroup" role="dialog" >
+	<div class="modal-dialog   modal-lg" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">THÊM NHÓM</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+                
+          <div class="col-12 my-1">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Tên</div>
+              </div>
+              <input type="text" class="form-control" id="ten" placeholder="Tên ứng dụng" value="1">
+            </div>
+          </div> 
+          <div class="col-12 my-1">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Ghi chú</div>
+              </div>
+              <input type="text" class="form-control" id="ghichu" placeholder="Ghi chú" value="1">
+            </div>
+          </div>
+
+			</div>
+			<div class="modal-footer">
+				<button id="savemodal" type="button" class="userbutton btn btn-warning float-right"  ><i class="fa fa-save"></i></button>
+			</div>
+		</div>
+	</div>
+</div>

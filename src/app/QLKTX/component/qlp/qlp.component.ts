@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RESTService } from 'src/app/Service/rest.service';
 import { KTX0001 } from '../../models/KTX0001';
 import { result } from '../../models/result';
+import { KTX0002 } from '../../models/KTX0002';
 declare var $:any
 
 @Component({
@@ -16,12 +17,15 @@ public listtoanha:KTX0001[]=[]
 public listkhu:KTX0001[]=[]
 public listtang:KTX0001[]=[]
 public listphong:KTX0001[]=[]
+public listgiuong:KTX0002[]=[]
 public khu=''
 public notify
 public palahol
 public toanha=0
 public tang=0
+public phong=0
 public tentoanha=''
+public tenphong=''
 public isaddtoanha=true;
   ngOnInit() {
     let that=this
@@ -34,6 +38,7 @@ public isaddtoanha=true;
           that.listtang=[]
           that.listtoanha=[]
           that.listphong=[]
+          that.listgiuong=[]
           that.tang=0;
           that.toanha=0;
           data.forEach(val=>{
@@ -51,6 +56,7 @@ public isaddtoanha=true;
         that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall').subscribe(data=>{
           that.listtang=[]
           that.listphong=[]
+          that.listgiuong=[]
           that.tang=0;
           data.forEach(val=>{
             if(val.type==3&&val.idcha==that.toanha){
@@ -62,9 +68,21 @@ public isaddtoanha=true;
       function filtterphong(){
         that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall').subscribe(data=>{
           that.listphong=[]
+          that.listgiuong=[]
           data.forEach(val=>{
             if(val.type==4&&val.idcha==that.tang){
               that.listphong.push(val)
+            }
+          })
+        })
+      }
+      function filttergiuong(){
+        that.rest.GetDataFromAPI<KTX0002[]>('KTX0002/Getall').subscribe(data=>{
+          that.listgiuong=[]
+          console.log(data)
+          data.forEach(val=>{
+            if(val.KTX0001_ID==that.phong){
+              that.listgiuong.push(val)
             }
           })
         })
@@ -150,6 +168,23 @@ public isaddtoanha=true;
         $(this).parent().find('li').removeClass('active')
         $(this).addClass('active')
         filtterphong()
+      })
+      ////////////////////////
+      $('.card').on('click','.phongclick',function(){
+        that.phong=$(this).attr('id')
+        that.tenphong=$(this).attr('title')
+        $(this).parent().find('.card').removeClass('bg-info')
+        $(this).parent().find('.card').removeClass('text-white')
+        $(this).addClass('bg-info')
+        $(this).addClass('text-white')
+        filttergiuong()
+      })
+      ////////////////////////
+      $('.card').on('click','.giuongclick',function(){
+        $(this).parent().find('.card').removeClass('bg-info')
+        $(this).parent().find('.card').removeClass('text-white')
+        $(this).addClass('bg-info')
+        $(this).addClass('text-white')
       })
       ////////////////////////
       $('#formaddtoanhatang').on('click','#luutoanha',function(){

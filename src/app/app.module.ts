@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service'
-import { NgModule } from '@angular/core';
+import { NgModule ,Injectable, Input} from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Layout/header/header.component';
@@ -18,6 +19,9 @@ import { SettingComponent } from './dashboard/setting/setting.component';
 import { TaikhoanComponent } from './dashboard/setting/taikhoan/taikhoan.component';
 import { MenuaccountComponent } from './dashboard/setting/menuaccount/menuaccount.component';
 import { NhomComponent } from './dashboard/setting/nhom/nhom.component';
+import { SapphongComponent } from './QLKTX/component/sapphong/sapphong.component';
+import { TracuuthongkeComponent } from './QLKTX/component/tracuuthongke/tracuuthongke.component';
+import { FormdangkyokytucxaComponent } from './QLKTX/component/nhanviendangky/formtemplate/formdangkyokytucxa/formdangkyokytucxa.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -26,6 +30,8 @@ const routes: Routes = [
   {path: 'QLKTX/QLP', component: QLPComponent},
   {path: 'QLKTX/QLTB', component: QLTBComponent},
   {path: 'QLKTX/QLDK', component: NhanviendangkyComponent},
+  {path: 'QLKTX/QLSP', component: SapphongComponent},
+  {path: 'QLKTX/QLTCTK', component: TracuuthongkeComponent},
   {path: 'DASHBOARD', component: SettingComponent},
 ];
 
@@ -45,11 +51,14 @@ const routes: Routes = [
     TaikhoanComponent,
     MenuaccountComponent,
     NhomComponent,
+    SapphongComponent,
+    TracuuthongkeComponent,
+    FormdangkyokytucxaComponent,
     
   ],
   imports: [
     RouterModule.forRoot(routes),
-    BrowserModule,
+    BrowserModule,FormsModule,
     HttpClientModule,
   ],
   exports: [RouterModule],

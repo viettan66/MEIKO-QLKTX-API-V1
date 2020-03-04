@@ -3,6 +3,7 @@ import * as Global from '../../Service/global.service'
 import { RESTService } from 'src/app/Service/rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MKV9982 } from 'src/app/Models/MKV9982';
+import { Router, ActivatedRoute } from '@angular/router';
 declare var $: any
 @Component({
   selector: 'app-ktx-dashboard',
@@ -11,10 +12,12 @@ declare var $: any
 })
 export class KTXDashboardComponent implements OnInit {
 
-  constructor(public rest:RESTService,public cookie:CookieService) { }
+  constructor(public rest:RESTService,public cookie:CookieService,public route:ActivatedRoute) { }
 public menu:MKV9982[]=[]
   ngOnInit() {
+
     let that = this
+   
     $(document).ready(function () {
       
       ////////////////////////

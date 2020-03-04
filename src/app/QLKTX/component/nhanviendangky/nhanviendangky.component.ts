@@ -12,19 +12,20 @@ declare var $:any
 export class NhanviendangkyComponent implements OnInit {
 
   constructor(public rest:RESTService,public cookie:CookieService) { }
-public ktx10: KTX0010[]=[]
+
+public form='formdangkyokytucxa'
   ngOnInit() {
     let that=this
-    function showdodung(){
-        that.rest.GetDataFromAPI<KTX0010[]>('KTX0010/Getall').subscribe(data=>{
-          that.ktx10=data
-        })
-    }
+
     $(document).ready(function(){
-      showdodung()
+      //////////////formdangkyokytucxa////////
+        $('#adddon').click(function(){
+          $('#selecttemplateform').modal()
+        })
       //////////////////////
-        $('#themdon').click(function(){
-          $('#formdangdyokytucxa').modal()
+        $('#adddonxinokytucxa').click(function(){
+          $('#selecttemplateform').modal('hide')
+          that.form='formdangkyokytucxa'
         })
       ////////////////////
     })

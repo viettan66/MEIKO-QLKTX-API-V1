@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+@media (min-width: 576px) {
+    .modal-dialog { max-width: none; }
+  }
+
+  .modal-95 {
+    width: 95%;
+    height: auto;
+    padding: 0;
+  }  
+  .modal-75 {
+    width: 75%;
+    height: auto;
+    padding: 0;
+  }  
+  .modal-55 {
+    width: 55%;
+    height: auto;
+    padding: 0;
+  }  
+  .modal-25 {
+    width: 25%;
+    height: auto;
+    padding: 0;
+  } 
+  .modal-15 {
+    width: 15%;
+    height: auto;
+    padding: 0;
+  }
+
+  .giuongclick{cursor: pointer;}
+  .phongclick{cursor: pointer;}

@@ -5,4 +5,5 @@ export class KTX0010{
     public  ghichu :string    ;
     public  trangthai :boolean    ;
     public  thutu :  number  ;
+    public  loai :  number  ;
 }

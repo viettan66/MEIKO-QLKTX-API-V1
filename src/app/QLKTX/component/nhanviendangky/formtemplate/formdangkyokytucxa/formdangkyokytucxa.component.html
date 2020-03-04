@@ -1,0 +1,260 @@
+<div class="row" id="form1">
+  <div class="col">
+
+    <div class="row no-gutters py-2" style="border-bottom: solid 1px gray;">
+      <div class="col-4"><img src="../../../../assets/image/icon/logo-1.jpg" width="200" alt=""></div>
+      <div class="col-4" style="text-align: center;"><span style="font-size: 18px;font-weight: bold;">ĐƠN XIN Ở KÝ TÚC
+          XÁ</span><br><span>(Viết kèm BẢN KHAI NHÂN KHẨU)</span></div>
+      <div class="col-4"></div>
+    </div>
+    <br>
+    <span>Chú ý: Nộp đơn cho BP Hành chính vào các ngày trong tuần và làm thủ tục bàn giao phòng KTX tại
+      phòng ban
+      quản lý KTX lúc 17:00 thứ 2 hàng tuần.</span>
+    <table class="table  table-bordered tb">
+      <tr  >
+        <td>Họ và tên</td>
+        <td><input   type="text"  class="formcontrol none" value="{{cookie.get('hodem')+' '+cookie.get('ten')}}" required></td>
+        <td>Giới tính</td>
+        <td style="width: 100px;">
+          <select    class="formcontrol none">
+            <option selected value="{{cookie.get('gioitinh')}}">
+              {{cookie.get('gioitinh')=='true'?"Nam":"Nữ"}}</option>
+            <option value="true">Nam</option>
+            <option value="false">Nữ</option>
+          </select>
+        </td>
+        <td style="width: 60px;"> Mã ID</td>
+        <td><input type="text"      class="formcontrol none" value="{{cookie.get('manhansu')}}">
+        </td>
+        <td style="width: 120px;">Quốc tịch</td>
+        <td style="width:100px;"><input type="text"    class="formcontrol none"
+            value="{{cookie.get('datnuoc_id')}}"></td>
+      </tr>
+      <tr  >
+        <td>Cấp bậc</td>
+        <td colspan="7" style="border: none;">{{cookie.get('chucvu')}}</td>
+      </tr>
+      <tr  >
+        <td>Phòng</td>
+        <td><input type="text"    class="formcontrol none" value="{{cookie.get('bpbophan_ten')}}"></td>
+        <td>Bộ phận</td>
+        <td><input type="text"    class="formcontrol none" value="{{cookie.get('bpbophan_ten')}}"></td>
+        <td>Ban</td>
+        <td><input type="text"    class="formcontrol none" value="{{cookie.get('banbophan_ten')}}"></td>
+        <td>CĐ</td>
+        <td><input type="text"    class="formcontrol none" value=""></td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          <div class="row">
+            <div class="col-3">Nội dung đăng ký</div>
+            <div class="col-3">
+              <input type="checkbox"     [(ngModel)]="ktx0020.okitucxa" /><label >Ở ký túc xá</label><br>
+              <input type="checkbox"   [(ngModel)]="ktx0020.quaylaikytucxa" /><label >Quay lại ký túc xá</label><br>
+              (Thời gian trả lần trước)
+
+            </div>
+            <div class="col">
+              Từ ngày:&nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;" type="date"  class="" [(ngModel)]="ktx0020.ngayokitucxa" /><br>
+              Từ ngày:&nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;" type="date"  class="" [(ngModel)]="ktx0020.ngayquaylaikytucxa" /><br>
+              &nbsp;&nbsp;&nbsp;Ngày: &nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;" type="date"  class="" [(ngModel)]="ktx0020.thoigiantralantruoc" /><br>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          <div class=" row no-gutters">
+            <label for="inputPassword" class="col-auto ">Lý do đăng ký ở KTX:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.lydodangkyoktx" />
+          </div>
+          <div class="row no-gutters">
+            <label for="inputPassword" class="col-auto">Nguyện vọng ở phòng số:</label> <input   type="text"  class="formcontrol col-2" [(ngModel)]="ktx0020.nguyenvongophongso" >
+            <label for="inputPassword" class="col-auto">Lý do:</label> <input  type="text"  class="formcontrol col" [(ngModel)]="ktx0020.lydonguyenvong" >
+          </div>
+          <div class=" row no-gutters">
+            <label for="inputPassword" class="col-auto ">Điện thoại liên lạc: Số máy lẻ: </label> <input type="text"  class="formcontrol col-2" [(ngModel)]="ktx0020.somayle" >
+            <label for="inputPassword" class="col-auto ">Di động:</label> <input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.didong" >
+            <label for="inputPassword" class="col-auto ">Nhà riêng:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.nharieng" >
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="6"><b>Phần xử lý</b> </td>
+        <td colspan="4">Phòng ban làm việc phê duyệt</td>
+        <td colspan="3">Phòng Hành chính Nhân sự phê duyệt</td>
+      </tr>
+      <tr>
+        <td colspan="2">Chủ nhiệm</td>
+        <td colspan="2">Trưởng phòng</td>
+        <td colspan="1">Ban QLKTX</td>
+        <td colspan="2">Chủ nhiệm/Trưởng phòng</td>
+      </tr>
+      <tr>
+        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.chunhiemnoilamviec"></td>
+        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.truongphongnoilamviec"></td>
+        <td colspan="1"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.bqlktx"></td>
+        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.truongphongGA"></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="3">Ban QLKT</td>
+        <td colspan="1">Số phòng</td>
+        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.KTX0001_ID"></td>
+        <td colspan="1">Số tủ</td>
+        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.sotu"></td>
+      </tr>
+      <tr>
+        <td colspan="1">Khóa phòng</td>
+        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.khoaphong"></td>
+        <td colspan="1">Số khóa tủ</td>
+        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.sokhoatu"></td>
+      </tr>
+      <tr>
+        <td colspan="1">Số giường</td>
+        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.KTX0002_ID"></td>
+        <td colspan="1">Ngày có hiêu lực</td>
+        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.ngaycohieuluc"></td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          TIÊU CHUẨN CẤP PHÁT ĐỒ DÙNG CÁ NHÂN
+        </td>
+      </tr>
+      <tr>
+        <td colspan="8">
+          <div class="row">
+            <div class="col-2">
+              Vật dụng được cấp phát
+            </div>
+            <div class="col dfff">
+
+              <div class="col-12 my-1" *ngFor="let element of ktx10">
+                <div class="custom-control custom-checkbox mr-sm-2">
+                  <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                  <label class="custom-control-label"
+                    for="customControlAutosizing">{{element.ten}}</label>&nbsp;&nbsp;&nbsp;
+                  <input style="width: 60px;border: none;border-bottom: dotted 2px gray;" type="text" class="" 
+                    id="">Chiếc
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td rowspan="3"><b> Phần ký nhận</b></td>
+        <td colspan="4">Bên giao (Ban QLKTX)</td>
+        <td colspan="3">Bên nhận (Người lao động)</td>
+      </tr>
+      <tr>
+        <td colspan="2">Họ và tên</td>
+        <td colspan="2">Ký nhận</td>
+        <td colspan="2">Họ và tên</td>
+        <td colspan="1">Ký nhận</td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="text" class="formcontrol"  [(ngModel)]="ktx0020.bengiao"></td>
+        <td colspan="2"><input type="text" class="formcontrol"  [(ngModel)]="ktx0020.bengiao"></td>
+        <td colspan="2"><input type="text" class="formcontrol"  [(ngModel)]="ktx0020.bennhan"></td>
+        <td colspan="1"><input type="text" class="formcontrol"  [(ngModel)]="ktx0020.bennhan"></td>
+      </tr>
+    </table>
+
+  </div>
+  <div class="col">
+    <div class="row no-gutters">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <h6 class="w-100" style="text-align: center;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h6>
+        <h6 class="w-100" style="text-align: center;">Độc lập - Tự do - Hạnh phúc</h6>
+        <h6 class="w-100" style="text-align: center;">------------</h6>
+      </div>
+      <div class="col-2">Mẫu KH01 ban hành theo QD số 698/2007/QD-BCA (C11)</div>
+    </div>
+    <div class="row  justify-content-md-center no-gutters" style="border-bottom: solid 1px gray;padding: 5px;">
+
+      <h5 class="w-100" style="font-size: 18px;font-weight: bold;text-align: center;">BẢN KHAI NHÂN KHẨU</h5>
+
+      <SPAN>(Dùng cho người đủ từ 14 tuổi trở lên)</SPAN>
+    </div>
+    <div class="col-12">
+      <div class="row no-gutters" >
+        <label class="col-auto">1. Họ và tên khai sinh:(1)</label><input type="text"  class="formcontrol col"  [(ngModel)]="ktx0020.hotenkhaisinh">
+        <label class="col-auto">2. Giới tính:</label>  
+                                              <select     class="formcontrol col-3"  [(ngModel)]="ktx0020.gioitinh">
+                                                <option value="true">Nam</option>
+                                                <option value="false">Nữ</option>
+                                              </select>
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">3. Họ và tên khác (nếu có):</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.hotenkhac">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">4. Sinh ngày:</label><input type="date"  class="formcontrol col-4" [(ngModel)]="ktx0020.ngaysinh">
+        <label class="col-auto">5. Nơi sinh:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.noisinh">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">6. Quê quán (2):</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.quequan">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">7. Dân tộc:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.dantoc">
+        <label class="col-auto">8. Tôn giáo:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.tongiao">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">9. CMTND/ Hộ chiếu số:</label><input type="text"  class="formcontrol col-2" [(ngModel)]="ktx0020.cmtnd_so">
+        <label class="col-auto"> Cấp ngày:</label><input type="date"  class="formcontrol col-3" [(ngModel)]="ktx0020.cmtnd_ngaycap">
+        <label class="col-auto"> Nơi cấp:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.cmtnd_noicap">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">10. Nơi thường trú:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.noithuongtru">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">11. Chỗ ở hiện nay:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.choohiennay">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">12. Trình độ học vấn(3):</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.trinhdohocvan">
+        <label class="col-auto">13. Trình độ chuyên môn(4):</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.trinhdchuyenmon">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">14. Biết tiếng dân tộc ít người:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.biettiengdantocitnguoi">
+        <label class="col-auto">15. Biết ngoại ngữ:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.bietngoaingu">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">16. Nghề nghiệp, chức vụ, nơi làm việc hiện nay:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.nghenghiepchucvunoilam">
+      </div>
+      <div class="row no-gutters" >
+        <label class="col-auto">17. Từ đủ 14 tuổi trở lên đến nay làm gì, ở đâu:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.lamgiodautu14tuoi">
+      </div>
+      <div class="row no-gutters">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th class="w-25" colspan="2">THỜI GIAN</th>
+              <th rowspan="2">CHỖ Ở<br>
+                <span style="font-weight: normal;">(Ghi rõ số nhà, đường phố, xóm, ấp, bản, xã/phường/thị trấn; quận/huyện; tỉnh/thành phố. Nếu ở nước ngoài thì ghi rõ tên nước.)</span>
+              </th>
+              <th rowspan="2">NGHỀ NGHIỆP, NƠI LÀM VIỆC</th>
+            </tr>
+            <tr>
+              <td>TỪ NĂM</td>
+              <td>ĐẾN NĂM</td>
+            </tr>
+          </thead>
+          <TBOdy>
+            <TR *ngFor="let element of ktx0020.KTX0021;let i = index;">
+              <td><input class="formcontrol" type="date"  [(ngModel)]="ktx0020.KTX0021[i].batdau"></td>
+              <td><input class="formcontrol" type="date"  [(ngModel)]="ktx0020.KTX0021[i].ketthuc"></td>
+              <td><textarea style="height: 30px;" class="formcontrol"   [(ngModel)]="ktx0020.KTX0021[i].choo"></textarea></td>
+              <td><textarea style="height: 30px;" class="formcontrol endtexaddrow"   [(ngModel)]="ktx0020.KTX0021[i].nghenghiepnoilam"></textarea></td>
+            </TR>
+          </TBOdy>
+        </table>
+        <div class="row no-gutters">
+          <i>(1) Viết chữ in hoa đủ dấu. (2) Ghi theo giấy khai  sinh hoặc quê gốc. (3) Ghi trình độ học vấn cao nhất: Tiễn sĩ, Thạc sĩ, Đại học, Cao đẳng. Trung cấp, THPT(12/12, 7/12 ...). (4) Ghi trình độ chuyên môn cao nhất: Tiến sĩ y học, Thạc sĩ quản lý giao dục, Cử nhân luật...</i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <button class="btn btn-primary" id="savedon"><i class="fa fa-save"></i>&nbsp;Lưu và gửi đơn</button>

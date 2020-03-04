@@ -2,20 +2,20 @@
     
     <div class="col-4 px-1">
         <div class="card">
-            <div class="card-header"><h5 class="float-left ">ỨNG DỤNG</h5><button class="btn addapp float-right"><i class="fa fa-plus"></i></button></div>
+            <div class="card-header"><h5 class="float-left ">QUYỀN</h5><button class="btn addapp float-right"><i class="fa fa-plus"></i></button></div>
             <div class="card-body" style="padding: 0;">
-                <ul class="list-group list-group-flush" id="listapp">
-                    <li id="{{element.MKV9982_ID}}" class="list-group-item" *ngFor="let element of listapp">{{element.TENMENU}}</li>
+                <ul class="list-group list-group-flush" id="listper">
+                    <li id="{{element.MKV9980_ID}}" class="list-group-item" *ngFor="let element of listper">{{element.TENQUYEN}}</li>
                   </ul>
             </div>
         </div>
     </div>
     <div class="col-4 px-1">
         <div class="card">
-            <div class="card-header"><h5 class="float-left ">CHỨC NĂNG</h5><button class="btn addmenu float-right"><i class="fa fa-plus"></i></button></div>
+            <div class="card-header"><h5 class="float-left ">HÀNH ĐỘNG</h5><button class="btn addmenu float-right"><i class="fa fa-plus"></i></button></div>
             <div class="card-body">
                 <ul class="list-group list-group-flush" id="listfunction">
-                    <li id="{{element.MKV9982_ID}}" class="list-group-item" *ngFor="let element of listmenu">{{element.TENMENU}}</li>
+                    <li id="{{element.MKV9981_ID}}" class="list-group-item" *ngFor="let element of listaction">{{element.TENHANHDONG}}</li>
                   </ul>
             </div>
         </div>
@@ -35,17 +35,25 @@
           <div class="col-12 my-1">
             <div class="input-group">
               <div class="input-group-prepend">
-                <div class="input-group-text">Tên ứng dụng</div>
+                <div class="input-group-text">Tên</div>
               </div>
               <input type="text" class="form-control" id="ten" placeholder="Tên ứng dụng" value="1">
             </div>
           </div>   
-          <div class="col-12 my-1">
+          <div class="col-12 my-1 linkabc">
             <div class="input-group">
               <div class="input-group-prepend">
                 <div class="input-group-text">Link</div>
               </div>
               <input type="text" class="form-control" id="link" placeholder="link menu theo angular" value="1">
+            </div>
+          </div>   
+          <div class="col-12 my-1 linkabc">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Cấp</div>
+              </div>
+              <input type="text" class="form-control" id="CAP" placeholder="link menu theo angular" value="1">
             </div>
           </div> 
           <div class="col-12 my-1">
