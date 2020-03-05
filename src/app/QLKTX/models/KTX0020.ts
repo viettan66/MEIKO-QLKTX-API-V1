@@ -48,8 +48,17 @@ export class KTX0020{
     public  bietngoaingu  :    string  ;
     public  nghenghiepchucvunoilam  :string      ;
     public  lamgiodautu14tuoi  : string     ;
+    public  ngaytaodon  :string      ;
+    public  ngayduyetdon  :string      ;
+    public  noidung  :string      ;
+    public  lydo  :string      ;
+    public  ghichu  :string      ;
+    public  trangthai  :boolean      ;
+
+
     public   MKV9999  : MKV9999     ;
     public   KTX0001  : KTX0001     
     public   KTX0002  : KTX0002     ;
     public   KTX0021  : KTX0021[]     ;
+    
 }

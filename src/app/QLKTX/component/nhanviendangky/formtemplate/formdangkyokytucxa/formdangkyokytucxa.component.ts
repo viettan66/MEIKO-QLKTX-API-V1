@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { RESTService } from 'src/app/Service/rest.service';
 import { KTX0010 } from 'src/app/QLKTX/models/KTX0010';
 import { KTX0020 } from 'src/app/QLKTX/models/KTX0020';
 import { formatDate } from '@angular/common';
 import { KTX0021 } from 'src/app/QLKTX/models/KTX0021';
+import { result } from 'src/app/QLKTX/models/result';
 declare var $: any
 
 @Component({
@@ -13,17 +14,21 @@ declare var $: any
   styleUrls: ['./formdangkyokytucxa.component.css']
 })
 export class FormdangkyokytucxaComponent implements OnInit {
-
+  @Input() ktx20temp: KTX0020;
   constructor(public rest: RESTService, public cookie: CookieService) { }
   public ktx10: KTX0010[] = []
   public ktx0020:KTX0020=new KTX0020()
   
   ngOnInit() {
     let that = this
+    if(this.ktx20temp!=null){
+      that.ktx0020=this.ktx20temp
+    }else{
     that.ktx0020.KTX0021=[]
     that.ktx0020.KTX0021.push(new KTX0021())
     that.ktx0020.KTX0021.push(new KTX0021())
     this.ktx0020.hotenkhaisinh=that.cookie.get('hodem')+' '+that.cookie.get('ten')
+    this.ktx0020.MKV9999_ID=Number.parseInt(that.cookie.get('MKV9999_ID')) 
     this.ktx0020.gioitinh= that.cookie.get('gioitinh')=="true"
     this.ktx0020.ngaysinh= formatDate(that.cookie.get('ngaysinh'),'yyyy-MM-dd','en-US') 
     this.ktx0020.quequan= that.cookie.get('quequan')
@@ -33,6 +38,7 @@ export class FormdangkyokytucxaComponent implements OnInit {
     this.ktx0020.noithuongtru= that.cookie.get('diachithuongtru')
     this.ktx0020.choohiennay= that.cookie.get('diachitamtru')
     this.ktx0020.noisinh= that.cookie.get('noisinh')
+  }
     $(document).ready(function () {
       function showdodung() {
         that.rest.GetDataFromAPI<KTX0010[]>('KTX0010/Getall').subscribe(data => {
@@ -44,13 +50,16 @@ export class FormdangkyokytucxaComponent implements OnInit {
       ////////////////
       $('.table').on('change','.endtexaddrow',function(){
           if($(this).parent().parent().index()==($(this).parent().parent().parent().find('tr').length-1)){
-            
-    that.ktx0020.KTX0021.push(new KTX0021())
+            that.ktx0020.KTX0021.push(new KTX0021())
           }
         })
       ////////////////
       $('#savedon').click(function(){
-        console.log(that.ktx0020)
+        that.rest.PostDataToAPI<result<KTX0020>>(that.ktx0020,'KTX0020/add').subscribe(data=>{
+          console.log(that.ktx0020)
+          console.log(data)
+        })
+        //console.log(that.ktx0020)
       })
     })
 

@@ -7,14 +7,33 @@
         <div class="card">
           <div class="card-header">
             DANH SÁCH ĐƠN
-            <button title="Thêm đơn" style="margin-left: 10px;" id="adddon" class="btn btn-secondary float-right"><i
+            <button title="Thêm đơn" style="margin-left: 10px;"  class="btn btn-secondary float-right adddon"><i
                 class="fa fa-plus"></i></button>
           </div>
           <div class="card-body" style="padding: 5px;">
-            <div class="row" id="showdon">
-
+            <div class="row no-gutters" *ngIf="form=='showdon'">
+              <table class="table table-bodered">
+                <thead>
+                  <th>STT</th>
+                  <th>LOẠI ĐƠN</th>
+                  <th>NGƯỜI TẠO</th>
+                  <th>THỜI GIAN TẠO</th>
+                  <th>TRẠNG THÁI</th>
+                  <th>CHỨC NĂNG</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let element of listdon;let i=index;">
+                    <td>{{i+1}}</td>
+                    <td>ĐƠN XIN Ở KÝ TÚC XÁ</td>
+                    <td>{{element.hotenkhaisinh}}</td>
+                    <td>{{element.ngaytaodon| date:'dd/MM/yyyy HH:mm'}}</td>
+                    <td>{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</td>
+                    <td><button name="{{element.KTX0020_ID}}" class="btn editdon"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button class="btn deletedon"><i class="fas fa-trash-alt"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
-            <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'"></app-formdangkyokytucxa>
+            <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'" [ktx20temp]="ktx20temp"></app-formdangkyokytucxa>
           </div>
 
         </div>
