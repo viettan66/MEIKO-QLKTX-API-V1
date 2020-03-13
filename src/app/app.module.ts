@@ -22,6 +22,7 @@ import { NhomComponent } from './dashboard/setting/nhom/nhom.component';
 import { SapphongComponent } from './QLKTX/component/sapphong/sapphong.component';
 import { TracuuthongkeComponent } from './QLKTX/component/tracuuthongke/tracuuthongke.component';
 import { FormdangkyokytucxaComponent } from './QLKTX/component/nhanviendangky/formtemplate/formdangkyokytucxa/formdangkyokytucxa.component';
+import { QldComponent } from './QLKTX/component/qld/qld.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: 'QLKTX/QLSP', component: SapphongComponent},
   {path: 'QLKTX/QLTCTK', component: TracuuthongkeComponent},
   {path: 'DASHBOARD', component: SettingComponent},
+  {path: 'QLKTX/QLD', component: QldComponent},
 ];
 
 @NgModule({
@@ -54,6 +56,7 @@ const routes: Routes = [
     SapphongComponent,
     TracuuthongkeComponent,
     FormdangkyokytucxaComponent,
+    QldComponent,
     
   ],
   imports: [

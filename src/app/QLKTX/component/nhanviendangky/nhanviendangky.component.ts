@@ -23,6 +23,7 @@ public ktx20temp: KTX0020;
       ////
       function showdon(){
         that.rest.GetDataFromAPI<KTX0020[]>('KTX0020/Getall').subscribe(data=>{
+          console.log(data)
           data.forEach(val=>{
             if(val.MKV9999_ID==Number.parseInt(that.cookie.get('MKV9999_ID')))
           that.listdon.push(val)
@@ -42,7 +43,6 @@ public ktx20temp: KTX0020;
         })
       //////////////formdangkyokytucxa////////
         $('.card').on('click','.editdon',function(){
-          console.log('fffffffff')
           that.listdon.forEach(val=>{
             if(val.KTX0020_ID==$(this).attr('name')){
               that.ktx20temp=val
@@ -72,4 +72,8 @@ public ktx20temp: KTX0020;
     })
   }
 
+      /////
+      getktx20(event:KTX0020){
+        this.listdon.push(event)
+      }
 }

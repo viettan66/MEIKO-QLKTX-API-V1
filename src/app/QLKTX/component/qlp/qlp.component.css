@@ -2,3 +2,12 @@
 #listtangsh{cursor: pointer;}
 #listtoanhash{cursor: pointer;}
 .card{margin: 3px;}
+.none{border: none; background-color: transparent;}
+.bodernone{background-color: transparent;}
+#hidecolumn ul li{cursor: pointer;}
+.tab1 ul li{cursor: pointer;}
+
+.actived{background-color: rgb(223, 223, 223);}
+.select{background-color: #17a2b8;}
+
+.qlsp{display: none;}

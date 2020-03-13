@@ -1,5 +1,5 @@
-<div class="row" id="form1">
-  <div class="col-12">
+<div class="row d-flex justify-content-center" id="form1">
+  <div class="col-8">
 
     <div class="row no-gutters py-2" style="border-bottom: solid 1px gray;">
       <div class="col-4"><img src="../../../../assets/image/icon/logo-1.jpg" width="200" alt=""></div>
@@ -56,9 +56,9 @@
 
             </div>
             <div class="col">
-              Từ ngày:&nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;" type="date"  class="" [(ngModel)]="ktx0020.ngayokitucxa" /><br>
-              Từ ngày:&nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;" type="date"  class="" [(ngModel)]="ktx0020.ngayquaylaikytucxa" /><br>
-              &nbsp;&nbsp;&nbsp;Ngày: &nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;" type="date"  class="" [(ngModel)]="ktx0020.thoigiantralantruoc" /><br>
+              Từ ngày:&nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;" type="date"  class="" (ngModelChange)="ktx0020.ngayokitucxa = $event"  [ngModel]="ktx0020.ngayokitucxa | date:'yyyy-MM-dd'" /><br>
+              Từ ngày:&nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;" type="date"  class="" (ngModelChange)="ktx0020.ngayquaylaikytucxa = $event"   [ngModel]="ktx0020.ngayquaylaikytucxa | date:'yyyy-MM-dd'" /><br>
+              &nbsp;&nbsp;&nbsp;Ngày: &nbsp;<input style="width: 150px;border: none;border-bottom: dotted 2px gray;" type="date"  class=""  (ngModelChange)="ktx0020.thoigiantralantruoc = $event" [ngModel]="ktx0020.thoigiantralantruoc | date:'yyyy-MM-dd'" /><br>
             </div>
           </div>
         </td>
@@ -162,7 +162,7 @@
     </table>
 
   </div>
-  <div class="col-12">
+  <div class="col-8">
     <div class="row no-gutters">
       <div class="col-2"></div>
       <div class="col-8">
@@ -191,7 +191,7 @@
         <label class="col-auto">3. Họ và tên khác (nếu có):</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.hotenkhac">
       </div>
       <div class="row no-gutters" >
-        <label class="col-auto">4. Sinh ngày:</label><input type="date"  class="formcontrol col-4" [(ngModel)]="ktx0020.ngaysinh">
+        <label class="col-auto">4. Sinh ngày:</label><input type="date"  class="formcontrol col-4"  (ngModelChange)="ktx0020.ngaysinh = $event"   [ngModel]="ktx0020.ngaysinh|date:'yyyy-MM-dd'">
         <label class="col-auto">5. Nơi sinh:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.noisinh">
       </div>
       <div class="row no-gutters" >
@@ -203,7 +203,7 @@
       </div>
       <div class="row no-gutters" >
         <label class="col-auto">9. CMTND/ Hộ chiếu số:</label><input type="text"  class="formcontrol col-2" [(ngModel)]="ktx0020.cmtnd_so">
-        <label class="col-auto"> Cấp ngày:</label><input type="date"  class="formcontrol col-3" [(ngModel)]="ktx0020.cmtnd_ngaycap">
+        <label class="col-auto"> Cấp ngày:</label><input type="date"  class="formcontrol col-3"  (ngModelChange)="ktx0020.cmtnd_ngaycap = $event"  [ngModel]="ktx0020.cmtnd_ngaycap|date:'yyyy-MM-dd'">
         <label class="col-auto"> Nơi cấp:</label><input type="text"  class="formcontrol col" [(ngModel)]="ktx0020.cmtnd_noicap">
       </div>
       <div class="row no-gutters" >
@@ -235,6 +235,7 @@
                 <span style="font-weight: normal;">(Ghi rõ số nhà, đường phố, xóm, ấp, bản, xã/phường/thị trấn; quận/huyện; tỉnh/thành phố. Nếu ở nước ngoài thì ghi rõ tên nước.)</span>
               </th>
               <th rowspan="2">NGHỀ NGHIỆP, NƠI LÀM VIỆC</th>
+              <th rowspan="2"><button  class="btn btn-primary addroww col-auto" ><i class="fa fa-plus"></i></button></th>
             </tr>
             <tr>
               <td>TỪ NĂM</td>
@@ -243,10 +244,11 @@
           </thead>
           <TBOdy>
             <TR *ngFor="let element of ktx0020.KTX0021;let i = index;">
-              <td><input class="formcontrol" type="date"  [(ngModel)]="ktx0020.KTX0021[i].batdau"></td>
-              <td><input class="formcontrol" type="date"  [(ngModel)]="ktx0020.KTX0021[i].ketthuc"></td>
+              <td><input class="formcontrol" type="date"   (ngModelChange)="ktx0020.KTX0021[i].batdau = $event"  [ngModel]="ktx0020.KTX0021[i].batdau|date:'yyyy-MM-dd'"></td>
+              <td><input class="formcontrol" type="date"   (ngModelChange)="ktx0020.KTX0021[i].ketthuc = $event" [ngModel]="ktx0020.KTX0021[i].ketthuc|date:'yyyy-MM-dd'"></td>
               <td><textarea style="height: 30px;" class="formcontrol"   [(ngModel)]="ktx0020.KTX0021[i].choo"></textarea></td>
               <td><textarea style="height: 30px;" class="formcontrol endtexaddrow"   [(ngModel)]="ktx0020.KTX0021[i].nghenghiepnoilam"></textarea></td>
+              <td><input type="hidden" name="{{i}}" value=""><button  class="btn btn-primary deleteroww col-auto" ><i class="fa fa-minus"></i></button></td>
             </TR>
           </TBOdy>
         </table>

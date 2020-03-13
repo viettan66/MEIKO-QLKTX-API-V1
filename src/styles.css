@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+html {
+  height: 100%;
+}
+body{background-image: url(./assets/image/background.jpg);background-blend-mode: screen;}
 @media (min-width: 576px) {
     .modal-dialog { max-width: none; }
   }
@@ -28,6 +32,18 @@
     height: auto;
     padding: 0;
   }
+  .modal-700 {
+    width: 700px;
+    height: auto;
+    padding: 0;
+  }
+  .modal-500 {
+    width: 500px;
+    height: auto;
+    padding: 0;
+  }
 
   .giuongclick{cursor: pointer;}
   .phongclick{cursor: pointer;}
+
+  .none{border: none; background-color: transparent;}

@@ -1,15 +1,21 @@
 <div class="row no-gutters h-100 px-0">
     <app-menu></app-menu>
-      <div class="col" id="contentmenu" style="padding: 10px;">
-        <div class="row no-gutters">
-            <div class="col-2">
+      <div class="col" id="contentmenu"> 
+        <div class="row no-gutters" id="hidecolumn">
+              <button class="list-group-item"><i class="fas fa-city"></i>&nbsp;<span>Danh mục phòng</span> </button>
+              <button class="list-group-item"><i class="fas fa-sort-amount-up-alt"></i>&nbsp;<span>Phòng</span> </button>
+
+          </div>
+        <div class="row no-gutters"  style="padding: 10px;" >
+         
+            <!-- <div class="col-4" id="hidecolumn">
                 <div class="card" >
                     <div class="card-header">
                       DANH SÁCH KHU 
-                      <button title="Thêm thủ công" style="margin-left: 10px;"  id="themKHU" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
+                      
                     </div>
                     <div class="card-body " style="padding: 0px;">
-                        <UL class="list-group " id="listkhu">
+                        <UL class="list-group " id="listkhu2">
                             <li class="list-group-item" id="N" >NAM</li>
                             <li class="list-group-item" id="F" >NỮ</li>
                         </UL>
@@ -23,7 +29,7 @@
                     </div>
                     
                     <div class="card-body " style="padding: 0px;">
-                        <UL class="list-group " id="listtoanhash">
+                        <UL class="list-group " id="listtoanhash2">
                             <li class="list-group-item" id="{{element.KTX0001_ID}}" *ngFor="let element of listtoanha">{{element.ten}}</li>
                         </UL>
                     </div>
@@ -36,54 +42,149 @@
                     </div>
                     
                     <div class="card-body " style="padding: 0px;">
-                        <UL class="list-group " id="listtangsh">
+                        <UL class="list-group " id="listtangsh2">
                             <li class="list-group-item"  id="{{element.KTX0001_ID}}"  *ngFor="let element of listtang">{{element.ten}}</li>
                         </UL>
                     </div>
                     
                   </div>
-            </div>
-            <div class="col">
+            </div> -->
+            <div class="col tab2"  >
                 <div class="card" >
                   <div class="card-header">
                     DANH SÁCH PHÒNG 
-                    <button title="Thêm thủ công" style="margin-left: 10px;"  id="themphongthemphong" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
+                    <span class="float-right">
+                      <button title="Thêm phòng" style="margin-left: 10px;"  id="themphongthemphong" class="btn btn-secondary qlp"><i class="fa fa-plus"></i></button>&nbsp;
+                      <button title="Sắp phòng tự động" id="sapphongtudong"  class="btn btn-secondary qlsp"><i class="fas fa-magic"></i></button>
+                    </span>
+                    <span class="float-right">
+                      <select name="" id="listkhu" class="btn btn-outline-secondary filter" >
+                        <option value="a">Khu ALL</option>
+                        <option value="F">Nữ</option>
+                        <option value="N">Nam</option>
+                      </select>&nbsp;
+                      <select name="" id="listtoanhash" class="btn btn-outline-secondary filter">
+                        <option value="0">Tòa ALL</option>
+                        <option value="{{element.KTX0001_ID}}" *ngFor="let element of listtoanha">{{element.ten}}</option>
+                      </select>&nbsp;
+                      <select name="" id="listtangsh" class="btn btn-outline-secondary  filter">
+                        <option value="0">Tầng ALL</option>
+                        <option value="{{element.KTX0001_ID}}" *ngFor="let element of listtang">{{element.ten}}</option>
+                        
+                      </select>
+                    </span>
                   </div>
                   <div class="card-body" style="padding: 5px;">
-                    <div class="row no-gutters">
+                    <div class="row no-gutters d-flex justify-content-start">
 
-                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}"  *ngFor="let element of listphong" style="width: 8em;">
+                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}"  *ngFor="let element of listphong" style="width: 8em;" [ngStyle]="{'background-color':color[element.slotuse==null?0:element.slotuse]}">
                           <!--<img class="card-img-top" src="..." alt="Card image cap">-->
                           <div class="card-body"  style="padding: 5px;">
                             <h5 class="card-title">{{element.ten}}</h5>
-                            <p class="card-text">Trống: 3/{{element.slot}} </p>
+                            <p class="card-text">Dùng: {{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </p>
                           </div>
                         </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="col-2 tab2" >
+                <div class="card" >
+                  <div class="card-header">
+                    GIƯỜNG PHÒNG {{tenphong}}
+                    <button title="Thêm thủ công" style="margin-left: 10px;"  id="themgiuong" class="btn btn-secondary float-right  qlp"><i class="fa fa-plus"></i></button>
+                  </div>
+                  <div class="card-body" style="padding: 5px;">
+                    <div class="row no-gutters">
+                        <div   *ngFor="let element of listgiuong" class="w-100">
+                          <div  id="{{element.KTX0002_ID}}"  class="card giuongclick {{element.trangthai?' text-white bg-success ':' text-white bg-secondary '}} " style="width: 100%;">
+                              <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                              <div class="card-body"  style="padding: 5px;">
+                                <h5 class="card-title">{{element.ten}}</h5>
+                                <p class="card-text">{{element.KTX0020!=null?(element.KTX0020.MKV9999.hodem + ' ' + element.KTX0020.MKV9999.ten) :(' Trống ')}} </p>
+                              </div>
+                            </div>
+                        </div>
+
                     </div>
                   </div>
                   
                 </div>
             </div>
-            <div class="col-2">
-                <div class="card" >
-                  <div class="card-header">
-                    GIƯỜNG PHÒNG {{tenphong}}
-                    <button title="Thêm thủ công" style="margin-left: 10px;"  id="themgiuong" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
-                  </div>
-                  <div class="card-body" style="padding: 5px;">
-                    <div class="row no-gutters">
 
-                      <div class="card giuongclick"  *ngFor="let element of listgiuong" style="width: 8em;">
-                          <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-                          <div class="card-body"  style="padding: 5px;">
-                            <h5 class="card-title">{{element.ten}}</h5>
-                            <p class="card-text">Trống: 3/{{element.slot}} </p>
-                          </div>
-                        </div>
-                    </div>
+            <div class="col tab1" style="padding: 10px;" >
+              <div class="row no-gutters">
+                <div class="col-auto">
+                  <div class="card" >
+                      <div class="card-header">
+                        KHU
+                        <!-- <button disabled title="Thêm thủ công" style="margin-left: 10px;"  id="themgiuong" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button> -->
+                      </div>
+                      <div class="card-body" >
+                        <ul class="list-group list-group-flush" id="tab1-khu">
+                          <li class="list-group-item" value="N">NAM</li>
+                          <li class="list-group-item" value="F">NỮ</li>
+                        </ul>
+                      </div>
                   </div>
-                  
                 </div>
+                <div class="col">
+                  <div class="card" >
+                      <div class="card-header">
+                        DANH TÒA
+                        <button  title="Thêm thủ công" style="margin-left: 10px;"  id="themtoanha2" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
+                      </div>
+                      <div class="card-body" >
+                    
+                        <table class="table " id="tab1-toa">
+                          <thead>
+                            <tr>
+                              <th>Tên</th>
+                              <th>Ghi chú</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+
+                          <tr *ngFor="let element of listtoanha;let i=index" id="{{i}}">
+                            <td><input disabled type="text"  class="form-control none"  [(ngModel)]="element.ten"><input type="hidden" name="ID" title="{{element.ten}}"  value="{{element.KTX0001_ID}}"> </td>
+                              <td><textarea disabled class="form-control none" [(ngModel)]="element.ghichu">
+                              </textarea></td>
+                            <td><button  title="Thêm thủ công" class="btn btn-sm edit"><i class="fa fa-edit"></i></button>
+                              <button  title="Thêm thủ công" class="btn btn-sm del"><i class="fa fa-trash"></i></button></td>
+                          </tr>
+                        </table>
+                      </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card" >
+                      <div class="card-header">
+                        DANH SÁCH TẦNG
+                        <button title="Thêm thủ công" style="margin-left: 10px;"  id="themtang2" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
+                      </div>
+                      <div class="card-body" >
+                        
+                        <table class="table " id="tab1-tang">
+                          <thead>
+                            <tr>
+                              <th>Tên</th>
+                              <th>Ghi chú</th>
+                              <th>Chức năng</th>
+                            </tr>
+                          </thead>
+                            
+                          <tr *ngFor="let element of listtang;let i=index" id="{{i}}">
+                            <td><input disabled type="text" name="{{element.KTX0001_ID}}"  class="form-control none"  [(ngModel)]="element.ten"><input type="hidden" name="ID" title="{{element.ten}}" value="{{element.KTX0001_ID}}"> </td>
+                            <td><textarea disabled class="form-control none" [(ngModel)]="element.ghichu">
+                            </textarea></td>
+                          <td><button  title="Thêm thủ công" class="btn btn-sm edit"><i class="fa fa-edit"></i></button>
+                            <button  title="Thêm thủ công" class="btn btn-sm del"><i class="fa fa-trash"></i></button></td>
+                        </tr>
+                        </table>
+                      </div>
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
         
@@ -91,15 +192,102 @@
   </div>
   
 
+  <div class="modal fade " id="editphong" role="dialog" >
+	<div class="modal-dialog   modal-700" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">SỬA THÔNG TIN PHÒNG</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+        <h6>Thông tin phòng</h6>
+                <table class="table ">
+                  <thead>
+                    <tr>
+                      <td>Tên phòng</td>
+                      <td><input  type="text"  class="form-control bodernone"  [(ngModel)]="phongdetail.ten"></td>
+                    </tr>
+                    <tr>
+                      <td>Số lượng chỗ</td>
+                      <td><input  type="number"  class="form-control bodernone"  [(ngModel)]="phongdetail.slot"></td>
+                    </tr>
+                    <tr>
+                      <td>Ghi chú</td>
+                      <td><textarea name="" id="" class="form-control bodernone" [(ngModel)]="phongdetail.ghichu"></textarea>  </td>
+                    </tr>
+                  </thead>
+                </table>
+                <h6>Thông tin tài sản cố định</h6>
+                <table class="table ">
+                  <thead>
+                    <tr>
+                    <th>Tên tài sản</th>
+                    <th>Số lượng</th>
+                    <th>Chức năng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <select name="" id="" class="form-control">
+                          <option value="">Quạt treo tường</option>
+                          <option value="">Bóng điện</option>
+                        </select>
+                      </td>
+                      <td><input  type="text"  class="form-control bodernone" value="5"></td>
+                      <td><button class="btn"><i class="fa fa-edit"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <select name="" id="" class="form-control">
+                          <option value="">Quạt treo tường</option>
+                          <option value="">Bóng điện</option>
+                        </select>
+                      </td>
+                      <td><input  type="text"  class="form-control bodernone" value="5"></td>
+                      <td><button class="btn"><i class="fa fa-edit"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <select name="" id="" class="form-control">
+                          <option value="">Quạt treo tường</option>
+                          <option value="">Bóng điện</option>
+                        </select>
+                      </td>
+                      <td><input  type="text"  class="form-control bodernone" value="5"></td>
+                      <td><button class="btn"><i class="fa fa-edit"></i></button></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <select name="" id="" class="form-control">
+                          <option value="">Quạt treo tường</option>
+                          <option value="">Bóng điện</option>
+                        </select>
+                      </td>
+                      <td><input  type="text"  class="form-control bodernone" value="5"></td>
+                      <td><button class="btn"><i class="fa fa-edit"></i></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <br>
+                <!-- <button id="luutoanha" class="btn btn-primary form-control"><i class="fa fa-save"></i></button> -->
+			</div>
+			<div class="modal-footer">
+				<button id="updateroominfo" type="button" class="userbutton btn btn-warning float-right" ><i class="fa fa-save"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
   <div class="modal fade " id="formaddtoanhatang" role="dialog" >
-	<div class="modal-dialog   modal-lg" >
+	<div class="modal-dialog   modal-500" >
 		<div class="modal-content " >
 			<div class="modal-header">
 				<h5 class="modal-title">{{notify!=null?notify:""}}</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body ">
-                <select class="form-control change" id="khuvuc">
+                <select disabled class="form-control change" id="khuvuc">
                     <option value="">Khu vực</option>
                     <option value="N" >NAM</option>
                     <option value="F" >NỮ</option>
@@ -194,3 +382,59 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="modal fade " id="giuonginfo" role="dialog" >
+	<div class="modal-dialog  modal-700" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">THÔNG TIN CHI TIẾT GIƯỜNG</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td>Mã giường</td>
+              <td>abc</td>
+            </tr>
+            <tr>
+              <td>Tên nhân viên</td>
+              <td>abc</td>
+            </tr>
+            <tr>
+              <td>Mã nhân viên</td>
+              <td>abc</td>
+            </tr>
+
+          </tbody>
+        </table>
+			</div>
+			<div class="modal-footer">
+				<button  type="button" class="userbutton btn btn-warning float-right"  ><i class="fa fa-check"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<div id="divtoshow" style="width: 200px;height: 100px;background-color: blueviolet;position: absolute;z-index: 999;;display: none">
+  <ul class="list-group list-group-flush " style="border: solid 2px gray;">
+    <button type="button" id="viewinforgiuong" class="list-group-item list-group-item-action">Xem thông tin</button>
+    <button type="button" class="list-group-item list-group-item-action qlp">Sửa thông tin</button>
+    <button type="button" class="list-group-item list-group-item-action qlsp">Thêm một người</button>
+    <button type="button" id="deletebed" class="list-group-item list-group-item-action qlp">Xóa Giường</button>
+    <button type="button" class="list-group-item list-group-item-action qlsp">Xóa người đang ở</button>
+  </ul></div>
+
+  <div id="divtoshowoptionphong" style="width: 200px;height: 100px;background-color: blueviolet;position: absolute;z-index: 999;display: none;">
+    <ul class="list-group list-group-flush " style="border: solid 2px gray;">
+      <button type="button" class="list-group-item list-group-item-action">Xem thông tin</button>
+      <button type="button" id="editroom" class="list-group-item list-group-item-action qlp">Sửa thông tin</button>
+      <button type="button" id="deleteroom" class="list-group-item list-group-item-action qlp">Xóa Phòng</button>
+      <button type="button" class="list-group-item list-group-item-action qlsp">Xóa người đang ở</button>
+      <button type="button" id="addRange" name="" title="" class="list-group-item list-group-item-action qlsp" >Thêm người vào phòng</button>
+      <button type="button" class="list-group-item list-group-item-action" disabled>...</button>
+    </ul></div>

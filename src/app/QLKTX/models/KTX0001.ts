@@ -8,4 +8,5 @@ export class KTX0001{
     thutu:number;
     idcha:number;
     slot:number;
+    slotuse:number
 }

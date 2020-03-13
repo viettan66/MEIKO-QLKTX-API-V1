@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { RESTService } from './Service/rest.service';
 import * as Globals from './Service/global.service';
+declare var $:any
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,8 @@ import * as Globals from './Service/global.service';
 })
 export class AppComponent {
   constructor(public rest:RESTService,public cookie:CookieService) {
+
+
     if(cookie.get('manhansu')==''){
       if(window.location.href!=Globals.HostUrl+"Login"){
         window.location.assign('Login')

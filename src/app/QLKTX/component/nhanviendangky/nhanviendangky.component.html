@@ -33,7 +33,7 @@
                 </tbody>
               </table>
             </div>
-            <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'" [ktx20temp]="ktx20temp"></app-formdangkyokytucxa>
+            <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'" [ktx20temp]="ktx20temp"  (ktx20out)="getktx20($event)" ></app-formdangkyokytucxa>
           </div>
 
         </div>

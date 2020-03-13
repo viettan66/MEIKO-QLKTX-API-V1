@@ -1,13 +1,244 @@
-<app-qlp></app-qlp>
+<app-qlp   (ktx02out)="getemitListGIUONG($event)"   (ktx01out)="getemitListPHONG($event)" (ktx01oneout)="getemitPHONG($event)"></app-qlp>
 
-<div class="modal fade " id="danhsachchomodal" role="dialog" >
+<!-- <div class="modal fade " id="danhsachchomodal" role="dialog" >
 	<div class="modal-dialog   modal-55" >
 		<div class="modal-content " >
 			<div class="modal-header">
 				<h5 class="modal-title">DANH SÁCH NHÂN VIÊN CHỜ SẮP PHÒNG</h5>
+			
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body ">
+				<h5 class="card-title">Chọn danh mục đồ sẽ cấp phát khi sắp phòng</h5>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<td>Đồ dùng</td>
+							<td>Mã đồ dùng</td>
+							<td>Số lượng</td>
+							<td style="width: 200px;text-align: center;"><button class="btn btn-primary"><i class="fa fa-plus"></i></button></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Vỏ chăn</td>
+							<td>TH0001</td>
+							<td>2</td>
+							<td style="text-align: center;"><button class="btn btn-danger"><i class="fa fa-trash"></i></button></td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+			<div class="modal-body ">
+				<h5 class="card-title">{{title}}</h5>
+				<table class="table table-bordered listEP">
+					<thead>
+						<tr>
+							<td>STT</td>
+							<td>ID</td>
+							<td>TÊN</td>
+							<td>BỘ PHẬN</td>
+							<td>GIỚI TÍNH</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let element of listEP;let i=index" style="cursor: pointer;">
+							<td>{{i+1}} <input type="hidden" name="ID" value="{{i}}"> </td>
+							<td>{{element.MKV9999.manhansu}}</td>
+							<td>{{element.MKV9999.hodem+' '+element.MKV9999.ten}}</td>
+							<td>{{element.MKV9999.thetu_id}}</td>
+							<td>{{element.MKV9999.gioitinh?"Nam":"Nữ"}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<button id="sapphongauto" type="button" class="userbutton btn btn-warning float-right"  ><i class="fa fa-check"></i></button>
+			</div>
+		</div>
+	</div>
+</div> -->
+<div class="modal fade " id="sapphongtudongmodal" role="dialog" >
+	<div class="modal-dialog   modal-95" style="max-width: 1366px;" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">SẮP PHÒNG TỰ ĐỘNG</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+				<div class="row">
+					<div class="col-12 ">
+						
+						<div class="accordion" id="accordionExample">
+							<div class="card">
+							  <div class="card-header" id="headingOne" style="cursor: pointer;" >
+								<h5 class="mb-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									Danh mục đồ sẽ cấp phát khi sắp phòng
+								<i class="fa fa-eye float-right"></i>
+								</h5>
+							  </div>
+							  <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+								<div class="card-body">
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<td>STT</td>
+												<td>Tên vật tư</td>
+												<td>Mã vật tư</td>
+												<td>số lượng</td>
+												<td style="text-align: center;">Sửa số lượng</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>Vỏ chăn</td>
+												<td>TH0001</td>
+												<td>1</td>
+												<td style="text-align: center;"><button class="btn btn-secondary"><i class="fa fa-edit"></i></button></td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td>Vỏ Gối</td>
+												<td>TH0002</td>
+												<td>1</td>
+												<td style="text-align: center;"><button class="btn btn-secondary"><i class="fa fa-edit"></i></button></td>
+											</tr>
+											<tr>
+												<td>3</td>
+												<td>Chậu</td>
+												<td>TH0003</td>
+												<td>1</td>
+												<td style="text-align: center;"><button class="btn btn-secondary"><i class="fa fa-edit"></i></button></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							  </div>
+							</div>
+							<div class="card">
+								<div class="card-header" id="headingOne2" style="cursor: pointer;" >
+								  <h5 class="mb-0" data-toggle="collapse" data-target="#collapsetwo" aria-expanded="true" aria-controls="collapsetwo">
+									  Sắp phòng
+									  <i class="fa fa-eye float-right"></i>
+								  </h5>
+								</div>
+								<div id="collapsetwo" class="collapse show" aria-labelledby="headingOne2" data-parent="#accordionExample">
+								  	<div class="card-body">
+										<div class="row">
+											<div class="col-lg-6">
+												<h6 class="card-title">Chọn phòng sẽ thêm nhân viên</h6>
+												<table class="table table-bordered table-click">
+													<thead>
+														<tr>
+															<td style="width: 10px;"><input type="checkbox" ></td>
+															<td>STT</td>
+															<td>Tên phòng</td>
+															<td>Số giường</td>
+															<td>Còn trống</td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let element of listphong;let i=index" style="cursor: pointer;">
+															<td><input type="checkbox" ></td>
+															<td>{{i+1}}</td>
+															<td>{{element.ten}}</td>
+															<td>{{element.slot}}</td>
+															<td>{{element.slot-element.slotuse}}</td>
+														</tr>
+													</tbody>
+												</table>
+
+											</div>
+											<div class="col-lg-6">
+												<h6 class="card-title">Chọn Nhân viên cần sắp phòng</h6>
+												<table class="table table-bordered  table-click">
+													<thead>
+														<tr>
+															<td style="width: 10px;"><input type="checkbox" ></td>
+															<td>STT</td>
+															<td>ID</td>
+															<td>TÊN</td>
+															<td>BỘ PHẬN</td>
+															<td>GIỚI TÍNH</td>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let element of listEP;let i=index" style="cursor: pointer;">
+															<td><input type="checkbox" ></td>
+															<td>{{i+1}} <input type="hidden" name="ID" value="{{i}}"> </td>
+															<td>{{element.MKV9999.manhansu}}</td>
+															<td>{{element.MKV9999.hodem+' '+element.MKV9999.ten}}</td>
+															<td>{{element.MKV9999.thetu_id}}</td>
+															<td>{{element.MKV9999.gioitinh?"Nam":"Nữ"}}</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button id="sapphongauto" type="button" class="userbutton btn btn-warning float-right"  ><i class="fa fa-check"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade " id="nguoitronggiuong" role="dialog" >
+	<div class="modal-dialog    modal-700 " >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">THÔNG TIN NHÂN VIÊN ĐANG SỞ HỮU GIƯỜNG</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+				<h5 class="card-title">{{title}}</h5>
+				<table class="table table-bordered ">
+					<thead>
+						<tr>
+							<td>ID</td>
+							<td>TÊN</td>
+							<td>BỘ PHẬN</td>
+							<td>GIỚI TÍNH</td>
+							<td>CHỨC NĂNG</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr  style="cursor: pointer;">
+							<td>{{giuong!=null?(giuong.KTX0020.MKV9999.manhansu):""}}</td>
+							<td>{{giuong!=null?(giuong.KTX0020.MKV9999.hodem+' '+giuong.KTX0020.MKV9999.ten):""}}</td>
+							<td>{{giuong!=null?(giuong.KTX0020.MKV9999.thetu_id):""}}</td>
+							<td>{{giuong!=null?(giuong.KTX0020.MKV9999.gioitinh?"Nam":"Nữ"):""}}</td>
+							<TD><button class="btn btn-danger" id="deleterooms" title="Xóa khỏi phòng này"><i class="fas fa-hospital-alt"></i></button></TD>
+						</tr>
+						<tr>
+							<td>Phòng</td>
+							<td>{{giuong!=null?(giuong.KTX0001.ten):""}}</td>
+							<td>Khóa</td>
+							<td ></td>
+							<td rowspan="2"><button class="btn btn-danger" id="deleteout" title="Xóa khỏi giường này"><i class="fas fa-sync"></i></button></td>
+						</tr>
+						<tr>
+							<td>Tủ</td>
+							<td ></td>
+							<td>Khóa</td>
+							<td ></td>
+						</tr>
+						<tr>
+							<td>Ngày duyệt</td>
+							<td  colspan="4"></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div class="modal-footer">
 				<button id="UPDATEinfo" type="button" class="userbutton btn btn-warning float-right" data-dismiss="modal" >UPDATE</button>
@@ -15,3 +246,4 @@
 		</div>
 	</div>
 </div>
+
