@@ -25,6 +25,10 @@ public ktx0010:KTX0010[]=[]
       showdodung()
     })
     ////////////////
+    $('#thietlap').click(function(){
+      $('#thietlapmodal').modal()
+    })
+    ////////////////
     $('#savedodung').click(function(){
       let temp=new KTX0010()
       let temparr:KTX0010[]=[]
@@ -70,6 +74,7 @@ public ktx0010:KTX0010[]=[]
               row.addClass('none')
               row.attr('disabled',true)
               row=null
+              console.log('d')
             }
             else alert(val.mess)
         })

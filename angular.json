@@ -27,7 +27,8 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ],
-            "scripts": ["node_modules/jquery/dist/jquery.js",
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
@@ -123,6 +124,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "MEIKO-QLKTX-API-V1"
+    }
+  },
+  "defaultProject": "MEIKO-QLKTX-API-V1",
+  "cli": {
+    "analytics": "042071cb-d5ea-456e-8d2a-f6f6ce0ae697"
+  }
 }

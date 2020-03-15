@@ -77,11 +77,11 @@
                   <div class="card-body" style="padding: 5px;">
                     <div class="row no-gutters d-flex justify-content-start">
 
-                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}"  *ngFor="let element of listphong" style="width: 8em;" [ngStyle]="{'background-color':color[element.slotuse==null?0:element.slotuse]}">
+                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}"  *ngFor="let element of listphong" style="width: 4em;" [ngStyle]="{'background-color':color[element.slotuse==null?0:element.slotuse]}">
                           <!--<img class="card-img-top" src="..." alt="Card image cap">-->
                           <div class="card-body"  style="padding: 5px;">
-                            <h5 class="card-title">{{element.ten}}</h5>
-                            <p class="card-text">Dùng: {{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </p>
+                            <h6 class="card-title">{{element.ten}}</h6>
+                            <p class="card-text">{{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </p>
                           </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                           <div  id="{{element.KTX0002_ID}}"  class="card giuongclick {{element.trangthai?' text-white bg-success ':' text-white bg-secondary '}} " style="width: 100%;">
                               <!--<img class="card-img-top" src="..." alt="Card image cap">-->
                               <div class="card-body"  style="padding: 5px;">
-                                <h5 class="card-title">{{element.ten}}</h5>
+                                <h6 class="card-title">{{element.ten}}</h6>
                                 <p class="card-text">{{element.KTX0020!=null?(element.KTX0020.MKV9999.hodem + ' ' + element.KTX0020.MKV9999.ten) :(' Trống ')}} </p>
                               </div>
                             </div>

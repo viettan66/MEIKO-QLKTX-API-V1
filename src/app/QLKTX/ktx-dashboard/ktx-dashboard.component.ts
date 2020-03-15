@@ -5,7 +5,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { MKV9982 } from 'src/app/Models/MKV9982';
 import { Router, ActivatedRoute } from '@angular/router';
 declare var $: any
-
 @Component({
   selector: 'app-ktx-dashboard',
   templateUrl: './ktx-dashboard.component.html',
