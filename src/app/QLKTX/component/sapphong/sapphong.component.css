@@ -1,3 +1,4 @@
 .active{background-color: gray;}
 
 .actived{background-color: rgb(223, 223, 223);}
+.none{border: none; background-color: transparent;}

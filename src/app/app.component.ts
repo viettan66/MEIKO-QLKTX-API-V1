@@ -11,8 +11,6 @@ declare var $:any
 })
 export class AppComponent {
   constructor(public rest:RESTService,public cookie:CookieService) {
-
-
     if(cookie.get('manhansu')==''){
       if(window.location.href!=Globals.HostUrl+"Login"){
         window.location.assign('Login')
@@ -30,6 +28,9 @@ export class AppComponent {
       //   window.location.assign('Admin')
       // }
     }
+    $(document).ready(function () {
+     
+    })
    }
   title = 'MEIKO-QLKTX-API-V1';
 }

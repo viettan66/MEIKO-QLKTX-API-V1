@@ -2,7 +2,7 @@
 html {
   height: 100%;
 }
-body{background-image: url(./assets/image/bg1.jpg);}
+body{background-image: url(./assets/image/bg1.jpg);background-attachment:fixed;}
 @media (min-width: 576px) {
     .modal-dialog { max-width: none; }
   }

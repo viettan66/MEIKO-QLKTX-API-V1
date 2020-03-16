@@ -11,6 +11,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/core": "^9.0.6",
     "@angular/animations": "~8.2.14",
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",
@@ -19,11 +20,14 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "balanced-match": "^1.0.0",
     "bootstrap": "^4.4.1",
+    "core-util-is": "^1.0.2",
     "jquery": "^3.4.1",
-    "ngx-cookie-service": "^2.3.0",
+    "ngx-cookie-service": "^2.4.0",
     "rxjs": "~6.4.0",
-    "tslib": "^1.10.0",
+    "symbol-observable": "^1.2.0",
+    "tslib": "^1.11.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

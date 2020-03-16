@@ -26,6 +26,7 @@ export class FormdangkyokytucxaComponent implements OnInit {
     if(this.ktx20temp!=null){
       that.ktx0020=this.ktx20temp
     }else{
+      console.log('truyền vào null rồi')
     that.ktx0020.KTX0021=[]
     this.ktx0020.hotenkhaisinh=that.cookie.get('hodem')+' '+that.cookie.get('ten')
     this.ktx0020.MKV9999_ID=Number.parseInt(that.cookie.get('MKV9999_ID')) 
@@ -74,8 +75,9 @@ export class FormdangkyokytucxaComponent implements OnInit {
           })
         }else{ 
           that.rest.PutDataToAPI<result<KTX0020>>(that.ktx0020,'KTX0020/edit').subscribe(data=>{
-          console.log(that.ktx0020)
-          console.log(data)
+            if(data.code=="OK"){
+              //that.ktx20out.emit(data.data)
+            }
         })
         }
         //console.log(that.ktx0020)

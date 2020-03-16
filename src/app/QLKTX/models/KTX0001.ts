@@ -5,6 +5,7 @@ export class KTX0001{
     ten:string;
     ghichu:string;
     trangthai:boolean;
+    check:boolean;
     thutu:number;
     idcha:number;
     slot:number;

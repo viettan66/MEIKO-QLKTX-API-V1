@@ -75,5 +75,8 @@ public ktx20temp: KTX0020;
       /////
       getktx20(event:KTX0020){
         this.listdon.push(event)
+        this.form='showdon'
+        this.ktx20temp=null
+        //times(false)
       }
 }

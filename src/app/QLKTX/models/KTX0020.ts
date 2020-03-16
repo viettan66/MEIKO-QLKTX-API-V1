@@ -54,6 +54,7 @@ export class KTX0020{
     public  lydo  :string      ;
     public  ghichu  :string      ;
     public  trangthai  :boolean      ;
+    public  check  :boolean      ;
     public   MKV9999  : MKV9999     ;
     public   KTX0001  : KTX0001     
     public   KTX0002  : KTX0002     ;

@@ -14,12 +14,28 @@ export class QldComponent implements OnInit {
 
   constructor(public rest:RESTService,public cookie:CookieService) { }
   public listdon:KTX0020[]=[]
+  public ktx20temp:KTX0020
   public listdontemp:KTX0020[]=[]
+  public form=''
 
   ngOnInit() {  let that=this
 
     $(document).ready(function(){
+      
+      
+      $('thead>tr>th>input:checkbox').change(function(){
+        console.log($(this).is(':checked'))
+        $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
+      })
       ////
+      $('.tablelistdon').on('click','tbody>tr>td>input:checkbox',function(Event){
+        Event.stopPropagation()
+        if($(this).attr('checked')){
+            $(this).parent().parent().addClass('active')
+        }else{
+          $(this).parent().parent().removeClass('active')
+        }
+      })
       function showdon(){
         that.rest.GetDataFromAPI<KTX0020[]>('KTX0020/Getall').subscribe(data=>{
           that.listdon=data
@@ -29,10 +45,8 @@ export class QldComponent implements OnInit {
       }
       showdon()
       ////////////////
-      $('.tablelistdon').on('click','tr',function(){
-        if(!$(this).hasClass('active'))
-        $(this).addClass('active')
-        else $(this).removeClass('active')
+      $('.tablelistdon').on('click','tbody>tr',function(){
+        $(this).find('input:checkbox').click()
       })
       ////////////////
       $('.card').on('change','#filter',function(){
@@ -47,13 +61,7 @@ export class QldComponent implements OnInit {
       })
       ////////////////
       $('.card').on('click','#agree',function(){
-        let arr:KTX0020[]=[]
-        $('.tablelistdon>tbody>tr').each(function(){
-          if($(this).hasClass('active')){
-            arr.push(that.listdon[$(this).find('input[name=ID]').val()])
-          }
-        })
-        that.rest.PostDataToAPI<result<KTX0020>[]>(arr,'KTX0020/approval').subscribe(data=>{
+        that.rest.PostDataToAPI<result<KTX0020>[]>(that.listdon.filter(c=>{return c.check===true}),'KTX0020/approval').subscribe(data=>{
           console.log(data)
           data.forEach(val=>{
             if(val.code=="OK"){
@@ -65,6 +73,19 @@ export class QldComponent implements OnInit {
             }
           })
         })
+      })
+      ////////////////
+      
+      $('.tablelistdon').on('click','.showdetaildon',function(){
+        let id=$(this).attr('name')
+        console.log(id)
+        that.ktx20temp=that.listdon.filter(c=>{return c.KTX0020_ID===Number(id)})[0]
+        console.log(that.ktx20temp)
+        that.form='formdangkyokytucxa';
+      })
+      ////////////////
+      $('.card').on('click','#disagree',function(){
+        console.log(that.listdon)
       })
     })
   }

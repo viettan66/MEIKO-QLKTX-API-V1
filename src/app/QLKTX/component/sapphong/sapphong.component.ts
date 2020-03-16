@@ -16,11 +16,13 @@ declare var $:any
 export class SapphongComponent implements OnInit {
   constructor(public rest:RESTService) { }
 public listEP:KTX0020[]=[]
+public listEPcopy:KTX0020[]=[]
 public listEPtemp:KTX0020[]=[]
 public giuong:KTX0002=null
 public phong:KTX0001=null
 public listgiuong:KTX0002[]=[]
 public listphong:KTX0001[]=[]
+public listphongcopy:KTX0001[]=[]
 public listphongtemp:KTX0001[]=[]
 public title=""
   ngOnInit() {
@@ -31,11 +33,11 @@ public title=""
       $('.qlp').css('display','none')
       $('.qlsp').css('display','unset')
       $('thead>tr>td>input:checkbox').change(function(){
-        $(this).parent().parent().parent().parent().find('input:checkbox').prop('checked',$(this).prop('checked'))
+        //console.log($(this).is(':checked'))
+        $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       $('.table-click').on('click','tbody>tr',function(Event){
-        $(this).find('input:checkbox').prop('checked',!$(this).find('input:checkbox').prop('checked'))
-        $(this).find('input:checkbox').change()
+        $(this).find('input:checkbox').click()
        })
       $('.table-click').on('click','tbody>tr>td>input:checkbox',function(Event){
         Event.stopPropagation()
@@ -48,8 +50,8 @@ public title=""
       //////////////////
       //////////////////
       $('#addRange').click(function(e){
-        that.listphong=[]
-        that.listphong.push(that.phong)
+        that.listphongcopy=[]
+        that.listphongcopy.push(that.phong)
 
        idphong=$(this).attr('name')
        tenphong=$(this).attr('title')
@@ -68,6 +70,8 @@ public title=""
           return false
         }
         that.listphong=that.listphongtemp
+           that.listEPcopy=that.listEP
+           that.listphongcopy=that.listphong.filter(c=>{return (c.slotuse<c.slot)})
           $('#sapphongtudongmodal').modal()
       })​
        ///
@@ -76,8 +80,8 @@ public title=""
       let idphong=0
       let tenphong=''
       $('.card').on('click','.giuongclick',function(event){ 
-        that.listphong=[]
-        that.listphong.push(that.phong)
+        that.listphongcopy=[]
+        that.listphongcopy.push(that.phong)
         event.stopImmediatePropagation()
         option=2
         that.title="Chọn một nhân viên cho giường: "+$(this).find('.card-title').text()
@@ -114,6 +118,10 @@ public title=""
       })
       ///////////////////////////////////////////////UPDATEinfo
       $('#sapphongauto').click(function(){
+        that.rest.PostDataToAPI<result<KTX0020>[]>({arrPhong:that.listphongcopy.filter(c=>{return c.check===true}),EPs:that.listEPcopy.filter(c=>{return c.check===true}) },'QLSP/AddEPToGiuongAuto/'+idphong).subscribe(datas=>{
+          console.log(datas)
+        })
+        return
         let arr=[]
         $('.listEP>tbody>.active').each(function(){
          arr.push(that.listEP[$(this).find('input[name=ID]').val()])
@@ -180,7 +188,16 @@ public title=""
           })
          })
       }
-   
+      ///////////// edit danh mục đồ 
+      $('.table-edit-button').on('click','button',function () {
+        if($(this).find('i').hasClass('fa-edit')){
+          $(this).parent().parent().find('input,textarea').removeClass('none').removeAttr('disabled')
+          $(this).find('i').removeClass('fa-edit').addClass('fa-save')
+        }else{
+              $(this).parent().parent().find('input,textarea').addClass('none').attr('disabled',true)
+              $(this).find('i').removeClass('fa-save').addClass('fa-edit')
+        }
+      })
     })
   }
   getemitListGIUONG(event){

@@ -8,6 +8,8 @@
 .tab1 ul li{cursor: pointer;}
 
 .actived{background-color: rgb(223, 223, 223);}
-.select{background-color: #17a2b8;}
+.select .card-title{font-weight: bold;}
 
 .qlsp{display: none;}
+
+.boderbold{border:  solid 3px gray;}
