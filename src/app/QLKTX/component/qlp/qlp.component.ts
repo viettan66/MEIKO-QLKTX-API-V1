@@ -6,6 +6,8 @@ import { KTX0002 } from '../../models/KTX0002';
 import * as Global from '../../../Service/global.service';
 import { WH0006 } from 'src/app/Models/WH0006';
 import { WH0007 } from 'src/app/Models/WH0007';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 declare var $: any
 
@@ -55,6 +57,17 @@ export class QLPComponent implements OnInit {
     function onMouseUpdate(e) { that.x = e.pageX; that.y = e.pageY; }
 
     $(document).ready(function () {
+      $('#testd').click(function(){
+        console.log('d')
+        let data = document.getElementById('testconvertPDF');  
+        html2canvas(data).then(canvas => {
+          const contentDataURL = canvas.toDataURL('image/png')  
+          let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
+          // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
+          pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);  
+          pdf.save('Filename.pdf');   
+        }); 
+      })
       /////////////////
       $(document).bind("contextmenu", function (e) {
         return false;

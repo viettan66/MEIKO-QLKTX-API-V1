@@ -30,6 +30,7 @@ public title=""
     document.getElementById('hidecolumn').style.display='none'
     let that=this
     $(document).ready(function(){
+    
       /////////////////////////////////////////////
       $('.qlp').css('display','none')
       $('.qlsp').css('display','unset')
