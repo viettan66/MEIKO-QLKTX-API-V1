@@ -1,0 +1,36 @@
+<div class="col-12 px-3">
+    <div class="card" >
+      <div class="card-header">
+        DANH SÁCH ĐỒ DÙNG / THIẾT BỊ
+         <button title="thiết lập" style="margin: 5px;"  id="thietlap" class="btn btn-primary float-right"><i class="fas fa-cog"></i></button> 
+         <!-- <button title="Sửa" style="margin: 5px;"   class="btn  deleteitem btn-danger float-right"><i class="fa fa-trash"></i></button> -->
+         <button title="Sửa" style="margin: 5px;"   class="btn  edititem btn-warning float-right"><i class="fa fa-edit"></i></button>
+      </div>
+      <div class="card-body " style="">
+          <TABLE class="table tabledodung">
+            <thead>
+              <TR>
+
+              <td><input type="checkbox" ></td>
+              <td>STT</td>
+              <td>TÊN ĐỒ DÙNG/TB</td>
+              <td>GIÁ TIỀN</td>
+              <td>GHI CHÚ</td>
+              <td>SL mặc định</td>
+              </TR>
+            </thead>
+            <TBOdy>
+                <TR *ngFor="let element of listtaisancodinh;let index=index" style="cursor: pointer;">
+                  <td><input type="checkbox" [(ngModel)]="element.check"></td>
+                  <td>{{index+1}}<input type="hidden" disabled class="form-control none" name="ID"  value="{{element.KTX0010_ID }}" ></td>
+                  <td>{{element.ten }}</td>
+                  <td>{{element.giatien }}</td>
+                  <td>{{element.ghichu }}</td>
+                  <td><input type="number" disabled class="form-control none" name="ghichu"  [(ngModel)]="element.soluongmacdinh"></td>
+                </TR>
+            </TBOdy>
+          </TABLE>
+      </div>
+      
+    </div> 
+  </div>

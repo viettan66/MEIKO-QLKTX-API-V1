@@ -13,11 +13,13 @@
       quản lý KTX lúc 17:00 thứ 2 hàng tuần.</span>
     <table class="table  table-bordered tb">
       <tr  >
-        <td>Họ và tên</td>
-        <td><input   type="text"  class="formcontrol none" value="{{cookie.get('hodem')+' '+cookie.get('ten')}}" required></td>
+        <td>Họ đệm</td>
+        <td><input   type="text"  class="formcontrol none"  [(ngModel)]="ktx0020.MKV9999.hodem" ></td> 
+        <td style="width: 120px;">Tên</td>
+        <td style="width:100px;"> <input type="text"    class="formcontrol none" [(ngModel)]="ktx0020.MKV9999.ten"></td>
         <td>Giới tính</td>
         <td style="width: 100px;">
-          <select    class="formcontrol none">
+          <select    class="formcontrol none"  [(ngModel)]="ktx0020.MKV9999.gioitinh">
             <option selected value="{{cookie.get('gioitinh')}}">
               {{cookie.get('gioitinh')=='true'?"Nam":"Nữ"}}</option>
             <option value="true">Nam</option>
@@ -27,9 +29,7 @@
         <td style="width: 60px;"> Mã ID</td>
         <td><input type="text"      class="formcontrol none" value="{{cookie.get('manhansu')}}">
         </td>
-        <td style="width: 120px;">Quốc tịch</td>
-        <td style="width:100px;"><input type="text"    class="formcontrol none"
-            value="{{cookie.get('datnuoc_id')}}"></td>
+       
       </tr>
       <tr  >
         <td>Cấp bậc</td>
@@ -115,7 +115,7 @@
         <td colspan="1">Ngày có hiêu lực</td>
         <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.ngaycohieuluc"></td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td colspan="8">
           TIÊU CHUẨN CẤP PHÁT ĐỒ DÙNG CÁ NHÂN
         </td>
@@ -134,14 +134,14 @@
                   <label class="custom-control-label"
                     for="customControlAutosizing">{{element.ten}}</label>&nbsp;&nbsp;&nbsp;
                   <input style="width: 60px;border: none;border-bottom: dotted 2px gray;" type="text" class="" 
-                    id="">Chiếc
+                    >Chiếc
 
                 </div>
               </div>
             </div>
           </div>
         </td>
-      </tr>
+      </tr> -->
       <tr>
         <td rowspan="3"><b> Phần ký nhận</b></td>
         <td colspan="4">Bên giao (Ban QLKTX)</td>

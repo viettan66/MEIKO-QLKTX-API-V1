@@ -14,6 +14,12 @@ export class RESTService {
   public Get207<Type>( uri:string) {
     return this.http.get<Type>(uri);
   }
+  public Get<Type>( uri:string) {
+    return this.http.get<Type>(uri);
+  }
+  public Post<Type>( uri:string) {
+    return this.http.get<Type>(uri);
+  }
   PostDataToAPI<Type> (post,uri) {
     let data = JSON.stringify(post);
     let headers = new HttpHeaders(); 

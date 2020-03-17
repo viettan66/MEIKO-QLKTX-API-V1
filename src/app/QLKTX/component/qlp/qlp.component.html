@@ -8,49 +8,8 @@
           </div>
         <div class="row no-gutters"  style="padding: 10px;" >
          
-            <!-- <div class="col-4" id="hidecolumn">
-                <div class="card" >
-                    <div class="card-header">
-                      DANH SÁCH KHU 
-                      
-                    </div>
-                    <div class="card-body " style="padding: 0px;">
-                        <UL class="list-group " id="listkhu2">
-                            <li class="list-group-item" id="N" >NAM</li>
-                            <li class="list-group-item" id="F" >NỮ</li>
-                        </UL>
-                    </div>
-                    
-                  </div> 
-                  <div class="card toanhacard" >
-                    <div class="card-header">
-                      DANH SÁCH TÒA NHÀ
-                      <button title="Thêm thủ công" style="margin-left: 10px;"  id="themtoanha" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
-                    </div>
-                    
-                    <div class="card-body " style="padding: 0px;">
-                        <UL class="list-group " id="listtoanhash2">
-                            <li class="list-group-item" id="{{element.KTX0001_ID}}" *ngFor="let element of listtoanha">{{element.ten}}</li>
-                        </UL>
-                    </div>
-                    
-                  </div>
-                  <div class="card" >
-                    <div class="card-header">
-                      DANH SÁCH TẦNG
-                      <button title="Thêm thủ công" style="margin-left: 10px;"  id="themtang" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button>
-                    </div>
-                    
-                    <div class="card-body " style="padding: 0px;">
-                        <UL class="list-group " id="listtangsh2">
-                            <li class="list-group-item"  id="{{element.KTX0001_ID}}"  *ngFor="let element of listtang">{{element.ten}}</li>
-                        </UL>
-                    </div>
-                    
-                  </div>
-            </div> -->
             <div class="col tab2"  >
-                <div class="card" >
+                <div class="card  bg-transparent" >
                   <div class="card-header">
                     DANH SÁCH PHÒNG 
                     <span class="float-right">
@@ -86,8 +45,11 @@
                   <div class="card-body" style="padding: 5px;">
                     <div class="row no-gutters d-flex justify-content-start">
 
-                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}"  *ngFor="let element of listphong" style="width: 4em;" [ngStyle]="{'background-color':color[element.slotuse==null?0:element.slotuse]}">
+                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}"  *ngFor="let element of listphong" style="width: 4em;" 
+                      
+                      [ngStyle]="{'background-color':color[element.slotuse==null?0:element.slotuse]}">
                           <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                          <input type="hidden" name="slotuse" value="{{element.slotuse}}" >
                           <div class="card-body"  style="padding: 5px;">
                             <h6 class="card-title">{{element.ten}}</h6>
                             <p class="card-text">{{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </p>
@@ -202,91 +164,119 @@
   
 
   <div class="modal fade " id="editphong" role="dialog" >
-	<div class="modal-dialog   modal-700" >
-		<div class="modal-content " >
-			<div class="modal-header">
-				<h5 class="modal-title">SỬA THÔNG TIN PHÒNG</h5>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-			<div class="modal-body ">
-        <h6>Thông tin phòng</h6>
-                <table class="table ">
-                  <thead>
-                    <tr>
-                      <td>Tên phòng</td>
-                      <td><input  type="text"  class="form-control bodernone"  [(ngModel)]="phongdetail.ten"></td>
-                    </tr>
-                    <tr>
-                      <td>Số lượng chỗ</td>
-                      <td><input  type="number"  class="form-control bodernone"  [(ngModel)]="phongdetail.slot"></td>
-                    </tr>
-                    <tr>
-                      <td>Ghi chú</td>
-                      <td><textarea name="" id="" class="form-control bodernone" [(ngModel)]="phongdetail.ghichu"></textarea>  </td>
-                    </tr>
-                  </thead>
-                </table>
-                <h6>Thông tin tài sản cố định</h6>
-                <table class="table ">
-                  <thead>
-                    <tr>
-                    <th>Tên tài sản</th>
-                    <th>Số lượng</th>
-                    <th>Chức năng</th>
-                    </tr>
-                  </thead>
-                  <tbody>
+    <div class="modal-dialog   modal-700" >
+      <div class="modal-content " >
+        <div class="modal-header">
+          <h5 class="modal-title">SỬA THÔNG TIN PHÒNG</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body ">
+          <h6>Thông tin phòng</h6>
+                  <table class="table ">
+                    <thead>
+                      <tr>
+                        <td>Tên phòng</td>
+                        <td><input  type="text"  class="form-control bodernone"  [(ngModel)]="phongdetail.ten"></td>
+                      </tr>
+                      <tr>
+                        <td>Số lượng chỗ</td>
+                        <td><input  type="number"  class="form-control bodernone"  [(ngModel)]="phongdetail.slot"></td>
+                      </tr>
+                      <tr>
+                        <td>Ghi chú</td>
+                        <td><textarea name="" id="" class="form-control bodernone" [(ngModel)]="phongdetail.ghichu"></textarea>  </td>
+                      </tr>
+                    </thead>
+                  </table>
+                  <h6>Thông tin tài sản cố định</h6>
+                  <table class="table ">
+                    <thead>
+                      <tr>
+                      <th>Tên tài sản</th>
+                      <th>Số lượng</th>
+                      <th><button id="themtaisancodinh" class="btn btn-secondary"><i class="fa fa-plus"></i></button></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select name="" id="" class="form-control">
+                            <option value="">Quạt treo tường</option>
+                            <option value="">Bóng điện</option>
+                          </select>
+                        </td>
+                        <td><input  type="text"  class="form-control bodernone" value="5"></td>
+                        <td><button class="btn"><i class="fa fa-edit"></i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <br>
+                  <!-- <button id="luutoanha" class="btn btn-primary form-control"><i class="fa fa-save"></i></button> -->
+        </div>
+        <div class="modal-footer">
+          <button id="updateroominfo" type="button" class="userbutton btn btn-warning float-right" ><i class="fa fa-save"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="modal fade " id="themtaisancodinhMODAL" role="dialog" >
+    <div class="modal-dialog   modal-700" >
+      <div class="modal-content " >
+        <div class="modal-header">
+          <h5 class="modal-title">THÊM DANH MỤC TÀI SẢN TRONG PHÒNG</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body ">
+          
+                  <table class="table ">
                     <tr>
                       <td>
-                        <select name="" id="" class="form-control">
-                          <option value="">Quạt treo tường</option>
-                          <option value="">Bóng điện</option>
+                        <select  class="form-control" id="danhmucloaisanpham">
+                          <option *ngFor="let element of listdanhmuctaisan" value="{{element.WH0006_ID}}">{{element.tenLoaiSanPham}}</option>
                         </select>
                       </td>
-                      <td><input  type="text"  class="form-control bodernone" value="5"></td>
-                      <td><button class="btn"><i class="fa fa-edit"></i></button></td>
-                    </tr>
-                    <tr>
                       <td>
-                        <select name="" id="" class="form-control">
-                          <option value="">Quạt treo tường</option>
-                          <option value="">Bóng điện</option>
+                        <select  class="form-control">
+                          <option *ngFor="let element of listhanghoatemp" value="{{element.WH0007_ID}}">{{element.tenSanPham}}</option>
                         </select>
                       </td>
-                      <td><input  type="text"  class="form-control bodernone" value="5"></td>
-                      <td><button class="btn"><i class="fa fa-edit"></i></button></td>
-                    </tr>
-                    <tr>
                       <td>
-                        <select name="" id="" class="form-control">
-                          <option value="">Quạt treo tường</option>
-                          <option value="">Bóng điện</option>
-                        </select>
+                        <input  type="text"  class="form-control bodernone" value="5">
                       </td>
-                      <td><input  type="text"  class="form-control bodernone" value="5"></td>
-                      <td><button class="btn"><i class="fa fa-edit"></i></button></td>
-                    </tr>
-                    <tr>
                       <td>
-                        <select name="" id="" class="form-control">
-                          <option value="">Quạt treo tường</option>
-                          <option value="">Bóng điện</option>
-                        </select>
+                        <button class="btn"><i class="fa fa-save"></i></button>
                       </td>
-                      <td><input  type="text"  class="form-control bodernone" value="5"></td>
-                      <td><button class="btn"><i class="fa fa-edit"></i></button></td>
                     </tr>
-                  </tbody>
-                </table>
-                <br>
-                <!-- <button id="luutoanha" class="btn btn-primary form-control"><i class="fa fa-save"></i></button> -->
-			</div>
-			<div class="modal-footer">
-				<button id="updateroominfo" type="button" class="userbutton btn btn-warning float-right" ><i class="fa fa-save"></i></button>
-			</div>
-		</div>
-	</div>
-</div>
+                  </table>
+                  <table class="table ">
+                    <thead>
+                      <tr>
+                      <th>Tên tài sản</th>
+                      <th>Số lượng</th>
+                      <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <select name="" id="" class="form-control">
+                            <option value="">Quạt treo tường</option>
+                            <option value="">Bóng điện</option>
+                          </select>
+                        </td>
+                        <td><input  type="text"  class="form-control bodernone" value="5"></td>
+                        <td><button class="btn"><i class="fa fa-edit"></i></button></td>
+                      </tr>
+                    </tbody>
+                  </table>
+        </div>
+        <div class="modal-footer">
+          <button id="luudanhmuctaisan" type="button" class="userbutton btn btn-info  float-right" ><i class="fa fa-save"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="modal fade " id="formaddtoanhatang" role="dialog" >
 	<div class="modal-dialog   modal-500" >

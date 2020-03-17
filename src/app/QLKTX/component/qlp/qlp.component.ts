@@ -4,6 +4,8 @@ import { KTX0001 } from '../../models/KTX0001';
 import { result } from '../../models/result';
 import { KTX0002 } from '../../models/KTX0002';
 import * as Global from '../../../Service/global.service';
+import { WH0006 } from 'src/app/Models/WH0006';
+import { WH0007 } from 'src/app/Models/WH0007';
 
 declare var $: any
 
@@ -410,7 +412,27 @@ export class QLPComponent implements OnInit {
           })
         })
       })
-    })
+      /////////////////////////themtaisancodinh
+      $('#themtaisancodinh').click(function(){
+        // that.rest.Get<result< WH0006[]>>('http://192.84.100.207/adminapi/api/wh_admin/r1_loaisanphamgetbyselect').subscribe(data=>{
+        //   that.listdanhmuctaisan=data.data
+        //    that.rest.Get<result< WH0007[]>>('http://192.84.100.207/adminapi/api/wh_admin/r1_sanphamgetbyselect').subscribe(data=>{
+        //     that.listhanghoatemp=data.data
+        //       $('#themtaisancodinhMODAL').modal()
+        //     })
+        // })
+      })
+      /////////////////////////themtaisancodinh
+      $('#danhmucloaisanpham').change(function(){
+        that.listhanghoa=that.listhanghoatemp.filter(c=>{return c.WH0006_ID==$('#danhmucloaisanpham').val()})
+      })
+      /////////////////////////themtaisancodinh
+      $('#luudanhmuctaisan').click(function(){
+        
+      })
+    })////////////end ready function
   }
-
+    public listdanhmuctaisan:WH0006[]=[]
+    public listhanghoa:WH0007[]=[]
+    public listhanghoatemp:WH0007[]=[]
 }

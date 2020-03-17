@@ -12,6 +12,11 @@ body{background-image: url(./assets/image/bg1.jpg);background-attachment:fixed;}
     height: auto;
     padding: 0;
   }  
+  .modal-99 {
+    width: 99%;
+    height: auto;
+    padding: 0;
+  }  
   .modal-75 {
     width: 75%;
     height: auto;
@@ -45,7 +50,14 @@ body{background-image: url(./assets/image/bg1.jpg);background-attachment:fixed;}
     padding: 0;
   }
   .modal-500 {
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    padding: 0;
+  }
+  .modal-400 {
+    width: 100%;
+    max-width: 400px;
     height: auto;
     padding: 0;
   }

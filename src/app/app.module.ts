@@ -23,6 +23,12 @@ import { SapphongComponent } from './QLKTX/component/sapphong/sapphong.component
 import { TracuuthongkeComponent } from './QLKTX/component/tracuuthongke/tracuuthongke.component';
 import { FormdangkyokytucxaComponent } from './QLKTX/component/nhanviendangky/formtemplate/formdangkyokytucxa/formdangkyokytucxa.component';
 import { QldComponent } from './QLKTX/component/qld/qld.component';
+import { DanhsachraComponent } from './QLKTX/component/tracuuthongke/danhsachra/danhsachra.component';
+import { DanhsachvaoComponent } from './QLKTX/component/tracuuthongke/danhsachvao/danhsachvao.component';
+import { TimkiemComponent } from './QLKTX/component/tracuuthongke/timkiem/timkiem.component';
+import { IndonComponent } from './QLKTX/component/tracuuthongke/indon/indon.component';
+import { DanhmuctaisasnComponent } from './QLKTX/component/qltb/danhmuctaisasn/danhmuctaisasn.component';
+import { ThietlaptaisancodinhComponent } from './QLKTX/component/qltb/thietlaptaisancodinh/thietlaptaisancodinh.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent},
@@ -57,6 +63,12 @@ const routes: Routes = [
     TracuuthongkeComponent,
     FormdangkyokytucxaComponent,
     QldComponent,
+    DanhsachraComponent,
+    DanhsachvaoComponent,
+    TimkiemComponent,
+    IndonComponent,
+    DanhmuctaisasnComponent,
+    ThietlaptaisancodinhComponent,
     
   ],
   imports: [

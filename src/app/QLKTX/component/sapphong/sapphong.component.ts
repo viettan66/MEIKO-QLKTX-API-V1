@@ -6,6 +6,7 @@ import { KTX0020 } from '../../models/KTX0020';
 import { KTX0002 } from '../../models/KTX0002';
 import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import { KTX0001 } from '../../models/KTX0001';
+import { color } from 'src/app/Service/global.service';
 declare var $:any
 
 @Component({
@@ -50,6 +51,7 @@ public title=""
       //////////////////
       //////////////////
       $('#addRange').click(function(e){
+        console.log(that.phong)
         that.listphongcopy=[]
         that.listphongcopy.push(that.phong)
 
@@ -60,8 +62,11 @@ public title=""
          
          if(getdata(that.phong.khu)==false){
           return false
+        }else{
+          that.listEPcopy=that.listEP
+          $('#sapphongtudongmodal').modal()
         }
-        $('#sapphongtudongmodal').modal()
+        //$('#sapphongtudongmodal').modal()
     })​
       //////////////////
       $('#sapphongtudong').click(function(e){//console.log(e.which)14%
@@ -99,6 +104,8 @@ public title=""
           if(getdata(that.phong.khu)==false){
             return false
           }
+          
+          that.listEPcopy=that.listEP
           $('#sapphongtudongmodal').modal()}
       })
       ///////////////////////////////////////////////
@@ -106,12 +113,15 @@ public title=""
         if(!confirm("Bạn muốn xóa người này ra khỏi phòng: "+that.giuong.KTX0001.ten+'?'))return false
         that.rest.PostDataToAPI<result<KTX0002>>(that.giuong,'QLSP/DeleteBed').subscribe(data=>{
           if(data.code=="OK"){
-            $('.giuongclick').each(function(){
-              if($(this).attr('id')==data.data.KTX0002_ID){
-                $(this).removeClass('bg-success').addClass('bg-secondary').find('.card-text').text('Trống')
-               // that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})[0].trangthai=false;
-              }
-            })
+            var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})
+            if(l.length!=0){
+              l[0].KTX0020=null;
+              l[0].trangthai=false
+            } 
+            var k=that.listphong.filter(c=>{return c.KTX0001_ID===data.data.KTX0001_ID})
+            if(k.length!=0){
+              k[0].slotuse--
+            }
             $('#nguoitronggiuong').modal('hide')
           }
         })
@@ -120,29 +130,25 @@ public title=""
       $('#sapphongauto').click(function(){
         that.rest.PostDataToAPI<result<KTX0020>[]>({arrPhong:that.listphongcopy.filter(c=>{return c.check===true}),EPs:that.listEPcopy.filter(c=>{return c.check===true}) },'QLSP/AddEPToGiuongAuto/'+idphong).subscribe(datas=>{
           console.log(datas)
+           let ok=0
+            let ng=0
+          datas.forEach(data=>{
+            if(data.code=="OK"){
+              ok++
+              var k=that.listphong.filter(c=>{return c.KTX0001_ID===data.data.KTX0001_ID})
+              if(k.length!=0){
+                k[0].slotuse++
+              }
+              var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})
+              if(l.length!=0){
+                l[0].trangthai=true
+                l[0].KTX0020=data.data
+              }
+               
+            }else ng++
+          })
         })
         return
-        let arr=[]
-        $('.listEP>tbody>.active').each(function(){
-         arr.push(that.listEP[$(this).find('input[name=ID]').val()])
-        })
-          that.rest.PostDataToAPI<result<KTX0020>[]>(arr,'QLSP/AddEPToGiuongAuto/'+idphong).subscribe(datas=>{
-            let ok=0
-            let ng=0
-            console.log(datas)
-            datas.forEach(data=>{
-              if(data.code=="OK"){
-                ok++
-                $('.giuongclick').each(function(){
-                  if($(this).attr('id')==data.data.KTX0002_ID){
-                    $(this).removeClass('bg-secondary').addClass('bg-success').find('.card-text').text(data.data.MKV9999.hodem+' '+data.data.MKV9999.ten)
-                    //that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})[0].trangthai=true;
-                  }
-                })
-              }else ng++
-            })
-            alert('Đã thêm '+ok+' người vào phòng "'+tenphong+'".'+(ng!=0?(" Còn "+ng+' người chưa thêm được. Hãy kiểm tra lại.'):""))
-          })
       })
        ///
        $('.listEP').on('click','tr',function(event){ 
@@ -178,7 +184,6 @@ public title=""
           }
           khu=$("#listkhu").val()
         }
-        
         that.listEP=[]
         that.rest.GetDataFromAPI<KTX0020[]>('QLSP/GetAllEp').subscribe(data=>{
           console.log(data)
@@ -186,6 +191,7 @@ public title=""
             if(cal.gioitinh==(khu=='N'))
             that.listEP.push(cal)
           })
+          return true
          })
       }
       ///////////// edit danh mục đồ 
