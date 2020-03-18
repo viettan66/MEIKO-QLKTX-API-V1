@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
     let that=this
     $(document).ready(function(){
      function LOGIN(data:MKV9999){
-
+      localStorage.setItem('KTX_User',JSON.stringify(data) );
+       //localStorage.getItem('KTX_User')
       that.cookie.set('MKV9999_ID',data.MKV9999_ID+'')
       that.cookie.set("id",data.id )
       that.cookie.set("manhansu",data.manhansu )

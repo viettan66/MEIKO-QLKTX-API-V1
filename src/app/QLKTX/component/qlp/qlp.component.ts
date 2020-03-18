@@ -8,6 +8,11 @@ import { WH0006 } from 'src/app/Models/WH0006';
 import { WH0007 } from 'src/app/Models/WH0007';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { KTX0011 } from '../../models/KTX0011';
+import { ThrowStmt } from '@angular/compiler';
+import { ECANCELED } from 'constants';
+import { KTX0010 } from '../../models/KTX0010';
+import { CookieService } from 'ngx-cookie-service';
 
 declare var $: any
 
@@ -34,10 +39,12 @@ export class QLPComponent implements OnInit {
   public toanha = 0
   public tang = 0
   public phong = 0
+  public giuong = 0
   public tentoanha = ''
   public tenphong = ''
   public isaddtoanha = true;
   public phongdetail: KTX0001 = new KTX0001()
+  public giuongdetail: KTX0002 = new KTX0002()
   public tab=1
   public x = null;
   public y = null;
@@ -46,7 +53,7 @@ export class QLPComponent implements OnInit {
   ngOnInit() {
     console.log()
     let that = this
-    that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall').subscribe(data => {
+    that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/-1').subscribe(data => {
       this.listktx0001 = data
     })
     that.rest.GetDataFromAPI<KTX0002[]>('KTX0002/Getall').subscribe(data => {
@@ -87,6 +94,7 @@ export class QLPComponent implements OnInit {
         if (e.which == 3) {
           tengiuong = $(this).find('.card-title').text()
           idgiuong = $(this).attr('id')
+          that.giuong = $(this).attr('id')
           $('#divtoshow').css({ 'top': that.y, 'left': that.x - 100 }).show()
         }
       })
@@ -127,9 +135,14 @@ export class QLPComponent implements OnInit {
       //////////////////
       $('#deleteroom').click(function () {
         if (confirm('Bạn có muốn xóa phòng: ' + tenphong)) {
-          that.rest.GetDataFromAPI<result<KTX0002>>('KTX0001/Delete/' + idgiuong).subscribe(data => {
+          that.rest.GetDataFromAPI<result<KTX0001>>('KTX0001/Delete/' + that.phong).subscribe(data => {
             if (data.code == "OK") {
               console.log(data)
+              var length= that.listphong.filter(c=>{return c.KTX0001_ID===data.data.KTX0001_ID})
+              console.log(length)
+              if(length.length!=0){
+                that.listphong.splice(that.listphong.indexOf(length[0]),1)
+              }
             } else
               alert(data.mess)
           })
@@ -137,18 +150,35 @@ export class QLPComponent implements OnInit {
       })
       //////////////////
       $('#editroom').click(function (e) {//console.log(e.which)
-        let k = that.listphong.filter(c => { return c.KTX0001_ID === Number(that.phong) })[0]
-        that.phongdetail.KTX0001_ID = k.KTX0001_ID
-        that.phongdetail.ten = k.ten
-        that.phongdetail.ghichu = k.ghichu
-        that.phongdetail.slot = k.slot
-        that.phongdetail.idcha = k.idcha
-        that.phongdetail.khu = k.khu
-        that.phongdetail.thutu = k.thutu
-        that.phongdetail.trangthai = k.trangthai;
-        that.phongdetail.type = k.type
-        $('#editphong').modal();
+        that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/'+that.phong).subscribe(dataa=>{
+          that.phongdetail=dataa[0]
+          $('#editphong').modal();
+        })
 
+      })
+      //////////////////
+      $('#editgiuong').click(function (e) {//console.log(e.which)
+        that.rest.GetDataFromAPI<KTX0002>('KTX0002/Get/'+that.giuong).subscribe(dataa=>{
+          console.log(dataa)
+          that.giuongdetail=dataa
+          $('#editgiuongmodal').modal();
+        })
+      })
+      //////////////////
+      $('#updatebedinfo').click(function (e) {//console.log(e.which)
+        that.rest.PostDataToAPI<result< KTX0002>>(that.giuongdetail,'KTX0002/update').subscribe(dataa=>{
+          console.log(dataa)
+          if(dataa.code=="OK"){
+            var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===dataa.data.KTX0002_ID})
+            if(l.length!=0){
+              l[0].ten=dataa.data.ten;
+              $('#editgiuongmodal').modal('hide');
+            }
+            
+          }
+          that.giuongdetail=dataa
+          
+        })
       })
 
       $('.filter').change(function () {
@@ -201,6 +231,7 @@ export class QLPComponent implements OnInit {
         kt01.idcha = $('#listtangsh').val()
         kt01.type = 4
         kt01.slot = $('#soluongchochua').val()
+        kt01.KTX0011=null
         if ($('#soluongchochua').val() < 1 || $('#soluongchochua').val() > 10) {
           alert('Số lượng không hợp lệ')
           return
@@ -288,6 +319,12 @@ export class QLPComponent implements OnInit {
             k.thutu = data.data.thutu
             k.trangthai = data.data.trangthai;
             k.type = data.data.type
+            data.data.KTX0002.forEach(vc=>{
+              var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===vc.KTX0002_ID})
+              if(l.length==0){
+                that.listgiuong.push(vc)
+              }
+            })
             $('#editphong').modal('hide')
           }
           else {
@@ -425,6 +462,33 @@ export class QLPComponent implements OnInit {
           })
         })
       })
+      //////////////////////////////////////edit taisancodinh
+      
+    ///////////////
+          var row=null
+          var rowtr=null
+          $('.table-click').on('click','.edititem',function(Event){
+            Event.stopPropagation()
+            if(row==null){
+              $(this).find('.fa-edit').removeClass('fa-edit').addClass('fa-save')
+            row=$(this).parent().parent().find('.none')
+            rowtr=$(this).parent().parent()
+            row.removeClass('none')
+            row.removeAttr('disabled')
+            }else{
+              that.rest.PutDataToAPI<result<KTX0011 >[]>(that.phongdetail.KTX0011,'KTX0011/edit').subscribe(vals=>{
+                vals.forEach(val=>{
+                  if(val.code=='OK'){
+                  }
+                  else alert(val.mess)
+                })
+                    $(this).find('.fa-save').removeClass('fa-save').addClass('fa-edit')
+                    row.addClass('none')
+                    row.attr('disabled',true)
+                    row=null
+              })
+            }
+          })
       /////////////////////////themtaisancodinh
       $('#themtaisancodinh').click(function(){
         // that.rest.Get<result< WH0006[]>>('http://192.84.100.207/adminapi/api/wh_admin/r1_loaisanphamgetbyselect').subscribe(data=>{
@@ -434,18 +498,39 @@ export class QLPComponent implements OnInit {
         //       $('#themtaisancodinhMODAL').modal()
         //     })
         // })
+        that.rest.GetDataFromAPI<KTX0010[]>('KTX0010/Getall').subscribe(data=>{
+           that.listdanhmuctaisan=data.filter(c=>{ return c.loai===1})
+           $('#themtaisancodinhMODAL').modal()
+        })
+       
+        
       })
       /////////////////////////themtaisancodinh
       $('#danhmucloaisanpham').change(function(){
-        that.listhanghoa=that.listhanghoatemp.filter(c=>{return c.WH0006_ID==$('#danhmucloaisanpham').val()})
+        //that.listhanghoa=that.listhanghoatemp.filter(c=>{return c.WH0006_ID==$('#danhmucloaisanpham').val()})
       })
       /////////////////////////themtaisancodinh
       $('#luudanhmuctaisan').click(function(){
-        
+        that.rest.PostDataToAPI<result<KTX0011>[]>(that.listdanhmuctaisan,"KTX0011/add/"+that.phongdetail.KTX0001_ID).subscribe(data=>{
+          that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/'+that.phong).subscribe(dataa=>{
+            that.phongdetail=dataa[0]
+            $('#themtaisancodinhMODAL').modal('hide')
+          })
+        })
       })
     })////////////end ready function
   }
-    public listdanhmuctaisan:WH0006[]=[]
-    public listhanghoa:WH0007[]=[]
-    public listhanghoatemp:WH0007[]=[]
+    public listdanhmuctaisan:KTX0010[]=[]
+    delete(event:KTX0011){
+      if(!confirm('Bạn có chắc chăn muốn xóa: '+event.KTX0010.ten+' ra khỏi phòng: '+this.phongdetail.ten))return false
+      this.rest.PutDataToAPI<result<KTX0011 >>(event,'KTX0011/delete').subscribe(val=>{
+          if(val.code=='OK'){
+            this.phongdetail.KTX0011.splice(this.phongdetail.KTX0011.indexOf(event),1)
+          }
+          else alert(val.mess)
+      })
+    }
+    deleteitemdanhmuc(event){
+      this.listdanhmuctaisan.splice(this.listdanhmuctaisan.indexOf(event),1)
+    }
 }

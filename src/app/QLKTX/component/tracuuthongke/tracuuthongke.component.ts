@@ -23,6 +23,10 @@ export class TracuuthongkeComponent implements OnInit {
         that.tab=$(this).index()
         
       })
+      ////////////////
+      $('#SEARCH').click(function(){
+        $('#searchbox').change()
+      })
       //////////////
 
     }})//end $(document).ready

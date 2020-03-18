@@ -32,6 +32,12 @@ export class RESTService {
     headers.set('Content-Type', 'application/json');
     return this.http.put<Type>(Global.APIUrl+uri,post, {headers: headers});
   }
+  // DeleteDataToAPI<Type> (post,uri) {
+  //   let data = JSON.stringify(post);
+  //   let headers = new HttpHeaders(); 
+  //   headers.set('Content-Type', 'application/json');
+  //   return this.http.delete<Type>(Global.APIUrl+uri,post, {headers: headers});
+  // }
 
   
 }

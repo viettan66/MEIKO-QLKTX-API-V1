@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { dataservice } from '../Service/dataservice';
 import { MKV9981 } from '../Models/MKV9981';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MKV9999 } from '../Models/MKV9999';
 declare var $:any
 
 @Component({
@@ -20,8 +21,8 @@ public listapp:MKV9981[]=[]
 
     let that=this
     $(document).ready(function(){
-      that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAcctionWidthMKV9999ID/'+that.cookie.get('MKV9999_ID')).pipe().subscribe(data=>{
-        console.log(data)
+      var user = JSON.parse(localStorage.getItem('KTX_User'));
+      that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAcctionWidthMKV9999ID/'+user.MKV9999_ID).pipe().subscribe(data=>{
         that.listapp=data
       })
       //////////////////////

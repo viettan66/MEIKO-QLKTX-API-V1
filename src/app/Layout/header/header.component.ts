@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
   }
   logout(){
     this.cookie.deleteAll();
+    localStorage.removeItem('KTX_User')
     window.location.assign('');
   }
 }

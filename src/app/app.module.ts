@@ -29,18 +29,19 @@ import { TimkiemComponent } from './QLKTX/component/tracuuthongke/timkiem/timkie
 import { IndonComponent } from './QLKTX/component/tracuuthongke/indon/indon.component';
 import { DanhmuctaisasnComponent } from './QLKTX/component/qltb/danhmuctaisasn/danhmuctaisasn.component';
 import { ThietlaptaisancodinhComponent } from './QLKTX/component/qltb/thietlaptaisancodinh/thietlaptaisancodinh.component';
+import { Auth } from './Service/Auth';
 
 const routes: Routes = [
-  {path: '', component: DashboardComponent},
+  {path: '', component: DashboardComponent,canActivate:[Auth]},
   {path: 'Login', component: LoginComponent},
-  {path: 'QLKTX', component: KTXDashboardComponent},
-  {path: 'QLKTX/QLP', component: QLPComponent},
-  {path: 'QLKTX/QLTB', component: QLTBComponent},
-  {path: 'QLKTX/QLDK', component: NhanviendangkyComponent},
-  {path: 'QLKTX/QLSP', component: SapphongComponent},
-  {path: 'QLKTX/QLTCTK', component: TracuuthongkeComponent},
-  {path: 'DASHBOARD', component: SettingComponent},
-  {path: 'QLKTX/QLD', component: QldComponent},
+  {path: 'QLKTX', component: KTXDashboardComponent,canActivate:[Auth]},
+  {path: 'QLKTX/QLP', component: QLPComponent,canActivate:[Auth]},
+  {path: 'QLKTX/QLTB', component: QLTBComponent,canActivate:[Auth]},
+  {path: 'QLKTX/QLDK', component: NhanviendangkyComponent,canActivate:[Auth]},
+  {path: 'QLKTX/QLSP', component: SapphongComponent,canActivate:[Auth]},
+  {path: 'QLKTX/QLTCTK', component: TracuuthongkeComponent,canActivate:[Auth]},
+  {path: 'DASHBOARD', component: SettingComponent,canActivate:[Auth]},
+  {path: 'QLKTX/QLD', component: QldComponent,canActivate:[Auth]},
 ];
 
 @NgModule({
@@ -77,7 +78,7 @@ const routes: Routes = [
     HttpClientModule,
   ],
   exports: [RouterModule],
-  providers: [CookieService],
+  providers: [CookieService,Auth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

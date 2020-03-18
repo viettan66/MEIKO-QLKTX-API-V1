@@ -190,7 +190,7 @@
                     </thead>
                   </table>
                   <h6>Thông tin tài sản cố định</h6>
-                  <table class="table ">
+                  <table class="table table-click">
                     <thead>
                       <tr>
                       <th>Tên tài sản</th>
@@ -199,15 +199,13 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                      <tr *ngFor="let element of phongdetail.KTX0011;let i=index">
+                        <td>{{element.KTX0010.ten}}</td>
+                        <td><input disabled type="text"  class="form-control bodernone none" [(ngModel)]="element.soluong"></td>
                         <td>
-                          <select name="" id="" class="form-control">
-                            <option value="">Quạt treo tường</option>
-                            <option value="">Bóng điện</option>
-                          </select>
+                          <button class="btn edititem"><i class="fa fa-edit"></i></button>
+                          <button class="btn del" (click)="delete(element)"><i class="fa fa-trash"></i></button>
                         </td>
-                        <td><input  type="text"  class="form-control bodernone" value="5"></td>
-                        <td><button class="btn"><i class="fa fa-edit"></i></button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -216,6 +214,37 @@
         </div>
         <div class="modal-footer">
           <button id="updateroominfo" type="button" class="userbutton btn btn-warning float-right" ><i class="fa fa-save"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="modal fade " id="editgiuongmodal" role="dialog" >
+    <div class="modal-dialog   modal-700" >
+      <div class="modal-content " >
+        <div class="modal-header">
+          <h5 class="modal-title">SỬA THÔNG TIN GIƯỜNG: {{giuongdetail!=null?giuongdetail.ten:""}}</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body ">
+          <h6>Thông tin giường</h6>
+                  <table class="table ">
+                    <thead>
+                      <tr>
+                        <td>Tên giường</td>
+                        <td><input  type="text"  class="form-control bodernone"  [(ngModel)]="giuongdetail.ten"></td>
+                      </tr>
+                      <tr>
+                        <td>Ghi chú</td>
+                        <td><textarea name="" id="" class="form-control bodernone"  [(ngModel)]="giuongdetail.ghichu"></textarea>  </td>
+                      </tr>
+                    </thead>
+                  </table>
+        </div>
+        <div class="modal-footer">
+          <button id="updatebedinfo" type="button" class="userbutton btn btn-warning float-right" ><i class="fa fa-save"></i></button>
         </div>
       </div>
     </div>
@@ -229,27 +258,6 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body ">
-          
-                  <table class="table ">
-                    <tr>
-                      <td>
-                        <select  class="form-control" id="danhmucloaisanpham">
-                          <option *ngFor="let element of listdanhmuctaisan" value="{{element.WH0006_ID}}">{{element.tenLoaiSanPham}}</option>
-                        </select>
-                      </td>
-                      <td>
-                        <select  class="form-control">
-                          <option *ngFor="let element of listhanghoatemp" value="{{element.WH0007_ID}}">{{element.tenSanPham}}</option>
-                        </select>
-                      </td>
-                      <td>
-                        <input  type="text"  class="form-control bodernone" value="5">
-                      </td>
-                      <td>
-                        <button class="btn"><i class="fa fa-save"></i></button>
-                      </td>
-                    </tr>
-                  </table>
                   <table class="table ">
                     <thead>
                       <tr>
@@ -259,15 +267,10 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <select name="" id="" class="form-control">
-                            <option value="">Quạt treo tường</option>
-                            <option value="">Bóng điện</option>
-                          </select>
-                        </td>
-                        <td><input  type="text"  class="form-control bodernone" value="5"></td>
-                        <td><button class="btn"><i class="fa fa-edit"></i></button></td>
+                      <tr *ngFor="let element of listdanhmuctaisan;let i=index">
+                        <td>{{element.ten}}</td>
+                        <td><input  type="text"  class="form-control bodernone" [(ngModel)]="element.soluongmacdinh"></td>
+                        <td><button class="btn " (click)="deleteitemdanhmuc(element)"><i class="fa fa-trash"></i></button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -423,7 +426,7 @@
 <div id="divtoshow" style="width: 200px;height: 100px;background-color: blueviolet;position: absolute;z-index: 999;;display: none">
   <ul class="list-group list-group-flush " style="border: solid 2px gray;">
     <button type="button" id="viewinforgiuong" class="list-group-item list-group-item-action">Xem thông tin</button>
-    <button type="button" class="list-group-item list-group-item-action qlp">Sửa thông tin</button>
+    <button type="button"  id="editgiuong" class="list-group-item list-group-item-action qlp">Sửa thông tin</button>
     <button type="button" class="list-group-item list-group-item-action qlsp">Thêm một người</button>
     <button type="button" id="deletebed" class="list-group-item list-group-item-action qlp">Xóa Giường</button>
     <button type="button" class="list-group-item list-group-item-action qlsp">Xóa người đang ở</button>
