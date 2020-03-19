@@ -76,12 +76,12 @@ export class QldComponent implements OnInit {
       })
       ////////////////
       
-      $('.tablelistdon').on('click','.showdetaildon',function(){
-        let id=$(this).attr('name')
-        console.log(id)
-        that.ktx20temp=that.listdon.filter(c=>{return c.KTX0020_ID===Number(id)})[0]
-        console.log(that.ktx20temp)
-        that.form='formdangkyokytucxa';
+      
+      ////////////////
+      $('#myModalungvieninfo').on('hidden.bs.modal', function () {
+        that.form='';
+        console.log('element')
+        that.ktx20temp=null
       })
       ////////////////
       $('.card').on('click','#disagree',function(){
@@ -89,5 +89,11 @@ export class QldComponent implements OnInit {
       })
     })
   }
+  showdetaildon(element){
+        console.log(element)
+        this.ktx20temp=element
+        this.form='formdangkyokytucxa';
+        $('#myModalungvieninfo').modal()
+      }
 
 }

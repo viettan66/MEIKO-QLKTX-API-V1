@@ -174,15 +174,15 @@
 						<tr>
 							<td>Phòng</td>
 							<td>{{giuong!=null?(giuong.KTX0001.ten):""}}</td>
-							<td>Khóa</td>
-							<td ></td>
+							<td>Khóa phòng</td>
+							<td >{{giuong!=null?(giuong.KTX0020.khoaphong):""}}</td>
 							<td rowspan="2"><button class="btn btn-danger" id="deleteout" title="Xóa khỏi giường này"><i class="fas fa-sync"></i></button></td>
 						</tr>
 						<tr>
 							<td>Tủ</td>
-							<td ></td>
-							<td>Khóa</td>
-							<td ></td>
+							<td >{{giuong!=null?(giuong.KTX0020.sotu):""}}</td>
+							<td>Khóa tủ</td>
+							<td >{{giuong!=null?(giuong.KTX0020.sokhoatu):""}}</td>
 						</tr>
 						<tr>
 							<td>Ngày duyệt</td>

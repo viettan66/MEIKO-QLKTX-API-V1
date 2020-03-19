@@ -43,6 +43,12 @@ body{background-image: url(./assets/image/bg1.jpg);background-attachment:fixed;}
     height: auto;
     padding: 0;
   }
+  .modal-1360 {
+    width: 100%;
+    max-width: 1360px;
+    height: auto;
+    padding: 0;
+  }
   .modal-700 {
     width: 95%;
     max-width: 700px;

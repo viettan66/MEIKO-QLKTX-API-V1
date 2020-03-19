@@ -9,39 +9,55 @@
         <div class="row no-gutters"  style="padding: 10px;" >
          
             <div class="col tab2"  >
-                <div class="card  bg-transparent" id="testconvertPDF">
+                <div class="card cardcard  bg-transparent" id="testconvertPDF">
                   <div class="card-header">
-                    DANH SÁCH PHÒNG 
+                    <!-- DANH SÁCH PHÒNG  -->
                     <span class="float-right">
-                      <button title="Thêm phòng" style="margin-left: 10px;"  id="themphongthemphong" class="btn btn-secondary qlp"><i class="fa fa-plus"></i></button>&nbsp;
-                      <button title="Sắp phòng tự động" id="sapphongtudong"  class="btn btn-secondary qlsp"><i class="fas fa-magic"></i></button>&nbsp;
-                      <button title="test" id="testd"  class="btn btn-secondary"><i class="fas fa-minus"></i></button>
+                      <button title="Thêm phòng" style="margin-left: 10px;"  id="themphongthemphong" class="btn btn-sm btn-secondary qlp"><i class="fa fa-plus"></i></button>&nbsp;
+                      <button title="Sắp phòng tự động" id="sapphongtudong"  class="btn btn-secondary qlsp"><i class="fas fa-magic"></i></button>
+                      <!-- <button title="test" id="testd"  class="btn btn-secondary"><i class="fas fa-minus"></i></button> -->
                     </span>
                     <span class="float-right">
-                      <select name="" id="listkhu" class="btn btn-outline-secondary filter" >
+                      <select name="" id="listkhu" class="btn btn-sm btn-outline-secondary filter" >
                         <option value="a">Khu ALL</option>
                         <option value="F">Nữ</option>
                         <option value="N">Nam</option>
                       </select>&nbsp;
-                      <select name="" id="listtoanhash" class="btn btn-outline-secondary filter">
+                      <select name="" id="listtoanhash" class="btn btn-sm btn-outline-secondary filter">
                         <option value="0">Tòa ALL</option>
                         <option value="{{element.KTX0001_ID}}" *ngFor="let element of listtoanha">{{element.ten}}</option>
                       </select>&nbsp;
-                      <select name="" id="listtangsh" class="btn btn-outline-secondary  filter">
+                      <select name="" id="listtangsh" class="btn btn-sm btn-outline-secondary  filter">
                         <option value="0">Tầng ALL</option>
                         <option value="{{element.KTX0001_ID}}" *ngFor="let element of listtang">{{element.ten}}</option>
                         
                       </select>
                     </span>
-                    <SPAN class="float-right  btn" style="margin-right: 50px;">  
+                <div class="col-3 float-right">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">Giường trống</div>
+                      </div>
+                      <input style="font-weight: bold;" disabled type="text" class="form-control" [(ngModel)]="datacount.countgiuongtrong">
+                    </div>
+                  </div>
+                    <div class="col-3 float-right">
+                      <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">Tổng phòng</div>
+                        </div>
+                        <input style="font-weight: bold;" disabled type="text" class="form-control" [(ngModel)]="datacount.sumphong">
+                      </div>
+                    </div>
+                    <!-- <SPAN class="float-right  btn" style="margin-right: 20px;">  
                       Giường: <b>2584</b>  (Dùng: 1235, Trống: 1349)
                     </SPAN>
-                    <SPAN class="float-right  btn" style="margin-right: 50px;">  
+                    <SPAN class="float-right  btn" style="margin-right: 20px;">  
                       Phòng: <b>354</b> 
                     </SPAN>
-                    <SPAN class="float-right  btn" style="margin-right: 50px;">  
+                    <SPAN class="float-right  btn" style="margin-right: 20px;">  
                       Tòa nhà: <b> 2</b>
-                    </SPAN>
+                    </SPAN> -->
                   </div>
                   <div class="card-body" style="padding: 5px;">
                     <div class="row no-gutters d-flex justify-content-start">
@@ -60,28 +76,60 @@
                   </div>
                 </div>
             </div>
-            <div class="col-2 tab2" >
-                <div class="card" >
-                  <div class="card-header">
-                    GIƯỜNG PHÒNG {{tenphong}}
-                    <button title="Thêm thủ công" style="margin-left: 10px;"  id="themgiuong" class="btn btn-secondary float-right  qlp"><i class="fa fa-plus"></i></button>
-                  </div>
-                  <div class="card-body" style="padding: 5px;">
-                    <div class="row no-gutters">
-                        <div   *ngFor="let element of listgiuong" class="w-100">
-                          <div  id="{{element.KTX0002_ID}}"  class="card giuongclick {{element.trangthai?' text-white bg-success ':' text-white bg-secondary '}} " style="width: 100%;">
-                              <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-                              <div class="card-body"  style="padding: 5px;">
-                                <h6 class="card-title">{{element.ten}}</h6>
-                                <p class="card-text">{{element.KTX0020!=null?(element.KTX0020.MKV9999.hodem + ' ' + element.KTX0020.MKV9999.ten) :(' Trống ')}} </p>
+            <div class="col-auto tab2"  >
+              <div class="card bg-transparent card-bodygiuong" style="width: 250px;">
+                <div class="card-header" (click)="hiddencard('card-bodygiuong')">
+                  GIƯỜNG
+                  <button title="Thêm thủ công" style="margin-left: 10px;"  id="themgiuong" class="btn btn-sm btn-secondary float-right  qlp"><i class="fa fa-plus"></i></button>
+                </div>
+                <div class="card-body" style="padding: 5px;">
+                  <div class="row no-gutters">
+                      <div   *ngFor="let element of listgiuong" class="w-100">
+                        <div  id="{{element.KTX0002_ID}}"  class="card giuongclick {{element.trangthai?' text-white bg-success ':' text-white bg-secondary '}} " style="width: 100%;">
+                            <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                            <div class="card-body"  style="padding: 5px;">
+                              <div class="row no-gutters">
+                                <div class="col-auto px-1">
+                                  <b >{{element.ten}}</b>
+                                </div>
+                                <div class="col">
+                                  <i>{{element.KTX0020!=null?(element.KTX0020.MKV9999.hodem + ' ' + element.KTX0020.MKV9999.ten) :(' Trống ')}} </i>
+                                </div>
                               </div>
                             </div>
-                        </div>
+                          </div>
+                      </div>
 
-                    </div>
                   </div>
-                  
                 </div>
+                
+              </div>
+              <div class="card bg-transparent card-bodykhoa  qlp" style="width: 250px;">
+                <div class="card-header" (click)="hiddencard('card-bodykhoa')" >
+                  KHÓA TỦ
+                  <button title="Thêm thủ công" style="margin-left: 10px;"  id="themkhoa" class="btn btn-sm btn-secondary float-right  qlp"><i class="fa fa-plus"></i></button>
+                </div>
+                <div class="card-body" style="padding: 5px;">
+                  <div class="row no-gutters">
+                      <div   *ngFor="let element of listkhoa" class="w-100">
+                        <div  id="{{element.KTX0003_ID}}"  class="card khoaclick {{element.trangthai?' text-white bg-success ':' text-white bg-secondary '}} " style="width: 100%;cursor: pointer;">
+                            <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                            <div class="card-body"  style="padding: 5px;"> <div class="row no-gutters">
+                              <div class="col-auto px-1">
+                                <b >{{element.MaKhoa}}</b>
+                              </div>
+                              <div class="col">
+                                <i>{{element.KTX0020!=null?(element.KTX0020.MKV9999.hodem + ' ' + element.KTX0020.MKV9999.ten) :(' Trống ')}} </i>
+                              </div>
+                            </div>
+                            </div>
+                          </div>
+                      </div>
+
+                  </div>
+                </div>
+                
+              </div>
             </div>
 
             <div class="col tab1" style="padding: 10px;" >
@@ -386,7 +434,78 @@
 	</div>
 </div>
 
+<div class="modal fade " id="themkhoamodal" role="dialog" >
+	<div class="modal-dialog   modal-700" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">THÊM KHÓA</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <td>STT</td>
+                    <td>SỐ TỦ</td>
+                    <td>MÃ KHÓA TỦ</td>
+                    <td>GHI CHÚ</td>
+                    <td><button class="btn btn-sm" (click)="addkhoanew()"><i class="fa fa-plus"></i></button></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let element of listkhoaadd;let i= index">
+                    <td>{{i+1}}</td>
+                    <td><input type="text"  class="form-control none" [(ngModel)]="element.SoTu"></td>
+                    <td><input type="text"  class="form-control none" [(ngModel)]="element.MaKhoa"></td>
+                    <td><input type="text"  class="form-control none" [(ngModel)]="element.ghichu"></td>
+                    <td><button class="btn btn-sm"  (click)="removekhoanew( element)"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+                
+                <br>
+                <button (click)="luukhoa()" class="btn btn-primary form-control"><i class="fa fa-save"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
 
+
+<div class="modal fade " id="SUAkhoamodal" role="dialog" >
+	<div class="modal-dialog   modal-700" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">SỬA THÔNG TIN KHÓA</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <td>STT</td>
+                    <td>SỐ TỦ</td>
+                    <td>MÃ KHÓA TỦ</td>
+                    <td>GHI CHÚ</td>
+                    <td><button class="btn btn-sm" (click)="addkhoanew2()"><i class="fa fa-plus"></i></button></td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let element of listkhoaedit;let i= index">
+                    <td>{{i+1}}</td>
+                    <td><input type="text"  class="form-control none" [(ngModel)]="element.SoTu"></td>
+                    <td><input type="text"  class="form-control none" [(ngModel)]="element.MaKhoa"></td>
+                    <td><input type="text"  class="form-control none" [(ngModel)]="element.ghichu"></td>
+                    <td><button class="btn btn-sm"  (click)="removekhoanew2( element)"><i class="fa fa-trash"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+                
+                <br>
+                <button (click)="luukhoa2()" class="btn btn-primary form-control"><i class="fa fa-save"></i></button>
+			</div>
+		</div>
+	</div>
+</div>
 <div class="modal fade " id="giuonginfo" role="dialog" >
 	<div class="modal-dialog  modal-700" >
 		<div class="modal-content " >
@@ -423,21 +542,25 @@
 
 
 
-<div id="divtoshow" style="width: 200px;height: 100px;background-color: blueviolet;position: absolute;z-index: 999;;display: none">
-  <ul class="list-group list-group-flush " style="border: solid 2px gray;">
-    <button type="button" id="viewinforgiuong" class="list-group-item list-group-item-action">Xem thông tin</button>
+<div id="divtoshow" style="width: 200px;height: 100px;position: absolute;z-index: 999;;display: none">
+  <ul class="list-group list-group-flush  qlp" style="border: solid 2px gray;">
     <button type="button"  id="editgiuong" class="list-group-item list-group-item-action qlp">Sửa thông tin</button>
-    <button type="button" class="list-group-item list-group-item-action qlsp">Thêm một người</button>
+    <!-- <button type="button" class="list-group-item list-group-item-action qlsp">Thêm một người</button> -->
     <button type="button" id="deletebed" class="list-group-item list-group-item-action qlp">Xóa Giường</button>
-    <button type="button" class="list-group-item list-group-item-action qlsp">Xóa người đang ở</button>
+    <!-- <button type="button" class="list-group-item list-group-item-action qlsp">Xóa người đang ở</button> -->
   </ul></div>
 
-  <div id="divtoshowoptionphong" style="width: 200px;height: 100px;background-color: blueviolet;position: absolute;z-index: 999;display: none;">
+  <div id="divtoshowoptionphong" style="width: 200px;height: 100px;position: absolute;z-index: 999;display: none;">
     <ul class="list-group list-group-flush " style="border: solid 2px gray;">
       <button type="button" class="list-group-item list-group-item-action">Xem thông tin</button>
       <button type="button" id="editroom" class="list-group-item list-group-item-action qlp">Sửa thông tin</button>
       <button type="button" id="deleteroom" class="list-group-item list-group-item-action qlp">Xóa Phòng</button>
-      <button type="button" class="list-group-item list-group-item-action qlsp">Xóa người đang ở</button>
+      <button type="button" (click)="deleteallpeople()" id="deleteallpeople" class="list-group-item list-group-item-action qlsp">Xóa người đang ở</button>
       <button type="button" id="addRange" name="" title="" class="list-group-item list-group-item-action qlsp" >Thêm người vào phòng</button>
       <button type="button" class="list-group-item list-group-item-action" disabled>...</button>
-    </ul></div>
+    </ul></div>  
+    <div id="divtoshowoptionkhoa" style="width: 200px;height: 100px;position: absolute;z-index: 999;display: none;">
+      <ul class="list-group list-group-flush " style="border: solid 2px gray;">
+        <button type="button" (click)="editkhoaclick()" class="list-group-item list-group-item-action qlp">Sửa thông tin</button>
+        <button type="button" class="list-group-item list-group-item-action" disabled>...</button>
+      </ul></div>

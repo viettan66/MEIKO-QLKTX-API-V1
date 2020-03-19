@@ -55,19 +55,35 @@
                       <td>{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</td>
                       <td>
                         <button class="btn deletedon"><i class="fas fa-trash-alt"></i></button>
-                        <button name="{{element.KTX0020_ID}}" class="btn showdetaildon" ><i class="fas fa-eye"></i></button>
+                        <button  class="btn deletedon" (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-              <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'" [ktx20temp]="ktx20temp"  ></app-formdangkyokytucxa>
+              
             </div>
   
           </div>
         </div>
       </div>
   
+    </div>
+  </div>
+  <div class="modal fade " id="myModalungvieninfo" role="dialog" >
+    <div class="modal-dialog   modal-1360" >
+      <div class="modal-content " >
+        <div class="modal-header">
+          <h5 class="modal-title">Thông tin chi tiết ứng viên</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body "  style="padding: 30px;">
+          <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'" [ktx20temp]="ktx20temp"  ></app-formdangkyokytucxa>
+        </div>
+        <div class="modal-footer">
+          <button  type="button" class="userbutton btn btn-danger float-right" data-dismiss="modal" ><i class="fa fa-times"></i></button>
+        </div>
+      </div>
     </div>
   </div>
   

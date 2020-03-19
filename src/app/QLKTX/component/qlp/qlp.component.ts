@@ -4,15 +4,13 @@ import { KTX0001 } from '../../models/KTX0001';
 import { result } from '../../models/result';
 import { KTX0002 } from '../../models/KTX0002';
 import * as Global from '../../../Service/global.service';
-import { WH0006 } from 'src/app/Models/WH0006';
-import { WH0007 } from 'src/app/Models/WH0007';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import { KTX0011 } from '../../models/KTX0011';
-import { ThrowStmt } from '@angular/compiler';
-import { ECANCELED } from 'constants';
 import { KTX0010 } from '../../models/KTX0010';
-import { CookieService } from 'ngx-cookie-service';
+import { KTX0003 } from '../../models/KTX0003';
+import { ThietlaptaisancodinhComponent } from '../qltb/thietlaptaisancodinh/thietlaptaisancodinh.component';
+import { datacount } from '../../models/datacount';
 
 declare var $: any
 
@@ -25,14 +23,16 @@ export class QLPComponent implements OnInit {
   @Output('ktx02out') ktx02out = new EventEmitter<KTX0002[]>()
   @Output('ktx01out') ktx01out = new EventEmitter<KTX0001[]>()
   @Output('ktx01oneout') ktx01oneout = new EventEmitter<KTX0001>()
+  @Output('ktx03out') ktx03out = new EventEmitter<KTX0003[]>()
   constructor(public rest: RESTService) { }
   public listtoanha: KTX0001[] = []
   public listkhu: KTX0001[] = []
   public listtang: KTX0001[] = []
   public listphong: KTX0001[] = []
   public listgiuong: KTX0002[] = []
+  public listkhoa: KTX0003[] = []
+  public listkhoaadd: KTX0003[] = []
   public listktx0001: KTX0001[] = []
-  public listktx0002: KTX0002[] = []
   public khu = ''
   public notify
   public palahol
@@ -40,24 +40,25 @@ export class QLPComponent implements OnInit {
   public tang = 0
   public phong = 0
   public giuong = 0
-  public tentoanha = ''
   public tenphong = ''
   public isaddtoanha = true;
   public phongdetail: KTX0001 = new KTX0001()
   public giuongdetail: KTX0002 = new KTX0002()
+  public khoadetail: KTX0003 = new KTX0003()
   public tab=1
   public x = null;
   public y = null;
   public color=Global.color
-
+  public datacount=new datacount
   ngOnInit() {
     console.log()
     let that = this
+    that.rest.GetDataFromAPI<datacount>('KTX0002/getcount').subscribe(data => {
+      that.datacount=data
+    })
     that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/-1').subscribe(data => {
       this.listktx0001 = data
-    })
-    that.rest.GetDataFromAPI<KTX0002[]>('KTX0002/Getall').subscribe(data => {
-      this.listktx0002 = data
+      console.log(data)
     })
     document.addEventListener('mousemove', onMouseUpdate, false);
     document.addEventListener('mouseenter', onMouseUpdate, false);
@@ -85,6 +86,7 @@ export class QLPComponent implements OnInit {
           //console.log(e.which)
           $('#divtoshow').hide()
           $('#divtoshowoptionphong').hide()
+          $('#divtoshowoptionkhoa').hide()
         }
       })
       //////////////////
@@ -96,6 +98,14 @@ export class QLPComponent implements OnInit {
           idgiuong = $(this).attr('id')
           that.giuong = $(this).attr('id')
           $('#divtoshow').css({ 'top': that.y, 'left': that.x - 100 }).show()
+        }
+      }) 
+      $('.card').on('mousedown', '.khoaclick', function (e) {//console.log(e.which)
+        if (e.which == 3) {
+          let id=$(this).attr('id')
+          that.khoadetail = that.listkhoa.filter(c=>{return c.KTX0003_ID===Number(id)}) [0]
+          $('#divtoshowoptionkhoa').css({ 'top': that.y, 'left': that.x - 100 }).show()
+          //console.log(that.khoadetail)
         }
       })
       $('#divtoshow').on('click', 'ul>button', function (e) {
@@ -122,9 +132,11 @@ export class QLPComponent implements OnInit {
         if (e.which == 3) {
           tenphong = $(this).find('.card-title').text()
           idphong = $(this).attr('id')
+          that.phong = $(this).attr('id')
           $('#addRange').attr('name', idphong)
           $('#addRange').attr('title', tenphong)
           $('#divtoshowoptionphong').css({ 'top': that.y, 'left': that.x - 100 }).show()
+        $(this).click()
         }
       })
       $('#divtoshowoptionphong').on('click', 'ul>button', function (e) {
@@ -166,17 +178,17 @@ export class QLPComponent implements OnInit {
       })
       //////////////////
       $('#updatebedinfo').click(function (e) {//console.log(e.which)
-        that.rest.PostDataToAPI<result< KTX0002>>(that.giuongdetail,'KTX0002/update').subscribe(dataa=>{
+        that.rest.PutDataToAPI<result< KTX0002>>(that.giuongdetail,'KTX0002/update').subscribe(dataa=>{
           console.log(dataa)
           if(dataa.code=="OK"){
             var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===dataa.data.KTX0002_ID})
             if(l.length!=0){
               l[0].ten=dataa.data.ten;
+              l[0].ghichu=dataa.data.ghichu;
               $('#editgiuongmodal').modal('hide');
             }
             
           }
-          that.giuongdetail=dataa
           
         })
       })
@@ -184,6 +196,7 @@ export class QLPComponent implements OnInit {
       $('.filter').change(function () {
         that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/' + $('#listkhu').val() + '/' + $('#listtoanhash').val() + '/' + $('#listtangsh').val()).subscribe(data => {
           //console.log(data)
+          that.phong=0
           that.listphong = []
           that.listgiuong = []
           that.listphong = data.filter(c => { return c.type === 4 })
@@ -201,7 +214,8 @@ export class QLPComponent implements OnInit {
       })
      
       ////////////////////////themphongthemphongthemphongthemphongthemphongthemphongthemphongthemphongthemphongthemphongthemphongthemphongthemphongthemphongthemphongthemphong
-      $('#themphongthemphong').click(function () {
+      $('#themphongthemphong').click(function (e) {
+        e.stopPropagation()
         if ($('#listtangsh').val() == '0') {
           alert('Bạn hãy chọn Tầng trước khi tạo phòng!')
           return
@@ -219,6 +233,23 @@ export class QLPComponent implements OnInit {
         $('#tang2').val($('#listtangsh').val())
         $('#tenphong').val($('#listtoanhash>option:selected').text()+ '-')
         $('#themphongmodal2').modal();
+      })
+      ////////////////////////
+      $('#themkhoa').click(function (e) {
+        e.stopPropagation()
+        if (that.phong == 0) {
+          alert('Bạn hãy chọn phòng trước khi thêm khóa')
+          return
+        }
+        console.log(that.listkhoa)
+          that.listkhoaadd=[]
+          that.listkhoaadd.push(new KTX0003(that.phong))
+        $('#themkhoamodal').modal();
+      })
+      ////////////////////////
+      $('#themgiuong').click(function (e) {
+        e.stopPropagation()
+     
       })
       ////////////////////////
       $('#luuphong').click(function () {
@@ -260,8 +291,6 @@ export class QLPComponent implements OnInit {
       })
       ////////////////////////
       $('#listtoanhash').change(function () {
-        // that.toanha=$(this).val()
-        // that.tentoanha=$(this).text()
         toatemp = []
         toatemp = khutemp.filter(c => { return (c.idcha === Number($('#listtoanhash').val()) || $('#listtoanhash').val() == '0') })
         that.listtang = toatemp.filter(c => { return c.type === 3 })
@@ -273,19 +302,25 @@ export class QLPComponent implements OnInit {
 
       })
       function filttergiuong(){
-        that.rest.GetDataFromAPI<KTX0002[]>('KTX0002/Getall').subscribe(data=>{
+        that.rest.GetDataFromAPI<KTX0002[]>('KTX0002/Getall/'+that.phong).subscribe(data=>{
           that.listgiuong=[]
-          //console.log(data)
-          data.forEach(val=>{
-            if(val.KTX0001_ID==that.phong){
-              that.listgiuong.push(val)
-            }
-          })
+          console.log(data)
+              that.listgiuong=data
           that.ktx02out.emit(that.listgiuong)
         })
       }
+      function filtterkhoa(){
+        that.rest.GetDataFromAPI<KTX0003[]>('KTX0003/Get/onPhong/'+that.phong).subscribe(data=>{
+          that.listkhoa=[]
+          console.log(data)
+          that.listkhoa=data
+          that.ktx03out.emit(that.listkhoa)
+        })
+      }
       ////////////////////////
-      $('.card').on('click', '.phongclick', function () {
+      $('.cardcard').on('click', '.phongclick', function (e) {
+        e.stopPropagation()
+        e.stopImmediatePropagation()
         that.phong = $(this).attr('id')
         that.tenphong = $(this).attr('title')
         $(this).parent().find('.card').removeClass('select')
@@ -293,6 +328,7 @@ export class QLPComponent implements OnInit {
         $(this).addClass('select')
         $(this).addClass('text-white')
         filttergiuong()
+        filtterkhoa()
         //console.log(that.listphong.filter(c=>{return c.KTX0001_ID===Number($(this).attr('id'))})[0])
         that.ktx01oneout.emit(that.listphong.filter(c=>{return c.KTX0001_ID===Number($(this).attr('id')) })[0])
       })
@@ -319,6 +355,7 @@ export class QLPComponent implements OnInit {
             k.thutu = data.data.thutu
             k.trangthai = data.data.trangthai;
             k.type = data.data.type
+            if(data.data.KTX0002!=null)
             data.data.KTX0002.forEach(vc=>{
               var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===vc.KTX0002_ID})
               if(l.length==0){
@@ -533,4 +570,107 @@ export class QLPComponent implements OnInit {
     deleteitemdanhmuc(event){
       this.listdanhmuctaisan.splice(this.listdanhmuctaisan.indexOf(event),1)
     }
+    hiddencard($event){
+     if($('.'+$event).find('.card-body').css('display')!='none') {
+       $('.'+$event).find('.card-body').css('display','none')
+       $('.'+$event).css({'width':'100px',"height":"100px"})
+    }
+      else{ $('.'+$event).find('.card-body').css('display','')
+       $('.'+$event).css({'width':'250px',"height":"auto"})}
+    }
+    addkhoanew( ){
+      this.listkhoaadd.push(new KTX0003(this.phong))
+    }
+    removekhoanew( element){
+      this.listkhoaadd.splice(this.listkhoaadd.indexOf(element),1)
+    }
+    luukhoa(){
+      this.rest.PostDataToAPI<result<KTX0003>[]>(this.listkhoaadd,'KTX0003/Add').subscribe(data=>{
+        console.log(data)
+        data.forEach(val=>{
+          if(val.code=="OK"){
+            this.listkhoa.push(val.data)
+          }else{
+            alert(val.mess)
+          }
+        })
+        $('#themkhoamodal').modal('hide')
+      })
+    }
+  deleteallpeople(even) {
+    this.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/' + this.phong).subscribe(dataa => {
+      if (confirm("Bạn có chắc chắn xóa hết người trong phòng: " + dataa[0].ten)) {
+        this.rest.PostDataToAPI<result<KTX0002>[]>(this.listgiuong, 'QLSP/DeleteBed').subscribe(data => {
+          data.forEach(val => {
+            if (val.code == "OK") {
+              var l=this.listgiuong.filter(c=>{return c.KTX0002_ID===val.data.KTX0002_ID})
+              if(l.length!=0){
+                l[0].KTX0020=null;
+                l[0].trangthai=false
+              } 
+              var k=this.listphong.filter(c=>{return c.KTX0001_ID===val.data.KTX0001_ID})
+              if(k.length!=0){
+                k[0].slotuse--
+              }
+            } else {
+              //alert(data.mess)
+            }
+          })
+        })
+      }
+    })
+  }
+  public listkhoaedit:KTX0003[]=[]
+  editkhoaclick(){
+    this.listkhoaedit=this.listkhoa
+    
+    $('#SUAkhoamodal').modal()
+  }
+  addkhoanew2(){
+    this.rest.PostDataToAPI<result<KTX0003>[]>([new KTX0003(this.phong)],"KTX0003/Add").subscribe(datas=>{
+      datas.forEach(data => {
+        if(data.code=="OK"){
+          this.listkhoaedit.push(data.data)
+        }
+      })
+    })
+  }
+  removekhoanew2( element:KTX0003){
+    if(confirm("Bạn chắc chắn muốn xóa mã khóa tủ này?")){
+      if(element.KTX0003_ID!=null){
+        element.KTX0001=null
+        this.rest.PostDataToAPI<result<KTX0003>[]>([element],"KTX0003/delete").subscribe(datas=>{
+          datas.forEach(data => {
+            if(data.code=="OK"){
+              var l=this.listkhoa.filter(c=>{return c.KTX0003_ID===data.data.KTX0003_ID})
+              if(l.length!=0){
+                this.listkhoa.splice(this.listkhoa.indexOf(l[0]),1)
+                //this.listkhoaedit.splice(this.listkhoaedit.indexOf(element),1)
+              }
+            }
+          });
+        })
+      }else
+      this.listkhoaedit.splice(this.listkhoaedit.indexOf(element),1)
+    }
+  }
+  luukhoa2(){
+    this.listkhoaedit.forEach(kf=>{
+      kf.KTX0001=null
+    })
+    this.rest.PostDataToAPI<result<KTX0003>[]>(this.listkhoaedit,"KTX0003/update").subscribe(datas=>{
+      datas.forEach(data => {
+        if(data.code=="OK"){
+        }else{
+          var l=this.listkhoa.filter(c=>{return c.KTX0003_ID===data.data.KTX0003_ID})
+          if(l.length!=0){
+            l[0].MaKhoa=data.data.MaKhoa
+            l[0].SoTu=data.data.SoTu
+            l[0].ghichu=data.data.ghichu
+          }
+        }
+      })
+      $('#SUAkhoamodal').modal('hide')
+    })
+  }
 }

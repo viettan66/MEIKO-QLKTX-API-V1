@@ -112,19 +112,23 @@ public title=""
       ///////////////////////////////////////////////
       $('#deleterooms').click(function(event){
         if(!confirm("Bạn muốn xóa người này ra khỏi phòng: "+that.giuong.KTX0001.ten+'?'))return false
-        that.rest.PostDataToAPI<result<KTX0002>>(that.giuong,'QLSP/DeleteBed').subscribe(data=>{
-          if(data.code=="OK"){
-            var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})
-            if(l.length!=0){
-              l[0].KTX0020=null;
-              l[0].trangthai=false
-            } 
-            var k=that.listphong.filter(c=>{return c.KTX0001_ID===data.data.KTX0001_ID})
-            if(k.length!=0){
-              k[0].slotuse--
+        that.rest.PostDataToAPI<result<KTX0002>[]>([that.giuong],'QLSP/DeleteBed').subscribe(datas=>{
+            datas.forEach(data => {
+            if(data.code=="OK"){
+              var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})
+              if(l.length!=0){
+                l[0].KTX0020=null;
+                l[0].trangthai=false
+              } 
+              var k=that.listphong.filter(c=>{return c.KTX0001_ID===data.data.KTX0001_ID})
+              if(k.length!=0){
+                k[0].slotuse--
+              }
+              $('#nguoitronggiuong').modal('hide')
+            }else{
+              console.log(data.mess)
             }
-            $('#nguoitronggiuong').modal('hide')
-          }
+          })
         })
       })
       ///////////////////////////////////////////////UPDATEinfo
