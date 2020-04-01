@@ -1,0 +1,124 @@
+<div class="row no-gutters h-100">
+    <app-menu></app-menu>
+    <div class="col" id="contentmenu" style="padding: 10px;">
+      <div class="row no-gutters">
+  
+        <div class="col no-gutters">
+          <div class="card  " style="background-color: rgba(255, 255, 255, 0.842);">
+            <div class="card-header">
+              DANH SÁCH ĐƠN
+              <!-- <button title="Thêm đơn" style="margin-left: 10px;"  class="btn btn-secondary float-right adddon"><i
+                  class="fa fa-plus"></i></button> -->
+                  <span class="float-right">
+                      <button class="btn btn-primary" (click)="agree()"><i class="fa fa-check"></i></button>&nbsp;
+                      <button class="btn btn-primary" (click)="print()"><i class="fa fa-check"></i><i class="fa fa-print"></i></button>&nbsp;
+                      <!-- <button class="btn btn-danger" id="disagree"><i class="fa fa-times"></i></button>&nbsp; -->
+                      <button class="btn btn-success" (click)="export()" ><i class="fas fa-download"></i></button>&nbsp;
+                      <button class="btn btn-secondary" (click)="deleteall()"><i class="fa fa-trash-alt"></i></button>&nbsp;&nbsp;&nbsp;
+                      <select id="filter" class="btn btn-outline-secondary">
+                          <option value="">ALL</option>
+                          <option value="true">Đã duyệt</option>
+                          <option value="false">Chưa duyệt</option>
+                      </select>&nbsp;&nbsp;&nbsp;Từ ngày
+                    <input id="startdate" type="date" (change)="showdon()"  class="btn btn-outline-secondary py-1" placeholder="Từ ngày"   [ngModel]="now1 | date:'yyyy-MM-dd'" >đến
+                    <input  id="enddate" type="date"  (change)="showdon()"  class="btn btn-outline-secondary py-1"    [ngModel]="now | date:'yyyy-MM-dd'" >&nbsp;
+                    <button class="btn btn-info "><i class="fa fa-search"></i></button>&nbsp;
+                  </span>
+            </div>
+            <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
+              <div class="row no-gutters">
+                <table class="table table-bordered tablelistdon" id="tabletoexport">
+                  <thead><tr>
+                    <th style="width: 20px;"><input type="checkbox" ></th>
+                    <th style="width: 40px;">STT</th>
+                    <th>Tên</th>
+                    <th>ID</th>
+                    <th>BP</th>
+                    <th>Bậc</th>
+                    <th>CMTND</th>
+                    <th>Phòng</th>
+                    <th>Giường</th>
+                    <th>Tủ</th>
+                    <th>Trả đồ</th>
+                    <th>Thời gian tạo</th>
+                    <th>Trạng thái</th>
+                    <th>Nhận xét</th>
+                    <th style="padding: 0;"></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let element of listdon;let i=index;" style="cursor: pointer;padding: 0;">
+                      <td><input type="checkbox" [(ngModel)]="element.check"></td>
+                      <td>{{i+1}} <input type="hidden" name="ID" value="{{i}}"> </td>
+                      <td>{{element.nldhoten}}</td>
+                      <td>{{element.MKV9999.manhansu}}</td>
+                      <td>{{element.MKV9999.thetu_id}}</td>
+                      <td>{{element.MKV9999.capbac}}</td>
+                      <td>{{element.MKV9999.cmtnd_so}}</td>
+                      <td>{{element.KTX0001!=null?element.KTX0001.ten:""}}</td>
+                      <td>{{element.KTX0002!=null?element.KTX0002.ten:""}}</td>
+                      <td>{{element.KTX0003!=null?element.KTX0003.MaKhoa:""}}</td>
+                      <td>{{checkdo(element)?"Thiếu":"Đủ"}}</td>
+                      <td>{{element.ngaytaodon| date:'dd/MM/yyyy'}}</td>
+                      <td>{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</td>
+                      <td> <span class="ddd">{{element.nhanxet}}</span>
+                        <input type="text" list="datalisst" [(ngModel)]="element.nhanxet" class="form-control">
+                        <datalist id="datalisst">
+                          <option value="Trục xuất">
+                          <option value="Nghỉ việc">
+                          <option value="Ra ngoài">
+                          <option value="Khác">
+                          <option value=".........">
+                        </datalist>
+                      </td>
+                      <td>
+                        <!-- <button class="btn " (click)="delete(element)"><i class="fas fa-trash-alt"></i></button> -->
+                        <button style="padding: 0;"  class="btn  " (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- <table>
+                  <tr>
+                    <ng-container *ngFor="let element of listdon;let i=index;" style="cursor: pointer;padding: 0;">
+                      <td>{{element.hotenkhaisinh}}</td>
+                      <td>{{element.MKV9999.thetu_id}}</td>
+                    </ng-container>
+                  </tr>
+                </table> -->
+              </div>
+              
+            </div>
+  
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  <div class="modal fade " id="myModalungvieninfo" role="dialog" >
+    <div class="modal-dialog   modal-1360" >
+      <div class="modal-content " >
+        <div class="modal-header">
+          <h5 class="modal-title">Thông tin chi đơn xin</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body "  style="padding: 30px;">
+          <app-formketthucluutru *ngIf="form=='formket'" [ktx0023temp]="ktx23temp" [check]="true"  ></app-formketthucluutru>
+        </div>
+        <div class="modal-footer">
+          <button  type="button" class="userbutton btn btn-danger float-right" data-dismiss="modal" ><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+<div id="testprint" style="display: none; ">
+  <ng-container *ngFor='let element of ktx23tempprint'>
+    <app-formketthucluutru  [ktx0023temp]="element" [check]="true"  ></app-formketthucluutru>
+  </ng-container>
+  
+</div>
+  
+<app-loading *ngIf="loading"></app-loading>

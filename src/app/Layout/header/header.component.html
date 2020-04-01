@@ -1,11 +1,18 @@
-<div class="row bg-dark no-gutters text-white px-4" style="padding-top:5px ;">
-    <div class="col-auto px-1">
-        <img src="../../../assets/image/logo.jpg" width="100" alt="">
+<div class="row bg-dark no-gutters text-white px-4 py-1" style="border-bottom:2px gray solid ;">
+
+    <div class="col h-100">
+        <a class="text-white align-items-center" routerLink="/">
+            <img src="../../../assets/image/logo2.png" width="120" alt="">&nbsp; MEIKO ELECTRONICS VIETNAM</a>
     </div>
-    <div class="col h-100 align-items-center">
-        <h6 class="text-white"><a class="text-white" routerLink="/">MEIKO ELECTRONICS VIETNAM</a></h6>
+    <div class="col-auto" *ngIf="user!=null">
+        <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <input (change)="search($event)" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
+              aria-label="Search">
+          </form>
     </div>
-    <div class="col-auto">
+    <div class="col-auto" *ngIf="user!=null">
+        <button  class="btn btn-sm text-white" >{{user.hodem+' '+user.ten}}</button>
         <button  class="btn btn-sm text-white" (click)="logout()"><i class="fas fa-sign-out-alt"></i>Thoát</button>
     </div>
     

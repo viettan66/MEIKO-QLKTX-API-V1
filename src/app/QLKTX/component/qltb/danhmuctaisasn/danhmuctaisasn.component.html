@@ -1,21 +1,20 @@
 
-          <div class="row no-gutters px-2 py-2">
+          <div class="row no-gutters px-1 py-2">
             <div class="col-8 px-1">
-              <div class="card bg-transparent "  >
+              <div class="card " style="background-color: rgba(255, 255, 255, 0.877);"  >
                 <div class="card-header">
                   DANH SÁCH ĐỒ DÙNG / THIẾT BỊ
-                   <button title="thiết lập" style="margin-left: 10px;"  id="thietlap" class="btn btn-primary float-right"><i class="fas fa-cog"></i></button> 
                    <button title="Sửa" class="btn  deleteitem btn-danger float-right"><i class="fa fa-trash"></i></button>
                 </div>
                 <div class="card-body " style="">
-                    <TABLE class="table tabledodung">
+                    <TABLE class="table tabledodung" >
                       <thead>
                         <TR>
 
-                        <td><input type="checkbox" ></td>
-                        <td>STT</td>
+                        <td style="width: 20px;"><input type="checkbox" ></td>
+                        <td style="width: 20px;">STT</td>
                         <td>TÊN ĐỒ DÙNG/TB</td>
-                        <td>GIÁ TIỀN</td>
+                        <td style="width: 100px;">GIÁ TIỀN</td>
                         <td>GHI CHÚ</td>
                         <td>LOẠI</td>
                         <td>TRẠNG THÁI</td>
@@ -33,7 +32,7 @@
                               <select class="none form-control" disabled name="loai">
                                 <option selected value="{{element.loai }}">{{element.loai==1?"Tài sản cố định":"Vật tư tiêu hao" }}</option>
                                 <option  value="1">Tài sản cố định</option>
-                                <option value="2">Vật tư tiêu hao</option>
+                                <!-- <option value="2">Vật tư tiêu hao</option> -->
                                 </select>
                               </td>  
                               <td>
@@ -89,7 +88,7 @@
                       </div>
                         <select class=" form-control" id="loai">
                           <option selected value="1">Tài sản cố định</option>
-                          <option value="2">Vật tư tiêu hao</option>
+                          <!-- <option value="2">Vật tư tiêu hao</option> -->
                         </select>
                     </div>
                   </div>

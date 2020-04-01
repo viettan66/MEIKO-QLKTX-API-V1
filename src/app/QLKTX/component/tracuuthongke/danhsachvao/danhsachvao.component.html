@@ -1,25 +1,80 @@
-<div class="card w-100">
-    <div class="card-header">
-      DANH NHÂN VIÊN VÀO
-              <div class="col-2 float-right">
-                  <div class="input-group mb-2">
-                    <div class="input-group-prepend">
-                      <div class="input-group-text">Đến ngày </div>
-                    </div>
-                    <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-                  </div>
-                </div>
-            <div class="col-2 float-right">
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">Từ ngày </div>
-                  </div>
-                  <input type="date" class="form-control" id="inlineFormInputGroup" placeholder="Username">
-                </div>
-              </div>
-    </div>
-    <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
 
-        
-    </div>
-</div>
+                <div class="card  " id="testconvertPDF" style="background-color: rgba(255, 255, 255, 0.788);">
+                  <div class="card-header">
+                    DANH NHÂN VIÊN 
+                    <span class="float-right">
+                      <button title="Lưu dưới dạng excel" style="margin-left: 10px;" (click)="export()"  class="btn btn-secondary qlp"><i class="fa fa-download"></i></button>&nbsp;
+                    </span>
+                    <span class="float-right">
+                      <button title="Search" style="margin-left: 10px;" (click)="shows()"  class="btn btn-secondary qlp"><i class="fa fa-search"></i></button>&nbsp;
+                    </span>
+                    <span class="float-right">
+                      <input type="text" style="width: 100px;"  class="form-control filter" placeholder="ID" [(ngModel)]="id">
+                      <!-- <datalist id="datalisst">
+                          <option value="20">Nhỏ hơn 20 lần</option>
+                          <option value="15">Nhỏ hơn 15 lần</option>
+                          <option value="10">Nhỏ hơn 10 lần</option>
+                      </datalist> -->
+                    </span>
+                    <span class="float-right" style="width: 300px;">
+                      <div class="col float-right">
+                          <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">đến ngày</div>
+                            </div>
+                            <input style="font-weight: bold;"  type="date" class="form-control filter" [ngModel]="newdate|date:'yyyy-MM-dd'" (ngModelChange)="newdate=$event"  >
+                          </div>
+                        </div>
+                    </span>
+                    <span class="float-right" style="width: 300px;">
+                      <div class="col float-right">
+                          <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">Từ ngày</div>
+                            </div>
+                            <input style="font-weight: bold;"  type="date" class="form-control filter" [ngModel]="olddate|date:'yyyy-MM-dd'" (ngModelChange)="olddate=$event" >
+                          </div>
+                        </div>
+                    </span>
+                  </div>
+                  <div class="card-body" style="padding: 5px;">
+                      <table class="table table-bordered" id="exporttoexvel">
+                          <thead><tr>
+                              <th style="width: 20px;"><input type="checkbox" ></th>
+                              <th style="width: 40px;">STT</th>
+                              <th>ID</th>
+                              <th>Tên</th>
+                              <th>Ngày sinh</th>
+                              <th>Giới</th>
+                              <th>CMTND</th>
+                              <th>Ngày cấp</th>
+                              <th>Nơi cấp</th>
+                              <th>Địa chỉ thường trú</th>
+                              <th>Ngày vào</th>
+                              <th>Phòng</th>
+                              <th>SDT</th>
+                              <th style="padding: 0;"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              <ng-container *ngFor="let element of listktx0020;let i=index">
+                                <tr >
+                                    <td><input type="checkbox" name="" id=""></td>
+                                    <td>{{i+1}}</td>
+                                    <td>{{element.MKV9999.manhansu}}</td>
+                                    <td>{{element.MKV9999.hodem+element.MKV9999.ten}}</td>
+                                    <td>{{element.MKV9999.ngaysinh|date:"yyyy/MM/dd"}}</td>
+                                    <td>{{element.MKV9999.gioitinh?"Nam":'Nữ'}}</td>
+                                    <td>{{element.MKV9999.cmtnd_so }}</td>
+                                    <td>{{element.MKV9999.cmtnd_ngayhethan|date:"yyyy/MM/dd" }}</td>
+                                    <td>{{element.MKV9999.cmtnd_noicap }}</td>
+                                    <td>{{element.MKV9999.diachithuongtru }}</td>
+                                    <td>{{element.ngaycohieuluc|date:"yyyy/MM/dd" }}</td>
+                                    <td>{{element.KTX0001!=null?element.KTX0001.ten:''}}</td>
+                                    <td>{{element.MKV9999.dienthoai_didong}}</td>
+                                </tr>
+                              </ng-container>
+                            </tbody>
+                      </table>
+                  </div>
+              </div>

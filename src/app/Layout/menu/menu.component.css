@@ -1,7 +1,7 @@
 
-.gh{width: 50px;position: relative;background-color: gray;height: 100%;left: 0;top: 0 ;left: 0;top: 0 ;}
-.gh li{cursor: pointer;color: rgb(216, 216, 216);}
-.gh li:hover{color: rgb(255, 255, 255);background-color: rgb(54, 54, 54);}
-.gh span{display: none;}
-.gh:hover  span{display: unset;}
-.gh:hover ul{position: absolute;left: 0;top: 0 ;width: 240px;z-index: 9;}
+.gh{width: auto;position: relative;background-color: gray;height: 100%;left: 0;top: 0 ;left: 0;top: 0 ;}
+    .gh li{cursor: pointer;color: rgb(216, 216, 216);width: 260px;}
+.gh ul{transition:  0.6s;width: 50px ;overflow: hidden;}
+.gh span{opacity: 0;transition: 0.7s;;}
+.gh:hover ul{left: 0;top: 0 ;width: 240px;z-index: 9;;}
+.gh:hover ul span{display: unset;opacity: 1;}

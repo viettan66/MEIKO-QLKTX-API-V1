@@ -4,62 +4,78 @@
       <div class="row no-gutters">
   
         <div class="col no-gutters">
-          <div class="card  bg-transparent">
+          <div class="card  " style="background-color: rgba(255, 255, 255, 0.726);">
             <div class="card-header">
               DANH SÁCH ĐƠN
               <!-- <button title="Thêm đơn" style="margin-left: 10px;"  class="btn btn-secondary float-right adddon"><i
                   class="fa fa-plus"></i></button> -->
                   <span class="float-right">
-                      <button class="btn btn-primary" id="agree"><i class="fa fa-check"></i></button>&nbsp;
-                      <button class="btn btn-danger" id="disagree"><i class="fa fa-times"></i></button>&nbsp;&nbsp;&nbsp;
-                    <select id="filter" class="btn btn-outline-secondary">
-                        <option value="all">ALL</option>
-                        <option value="true">Đã duyệt</option>
-                        <option value="false">Chưa duyệt</option>
-                    </select>&nbsp;&nbsp;&nbsp;Từ ngày
-                    <input type="date"  class="btn btn-outline-secondary py-1" placeholder="Từ ngày">đến
-                    <input type="date"  class="btn btn-outline-secondary py-1" placeholder="Đên ngày">&nbsp;
+                      <button title="Duyệt sách đã chọn"  class="btn btn-primary" id="agree"><i class="fa fa-check"></i></button>&nbsp;
+                      <!-- <button title="Không duyệt sách đã chọn"  class="btn btn-danger" id="disagree"><i class="fa fa-times"></i></button>&nbsp; -->
+                      <button title="In danh sách đã chọn" class="btn btn-info" (click)="print2()" ><i class="fa fa-print"></i></button>&nbsp;
+                      <button title="Lưu sách"  class="btn btn-success" (click)="export()" ><i class="fas fa-download"></i></button>&nbsp;
+                      <button class="btn btn-secondary" (click)="deleteall()"><i class="fa fa-trash-alt"></i></button>&nbsp;&nbsp;&nbsp;
+                      <select id="filter" class="btn btn-outline-secondary">
+                          <option value="">ALL</option>
+                          <option value="true">Đã duyệt</option>
+                          <option value="false">Chưa duyệt</option>
+                      </select>&nbsp;&nbsp;&nbsp;Từ ngày
+                    <input id="startdate" type="date" (change)="showdon()"  class="btn btn-outline-secondary py-1" placeholder="Từ ngày"    [ngModel]="now1 | date:'yyyy-MM-dd'" >đến
+                    <input  id="enddate" type="date"  (change)="showdon()"  class="btn btn-outline-secondary py-1"    [ngModel]="now | date:'yyyy-MM-dd'" >&nbsp;
                     <button class="btn btn-info "><i class="fa fa-search"></i></button>&nbsp;
                   </span>
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
               <div class="row no-gutters">
-                <table class="table table-bordered tablelistdon">
+                <table class="table table-bordered tablelistdon" id="tabletoexport">
                   <thead><tr>
                     <th style="width: 20px;"><input type="checkbox" ></th>
                     <th style="width: 40px;">STT</th>
                     <th>Tên</th>
-                    <th>ID</th>
-                    <th>BP</th>
-                    <th>Cấp bậc</th>
+                    <th style="width: 80px;">ID</th>
+                    <th style="width: 80px;">BP</th>
+                    <th>Bậc</th>
                     <th>CMTND</th>
-                    <th>Ngày cấp</th>
+                    <th style="width: 130px;">Ngày cấp</th>
                     <th>Hộ khẩu</th>
-                    <th>Thời gian tạo</th>
-                    <th>Trạng thái</th>
-                    <th>Chức năng</th>
+                    <th style="width: 160px;">Thời gian tạo</th>
+                    <th>Lầnở</th>
+                    <th style="text-align: center;">
+                      <span class="ddd">Trạng thái</span> <i class="fas fa-question-circle"></i></th>
+                    <th style="width: 45px;text-align: center;"><i class="fas fa-th-list"></i></th>
                   </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="abc">
                     <tr *ngFor="let element of listdon;let i=index;" style="cursor: pointer;padding: 0;">
                       <td><input type="checkbox" [(ngModel)]="element.check"></td>
                       <td>{{i+1}} <input type="hidden" name="ID" value="{{i}}"> </td>
-                      <td>{{element.hotenkhaisinh}}</td>
+                      <td><span style="display: inline;">{{element.hotenkhaisinh}}</span></td>
                       <td>{{element.MKV9999.manhansu}}</td>
                       <td>{{element.MKV9999.thetu_id}}</td>
-                      <td>{{element.MKV9999.capbac}}</td>
+                      <td style="text-align: center;">{{element.MKV9999.capbac}}</td>
                       <td>{{element.MKV9999.cmtnd_so}}</td>
-                      <td>{{element.MKV9999.cmtnd_ngayhethan}}</td>
+                      <td>{{element.MKV9999.cmtnd_ngayhethan| date:'yyyy/MM/dd'}}</td>
                       <td>{{element.MKV9999.diachithuongtru}}</td>
                       <td>{{element.ngaytaodon| date:'dd/MM/yyyy HH:mm'}}</td>
-                      <td>{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</td>
-                      <td>
-                        <button class="btn deletedon"><i class="fas fa-trash-alt"></i></button>
-                        <button  class="btn deletedon" (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
+                      <td style="text-align: center;">{{count(element)}}</td>
+                      <td style="text-align: center;">
+                        <span class="ddd">{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</span> 
+                        <i *ngIf="element.trangthai" class="fa fa-check"></i><i *ngIf="!element.trangthai" class="fa fa-sync-alt fa-spin"></i></td>
+                      <td style="text-align: center;">
+                        <!-- <button class="btn px-1" (click)="delete(element)"><i class="fas fa-trash-alt"></i></button> -->
+                        <button  class="btn  px-1" (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
+                <!-- <table>
+                  <tr>
+                    <ng-container *ngFor="let element of listdon;let i=index;" style="cursor: pointer;padding: 0;">
+                      <td>{{element.hotenkhaisinh}}</td>
+                      <td>{{element.MKV9999.thetu_id}}</td>
+                    </ng-container>
+                  </tr>
+                </table> -->
               </div>
               
             </div>
@@ -74,11 +90,11 @@
     <div class="modal-dialog   modal-1360" >
       <div class="modal-content " >
         <div class="modal-header">
-          <h5 class="modal-title">Thông tin chi tiết ứng viên</h5>
+          <h5 class="modal-title">Thông tin chi đơn xin</h5>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body "  style="padding: 30px;">
-          <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'" [ktx20temp]="ktx20temp"  ></app-formdangkyokytucxa>
+          <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'" [ktx20temp]="ktx20temp" [check]="false"  ></app-formdangkyokytucxa>
         </div>
         <div class="modal-footer">
           <button  type="button" class="userbutton btn btn-danger float-right" data-dismiss="modal" ><i class="fa fa-times"></i></button>
@@ -86,4 +102,10 @@
       </div>
     </div>
   </div>
-  
+  <div id="testprint" style="display: none; ">
+    <ng-container *ngFor='let element of ktx20tempprint'>
+      <app-formdangkyokytucxa    [ktx20temp]="element" [check]="false"  ></app-formdangkyokytucxa>
+    </ng-container>
+    
+  </div>
+  <app-loading *ngIf="loading"></app-loading>

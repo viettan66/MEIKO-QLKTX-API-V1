@@ -3,6 +3,7 @@ import { KTX0010 } from 'src/app/QLKTX/models/KTX0010';
 import { result } from 'src/app/QLKTX/models/result';
 import { RESTService } from 'src/app/Service/rest.service';
 import { CookieService } from 'ngx-cookie-service';
+import { KTX0002 } from 'src/app/QLKTX/models/KTX0002';
 declare var $:any
 
 @Component({
@@ -22,7 +23,7 @@ export class DanhmuctaisasnComponent implements OnInit {
     $(document).ready(function(){
       
       $('thead>tr>td>input:checkbox').change(function(){
-        console.log($(this).is(':checked'))
+        //console.log($(this).is(':checked'))
         $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       $('.tabledodung').on('click','tbody>tr>td>input:checkbox',function(Event){
@@ -59,8 +60,8 @@ export class DanhmuctaisasnComponent implements OnInit {
     })
     ////////////////
     $('.deleteitem').click(function(Event){
-      if(!confirm("Bạn có chắc muốn xóa dữ liệu không?"))
-      console.log(that.ktx10temp)
+      if(!confirm("Bạn có chắc muốn xóa dữ liệu không?"))return false
+      //console.log(that.ktx10temp)
       that.rest.PostDataToAPI<result<KTX0010>[]>(that.ktx10temp.filter(c=>{return c.check===true}),'KTX0010/delete').subscribe(data=>{
         data.forEach(val=>{
           if(val.code=='OK'){
@@ -106,5 +107,4 @@ export class DanhmuctaisasnComponent implements OnInit {
     })
     })
   }
-
 }

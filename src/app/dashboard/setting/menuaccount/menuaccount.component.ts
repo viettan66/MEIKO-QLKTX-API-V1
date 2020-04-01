@@ -13,6 +13,7 @@ declare var $:any
 })
 export class MenuaccountComponent implements OnInit {
   public title=''
+  public idper=0
   public listper:MKV9980[]=[]
   public listaction:MKV9981[]=[]
   constructor(public rest:RESTService,public cookie:CookieService) { }
@@ -29,10 +30,17 @@ export class MenuaccountComponent implements OnInit {
       $('#listper>li').removeClass('active')
       $(this).addClass('active')
       let id=$(this).attr('id')
-      
+      that.idper=id
       that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAll/'+id).subscribe(data=>{
         that.listaction=data
       })
+    })
+    ///////////////////////////
+    $('#listfunction').on('click','li',function(){
+      $('#listfunction>li').removeClass('active')
+      $(this).addClass('active')
+      let id=$(this).attr('id')
+
     })
 
     
@@ -78,6 +86,7 @@ export class MenuaccountComponent implements OnInit {
 
         var mkv81:MKV9981=new MKV9981() 
         mkv81.TENHANHDONG=$('#ten').val()
+        mkv81.IDCHA=that.idper
         mkv81.MKV9980_ID=$('#listper').find('.active').attr('id')
         mkv81.TINHTRANG=true
         mkv81.LINKMENU=$('#link').val()
@@ -92,6 +101,28 @@ export class MenuaccountComponent implements OnInit {
       }
     })
   })
+  }
+  public mkv9981:MKV9981=new MKV9981()
+  edithanhdong(element:MKV9981){
+    this.mkv9981=element
+  }
+  save81(){
+    let that=this
+    this.rest.PutDataToAPI<result<MKV9981>[]>([this.mkv9981],'MKV9981/Edit').subscribe(data=>{
+      console.log(data)
+      data.forEach(val=>{
+        if(val.code=="OK"){
+          let k=that.listaction.filter(c=>{return c.MKV9981_ID===val.data.MKV9981_ID})
+          if(k.length!=0){
+            k[0].TENHANHDONG=val.data.TENHANHDONG
+            k[0].IMAGE=val.data.IMAGE
+            k[0].LINKMENU=val.data.LINKMENU
+          }
+        }else{
+          alert(val.mess)
+        }
+      })
+    })
   }
   // onFileChange(event) {
   //   let reader = new FileReader();

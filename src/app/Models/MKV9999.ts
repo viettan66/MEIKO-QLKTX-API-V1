@@ -1,5 +1,8 @@
+import { MKV9991 } from './MKV9991';
+
 export class MKV9999{
     public  MKV9999_ID :number     ;
+    public  type :number     ;
     public  manhansu : string    ;
     public  matkhau :  string   ;
     public  id :  string   ;
@@ -37,6 +40,8 @@ export class MKV9999{
     public  chucvu :string     ;
     public  capbac :  string   ;
     public  thetu_id :   string  ;
+    public bophan:MKV9991;
+    public ban:MKV9991;
     // public virtual ICollection<MKV9980 MKV9980 :     ;
     // public virtual MKV9998 MKV9998 :     ;
 }

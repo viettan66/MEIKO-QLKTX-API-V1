@@ -1,8 +1,9 @@
+
 <div class="col col-auto bg-dark gh no-gutters h-100 bg-dark" style="padding: 0;" >
     <ul class="list-group list-group-flush h-100 bg-dark no-gutters" id="dfdfdfdf">
-      <li class="list-group-item bg-dark menuclick" id="{{element.LINKMENU}}" *ngFor="let element of menu">
-        <a class="text-white " routerLink="/{{element.LINKMENU}}"  [queryParams]="{ flag: idcha}">
-          <i class="fas fa-briefcase"></i>
+      <li class="list-group-item  menuclick {{('/'+element.LINKMENU)==uri?'bg-lighht':' bg-dark'}}" id="{{element.LINKMENU}}" *ngFor="let element of menu">
+        <a class=" {{('/'+element.LINKMENU)==uri?' text-dark':' text-white'}} " routerLink="/{{element.LINKMENU}}">
+          <i class="{{element.IMAGE}} "></i>
           <span>&nbsp;&nbsp;{{element.TENHANHDONG}}</span>
       </a>
         

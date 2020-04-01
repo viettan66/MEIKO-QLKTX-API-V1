@@ -4,7 +4,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { MKV9982 } from 'src/app/Models/MKV9982';
 import * as Global from '../../Service/global.service'
 import { MKV9981 } from 'src/app/Models/MKV9981';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterStateSnapshot, Router } from '@angular/router';
+import { MKV9999 } from 'src/app/Models/MKV9999';
 declare var $: any
 
 @Component({
@@ -14,25 +15,19 @@ declare var $: any
 })
 export class MenuComponent implements OnInit {
 public host=''
+public uri=''
 public idcha=0
-  constructor( public rest:RESTService,public cookie:CookieService,public route:ActivatedRoute) { 
-    this.host=Global.HostUrl
+  constructor( public rest:RESTService,public cookie:CookieService,public route:Router) { 
+    //this.host=Global.HostUrl
   }
   public menu:MKV9981[]=[]
   ngOnInit() {
+    this.uri=this.route.url
+    //console.log(this.uri)
     let that = this 
-    this.route.queryParams.subscribe(params => {
-      that.idcha=params['flag']
-  })
     $(document).ready(function () {
-      let id = window.location.href.replace(Global.HostUrl, '').split('/')[0]
-      that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAcctionWidthMKV9999ID/'+that.cookie.get('MKV9999_ID')).subscribe(data=>{
-        
-        data.forEach(val=>{
-          if(val.MKV9980_ID==that.idcha&&val.CAPMENU!=0)
-          that.menu.push(val)
-        })
-      })
+     let temp:MKV9981[]=JSON.parse(localStorage.getItem('KTX_Menu'))
+     that.menu=temp.filter(c=>{return c.CAPMENU!=0&&c.IDCHA===Number(localStorage.getItem('KTX_Menu_Parent')) })
     })
   }
 

@@ -1,31 +1,103 @@
-<div class="row">
-    <div class="col-lg-4">
+<div class="row no-gutters">
+    <div class="col-xl-8 px-1">
         <div class="card">
             <h5 class="card-header">LỊCH SỬ LƯU TRÚ</h5>
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <table class="table table-border">
+                <thead>
+                  <tr>
+                    <th style="width: 20px;">STT</th>
+                    <th>Tên</th>
+                    <th>ID</th>
+                    <th>Bộ phận</th>
+                    <th>Vào/Ra</th>
+                    <th>Ngày</th>
+                    <th>Trạng thái</th>
+                    <th>Ghi chú</th>
+                    <th><i class="fa fa-eye"></i></th>
+                  </tr>
+                </thead>
+                <tbody id="tablelisstabcdef1">
+                  <ng-container *ngFor="let element of lisktx0020;let i=index">
+                    <tr (click)="showdetaildonvao(element)" style="cursor:pointer ;" >
+                      <td>{{i+1}}</td>
+                      <td>{{element.hotenkhaisinh}}</td>
+                      <td>{{element.MKV9999.manhansu}}</td>
+                      <td>{{element.MKV9999.thetu_id}}</td>
+                      <td>Vào</td>
+                      <td>{{element.ngayduyetdon|date:'dd/MM/yyyy'}}</td>
+                      <td>{{element.trangthai?"Đã duyệt":"Không duyệt"}}</td>
+                      <td>{{element.nhanxet }}</td>
+                      <td style="width: 50px;"><button (click)="showdetaildonvao(element)"  title="Xem chi tiết đơn" class="btn btn-sm"><i class="fa fa-eye"></i></button> </td>
+                    </tr>
+                  </ng-container>
+                  <ng-container *ngFor="let element of lisktx0023;let i=index">
+                    <tr (click)="showdetaildonvao(element)" style="cursor:pointer ;">
+                      <td>{{lisktx0020.length+i+1}}</td>
+                      <td>{{element.nldhoten}}</td>
+                      <td>{{element.MKV9999.manhansu}}</td>
+                      <td>{{element.MKV9999.thetu_id}}</td>
+                      <td>Ra</td>
+                      <td>{{element.ngaytaodon|date:'dd/MM/yyyy'}}</td>
+                      <td>{{element.trangthai?"Đã duyệt":"Không duyệt"}}</td>
+                      <td>{{element.nhanxet}}</td>
+                      <td style="width: 20px;"><button (click)="showdetaildonra(element)" title="Xem chi tiết đơn" class="btn btn-sm"><i class="fa fa-eye"></i></button> </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
             </div>
           </div>
     </div>
-    <div class="col-lg-4">
-        <div class="card">
-            <h5 class="card-header">TÀI SẢN ĐANG SỬ DỤNG</h5>
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-          </div>
-    </div>
-    <div class="col-lg-4">
+    <div class="col-xl-4 py-2 px-1" >
         <div class="card">
             <h5 class="card-header">THÔNG TIN KHÁC</h5>
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <table class="table  table-hover" *ngIf="element!=null">
+                <tr>
+                  <td>Phòng</td>
+                  <td><span *ngIf="element.KTX0001!=null">{{element.KTX0001.ten}}</span></td>
+                </tr>
+                <tr>
+                  <td>Giường</td>
+                  <td><span *ngIf="element.KTX0002!=null">{{element.KTX0002.ten}}</span></td>
+                </tr>
+                <tr>
+                  <td>Tủ</td>
+                  <td><span *ngIf="element.KTX0002!=null">{{element.sotu}}</span></td>
+                </tr>
+                <tr>
+                  <td>Khóa tủ</td>
+                  <td><span *ngIf="element.KTX0002!=null">{{element.sokhoatu}}</span></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <br>
+        <div class="card py-2">
+            <h5 class="card-header">THÔNG TIN ĐỒ CẤP PHÁT</h5>
+            <div class="card-body">
+              <table class="table  table-hover" *ngIf="element!=null">
+                <tr>
+                  <td>Tên đồ dùng</td>
+                  <td>SL cấp</td>
+                  <td>ngày cấp</td>
+                  <td>SL trả</td>
+                  <td>ngày trả</td>
+                </tr>
+                <ng-container *ngIf="element.KTX0031!=null">
+                  <ng-container *ngFor="let val of element.KTX0031;let i=index">
+                      <tr >
+                        <td>{{val.KTX0010.ten}}</td>
+                        <td>{{val.soluongcap}}</td>
+                        <td>{{val.ngaycap|date:'dd/MM/yy'}}</td>
+                        <td>{{val.soluongtra}}</td>
+                        <td>{{val.ngaytra|date:'dd/MM/yy'}}</td>
+                      </tr>
+                  </ng-container>
+                </ng-container>
+                
+              </table>
             </div>
           </div>
     </div>

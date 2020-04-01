@@ -4,6 +4,7 @@ import { RESTService } from 'src/app/Service/rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { MKV9982 } from 'src/app/Models/MKV9982';
 import { Router, ActivatedRoute } from '@angular/router';
+import { KTX0040 } from '../models/KTX0040';
 declare var $:any
 
 @Component({
@@ -15,8 +16,17 @@ export class KTXDashboardComponent implements OnInit {
 
   constructor(public rest:RESTService,public cookie:CookieService,public route:ActivatedRoute) { }
 public menu:MKV9982[]=[]
-  ngOnInit() {
-
+public listnew:KTX0040[]=[]
+public detail:KTX0040=new KTX0040()
+view(element){
+this.detail=element
+$('#modaldetail').modal()
+}
+substring(l){
+  return l.substring(0,200)
+}
+ async ngOnInit() {
+    this.listnew= await this.rest.GetDataFromAPI<KTX0040[]>('KTX0040/Getall').toPromise()
     let that = this
    
     $(document).ready(function () {

@@ -3,104 +3,100 @@
 <div class="modal fade " id="sapphongtudongmodal" role="dialog" >
 	<div class="modal-dialog   modal-99"  >
 		<div class="modal-content " >
-			<div class="modal-header">
-				<h5 class="modal-title">SẮP PHÒNG TỰ ĐỘNG</h5>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-header no-gutters">
+					<div class="col"><h5 class="modal-title">SẮP PHÒNG TỰ ĐỘNG</h5></div>
+					<div class="col-auto">
+						<select id="loc" (change)="loc()"  class="btn btn-secondary mr-1">
+							<option value="0">Loại phòng All</option>
+							<option value="1">Công nhân</option>
+							<option  value="2">Trưởng nhóm</option>
+							<option   value="3">Chủ nhiệm</option>
+							<option value="4">Trưởng phòng</option>
+						</select>
+						<button  type="button" class=" btn btn-warning mr-1"  ><i class="fas fa-sync-alt"></i></button>
+						<button title="Sắp phòng" id="sapphongauto" type="button" class=" btn btn-primary mr-1"  ><i class="fa fa-check"></i></button>
+						<button title="Sắp phòng và in đơn" (click)="sapphongvaindon()" type="button" class=" btn btn-info mr-5"  ><i class="fa fa-check"></i><i class="fa fa-print"></i></button>
+						<button   class="btn btn-secondary  "  data-dismiss="modal" ><i class="fa fa-times"></i></button>
+					</div>
+			
 			</div>
-			<div class="modal-body " style="padding: 5px;">
+			<div class="modal-body " style="padding:10px 5px;">
 				
-				<div class="row no-gutters justify-content-end">
-					<button id="sapphongauto" type="button" class=" btn btn-primary"  ><i class="fa fa-check"></i></button>
-				</div>
-				<br>
-				<div class="row ">
-					<div class="col-lg-4">
+				
+				<div class="row no-gutters">
+					<div class="col-lg-auto px-1">
 						<h6 class="card-title">Chọn phòng sẽ thêm nhân viên</h6>
-						<table class="table table-bordered table-click">
+						<table class="table table-bordered table-hover table-click">
 							<thead>
 								<tr>
 									<td style="width: 10px;"><input type="checkbox" ></td>
-									<td>STT</td>
-									<td>Tên phòng</td>
-									<td>Số giường</td>
-									<td>Còn trống</td>
+									<td style="width: 10px;">STT</td>
+									<td >Phòng</td>
+									<td >Loại</td>
+									<td >Giường</td>
+									<td >Trống</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr *ngFor="let element of listphongcopy;let i=index" style="cursor: pointer;">
-									<td><input type="checkbox" [(ngModel)]="element.check" ></td>
-									<td>{{i+1}}</td>
-									<td>{{element.ten}}</td>
-									<td>{{element.slot}}</td>
-									<td>{{element.slot-element.slotuse}}</td>
+									<td style="text-align: center;"><input type="checkbox" [(ngModel)]="element.check" ></td>
+									<td style="text-align: center;">{{i+1}}</td>
+									<td style="text-align: center;">{{element.ten}}</td>
+									<td style="text-align: center;">{{element.capbac==1?'CN/TV':element.capbac==2?'TN':element.capbac==3?'CN':element.capbac==4?'TP':'NaN'}}</td>
+									<td style="text-align: center;">{{element.slot}}</td>
+									<td style="text-align: center;">{{element.slot-element.slotuse}}</td>
 								</tr>
 							</tbody>
 						</table>
 
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg px-1">
 						<h6 class="card-title">Chọn Nhân viên cần sắp phòng</h6>
-						<table class="table table-bordered  table-click">
+						<table class="table table-bordered table-hover  table-click">
 							<thead>
 								<tr>
 									<td style="width: 10px;"><input type="checkbox" ></td>
-									<td>STT</td>
+									<td style="width: 10px;">STT</td>
 									<td>ID</td>
 									<td>TÊN</td>
-									<td>BỘ PHẬN</td>
-									<td>GIỚI TÍNH</td>
+									<td>BP</td>
+									<td>CB</td>
+									<td>GIỚI</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr *ngFor="let element of listEPcopy;let i=index" style="cursor: pointer;">
-									<td><input type="checkbox" [(ngModel)]="element.check"  ></td>
+									<td><input  type="checkbox" [(ngModel)]="element.check"  ></td>
 									<td>{{i+1}} <input type="hidden" name="ID" value="{{i}}"> </td>
 									<td>{{element.MKV9999.manhansu}}</td>
 									<td>{{element.MKV9999.hodem+' '+element.MKV9999.ten}}</td>
 									<td>{{element.MKV9999.thetu_id}}</td>
+									<td>{{element.MKV9999.capbac}}</td>
 									<td>{{element.MKV9999.gioitinh?"Nam":"Nữ"}}</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
 					
-					<div class="col-lg-4">
+					<div class="col-lg-3 px-1">
 						<h6 class="card-title">Danh mục đồ sẽ cấp phát khi sắp phòng</h6>
-						<table class="table table-bordered table-edit-button">
+						<table class="table table-bordered table-hover table-edit-button">
 							<thead>
 								<tr>
 									<td>STT</td>
 									<td>Tên vật tư</td>
-									<td>Mã vật tư</td>
+									<!-- <td>Mã vật tư</td> -->
 									<td style="width: 90px;">SL Cấp</td>
-									<td>SL Tồn</td>
-									<td style="text-align: center;">Edit</td>
+									<td>SLTồn</td>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Vỏ chăn</td>
-									<td>TH0001</td>
-									<td><input disabled type="text"  class="none form-control"  value="1"></td>
-									<td>1202</td>
-									<td style="text-align: center;"><button class="btn btn-secondary"><i class="fa fa-edit"></i></button></td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Vỏ Gối</td>
-									<td>TH0002</td>
-									<td><input disabled type="text"  class="none form-control"  value="1"></td>
-									<td>1202</td>
-									<td style="text-align: center;"><button class="btn btn-secondary"><i class="fa fa-edit"></i></button></td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td>Chậu</td>
-									<td>TH0003</td>
-									<td><input disabled type="text"  class="none form-control"  value="1"></td>
-									<td>1202</td>
-									<td style="text-align: center;"><button class="btn btn-secondary"><i class="fa fa-edit"></i></button></td>
+								<tr *ngFor="let element of ktx0010;let i=index">
+									<td>{{i+1}}</td>
+									<td>{{element.tenSanPham}}</td>
+									<!-- <td>{{element.maSanPham}}</td> -->
+									<td><input  type="text"  class="none form-control"  [(ngModel)]="element.soluongmacdinh"></td>
+									<td>{{element.soLuongTonKho-element.soluongtinh}}</td>
 								</tr>
 							</tbody>
 						</table>
@@ -153,7 +149,7 @@
 			</div>
 			<div class="modal-body ">
 				<h5 class="card-title">{{title}}</h5>
-				<table class="table table-bordered ">
+				<table class="table table-bordered table-hover ">
 					<thead>
 						<tr>
 							<td>ID</td>
@@ -186,7 +182,7 @@
 						</tr>
 						<tr>
 							<td>Ngày duyệt</td>
-							<td  colspan="4"></td>
+							<td  colspan="4">{{giuong!=null?(giuong.KTX0020.ngayduyetdon|date:'dd-MM-yyyy' ):""}}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -198,3 +194,12 @@
 	</div>
 </div>
 
+
+<div id="testprint" style="display: none; ">
+    <ng-container *ngFor='let element of ktx20tempprint'>
+      <app-formdangkyokytucxa    [ktx20temp]="element" [check]="false"  ></app-formdangkyokytucxa>
+    </ng-container>
+    
+  </div>
+  
+  <app-loading *ngIf="loading"></app-loading>

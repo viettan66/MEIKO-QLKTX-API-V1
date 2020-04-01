@@ -1,24 +1,15 @@
-<div class="row h-100 d-flex justify-content-center" id="contentapp" style="padding: 10%;">
-    <div *ngFor="let element of listapp">
 
-    <!-- <div class="card" style="width: 18rem;margin:10px;" *ngIf="element.CAPMENU==0">
-        
-        <img class="card-img-top" src="{{element.IMAGE}}" alt="{{element.MKV9981_ID}}">
-        <div class="card-body">
-            <a routerLink="/{{element.LINKMENU}}" [queryParams]="{ flag: element.MKV9980_ID}">
-          <p class="card-text"><button class="btn" name="/{{element.LINKMENU}}"  id="{{element.MKV9980_ID}}">{{element.TENHANHDONG}}</button></p>
-          </a>
-        </div>
-    </div> -->
-<a routerLink="/{{element.LINKMENU}}" [queryParams]="{ flag: element.MKV9980_ID}" *ngIf="element.CAPMENU==0">
-    <div class="card bg-dark text-white" style="width: 20rem;margin:10px;">
-        <img class="card-img" src="{{element.IMAGE}}"  alt="{{element.MKV9981_ID}}">
+<div class="row h-100 d-flex justify-content-center" id="contentapp" style="padding: 10%;">
+  <div *ngFor="let element of listapp">
+    <a *ngIf="element.CAPMENU==0" style="cursor: pointer;">
+      <div class="card bg-dark text-white" style="width: 20rem;margin:10px;"  (click)="go(element.MKV9980_ID,element.LINKMENU)">
+        <img class="card-img" src="{{element.IMAGE}}" alt="{{element.MKV9981_ID}}">
         <div class="card-img-overlay">
           <h5 class="card-title">{{element.TENHANHDONG}}</h5>
           <p class="card-text">{{element.GHICHU}}</p>
         </div>
       </div>
     </a>
-      
-    </div>
+
+  </div>
 </div>

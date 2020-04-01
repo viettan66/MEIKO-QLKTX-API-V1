@@ -1,12 +1,15 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { RESTService } from 'src/app/Service/rest.service';
-import { MKV9999 } from 'src/app/Models/MKV9999';
 import { result } from '../../models/result';
 import { KTX0020 } from '../../models/KTX0020';
 import { KTX0002 } from '../../models/KTX0002';
-import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import { KTX0001 } from '../../models/KTX0001';
-import { color } from 'src/app/Service/global.service';
+import { WH0007 } from 'src/app/Models/WH0007';
+import { KTX0010 } from '../../models/KTX0010';
+import { Validators } from '@angular/forms';
+import { KTX0031 } from '../../models/KTX0031';
+import * as Global from '../../../Service/global.service';
+import { xuatkho } from '../../models/xuatkho';
 declare var $:any
 
 @Component({
@@ -27,15 +30,15 @@ public listphongcopy:KTX0001[]=[]
 public listphongtemp:KTX0001[]=[]
 public title=""
   ngOnInit() {
+    this.show()
     document.getElementById('hidecolumn').style.display='none'
     let that=this
     $(document).ready(function(){
-    
       /////////////////////////////////////////////
       $('.qlp').css('display','none')
       $('.qlsp').css('display','unset')
       $('thead>tr>td>input:checkbox').change(function(){
-        //console.log($(this).is(':checked'))
+        ////console.log($(this).is(':checked'))
         $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       $('.table-click').on('click','tbody>tr',function(Event){
@@ -43,6 +46,16 @@ public title=""
        })
       $('.table-click').on('click','tbody>tr>td>input:checkbox',function(Event){
         Event.stopPropagation()
+      })
+      $('.table-click').on('change','tbody>tr>td>input:checkbox',function(Event){
+        Event.stopPropagation()
+        
+          let c= that.listEPcopy.filter(c=>{return c.check===true})
+          that.ktx0010.forEach(vla=>{
+            vla.soluongtinh=c.length*vla.soluongmacdinh
+            if(vla.soLuongTonKho-vla.soluongtinh<0)alert("Mặt hàng "+vla.tenSanPham+' không đủ.')
+          })
+  
       })
       ///////////////////////////////////////////////////
       /////////////////
@@ -52,33 +65,54 @@ public title=""
       //////////////////
       //////////////////
       $('#addRange').click(function(e){
-        console.log(that.phong)
-        that.listphongcopy=[]
+        that.listphongcopy = []
         that.listphongcopy.push(that.phong)
-
-       idphong=$(this).attr('name')
-       tenphong=$(this).attr('title')
-         option=1
-         that.title="Chọn "+that.listgiuong.filter(c=>{return c.trangthai===false}).length+" nhân viên cho phòng: "+$(this).find('.card-title').text()
-         
-         if(getdata(that.phong.khu)==false){
+        idphong = $(this).attr('name')
+        tenphong = $(this).attr('title')
+        option = 1
+        that.title = "Chọn " + that.listgiuong.filter(c => { return c.trangthai === false }).length + " nhân viên cho phòng: " + $(this).find('.card-title').text()
+        //console.log('1')
+        let ch
+          getdata(that.phong.khu).then(da=>{
+                ch=da
+          //console.log('2')   
+        if (ch == false) {
           return false
-        }else{
-          that.listEPcopy=that.listEP
-          $('#sapphongtudongmodal').modal()
+        } else {
+       that.listEPcopy=that.listEP.filter(c=>{return c.capbac===that.phong.capbac})
+          that.showdodung().then(data => {
+            if (data) {
+              ////console.log(that.ktx0010)
+              $('#sapphongtudongmodal').modal()
+            }
+          })
+
         }
+          })
+   
         //$('#sapphongtudongmodal').modal()
     })​
       //////////////////
-      $('#sapphongtudong').click(function(e){//console.log(e.which)14%
-         //getdata()
-         if(getdata()==false){
+      $('#sapphongtudong').click(function(e){////console.log(e.which)14%
+        let khu=that.phong!=null?that.phong.khu:$('#listkhu').val()
+        if(khu=='a'){
+          alert('Bạn phải chọn khu Nam Nữ trước.')
+          return false
+        }
+        getdata(khu).then(da=>{
+         if(da==false){
           return false
         }
         that.listphong=that.listphongtemp
            that.listEPcopy=that.listEP
            that.listphongcopy=that.listphong.filter(c=>{return (c.slotuse<c.slot)})
-          $('#sapphongtudongmodal').modal()
+           that.showdodung().then(data => {
+            if (data) {
+              ////console.log(that.ktx0010)
+              $('#sapphongtudongmodal').modal()
+            }
+          })
+        })
       })​
        ///
       let option=0
@@ -102,12 +136,21 @@ public title=""
         }
         else{
 
-          if(getdata(that.phong.khu)==false){
+          let ch
+          getdata(that.phong.khu).then(da=>{
+                ch=da
+          })
+           if(ch==false){
             return false
           }
           
           that.listEPcopy=that.listEP
-          $('#sapphongtudongmodal').modal()}
+          that.showdodung().then(data => {
+            if (data) {
+              ////console.log(that.ktx0010)
+              $('#sapphongtudongmodal').modal()
+            }
+          })}
       })
       ///////////////////////////////////////////////
       $('#deleterooms').click(function(event){
@@ -126,62 +169,42 @@ public title=""
               }
               $('#nguoitronggiuong').modal('hide')
             }else{
-              console.log(data.mess)
+              //console.log(data.mess)
             }
           })
         })
       })
       ///////////////////////////////////////////////UPDATEinfo
-      $('#sapphongauto').click(function(){
-        that.rest.PostDataToAPI<result<KTX0020>[]>({arrPhong:that.listphongcopy.filter(c=>{return c.check===true}),EPs:that.listEPcopy.filter(c=>{return c.check===true}) },'QLSP/AddEPToGiuongAuto/'+idphong).subscribe(datas=>{
-          console.log(datas)
-           let ok=0
-            let ng=0
-          datas.forEach(data=>{
-            if(data.code=="OK"){
-              ok++
-              var k=that.listphong.filter(c=>{return c.KTX0001_ID===data.data.KTX0001_ID})
-              if(k.length!=0){
-                k[0].slotuse++
-              }
-              var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})
-              if(l.length!=0){
-                l[0].trangthai=true
-                l[0].KTX0020=data.data
-              }
-               
-            }else ng++
-          })
-        })
-        return
+      $('#sapphongauto').click( function(){
+       that.sapphong(false)
       })
        ///
-       $('.listEP').on('click','tr',function(event){ 
-        if($(this).hasClass('active')){
-          $(this).removeClass('active')
-        }else{
-          $(this).addClass('active')
-          if(option==2){
-            var EP=that.listEP[$(this).find('input[name=ID]').val()]
-            that.rest.PostDataToAPI<result<KTX0020>>(EP,'QLSP/AddEPToGiuong/'+idgiuong).subscribe(data=>{
-              console.log(data)
-              if(data.code=="OK"){
-                $('.giuongclick').each(function(){
-                  if($(this).attr('id')==data.data.KTX0002_ID){
-                    $(this).removeClass('bg-secondary').addClass('bg-success').find('.card-text').text(data.data.MKV9999.hodem+' '+data.data.MKV9999.ten)
-                    //that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})[0].trangthai=true;
-                  }
-                })
-              }
-            })
-            $('#sapphongtudongmodal').modal('hide')
-          }else{
+      //  $('.listEP').on('click','tr',function(event){ 
+      //   if($(this).hasClass('active')){
+      //     $(this).removeClass('active')
+      //   }else{
+      //     $(this).addClass('active')
+      //     if(option==2){
+      //       var EP=that.listEP[$(this).find('input[name=ID]').val()]
+      //       that.rest.PostDataToAPI<result<KTX0020>>(EP,'QLSP/AddEPToGiuong/'+idgiuong).subscribe(data=>{
+      //         //console.log(data)
+      //         if(data.code=="OK"){
+      //           $('.giuongclick').each(function(){
+      //             if($(this).attr('id')==data.data.KTX0002_ID){
+      //               $(this).removeClass('bg-secondary').addClass('bg-success').find('.card-text').text(data.data.MKV9999.hodem+' '+data.data.MKV9999.ten)
+      //               //that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})[0].trangthai=true;
+      //             }
+      //           })
+      //         }
+      //       })
+      //       $('#sapphongtudongmodal').modal('hide')
+      //     }else{
 
-          }
-        }
-      })
+      //     }
+      //   }
+      // })
       /////////////////////
-      function getdata(khu?:string){
+     async function getdata(khu?:string){
         if(khu==null){
           if($("#listkhu").val()=='a'){
             alert('Bạn chưa chọn khu Nam hay Nữ đê xếp phòng.')
@@ -190,14 +213,12 @@ public title=""
           khu=$("#listkhu").val()
         }
         that.listEP=[]
-        that.rest.GetDataFromAPI<KTX0020[]>('QLSP/GetAllEp').subscribe(data=>{
-          console.log(data)
+       let data= await that.rest.GetDataFromAPI<KTX0020[]>('QLSP/GetAllEp').toPromise()
           data.forEach(cal=>{
             if(cal.gioitinh==(khu=='N'))
             that.listEP.push(cal)
           })
           return true
-         })
       }
       ///////////// edit danh mục đồ 
       $('.table-edit-button').on('click','button',function () {
@@ -211,6 +232,42 @@ public title=""
       })
     })
   }
+  public ktx0010:WH0007[]=[]
+  public arr:WH0007[]=[]
+  public ktx0010show:KTX0010[]=[]
+
+  async showdodung():Promise<boolean>{
+    this.ktx0010=[]
+    this.ktx0010show=(await  this.rest.GetDataFromAPI<KTX0010[]>('KTX0010/Getall').toPromise()).filter(c=>{return c.loai===2})
+   
+    this.ktx0010show.forEach(val=>{
+      var check=this.arr.filter(c=>{return c.WH0007_ID===val.WH0007_ID})
+      if(check.length>0){
+        let kl=check[0]
+        kl.soluongmacdinh=val.soluongmacdinh
+        kl.KTX0010_ID=val.KTX0010_ID
+        kl.soluongtinh=0
+        this.ktx0010.push(kl)
+
+      }
+    })
+
+    return true
+  }
+  show(){
+    let that = this
+    let input = new FormData();
+    input.append('pz', '100000');
+    input.append('p', '1');
+    input.append('ob', '');
+    input.append('sort', '');
+    input.append('s', '');
+    input.append('sts', '');
+    input.append('WH0001_ID', Global.Khohang);
+    that.rest.Post<any>(input, 'http://192.84.100.207/AdminAPI/api/WH/R1_GetKhoHang').subscribe(data => {
+      that.arr = JSON.parse(data['data'])[0]
+    })
+  }
   getemitListGIUONG(event){
     this.listgiuong=event
   }
@@ -220,5 +277,101 @@ public title=""
   }
   getemitPHONG(event){
     this.phong=event
+  }
+  public ktx20tempprint:KTX0020[]=[]
+  
+  sapphong(check:boolean){
+    let arr:xuatkho=new xuatkho()
+    this.ktx20tempprint=[]
+    let that=this
+    //console.log(that.listEPcopy.filter(c=>{return c.check===true}))
+    that.rest.PostDataToAPI<result<KTX0020>[]>({arrPhong:that.listphongcopy.filter(c=>{return c.check===true}),EPs:that.listEPcopy.filter(c=>{return c.check===true}) },'QLSP/AddEPToGiuongAuto').subscribe(datas=>{
+      //console.log(datas)
+       let ok=0
+        let ng=0
+        that.ktx0010.forEach(kll=>{
+          if(kll.soluongmacdinh>0)
+            arr.data.push({soLuong:kll.soluongmacdinh,donViTinh:kll.tenDonViTinh,WH0007_ID:kll.WH0007_ID})
+        })
+        
+      datas.forEach(data=>{
+        if(data.code=="OK"){
+          if(data.data.MKV9999.type==1){
+            arr.A0002_ID.push(data.data.MKV9999.manhansu)
+          }
+          this.ktx20tempprint.push(data.data)
+          ok++
+          var k=that.listphong.filter(c=>{return c.KTX0001_ID===data.data.KTX0001_ID})
+          if(k.length!=0){
+            k[0].slotuse++
+          }
+          var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===data.data.KTX0002_ID})
+          if(l.length!=0){
+            l[0].trangthai=true
+            l[0].KTX0020=data.data
+          }
+          let arr31:KTX0031[]=[]
+           that.ktx0010.filter(c=>{return (c.soluongmacdinh>0&&c.soLuongTonKho>=c.soluongmacdinh)}).forEach(val=>{
+             let tem=new KTX0031();
+             tem.KTX0010_ID=val.KTX0010_ID
+             tem.MKV9999_ID=data.data.MKV9999_ID
+             tem.ghichu="Cấp phát mới ngày "+new Date()
+             tem.ngaycap=new Date()
+             tem.soluongcap=val.soluongmacdinh
+             val.soLuongTonKho-=val.soluongmacdinh
+             tem.trangthai=true
+             arr31.push(tem)
+           })
+             that.rest.PostDataToAPI<result<KTX0031>[]>(arr31,'KTX0031/add').subscribe(data=>{
+               //console.log(data)
+               data.forEach(val=>{
+                 if(val.code=="OK"){
+                  
+                 }else{
+                   alert(val.mess)
+                 }
+               })
+             })
+        }else ng++
+      })
+      console.log(arr)
+      alert('Đã sắp phòng cho '+ok+' người\n'+(ng!=0?('Chưa sắp được phòng cho '+ng+' người'):''))
+      if(check){
+        
+        $('#sapphongtudongmodal').modal('hide')
+        this.loading=true
+        setTimeout(() => {
+          this.loading=false
+          setTimeout(() => {
+            
+          print()
+          }, 200);
+        },4000);
+      }
+    })
+    return
+  }
+  public loading=false
+  sapphongvaindon(){
+    this.sapphong(true)
+  }
+  loc(){
+    ////console.log(this.listEP)
+    let value=Number($('#loc').val()) 
+    if(value!=0){
+      this.listphongcopy=this.listphongtemp.filter(c=>{return c.capbac===value})
+      // if(value==1)
+      this.listEPcopy=this.listEP.filter(c=>{return c.capbac===value})
+      // if(value==2)
+      // this.listEPcopy=this.listEP.filter(c=>{return (c.capbac>3&&c.capbac<6)})
+      // if(value==3)
+      // this.listEPcopy=this.listEP.filter(c=>{return (c.capbac>5&&c.capbac<8)})
+      // if(value==4)
+      // this.listEPcopy=this.listEP.filter(c=>{return (c.capbac>7)})
+}
+  else{
+  this.listphongcopy=this.listphongtemp
+  this.listEPcopy=this.listEP
+}
   }
 }

@@ -1,0 +1,183 @@
+<div class="row d-flex justify-content-center form1ketthuc" id="form1">
+    <div class="modal-900  ui-page print" >
+        <div class="row no-gutters py-2" style="border-bottom: solid 1px gray;">
+            <div class="col-4"><img src="../../../../assets/image/icon/logo-1.jpg" width="200" alt=""></div>
+            <div class="col-4  no-gutters">
+                <div class="row no-gutters d-flex justify-content-center"><span  style="font-size: 18px;font-weight: bold;">ĐƠN XIN TRẢ KÝ TÚC XÁ</span></div>
+                <div class="row no-gutters d-flex justify-content-center"><span>Ngày <input disabled  style="border: none;width: 150px;" type="date" value="{{newDate | date:'yyyy-MM-dd'}}"></span></div>
+            </div>
+        <div class="col-4"></div>
+        </div>
+        <div class="row no-gutters align-items-center">
+            <div class="col-auto">Họ đệm</div>
+            <div class="col"><input type="text" class="formcontrol none"  [(ngModel)]="ktx0023temp.MKV9999.hodem"></div>
+            <div class="col-auto">Tên</div>
+            <div class="col"><input type="text" class="formcontrol none"    [(ngModel)]="ktx0023temp.MKV9999.ten"></div>
+            <div class="col-auto">Giới tính</div>
+            <div class="col">
+                <select   [(ngModel)]="ktx0023temp.MKV9999.gioitinh" class="formcontrol none"  >
+                    <option value="true">Nam</option>
+                    <option value="false">Nữ</option>
+                </select>
+            </div>
+            <div class="col-auto">Mã iD</div>
+            <div class="col"><input type="text" class="formcontrol none"     [(ngModel)]="ktx0023temp.MKV9999.manhansu"></div>
+        </div>
+        <div class="row no-gutters align-items-center">
+            <div class="col-auto">Câp bậc</div>
+            <div class="col d-flex align-items-center px-4"><input type="text" class="formcontrol none"     [(ngModel)]="ktx0023temp.MKV9999.capbac"></div>
+            <div class="col-auto">Chức vụ</div>
+            <div class="col d-flex align-items-center px-4"><input type="text" class="formcontrol none"     [(ngModel)]="ktx0023temp.MKV9999.chucvu"></div>
+        </div>
+        <div class="row no-gutters align-items-center">
+            <div class="col-auto">Phòng</div>
+            <div class="col"><input type="text" class="formcontrol none"   [(ngModel)]="ktx0023temp.MKV9999.bophan.bophan_ten"></div>
+            <div class="col-auto">Bộ phận</div>
+            <div class="col"><input type="text" class="formcontrol none"    [(ngModel)]="ktx0023temp.MKV9999.bophan.bophan_ten"></div>
+            <div class="col-auto">Ban</div>
+            <div class="col"><input type="text" class="formcontrol none"  value="{{ktx0023temp.MKV9999.ban!=null?ktx0023temp.MKV9999.ban.bophan_ten:''}}"></div>
+            <div class="col-auto">Công đoạn</div>
+            <div class="col"><input type="text" class="formcontrol none"   value=""></div>
+        </div>
+        <div class="row no-gutters align-items-center">
+            <div class="col-auto">Nội dung đăng ký</div>
+            <div class="col-auto align-items-center px-5"><label for="kk4"><input type="checkbox" disabled  [(ngModel)]="ktx0023temp.trakytucxa">Trả ký túc xá</label></div>
+            <div class="col-auto">Từ ngày</div>
+            <div class="col"><input type="date" class="formcontrol none"   (ngModelChange)="ktx0023temp.ngaytrakytucxa = $event"  [ngModel]="ktx0023temp.ngaytrakytucxa | date:'yyyy-MM-dd'" ></div>
+        </div>
+        <div class="row no-gutters align-items-center">
+            <div class="col-auto">Lý do đăng ký trả: </div>
+            <div class="col"><textarea class="formcontrol none" rows="1"  [(ngModel)]="ktx0023temp.lydotra"></textarea></div>
+        </div>
+        <div class="row no-gutters align-items-center">
+            <div class="col-auto">Điện thoại liên lạc: Số máy lẻ: </div>
+            <div class="col"><input type="text" class="formcontrol none"   [(ngModel)]="ktx0023temp.somayle"></div>
+            <div class="col-auto">/Di động:</div>
+            <div class="col"><input type="text" class="formcontrol none"   [(ngModel)]="ktx0023temp.didong"></div>
+        </div>
+        
+        <div class="row no-gutters align-items-center boderroww py-2">
+            <table class="table table-bordered">
+                <tr>
+                    <td rowspan="6"><b>Phần xử lý</b> </td>
+                    <td colspan="4">Phòng ban làm việc phê duyệt</td>
+                    <td colspan="3">Phòng Hành chính Nhân sự phê duyệt</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Chủ nhiệm</td>
+                    <td colspan="2">Trưởng phòng</td>
+                    <td colspan="1">Ban QLKTX</td>
+                    <td colspan="2">Chủ nhiệm/Trưởng phòng</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.chunhiemnoilam"></td>
+                    <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.truongphongnoilam"></td>
+                    <td colspan="1"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.banqlktx"></td>
+                    <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.chunhiemGA"></td>
+                </tr>
+                <tr>
+                    <td colspan="1" rowspan="3">Ban QLKT</td>
+                    <td colspan="1">Số phòng</td>
+                    <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.KTX0001.ten"></td>
+                    <td colspan="1">Số tủ</td>
+                    <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.sotu"></td>
+                </tr>
+                <tr>
+                    <td colspan="1">Khóa phòng</td>
+                    <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.khoaphong"></td>
+                    <td colspan="1">Số khóa tủ</td>
+                    <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.sokhoatu"></td>
+                </tr>
+                <tr>
+                    <td colspan="1">Số giường</td>
+                    <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.KTX0002.ten"></td>
+                    <td colspan="1">Ngày có hiêu lực</td>
+                    <td colspan="2"><input class="formcontrol" type="text"  (ngModelChange)="ktx0023temp.ngaycohieuluc = $event"  [ngModel]="ktx0023temp.ngaycohieuluc | date:'yyyy-MM-dd'" ></td>
+                </tr>
+            </table>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-12 d-flex justify-content-center"><h5>TIÊU CHUẨN HOÀN TRẢ ĐỒ DÙNG CÁ NHÂN</h5></div>
+            <div class="col-12 d-flex justify-content-center"><span>Ngày <input disabled  style="border: none;width: 150px;" type="date" value ="{{newDate | date:'yyyy-MM-dd'}}"></span></div>
+        </div>
+        <div class="row no-gutters py-2">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th colspan="5"><i> Vật dụng hoàn trả</i></th>
+                    </tr>
+                    <tr>
+                        <th>Tên vật dụng</th>
+                        <th>SL Đã cấp</th>
+                        <th>SL trả</th>
+                        <th>Đơn vị</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let element of ktx0023temp.KTX0031;let i=index"> 
+                        <td>{{element.KTX0010.ten}}</td>
+                        <td>{{element.soluongcap}}</td>
+                        <td *ngIf="!check"><input (change)="tinhtien()" class="form-control" style="width: 60px;" type="number" [(ngModel)]="element.soluongtra"></td>
+                        <td *ngIf="check">{{element.soluongtra}}</td>
+                        <td>{{element.KTX0010.donvi}}</td>
+                    </tr>
+                    <tr>
+                        <th colspan="4"><i>Xác nhận bồi thường</i> </th>
+                    </tr>
+                    <tr *ngIf="sum==0">
+                        <td colspan="4">Nhân viên trả đồ dùng đã được cấp phát đầy đủ bao gồm các vật dụng như trên.</td>
+                    </tr>
+                    <tr *ngIf="sum!=0">
+                        <th>Tên vật dụng</th>
+                        <th>Giá tiền</th>
+                        <th>Số lượng</th>
+                        <th colspan="1">Thành tiền</th>
+                    </tr>
+                    <ng-container *ngFor="let element of ktx0023temp.KTX0031;let i=index">
+                        <tr *ngIf="element.soluongcap!=element.soluongtra">
+                            <td>{{element.KTX0010.ten}}</td>
+                            <td>{{element.KTX0010.giatien}} vnđ</td>
+                            <td>{{element.soluongcap-element.soluongtra}}</td>
+                            <td colspan="1">{{(element.soluongcap-element.soluongtra)*element.KTX0010.giatien}}</td>
+                        </tr>
+                    </ng-container>
+                    <tr *ngIf="sum!=0">
+                        <th><i>Tổng giá trị bồi thường</i> </th>
+                        <th colspan="3">{{sum}} VNĐ</th>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered">
+                <tr>
+                    <td rowspan="3">Phần ký nhận</td>
+                    <td colspan="2">Ban QLKTX</td>
+                    <td colspan="2">Người lao động</td>
+                </tr>
+                <tr>
+                    <td>Họ tên</td>
+                    <td>Ký nhận</td>
+                    <td>Họ tên</td>
+                    <td>Ký nhận</td>
+                </tr>
+                <tr>
+                    <td><input class="formcontrol" type="text" VALUE=""></td>
+                    <td><input class="formcontrol" type="text" VALUE=""></td>
+                    <td><input class="formcontrol" type="text"  value="{{ktx0023temp.MKV9999.hodem+' '+ktx0023temp.MKV9999.ten}}"></td>
+                    <td><input class="formcontrol" type="text" VALUE=""></td>
+                </tr>
+            </table>
+        </div>
+        <div class="row no-gutters">
+            <div class="col"></div>
+            <div class="col-auto">
+                <div class="row no-gutters px-5">Liên 1: Hành chính lưu</div>
+                <div class="row no-gutters px-5">Liên 2: BQL KTX lưu</div>
+                <div class="row no-gutters px-5">Liên 3: Người lao động lưu</div>
+            </div>
+        </div>
+        <button class="btn btn-primary px-4" (click)="save()"><i class="fa fa-save"></i></button>
+        
+    <p class="pagebreak"></p>
+    </div>
+</div>
+<!-- <button (click)="print('formketthucj')">test</button> -->

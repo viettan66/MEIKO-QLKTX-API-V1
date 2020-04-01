@@ -1,4 +1,4 @@
-<div class="col-12 px-3">
+<div class="col-12 px-2 py-2">
     <div class="card" >
       <div class="card-header">
         DANH SÁCH ĐỒ DÙNG / THIẾT BỊ THÊM VÀO KHI TẠO MỚI.
@@ -16,7 +16,8 @@
               <td>TÊN ĐỒ DÙNG/TB</td>
               <td>GIÁ TIỀN</td>
               <td>GHI CHÚ</td>
-              <td>SL mặc định</td>
+              <td>SL CẤP</td>
+              <td>SL ĐỦ</td>
               </TR>
             </thead>
             <TBOdy>
@@ -27,6 +28,7 @@
                   <td>{{element.giatien }}</td>
                   <td>{{element.ghichu }}</td>
                   <td><input type="number" disabled class="form-control none" name="ghichu"  [(ngModel)]="element.soluongmacdinh"></td>
+                  <td><input type="number" disabled class="form-control none" name="ghichu"  [(ngModel)]="element.soluongfull"></td>
                 </TR>
             </TBOdy>
           </TABLE>

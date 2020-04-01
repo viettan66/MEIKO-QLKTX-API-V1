@@ -2,6 +2,9 @@ import { KTX0002 } from './KTX0002';
 import { KTX0001 } from './KTX0001';
 import { MKV9999 } from 'src/app/Models/MKV9999';
 import { KTX0021 } from './KTX0021';
+import { KTX0031 } from './KTX0031';
+import { KTX0022 } from './KTX0022';
+import { valuesearch } from './valuesearch';
 
 export class KTX0020{
     public  KTX0020_ID  :number      ;
@@ -23,10 +26,13 @@ export class KTX0020{
     public  truongphongGA  :  boolean    ;
     public  KTX0001_ID  : number     ;
     public  KTX0002_ID  : number     ;
+    public  KTX0003_ID  : number     ;
+    public  printcount  : number     ;
     public  khoaphong  : string     ;
     public  sotu  : string     ;
     public  sokhoatu  :  string    ;
     public  ngaycohieuluc  :  string    ;
+    public  hotenbengiao  : string     ;
     public  bengiao  : boolean     ;
     public  bennhan  : boolean     ;
     public  hotenkhaisinh  : string     ;
@@ -41,6 +47,7 @@ export class KTX0020{
     public  cmtnd_ngaycap  :string      ;
     public  cmtnd_noicap  :string      ;
     public  noithuongtru  : string     ;
+    public  tienantoidanhhinhphat  : string     ;
     public  choohiennay  : string     ;
     public  trinhdohocvan  : string     ;
     public  trinhdchuyenmon  :string      ;
@@ -55,9 +62,15 @@ export class KTX0020{
     public  ghichu  :string      ;
     public  trangthai  :boolean      ;
     public  check  :boolean      ;
-    public   MKV9999  : MKV9999     ;
-    public   KTX0001  : KTX0001     
+    public  check2  :boolean      ;
+    public  timkiem  :valuesearch      ;
+    
+   public   capbac:number;
+    public   MKV9999  : MKV9999 =new MKV9999()    ;
+    public   KTX0001  : KTX0001     ;
     public   KTX0002  : KTX0002     ;
     public   KTX0021  : KTX0021[]=[]     ;
+    public   KTX0022  : KTX0022[]=[]     ;
+    public   KTX0031  : KTX0031[]=[]     ;
     
 }

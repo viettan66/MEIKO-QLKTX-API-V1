@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { RESTService } from 'src/app/Service/rest.service';
+import { valuesearch } from '../../models/valuesearch';
+import { KTX0023 } from '../../models/KTX0023';
+import { KTX0020 } from '../../models/KTX0020';
+import { KTX0031 } from '../../models/KTX0031';
 declare var $:any
 
 @Component({
@@ -8,28 +13,46 @@ declare var $:any
 })
 export class TracuuthongkeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public rest:RESTService) { }
   public tab=0
 
   ngOnInit() {
     let that=this
     $(document).ready(function(){{
+      $('.tab').click(function(){
+        that.tab=$(this).index()
+        $('.tab').removeClass('active')
+        $(this).addClass('active')
+      })
       ////////////
       $('.tab').click(function(){
         that.tab=$(this).index()
       })
       ////////////////
       $('#searchbox').change(function(){
-        that.tab=$(this).index()
+        that.inputchange($('#searchbox').val())
         
       })
       ////////////////
       $('#SEARCH').click(function(){
-        $('#searchbox').change()
+        that.inputchange($('#searchbox').val())
       })
       //////////////
 
     }})//end $(document).ready
   }
-
+  public lisktx0020:KTX0020[]=[];
+  public lisktx0023:KTX0023[]=[];
+  public listktx0031:KTX0031[]=[];
+  async inputchange($value){
+   this.lisktx0020=[];
+   this.lisktx0023=[];
+   this.listktx0031=[];
+    let data= await this.rest.PostDataToAPI<valuesearch>({key:$value},'Search/Search').toPromise()
+    if(data!=null){
+      if(data.KTX0020!=null)this.lisktx0020=data.KTX0020
+      if(data.KTX0023!=null)this.lisktx0023=data.KTX0023
+    }
+    this.tab=3
+  }
 }

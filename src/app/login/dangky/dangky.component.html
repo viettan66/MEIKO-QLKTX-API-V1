@@ -1,0 +1,236 @@
+<div class="row h-100  px-5 d-flex justify-content-center d-flex align-items-center no-gutters">
+    <div class="col-xl-6" style="min-width: 720px;;height: auto;background-color: rgba(196, 196, 196, 0.13);padding: 50px;border-radius: 20px;border: 1px solid gray;">
+        <div class="row  d-flex justify-content-center "><span class=""><h2>ĐĂNG KÝ THÀNH VIÊN MỚI</h2></span></div>
+              
+        <div class="row no-gutters">
+            <div class="col">
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Mã ID</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="Mã ID" [(ngModel)]="newcomer.manhansu" >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Họ đệm</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="Họ đệm" [(ngModel)]="newcomer.hodem"  >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Tên</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="Tên" [(ngModel)]="newcomer.ten"  >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Ngày sinh</div>
+                    </div>
+                    <input type="date" class="form-control"  placeholder="Ngày sinh" [ngModel]="newcomer.ngaysinh|date:'yyyy-MM-dd'"    (ngModelChange)="newcomer.ngaysinh = $event"   >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Giới tính</div>
+                    </div>
+                    <select class="form-control"  [(ngModel)]="newcomer.gioitinh" >
+                        <option >--Chọn--</option>
+                        <option value="true">Nam</option>
+                        <option value="false">Nữ</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Nơi sinh</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="Nơi sinh" list="datalistTP" [(ngModel)]="newcomer.noisinh" >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Quê quán</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="Quê quán" list="datalistTP" [(ngModel)]="newcomer.quequan"  >
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Thường trú</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="Thường trú"  [(ngModel)]="newcomer.diachithuongtru" >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Tạm trú</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="Tạm trú"  [(ngModel)]="newcomer.diachitamtru" >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">CMTND/Hộ chiếu</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="CMTND"  [(ngModel)]="newcomer.cmtnd_so" >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Ngày cấp</div>
+                    </div>
+                    <input type="date" class="form-control"  placeholder="Ngày cấp"  [(ngModel)]="newcomer.cmtnd_ngayhethan" >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Nơi cấp</div>
+                    </div>
+                    <input type="text" class="form-control"  placeholder="Nơi cấp"  [(ngModel)]="newcomer.cmtnd_noicap" >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Bộ phận</div>
+                    </div>
+                        <select class="form-control"  [(ngModel)]="newcomer.phong_id" >
+                            <option >--Chọn--</option>
+                            <option value="7335dd33-84b3-42c4-b554-b0ab2a5ea3db">HR (New Comer)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Cấp bậc</div>
+                    </div>
+                    <input type="number" class="form-control"  placeholder="Cấp bậc"  [(ngModel)]="newcomer.capbac" >
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col">
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">ID đăng nhập</div>
+                    </div>
+                    <input disabled type="text" class="form-control"  placeholder="ID đăng nhập"  [(ngModel)]="newcomer.manhansu" >
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Mật khẩu</div>
+                    </div>
+                    <input  type="password" class="form-control"  placeholder="Mật khẩu đăng nhập"  [(ngModel)]="newcomer.matkhau" >
+                    </div>
+                </div>
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Nhập lại mật khẩu</div>
+                    </div>
+                    <input  type="password" class="form-control"  placeholder="Mật khẩu đăng nhập"  [(ngModel)]="checkpass" >
+                    </div>
+                </div>
+            </div>
+        </div>
+          <div class="col-12 my-1">
+            <div class="input-group d-flex justify-content-between">
+                <button (click)="singin()"  class="btn btn-primary ">Đăng ký</button>
+              <a class="float-right" (click)="forgot()" style="cursor: pointer;"><u>Tôi không phải New Comer</u></a>
+            </div>
+          </div>
+          
+    </div>
+</div>
+<datalist id="datalistTP">
+        <option value="Hà Nội">
+        <option value="TP HCM">
+        <option value="Cần Thơ">
+        <option value="Đà Nẵng">
+        <option value="Hải Phòng">
+        <option value="An Giang">
+        <option value="Bà Rịa - Vũng Tàu">
+        <option value="Bắc Giang">
+        <option value="Bắc Kạn">
+        <option value="Bạc Liêu">
+        <option value="Bắc Ninh">
+        <option value="Bến Tre">
+        <option value="Bình Định">
+        <option value="Bình Dương">
+        <option value="Bình Phước">
+        <option value="Bình Thuận">
+        <option value="Cà Mau">
+        <option value="Cao Bằng">
+        <option value="Đắk Lắk">
+        <option value="Đắk Nông">
+        <option value="Điện Biên">
+        <option value="Đồng Nai">
+        <option value="Đồng Tháp">
+        <option value="Gia Lai">
+        <option value="Hà Giang">
+        <option value="Hà Nam">
+        <option value="Hà Tĩnh">
+        <option value="Hải Dương">
+        <option value="Hậu Giang">
+        <option value="Hòa Bình">
+        <option value="Hưng Yên">
+        <option value="Khánh Hòa">
+        <option value="Kiên Giang">
+        <option value="Kon Tum">
+        <option value="Lai Châu">
+        <option value="Lâm Đồng">
+        <option value="Lạng Sơn">
+        <option value="Lào Cai">
+        <option value="Long An">
+        <option value="Nam Định">
+        <option value="Nghệ An">
+        <option value="Ninh Bình">
+        <option value="Ninh Thuận">
+        <option value="Phú Thọ">
+        <option value="Quảng Bình">
+        <option value="Quảng Nam">
+        <option value="Quảng Ngãi">
+        <option value="Quảng Ninh">
+        <option value="Quảng Trị">
+        <option value="Sóc Trăng">
+        <option value="Sơn La">
+        <option value="Tây Ninh">
+        <option value="Thái Bình">
+        <option value="Thái Nguyên">
+        <option value="Thanh Hóa">
+        <option value="Thừa Thiên Huế">
+        <option value="Tiền Giang">
+        <option value="Trà Vinh">
+        <option value="Tuyên Quang">
+        <option value="Vĩnh Long">
+        <option value="Vĩnh Phúc">
+        <option value="Yên Bái">
+        <option value="Phú Yên">
+</datalist>

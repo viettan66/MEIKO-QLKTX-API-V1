@@ -1,0 +1,77 @@
+<div class="row no-gutters py-2">
+
+    <div class="col-8 px-2 colexpand">
+        <div class="card" id="colexpand1">
+        <div class="card-header">
+            <div class="row no-gutters">
+                <div class="col h-100 align-items-center">DANH SÁCH ĐỒ DÙNG</div>
+            <div class="col-auto  ">
+                <span class="  mr-3">Đang xem {{(i-1)*20}}-{{(i)*20}} / {{count}}</span>
+                <button class="btn  btn-outline-secondary btn-rounded    mr-3" (click)="back()"><i class="fas fa-chevron-left"></i></button>
+                <button class="btn  btn-outline-secondary  btn-rounded    mr-3" (click)="next()"><i class="fas fa-chevron-right"></i></button>
+                <button title="Lưu lại"  class="btn btn btn-primary " (click)="save()"><i class="fas fa-save"></i></button>
+            </div>
+            </div>
+    
+             
+          </div>
+          <div class="card-body " style="">
+              <TABLE class="table tabledodung  table-hover">
+                <thead>
+                  <TR>
+    
+                  <td><input type="checkbox" ></td>
+                  <th>STT</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Mã sản phẩm</th>
+                  <th>Mô tả</th>
+                  <th>Tồn kho</th>
+                  </TR>
+                </thead>
+                <TBOdy>
+                    <TR *ngFor="let element of arr;let i=index" style="cursor: pointer;">
+                      <td><input type="checkbox" [(ngModel)]="element.check"></td>
+                      <td>{{index+i}}<input type="hidden" disabled class="form-control none" name="ID"  value="{{element.tenSanPham }}" ></td>
+                      <td>{{element.tenSanPham }}</td>
+                      <td>{{element.maSanPham }}</td>
+                      <td>{{element.moTa }}</td>
+                      <td>{{element.soLuongTonKho }}</td>
+                    </TR>
+                </TBOdy>
+              </TABLE>
+          </div>
+          
+        </div> 
+      </div>
+      <div class="col-4 px-2 colexpand">
+          <div class="card"  id="colexpand2">
+          <div class="card-header">
+              <div class="row no-gutters">
+                  <div class="col h-100 align-items-center">SETUP SỐ LƯỢNG MẶC ĐỊNH</div>
+              <div class="col-auto  ">
+                  <button title="thiết lập" (click)="savedo()" class="btn btn btn-primary "><i class="fas fa-save"></i></button>
+              </div>
+              </div>
+            </div>
+            <div class="card-body " style="">
+                <TABLE class="table tabledodung">
+                    <thead>
+                        <TR>
+                            <td>STT</td>
+                            <td>TÊN</td>
+                            <td>SL MẶC ĐỊNH</td>
+                        </TR>
+                    </thead>
+                    <TBOdy>
+                        <TR *ngFor="let element of ktx0010;let index=index" style="cursor: pointer;">
+                            <td>{{index+1}}</td>
+                            <td>{{element.ten }}</td>
+                            <td><input type="number" class="form-control" [(ngModel)]="element.soluongmacdinh"></td>
+                        </TR>
+                    </TBOdy>
+                </TABLE>
+            </div>
+            
+          </div> 
+        </div>
+</div>

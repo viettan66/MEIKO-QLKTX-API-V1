@@ -3,6 +3,9 @@ import { RESTService } from 'src/app/Service/rest.service';
 import { CookieService } from 'ngx-cookie-service';
 import { KTX0020 } from '../../models/KTX0020';
 import { result } from '../../models/result';
+import * as Global from '../../../Service/global.service';
+import { MKV9999 } from 'src/app/Models/MKV9999';
+import { valuesearch } from '../../models/valuesearch';
 declare var $:any
 
 @Component({
@@ -12,57 +15,49 @@ declare var $:any
 })
 export class QldComponent implements OnInit {
 
-  constructor(public rest:RESTService,public cookie:CookieService) { }
+  constructor(public rest:RESTService) { }
   public listdon:KTX0020[]=[]
   public ktx20temp:KTX0020
+  public user:MKV9999
   public listdontemp:KTX0020[]=[]
   public form=''
+  public now=new Date()
+  public now1=new Date().getFullYear()+"-"+(new Date().getMonth())+"-"+new Date().getDay()
 
   ngOnInit() {  let that=this
-
+this.user=JSON.parse(localStorage.getItem('KTX_User'))
     $(document).ready(function(){
       
-      
       $('thead>tr>th>input:checkbox').change(function(){
-        console.log($(this).is(':checked'))
+        //console.log($(this).is(':checked'))
         $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       ////
       $('.tablelistdon').on('click','tbody>tr>td>input:checkbox',function(Event){
         Event.stopPropagation()
+        
         if($(this).attr('checked')){
             $(this).parent().parent().addClass('active')
         }else{
           $(this).parent().parent().removeClass('active')
         }
       })
-      function showdon(){
-        that.rest.GetDataFromAPI<KTX0020[]>('KTX0020/Getall').subscribe(data=>{
-          that.listdon=data
-          that.listdontemp=data
-          console.log(data)
-        })
-      }
-      showdon()
+      that.showdon()
       ////////////////
       $('.tablelistdon').on('click','tbody>tr',function(){
         $(this).find('input:checkbox').click()
       })
       ////////////////
       $('.card').on('change','#filter',function(){
-        let check=$(this).val()
-        if(check!='all'){
-          that.listdon=that.listdontemp.filter(c=>{
-            return c.trangthai===(check =="true") 
-          })
-        }else{
-          that.listdon=that.listdontemp
-        }
+        that.showdon()
       })
       ////////////////
       $('.card').on('click','#agree',function(){
+        that.listdon.filter(c=>{return c.check===true}).forEach(val=>{
+          val.hotenbengiao=that.user.hodem+' '+that.user.ten
+        })
         that.rest.PostDataToAPI<result<KTX0020>[]>(that.listdon.filter(c=>{return c.check===true}),'KTX0020/approval').subscribe(data=>{
-          console.log(data)
+          //console.log(data)
           data.forEach(val=>{
             if(val.code=="OK"){
               that.listdon.forEach((c,index)=>{
@@ -80,20 +75,105 @@ export class QldComponent implements OnInit {
       ////////////////
       $('#myModalungvieninfo').on('hidden.bs.modal', function () {
         that.form='';
-        console.log('element')
         that.ktx20temp=null
       })
       ////////////////
       $('.card').on('click','#disagree',function(){
-        console.log(that.listdon)
+        //console.log(that.listdon)
       })
     })
   }
+  showdon(){
+    
+    let check=$('#filter').val()
+    let startdate=$('#startdate').val()
+    let enddate=$('#enddate').val()
+    this.rest.PostDataToAPI<KTX0020[]>({trangthai:check,startdate:startdate,enddate:enddate},'KTX0020/Getall').subscribe(data=>{
+      this.listdon=data
+      this.listdontemp=data
+      //console.log(data)
+    })
+  }
   showdetaildon(element){
-        console.log(element)
+        //console.log(element)
         this.ktx20temp=element
         this.form='formdangkyokytucxa';
         $('#myModalungvieninfo').modal()
       }
-
+  deleteall(){
+    if(!confirm('Bạn có chắc chắn muốn xóa các đơn đã chọn?'))return false
+    let ok=0,ng=0
+    let that=this
+    this.rest.PutDataToAPI<result< KTX0020>[]>(this.listdon.filter(c=>{return c.check===true}),'KTX0020/delete').subscribe(data=>{
+    //console.log(data)
+    data.forEach(val=>{
+      if(val.code=="OK"){
+        ok++
+        let l=this.listdon.filter(c=>{return c.KTX0020_ID===val.data.KTX0020_ID})
+        if(l.length!=0){
+          this.listdon.splice(this.listdon.indexOf(l[0]),1)
+        }
+      }else{
+        ng++
+        //
+      }
+    })
+    alert('Đã xóa "'+ok+'" đơn. Lỗi "'+ng+'" đơn.')
+  })
+  }
+  delete(element){
+    if(!confirm('Bạn có chắc chắn muốn xóa đơn này?'))return false
+    let that=this
+    this.rest.PutDataToAPI<result< KTX0020>[]>([element],'KTX0020/delete').subscribe(data=>{
+    //console.log(data)
+    data.forEach(val=>{
+      if(val.code=="OK"){
+        let l=this.listdon.filter(c=>{return c.KTX0020_ID===val.data.KTX0020_ID})
+        if(l.length!=0){
+          this.listdon.splice(this.listdon.indexOf(l[0]),1)
+        }
+      }else{
+        alert(val.mess)
+      }
+    })
+  })
+  }
+  public ktx20tempprint:KTX0020[]=[]
+  public loading=false
+ async print2(){
+    
+  this.ktx20tempprint=[]
+  this.ktx20tempprint=await this.listdon.filter(c=>{return c.check===true})
+  //console.log(this.ktx20tempprint)
+  this.loading=true
+    setTimeout(() => {
+      this.loading=false
+      setTimeout(() => {
+        
+      print()
+      }, 200);
+    },2000);
+    
+  }
+   count(element:KTX0020){
+     let key=element.MKV9999.cmtnd_so!=null?element.MKV9999.cmtnd_so:
+     (element.MKV9999.hochieu_so!=null?element.MKV9999.hochieu_so:
+      (element.MKV9999.manhansu!=null?element.MKV9999.manhansu:(element.hotenkhaisinh))
+      )
+    if(element.timkiem==null&&element.check2==null){
+      element.check2=false
+        this.rest.PostDataToAPI<valuesearch>({key:key},'Search/Search').subscribe(data=>{
+        element.timkiem=data
+        element.check2=true
+      })
+     //console.log(element.timkiem)
+    }else if(element.check2==true){
+      return element.timkiem.KTX0020.filter(v=>{return v.trangthai===true}).length
+    }
+  }
+  export(){
+    $('.ddd').css('display','')
+    this.rest.ExportTOExcel(document.getElementById('tabletoexport'),'Danh sách vào '+(new Date).getDay+(new Date).getMonth+(new Date).getFullYear)
+    $('.ddd').css('display','none')
+  }
 }

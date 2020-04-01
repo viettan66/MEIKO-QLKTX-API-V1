@@ -1,0 +1,85 @@
+<div class="row no-gutters h-100 px-0">
+    <app-menu></app-menu>
+      <div class="col" id="contentmenu"> 
+        <div class="row no-gutters align-items-center" id="hidecolumn">
+              <button class="list-group-item tab"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>Danh sách vi phạm</span> </button>
+              <!-- <button class="list-group-item tab"><i class="fas fa-sign-in-alt"></i>&nbsp;<span>Danh sách vào</span> </button>
+              <button class="list-group-item tab"><i class="fas fa-print"></i>&nbsp;<span>In đơn</span> </button> -->
+                <input class="form-control form-control-sm  w-25 "  type="text" placeholder="Search" value="017308002"  aria-label="Search" style="margin-left: 20px;" id="searchbox">
+                <button class="btn btn-sm btn-info" id="SEARCH" ><i style="cursor: pointer;" class="fas fa-search" aria-hidden="true"></i></button>
+          </div>
+        <div class="row no-gutters"  style="padding: 10px;" >
+            <div class="col-12">
+                <div class="card  bg-transparent" id="testconvertPDF">
+                    <div class="card-header">
+                      DANH NHÂN VIÊN 
+                      <span class="float-right">
+                        <button title="Thêm phòng" style="margin-left: 10px;"  id="print" class="btn btn-secondary qlp"><i class="fa fa-search"></i></button>&nbsp;
+                      </span>
+                      <span class="float-right">
+                        <input type="text" style="width: 100px;" list="datalisst" class="form-control">
+                        <datalist id="datalisst">
+                            <option value="20">Nhỏ hơn 20 lần</option>
+                            <option value="15">Nhỏ hơn 15 lần</option>
+                            <option value="10">Nhỏ hơn 10 lần</option>
+                        </datalist>
+                      </span>
+                      <span class="float-right" style="width: 300px;">
+                        <div class="col float-right">
+                            <div class="input-group mb-2">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">đến ngày</div>
+                              </div>
+                              <input style="font-weight: bold;"  type="date" class="form-control" >
+                            </div>
+                          </div>
+                      </span>
+                      <span class="float-right" style="width: 300px;">
+                        <div class="col float-right">
+                            <div class="input-group mb-2">
+                              <div class="input-group-prepend">
+                                <div class="input-group-text">Từ ngày</div>
+                              </div>
+                              <input style="font-weight: bold;"  type="date" class="form-control" >
+                            </div>
+                          </div>
+                      </span>
+                    </div>
+                    <div class="card-body" style="padding: 5px;">
+                        <table class="table table-bordered">
+                            <thead><tr>
+                                <th style="width: 20px;"><input type="checkbox" ></th>
+                                <th style="width: 40px;">STT</th>
+                                <th>Tên</th>
+                                <th>ID</th>
+                                <th>BP</th>
+                                <th>Bậc</th>
+                                <th>CMTND</th>
+                                <th>Phòng</th>
+                                <th>Giường</th>
+                                <th>Số lần ra vào</th>
+                                <th style="padding: 0;"></th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                  <tr>
+                                      <td><input type="checkbox" name="" id=""></td>
+                                      <td>1</td>
+                                      <td>Nguyễn việt tấn</td>
+                                      <td>017677</td>
+                                      <td>IT</td>
+                                      <td>4</td>
+                                      <td>123346789</td>
+                                      <td>A-101</td>
+                                      <td>GA-A101-G01</td>
+                                      <td>23</td>
+                                      <td><i class="fa fa-eye"></i></td>
+                                  </tr>
+                              </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+</div>

@@ -7,8 +7,8 @@
         <div class="card">
           <div class="card-header">
             DANH SÁCH ĐƠN
-            <button title="Thêm đơn" style="margin-left: 10px;"  class="btn btn-secondary float-right adddon"><i
-                class="fa fa-plus"></i></button>
+            <button title="Thêm đơn" style="margin-left: 10px;"  class="btn btn-secondary float-right adddon"><i class="fa fa-plus"></i></button>
+            <button title="In đơn" style="margin-left: 10px;" (click)="print()"  class="btn btn-secondary float-right"><i class="fa fa-print"></i></button>
           </div>
           <div class="card-body" style="padding: 5px;">
             <div class="row no-gutters" *ngIf="form=='showdon'">
@@ -23,17 +23,28 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let element of listdon;let i=index;">
-                    <td>{{i+1}}</td>
+                    <td>{{iI+i+1}}</td>
                     <td>ĐƠN XIN Ở KÝ TÚC XÁ</td>
                     <td>{{element.hotenkhaisinh}}</td>
                     <td>{{element.ngaytaodon| date:'dd/MM/yyyy HH:mm'}}</td>
                     <td>{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</td>
-                    <td><button name="{{element.KTX0020_ID}}" class="btn editdon"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;<button class="btn deletedon"><i class="fas fa-trash-alt"></i></button></td>
+                    <td><button name="{{element.KTX0020_ID}}" class="btn editdon"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+                      <button (click)="delete(element)" class="btn deletedon"><i class="fas fa-trash-alt"></i></button></td>
+                  </tr>  
+                  <tr *ngFor="let element of listdon2;let i=index;">
+                    <td>{{iI+i+1+listdon.length}}</td>
+                    <td>ĐƠN XIN KẾT THÚC LƯU TRÚ</td>
+                    <td>{{element.nldhoten}}</td>
+                    <td>{{element.ngaytaodon| date:'dd/MM/yyyy HH:mm'}}</td>
+                    <td>{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</td>
+                    <td><button name="{{element.KTX0020_ID}}" (click)="editdonlulu(element)" class="btn "><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+                      <button (click)="delete2(element)" class="btn deletedon"><i class="fas fa-trash-alt"></i></button></td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'" [ktx20temp]="ktx20temp"  (ktx20out)="getktx20($event)" ></app-formdangkyokytucxa>
+            <app-formdangkyokytucxa *ngIf="form=='formdangkyokytucxa'" [ktx20temp]="ktx20temp"  (ktx20out)="getktx20($event)" [check]="true"  ></app-formdangkyokytucxa>
+            <app-formketthucluutru *ngIf="form=='formketthucluutru'"  [ktx0023temp]="ktx23temp"  (ktx0023out)="getktx23($event)"  [check]="ktx23temp.trangthai"   ></app-formketthucluutru>
           </div>
 
         </div>
@@ -74,7 +85,7 @@
       </div>
       <div class="modal-body ">
         <button id="adddonxinokytucxa" class="btn btn-secondary w-100 py-1">ĐƠN XIN Ở KÝ TÚC XÁ</button>
-        <button class="btn btn-secondary w-100 py-2">ĐƠN XIN KẾT THÚC LƯU TRÚ KTX</button>
+        <button class="btn btn-secondary w-100 py-2" id="ketthucluutru">ĐƠN XIN KẾT THÚC LƯU TRÚ KTX</button>
       </div>
       <!-- <div class="modal-footer">
 				<button id="UPDATEinfo" type="button" class="userbutton btn btn-warning float-right" data-dismiss="modal" >UPDATE</button>

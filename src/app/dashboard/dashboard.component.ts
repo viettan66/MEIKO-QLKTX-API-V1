@@ -18,21 +18,16 @@ export class DashboardComponent implements OnInit {
     public route: Router) { }
 public listapp:MKV9981[]=[]
   ngOnInit() {
-
     let that=this
     $(document).ready(function(){
-      var user = JSON.parse(localStorage.getItem('KTX_User'));
-      that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAcctionWidthMKV9999ID/'+user.MKV9999_ID).pipe().subscribe(data=>{
-        that.listapp=data
-      })
-      //////////////////////
-      $(document).on('click','.appclick',function(){
-        let link=$(this).attr('name')
-        
-        window.location.assign(link)
-      })
+      let kf:MKV9981[]=JSON.parse( localStorage.getItem('KTX_Menu'))
+   that.listapp=kf.filter(c=>{return c.CAPMENU===0})
+      
       ////////////////////
     })
   }
-
+go(id:string,link:string){
+  localStorage.setItem('KTX_Menu_Parent',id)
+  this.route.navigate([link])
+}
 }

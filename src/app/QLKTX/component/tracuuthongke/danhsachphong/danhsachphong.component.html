@@ -1,0 +1,62 @@
+
+                <div class="card  " id="testconvertPDF" style="background-color: rgba(255, 255, 255, 0.788);">
+                    <div class="card-header">
+                      DANH NHÂN VIÊN 
+                      <span class="float-right">
+                        <button title="Lưu dưới dạng excel" style="margin-left: 10px;" (click)="export()"  class="btn btn-secondary qlp"><i class="fa fa-download"></i></button>&nbsp;
+                      </span>
+                      <!-- <span class="float-right">
+                        <button title="Search" style="margin-left: 10px;" (click)="shows()"  class="btn btn-secondary qlp"><i class="fa fa-search"></i></button>&nbsp;
+                      </span>
+                      <span class="float-right">
+                        <input type="text" style="width: 100px;"  class="form-control filter" placeholder="Tên phòng" (keyup)="onKey($event)">
+                         <datalist id="datalisst">
+                            <option value="20">Nhỏ hơn 20 lần</option>
+                            <option value="15">Nhỏ hơn 15 lần</option>
+                            <option value="10">Nhỏ hơn 10 lần</option>
+                        </datalist> 
+                      </span> -->
+                    </div>
+                    <div class="card-body" style="padding: 5px;">
+                        <table class="table table-bordered" id="exporttoexvel">
+                            <thead><tr>
+                                <td style="width: 20px;"><input type="checkbox" ></td>
+                                <td style="width: 40px;">STT</td>
+                                <td>TÒA</td>
+                                <td>TẦNG</td>
+                                <td>PHÒNG</td>
+                                <td>TRẠNG THÁI</td>
+                                <ng-container *ngFor="let element of listktx0010">
+                                    <td class="item" *ngIf="element.soluongfull!=null&&element.soluongfull!=0">{{element.ten}}</td>
+                                </ng-container>
+                                <td><i class="fa fa-eye"></i></td>
+                              </tr>
+                              </thead>
+                              <tbody>
+                                <ng-container *ngFor="let element of listktx0001;let i=index">
+                                  <tr >
+                                      <td><input type="checkbox" name="" id=""></td>
+                                      <td>{{i+1}}</td>
+                                      <td>{{element.KTX0001.KTX0001!=null?element.KTX0001.KTX0001.ten:''}}</td>
+                                      <td>{{element.KTX0001!=null?element.KTX0001.ten:''}}</td>
+                                      <td>{{element.ten}}</td>
+                                      <td>{{element.trangthaidodung}}</td>
+                                            <ng-container *ngFor="let element of element.KTX0010">
+                                                <ng-container *ngIf="element.soluongfull!=null&&element.soluongfull!=0">
+                                                    <ng-container *ngIf="element.KTX0011!=null">
+                                                        <td class="item">{{element.KTX0011.soluong}}</td>
+                                                    </ng-container>
+                                                    <ng-container *ngIf="element.KTX0011==null">
+                                                        <td class="item">0</td>
+                                                    </ng-container>
+                                                </ng-container>
+                                                
+                                            </ng-container>
+                                      <th><i class="fa fa-eye"></i></th>
+                                     
+                                  </tr>
+                                </ng-container>
+                              </tbody>
+                        </table>
+                    </div>
+                </div>

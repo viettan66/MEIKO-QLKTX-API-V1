@@ -1,8 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+    .btn-rounded{border-radius: 100% !important;}
+
+    .actived{background-color: rgb(218, 218, 218);}
 html {
   height: 100%;
 }
-body{background-image: url(./assets/image/bg1.jpg);background-attachment:fixed;}
+body{background-image: url(./assets/image/BG3.jpg);background-attachment:fixed;}
 @media (min-width: 576px) {
     .modal-dialog { max-width: none; }
   }
@@ -47,7 +50,7 @@ body{background-image: url(./assets/image/bg1.jpg);background-attachment:fixed;}
     width: 100%;
     max-width: 1360px;
     height: auto;
-    padding: 0;
+    padding: 20px;
   }
   .modal-700 {
     width: 95%;
@@ -72,3 +75,35 @@ body{background-image: url(./assets/image/bg1.jpg);background-attachment:fixed;}
   .phongclick{cursor: pointer;}
 
   .none{border: none; background-color: transparent;}
+
+  @media print {
+    .pagebreak { break-before: page ; ;clear: both;}
+    
+    body * {
+         visibility: hidden;/* // part to hide at the time of print */
+        -webkit-print-color-adjust: exact !important; /*// not necessary use         
+           if colors not visible*/
+    }
+    #testprint {display: unset !important;} 
+     #testprint *:not(button) {
+        visibility: visible;
+        -webkit-print-color-adjust: exact !important;
+    }
+    .print td,.print tr,.print th {padding-top: 0 !important;padding-bottom: 0 !important; }
+    .print *:not(button) {
+        visibility: visible;  
+        -webkit-print-color-adjust: exact !important;
+    }
+    .print{   border: 1px solid white;
+      height: 99% !important;
+      page-break-after: avoid;
+      page-break-before: avoid;
+  
+  }
+
+      
+}
+@page {
+  size: A4;
+  margin: 1cm;
+}

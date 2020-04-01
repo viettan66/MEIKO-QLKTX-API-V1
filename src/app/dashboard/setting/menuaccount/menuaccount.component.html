@@ -15,11 +15,56 @@
             <div class="card-header"><h5 class="float-left ">HÀNH ĐỘNG</h5><button class="btn addmenu float-right"><i class="fa fa-plus"></i></button></div>
             <div class="card-body">
                 <ul class="list-group list-group-flush" id="listfunction">
-                    <li id="{{element.MKV9981_ID}}" class="list-group-item" *ngFor="let element of listaction">{{element.TENHANHDONG}}</li>
+                    <li id="{{element.MKV9981_ID}}" class="list-group-item" *ngFor="let element of listaction" (click)="edithanhdong(element)" style="cursor:pointer ;">{{element.TENHANHDONG}}</li>
                   </ul>
             </div>
         </div>
     </div>
+    
+    <div class="col-4 px-1">
+      <div class="card">
+          <div class="card-header"><h5 class="float-left ">EDIT HÀNH ĐỘNG</h5><button class="btn addmenu float-right"><i class="fa fa-plus"></i></button></div>
+          <div class="card-body">
+
+            <div class="col-12 my-1">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Tên</div>
+                </div>
+                <input type="text" class="form-control"  placeholder="Tên ứng dụng" [(ngModel)]="mkv9981.TENHANHDONG">
+              </div>
+            </div> 
+            
+            <div class="col-12 my-1">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Link</div>
+                </div>
+                <input type="text" class="form-control"  placeholder="Tên ứng dụng" [(ngModel)]="mkv9981.LINKMENU">
+              </div>
+            </div> 
+            
+            <div class="col-12 my-1">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Image</div>
+                </div>
+                <input type="text" class="form-control"  placeholder="Tên ứng dụng" [(ngModel)]="mkv9981.IMAGE">
+              </div>
+            </div>  
+            
+            <div class="col-12 my-1">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">Thứ tự</div>
+                </div>
+                <input type="text" class="form-control"  placeholder="Tên ứng dụng" [(ngModel)]="mkv9981.THUTU">
+              </div>
+            </div> 
+            <button class="form-control btn btn-info" (click)="save81()"><i class="fa fa-save"></i></button>
+          </div>
+      </div>
+  </div>
 </div>
 
 

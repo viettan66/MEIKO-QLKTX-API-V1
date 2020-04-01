@@ -2,8 +2,11 @@ import { KTX0001 } from './KTX0001';
 import { KTX0020 } from './KTX0020';
 
 export class KTX0003{
-    constructor(KTX0001_ID?: number){
-        this.KTX0001_ID=KTX0001_ID
+    constructor(obj?){
+        if(obj!=null)
+        Object.keys(obj).forEach(key=>{
+            this[key]=obj[key]
+        })
     }
     public  KTX0003_ID : number   ;
     public  KTX0001_ID : number   ;

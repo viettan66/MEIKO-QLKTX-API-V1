@@ -1,0 +1,146 @@
+<div class="row no-gutters h-100">
+    <app-menu></app-menu>
+    <div class="col" id="contentmenu" style="padding: 10px;">
+      <div class="row no-gutters">
+  
+        <div class="col-xl-8 px-1">
+          <div class="card">
+            <div class="card-header">
+              DANH SÁCH THÔNG TIN
+              <!-- <button title="Thêm đơn" style="margin-left: 10px;"  class="btn btn-secondary float-right adddon"><i class="fa fa-plus"></i></button>
+              <button title="In đơn" style="margin-left: 10px;" (click)="print()"  class="btn btn-secondary float-right"><i class="fa fa-print"></i></button> -->
+            </div>
+            <div class="card-body" style="padding: 5px;">
+              <div class="row no-gutters" >
+                <table class="table table-bodered">
+                  <thead>
+                    <th><input type="checkbox" ></th>
+                    <th>STT</th>
+                    <th>TIÊU ĐỀ</th>
+                    <th>NỘI DUNG</th>
+                    <th>HÌNH ẢNH</th>
+                    <th>GHI CHÚ</th>
+                    <th>TRẠNG THÁI</th>
+                    <th></th>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let element of listdon;let i=index;">
+                        <th><input type="checkbox" ></th>
+                      <td>{{i}}</td>
+                      <td>{{element.tieude}}</td>
+                      <td>{{element.noidung}}</td>
+                      <td>{{element.image}}</td>
+                      <td>{{element.ghichu}}</td>
+                      <td>{{element.trangthai?"Kích hoạt":"Tắt"}}</td>
+                      <td><button name="{{element.KTX0020_ID}}" class="btn editdon"><i class="fa fa-edit"></i></button>&nbsp;&nbsp;
+                        <button (click)="delete(element)" class="btn deletedon"><i class="fas fa-trash-alt"></i></button></td>
+                    </tr>  
+                  </tbody>
+                </table>
+              </div></div>
+  
+          </div>
+        </div>
+        <div class="col-xl-4 px-1">
+            
+            <div class="card" >
+                <div class="card-header">
+                  THÊM BÀI VIẾT
+                  <!-- <button title="Thêm thủ công" style="margin-left: 10px;"  id="themKHU" class="btn btn-secondary float-right"><i class="fa fa-plus"></i></button> -->
+                </div>
+                <div class="card-body " style="">
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">TIÊU ĐỀ</div>
+                        <input type="text"  class="form-control new" [(ngModel)]="ktx0040.tieude">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">NỘI DUNG</div>
+                      </div>
+                        <textarea   class="form-control new" [(ngModel)]="ktx0040.noidung" >
+
+                        </textarea>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">GHI CHÚ</div>
+                      </div>
+                        <input type="text"  [(ngModel)]="ktx0040.ghichu"    class="form-control new">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">ẢNH</div>
+                      </div>
+                        <input type="file" id="file"   class="form-control new"  (change)="handleFileInput($event.target.files)">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">Trạng thái</div>
+                      </div>
+                        <select class=" form-control" [(ngModel)]="ktx0040.trangthai" >
+                          <option value="true">Kích hoạt</option>
+                          <option value="false">Tắt</option>
+                        </select>
+                    </div>
+                  <button (click)="save()" class="btn btn-primary form-control"><i class="fa fa-save"></i></button>
+                  
+                  </div>
+                </div>
+                
+              </div> 
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+  
+  <div class="modal fade " id="formdangdyokytucxa" role="dialog">
+    <div class="modal-dialog   modal-75">
+      <div class="modal-content ">
+        <div class="modal-header">
+         
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body ">
+        </div>
+        <div class="modal-body ">
+  
+        </div>
+        <div class="modal-footer">
+          <button id="UPDATEinfo" type="button" class="userbutton btn btn-warning float-right"><i
+              class="fa fa-save"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="modal fade " id="selecttemplateform" role="dialog">
+    <div class="modal-dialog   modal-25">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title">CHỌN MẪU ĐƠN</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body ">
+          <button id="adddonxinokytucxa" class="btn btn-secondary w-100 py-1">ĐƠN XIN Ở KÝ TÚC XÁ</button>
+          <button class="btn btn-secondary w-100 py-2" id="ketthucluutru">ĐƠN XIN KẾT THÚC LƯU TRÚ KTX</button>
+        </div>
+        <!-- <div class="modal-footer">
+                  <button id="UPDATEinfo" type="button" class="userbutton btn btn-warning float-right" data-dismiss="modal" >UPDATE</button>
+              </div> -->
+      </div>
+    </div>
+  </div>

@@ -64,7 +64,7 @@
 
                       <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}"  *ngFor="let element of listphong" style="width: 4em;" 
                       
-                      [ngStyle]="{'background-color':color[element.slotuse==null?0:element.slotuse]}">
+                      [ngStyle]="{'background-color':color[element.slotuse==null?0:((parseInt(element.slotuse/element.slot*10) ))]}">
                           <!--<img class="card-img-top" src="..." alt="Card image cap">-->
                           <input type="hidden" name="slotuse" value="{{element.slotuse}}" >
                           <div class="card-body"  style="padding: 5px;">
@@ -104,9 +104,9 @@
                 </div>
                 
               </div>
-              <div class="card bg-transparent card-bodykhoa  qlp" style="width: 250px;">
+              <div class="card bg-transparent card-bodykhoa  " style="width: 250px;">
                 <div class="card-header" (click)="hiddencard('card-bodykhoa')" >
-                  KHÓA TỦ
+                  TỦ
                   <button title="Thêm thủ công" style="margin-left: 10px;"  id="themkhoa" class="btn btn-sm btn-secondary float-right  qlp"><i class="fa fa-plus"></i></button>
                 </div>
                 <div class="card-body" style="padding: 5px;">
@@ -213,13 +213,15 @@
   
 
   <div class="modal fade " id="editphong" role="dialog" >
-    <div class="modal-dialog   modal-700" >
+    <div class="modal-dialog   modal-1360" >
       <div class="modal-content " >
         <div class="modal-header">
           <h5 class="modal-title">SỬA THÔNG TIN PHÒNG</h5>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body ">
+          <div class="row">
+            <div class="col-lg-6">
           <h6>Thông tin phòng</h6>
                   <table class="table ">
                     <thead>
@@ -228,15 +230,29 @@
                         <td><input  type="text"  class="form-control bodernone"  [(ngModel)]="phongdetail.ten"></td>
                       </tr>
                       <tr>
+                        <td>Khóa phòng</td>
+                        <td><input  type="text"  class="form-control bodernone"  [(ngModel)]="phongdetail.makhoa"></td>
+                      </tr>
+                      <tr>
                         <td>Số lượng chỗ</td>
                         <td><input  type="number"  class="form-control bodernone"  [(ngModel)]="phongdetail.slot"></td>
+                      </tr>
+                      <tr>
+                        <td>Dành cho</td>
+                        <td> <select  class="form-control" [(ngModel)]="phongdetail.capbac">
+                          <option value="1">Công nhân</option>
+                          <option value="2">Trưởng nhóm</option>
+                          <option value="3">Chủ nhiệm</option>
+                          <option value="4">Trưởng phòng</option>
+                        </select></td>
                       </tr>
                       <tr>
                         <td>Ghi chú</td>
                         <td><textarea name="" id="" class="form-control bodernone" [(ngModel)]="phongdetail.ghichu"></textarea>  </td>
                       </tr>
                     </thead>
-                  </table>
+                  </table></div>
+            <div class="col-lg-6">
                   <h6>Thông tin tài sản cố định</h6>
                   <table class="table table-click">
                     <thead>
@@ -256,7 +272,8 @@
                         </td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table></div>
+          </div>
                   <br>
                   <!-- <button id="luutoanha" class="btn btn-primary form-control"><i class="fa fa-save"></i></button> -->
         </div>
@@ -418,6 +435,20 @@
                   <div class="col-12">
                     <div class="input-group mb-2">
                       <div class="input-group-prepend">
+                        <div class="input-group-text">Dành cho</div>
+                      </div>
+                      <select id="loai" class="form-control">
+                        <option value="1">Công nhân</option>
+                        <option value="2">Trưởng nhóm</option>
+                        <option value="3">Chủ nhiệm</option>
+                        <option value="4">Trưởng phòng</option>
+                      </select>
+                      
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="input-group mb-2">
+                      <div class="input-group-prepend">
                         <div class="input-group-text">Ghi chú</div>
                       </div>
                       <textarea name="" id="ghichu2" cols="30" rows="10" class="form-control"></textarea>
@@ -483,8 +514,8 @@
                 <thead>
                   <tr>
                     <td>STT</td>
-                    <td>SỐ TỦ</td>
-                    <td>MÃ KHÓA TỦ</td>
+                    <td>SỐ KHÓA TỦ</td>
+                    <td>MÃ TỦ</td>
                     <td>GHI CHÚ</td>
                     <td><button class="btn btn-sm" (click)="addkhoanew2()"><i class="fa fa-plus"></i></button></td>
                   </tr>

@@ -19,18 +19,16 @@ public tab=-1;
       function showdodung(){
         that.rest.GetDataFromAPI<KTX0010[]>('KTX0010/Getall').subscribe(data=>{
           that.ktx0010=data;
-          that.tab=1
+          that.tab=2
         })
       }
     $(document).ready(function(){
       $('.tab').click(function(){
         that.tab=$(this).index()
+        $('.tab').removeClass('active')
+        $(this).addClass('active')
       })
       showdodung()
-    })
-    ////////////////
-    $('#thietlap').click(function(){
-      $('#thietlapmodal').modal()
     })
   }
   getktx10(event:KTX0010){

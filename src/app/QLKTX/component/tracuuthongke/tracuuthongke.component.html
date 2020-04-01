@@ -2,19 +2,20 @@
     <app-menu></app-menu>
       <div class="col" id="contentmenu"> 
         <div class="row no-gutters align-items-center" id="hidecolumn">
-              <button class="list-group-item tab"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>Danh sách ra</span> </button>
-              <button class="list-group-item tab"><i class="fas fa-sign-in-alt"></i>&nbsp;<span>Danh sách vào</span> </button>
-              <button class="list-group-item tab"><i class="fas fa-print"></i>&nbsp;<span>In đơn</span> </button>
-                <input class="form-control form-control-sm mr-3 w-25 " type="text" placeholder="Search"  aria-label="Search" style="margin-left: 20px;" id="searchbox">
-                <i id="SEARCH" style="cursor: pointer;" class="fas fa-search" aria-hidden="true"></i>
+              <button class="list-group-item tab"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>Danh sách đã ra</span> </button>
+              <button class="list-group-item tab"><i class="fas fa-sign-in-alt"></i>&nbsp;<span>Danh sách đang ở</span> </button>
+              <button class="list-group-item tab"><i class="fas fa-list"></i>&nbsp;<span>Danh sách phòng</span> </button>
+                <input class="form-control form-control-sm  w-25 "  type="text" placeholder="ID, CMTND, SDT, Khóa phòng, khóa tủ"   aria-label="Search" style="margin-left: 20px;" id="searchbox">
+                <button class="btn btn-sm btn-info tab" id="SEARCH" ><i style="cursor: pointer;" class="fas fa-search" aria-hidden="true"></i></button>
           </div>
         <div class="row no-gutters"  style="padding: 10px;" >
             <div class="col-12">
 
             <app-danhsachra *ngIf="tab==0"></app-danhsachra>
             <app-danhsachvao *ngIf="tab==1"></app-danhsachvao>
-            <app-indon *ngIf="tab==2"></app-indon>
-            <app-timkiem *ngIf="tab==3"></app-timkiem>
+            <!-- <app-indon *ngIf="tab==2"></app-indon> -->
+            <app-danhsachphong *ngIf="tab==2"></app-danhsachphong>
+            <app-timkiem *ngIf="tab==3" [lisktx0020]="lisktx0020" [lisktx0023]="lisktx0023"></app-timkiem>
             </div>
         </div>
       </div>
