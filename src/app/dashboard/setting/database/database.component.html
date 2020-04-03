@@ -1,0 +1,13 @@
+<div class="row no-gutters h-100 px-0">
+    <app-menu></app-menu>
+    <div class="col py-3 px-3" id="contentmenu">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card-header">Chạy lệnh database</div>
+            <div class="card-body">
+              <!-- <h5 class="card-title">Primary card title</h5> -->
+              <textarea [(ngModel)]="cmd" class="form-control" cols="30" rows="10"></textarea><br>
+              <button class="btn btn-info" (click)="run()">RUN</button>
+            </div>
+          </div>
+    </div>
+</div>

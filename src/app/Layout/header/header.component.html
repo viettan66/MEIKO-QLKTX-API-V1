@@ -4,17 +4,64 @@
         <a class="text-white align-items-center" routerLink="/">
             <img src="../../../assets/image/logo2.png" width="120" alt="">&nbsp; MEIKO ELECTRONICS VIETNAM</a>
     </div>
-    <div class="col-auto" *ngIf="user!=null">
+    <!-- <div class="col-auto" *ngIf="user!=null">
         <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
             <i class="fas fa-search" aria-hidden="true"></i>
             <input (change)="search($event)" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
               aria-label="Search">
           </form>
-    </div>
+    </div> -->
     <div class="col-auto" *ngIf="user!=null">
-        <button  class="btn btn-sm text-white" >{{user.hodem+' '+user.ten}}</button>
-        <button  class="btn btn-sm text-white" (click)="logout()"><i class="fas fa-sign-out-alt"></i>Thoát</button>
+        <button  class="btn btn-sm text-white" ><i class="fas fa-comments"></i><b style="color: aliceblue;">0</b></button>
+        <button  class="btn btn-sm text-white" ><i class="fas fa-envelope"></i><b style="color: aliceblue;">0</b></button>
+        <button   class="btn btn-sm text-white" ><i class="fas fa-bell"></i><b style="color: aliceblue;">0</b></button>
+        <button *ngIf="userclickc" (click)="changepass()"  title="Thay đổi mật khẩu"  class="btn btn-sm text-white" ><i class="fas fa-key"></i></button>
+        <button *ngIf="userclickc"  class="btn btn-sm text-white" (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
+        <button (click)="userclick()"  class="btn btn-sm text-white" >{{user.hodem+' '+user.ten}}&nbsp;<i class="fas fa-user-circle"></i></button>
     </div>
     
 </div>
 
+
+<div class="modal fade " id="changepassworld" role="dialog">
+    <div class="modal-dialog   modal-700">
+      <div class="modal-content ">
+        <div class="modal-header">
+          <h5 class="modal-title">THAY ĐỔI MẬT KHẨU TÀI KHOẢN</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body ">
+  
+          <div class="col-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Mật khẩu hiện tại</div>
+              </div>
+              <input type="password" class="form-control " id="oldpass" placeholder="Xin nhập mật khẩu hiện tại của bạn">
+            </div>
+          </div>
+  
+          <div class="col-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Mật khẩu mới</div>
+              </div>
+              <input type="password" class="form-control " id="newpass" placeholder="Xin nhập mật khẩu mới">
+            </div>
+          </div>
+          <div class="col-auto">
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <div class="input-group-text">Mật khẩu mới</div>
+              </div>
+              <input type="password" class="form-control " id="confirmnewpass" placeholder="Xin nhập mật khẩu mới">
+            </div>
+          </div>
+          <div class="col-auto">
+            <button title="Lưu thay đổi" style="padding: 10px 30px;" (click)="savechange()"
+              class="userbutton btn btn-primary "><i class="fa fa-save"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { RESTService } from 'src/app/Service/rest.service';
 import { KTX0040 } from '../../models/KTX0040';
 import { result } from '../../models/result';
+import { element } from 'protractor';
+declare var $: any
 
 @Component({
   selector: 'app-thongtintrangchu',
@@ -34,5 +36,23 @@ uploadFileToActivity() {
         }
       })
     })
+  }
+  saved(){
+    //this.uploadFileToActivity()
+    this.rest.PostDataToAPI<result<KTX0040>>(this.element,'KTX0040/update').subscribe(data=>{
+        if(data.code=="OK"){
+          this.listdon.splice(this.listdon.indexOf(this.element),1)
+          this.listdon.push(data.data)
+$("#formdangdyokytucxa").modal('hide')
+        }
+    })
+  }
+  public element:KTX0040=new KTX0040()
+  edit(element){
+    this.element=element
+$("#formdangdyokytucxa").modal()
+  }
+  substr(t:string){
+    return t.substring(0,t.length>200?200:t.length)+'...'
   }
 }

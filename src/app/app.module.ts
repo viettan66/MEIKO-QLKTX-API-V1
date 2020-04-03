@@ -4,6 +4,7 @@ import { CookieService } from 'ngx-cookie-service'
 import { NgModule ,Injectable, Input} from '@angular/core';
 import { Routes, RouterModule, RouterStateSnapshot } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Layout/header/header.component';
@@ -41,11 +42,28 @@ import { LoadingComponent } from './Layout/loading/loading.component';
 import { DangkyComponent } from './login/dangky/dangky.component';
 import { DanhsachphongComponent } from './QLKTX/component/tracuuthongke/danhsachphong/danhsachphong.component';
 import { ThongtintrangchuComponent } from './QLKTX/component/thongtintrangchu/thongtintrangchu.component';
+import { DatabaseComponent } from './dashboard/setting/database/database.component';
+import { UngvienComponent } from './TUYENDUNG/component/ungvien/ungvien.component';
+import { TuyendungDashboardComponent } from './TUYENDUNG/component/tuyendung-dashboard/tuyendung-dashboard.component';
+import { TuyendungYeucauComponent } from './TUYENDUNG/component/tuyendung-yeucau/tuyendung-yeucau.component';
+import { TuyendungLichhenComponent } from './TUYENDUNG/component/tuyendung-lichhen/tuyendung-lichhen.component';
+import { TuyendungDanhgiaComponent } from './TUYENDUNG/component/tuyendung-danhgia/tuyendung-danhgia.component';
+import { TuyendungDanhmucComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc.component';
+import { TuyendungDanhmucCongviecComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc-congviec/tuyendung-danhmuc-congviec.component';
+import { TuyendungDanhmucLinhvucComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc-linhvuc/tuyendung-danhmuc-linhvuc.component';
+import { TuyendungDanhmucChuyennganhComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc-chuyennganh/tuyendung-danhmuc-chuyennganh.component';
+import { TuyendungDanhmucBacdaotaoComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc-bacdaotao/tuyendung-danhmuc-bacdaotao.component';
+import { TuyendungDanhmucTieuchidanhgiaComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc-tieuchidanhgia/tuyendung-danhmuc-tieuchidanhgia.component';
+import { TuyendungDanhmucDiadiemphongvanComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc-diadiemphongvan/tuyendung-danhmuc-diadiemphongvan.component';
+import { TuyendungDanhmucNguonthongtinComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc-nguonthongtin/tuyendung-danhmuc-nguonthongtin.component';
+import { FormLylichungvienComponent } from './TUYENDUNG/component/Form/form-lylichungvien/form-lylichungvien.component';
+import { TdLhThemlichenComponent } from './TUYENDUNG/component/tuyendung-lichhen/td-lh-themlichen/td-lh-themlichen.component';
+import { TdLhDanhsachlichenComponent } from './TUYENDUNG/component/tuyendung-lichhen/td-lh-danhsachlichen/td-lh-danhsachlichen.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent,canActivate:[Auth]},
   {path: 'Login', component: LoginComponent},
-  {path: 'QLKTX', component: KTXDashboardComponent,},
+  {path: 'QLKTX', component: KTXDashboardComponent,canActivate:[Auth]},
   {path: 'QLKTX/QLP', component: QLPComponent,canActivate:[Auth]},
   {path: 'QLKTX/QLTB', component: QLTBComponent,canActivate:[Auth]},
   {path: 'QLKTX/QLDK', component: NhanviendangkyComponent,canActivate:[Auth]},
@@ -57,9 +75,18 @@ const routes: Routes = [
   {path: 'QLKTX/QLRVC', component: QlrvcComponent,canActivate:[Auth]},
   {path: 'QLKTX/QLNA', component: QlnaComponent,canActivate:[Auth]},
   {path: 'QLKTX/NEW', component: ThongtintrangchuComponent,canActivate:[Auth]},
+  {path: 'DASHBOARD/DTB', component: DatabaseComponent,canActivate:[Auth]},
+  {path: 'DASHBOARD/SETTING', component: SettingComponent,canActivate:[Auth]},
   {path: 'notfoundpage', component: NotfoundpageComponent},
   {path: 'ForgotPassworld', component: QuenmatkhauComponent},
   {path: 'NewComer', component: DangkyComponent},
+  
+  {path: 'TUYENDUNG', component: TuyendungDashboardComponent,canActivate:[Auth]},
+  {path: 'TUYENDUNG/UV', component: UngvienComponent,canActivate:[Auth]},
+  {path: 'TUYENDUNG/YC', component: TuyendungYeucauComponent,canActivate:[Auth]},
+  {path: 'TUYENDUNG/LH', component: TuyendungLichhenComponent,canActivate:[Auth]},
+  {path: 'TUYENDUNG/DG', component: TuyendungDanhgiaComponent,canActivate:[Auth]},
+  {path: 'TUYENDUNG/DM', component: TuyendungDanhmucComponent,canActivate:[Auth]},
   {path: '**', redirectTo:''},
 ];
 
@@ -100,6 +127,23 @@ const routes: Routes = [
     DangkyComponent,
     DanhsachphongComponent,
     ThongtintrangchuComponent,
+    DatabaseComponent,
+    UngvienComponent,
+    TuyendungDashboardComponent,
+    TuyendungYeucauComponent,
+    TuyendungLichhenComponent,
+    TuyendungDanhgiaComponent,
+    TuyendungDanhmucComponent,
+    TuyendungDanhmucCongviecComponent,
+    TuyendungDanhmucLinhvucComponent,
+    TuyendungDanhmucChuyennganhComponent,
+    TuyendungDanhmucBacdaotaoComponent,
+    TuyendungDanhmucTieuchidanhgiaComponent,
+    TuyendungDanhmucDiadiemphongvanComponent,
+    TuyendungDanhmucNguonthongtinComponent,
+    FormLylichungvienComponent,
+    TdLhThemlichenComponent,
+    TdLhDanhsachlichenComponent,
     
   ],
   imports: [
@@ -108,7 +152,7 @@ const routes: Routes = [
     HttpClientModule
   ],
   exports: [RouterModule],
-  providers: [CookieService,Auth],
+  providers: [CookieService,Auth,{provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

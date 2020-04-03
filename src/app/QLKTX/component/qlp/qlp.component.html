@@ -60,18 +60,30 @@
                     </SPAN> -->
                   </div>
                   <div class="card-body" style="padding: 5px;">
-                    <div class="row no-gutters d-flex justify-content-start">
-
-                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}"  *ngFor="let element of listphong" style="width: 4em;" 
-                      
-                      [ngStyle]="{'background-color':color[element.slotuse==null?0:((parseInt(element.slotuse/element.slot*10) ))]}">
-                          <!--<img class="card-img-top" src="..." alt="Card image cap">-->
-                          <input type="hidden" name="slotuse" value="{{element.slotuse}}" >
-                          <div class="card-body"  style="padding: 5px;">
-                            <h6 class="card-title">{{element.ten}}</h6>
-                            <p class="card-text">{{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </p>
-                          </div>
+                    <!-- <div class="col no-gutters">
+                      <ng-container *ngFor="let element2 of listphongf">
+                        <div class="row d-flex justify-content-start">
+                          <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}" *ngFor="let element of element2" style="width: 4em !important;" [ngStyle]="{'background-color':color[element.slotuse==null?0:((parseInt(element.slotuse/element.slot*10) ))]}">
+                        <input type="hidden" name="slotuse" value="{{element.slotuse}}">
+                        <div class="card-body" style="padding: 5px;">
+                          <h6 class="card-title">{{element.ten}}</h6>
+                          <p class="card-text">{{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </p>
                         </div>
+                      </div>
+                        </div>
+                      </ng-container>
+                    </div> -->
+                    <div class="row no-gutters d-flex justify-content-start">
+                  
+                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}" *ngFor="let element of listphong" style="width: 4em;"
+                        [ngStyle]="{'background-color':color[element.slotuse==null?0:((parseInt(element.slotuse/element.slot*10) ))]}">
+                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                        <input type="hidden" name="slotuse" value="{{element.slotuse}}">
+                        <div class="card-body" style="padding: 5px;">
+                          <h6 class="card-title">{{element.ten}}</h6>
+                          <p class="card-text">{{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

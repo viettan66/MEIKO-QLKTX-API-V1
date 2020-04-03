@@ -26,7 +26,7 @@ substring(l){
   return l.substring(0,200)
 }
  async ngOnInit() {
-    this.listnew= await this.rest.GetDataFromAPI<KTX0040[]>('KTX0040/Getall').toPromise()
+    this.listnew= await (await this.rest.GetDataFromAPI<KTX0040[]>('KTX0040/Getall').toPromise()).filter(f=>f.trangthai===true)
     let that = this
    
     $(document).ready(function () {

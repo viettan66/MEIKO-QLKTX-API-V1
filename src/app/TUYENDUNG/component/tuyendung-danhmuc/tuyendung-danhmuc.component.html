@@ -1,0 +1,29 @@
+<div class="row no-gutters h-100">
+    <app-menu></app-menu>
+        <div class="col col-auto gh bg-dark h-100" >
+            <ul class="list-group list-group-flush h-100 bg-secondary" id="dfdfdfdf" >
+                  <li (click)="tabs(0)" class="list-group-item  {{tab==0?'bg-dark':'bg-secondary'}} "><i class="fas fa-briefcase"></i><span>&nbsp;&nbsp;Công việc</span></li>
+                  <li (click)="tabs(1)"  class="list-group-item   {{tab==1?'bg-dark':'bg-secondary'}}   "><i class="fas fa-h-square"></i> <span>&nbsp;&nbsp;Lĩnh vực</span></li>
+                  <li (click)="tabs(2)"  class="list-group-item    {{tab==2?'bg-dark':'bg-secondary'}}  "><i class="fas fa-school"></i> <span>&nbsp;&nbsp;Chuyên ngành</span></li>
+                  <li (click)="tabs(3)"  class="list-group-item   {{tab==3?'bg-dark':'bg-secondary'}}   "><i class="fas fa-graduation-cap"></i> <span>&nbsp;&nbsp;Học vấn</span></li>
+                  <li (click)="tabs(4)"  class="list-group-item    {{tab==4?'bg-dark':'bg-secondary'}}  "><i class="far fa-calendar-check"></i> <span>&nbsp;&nbsp;Tiêu chí đánh giá</span></li>
+                  <!-- <li (click)="tabs(5)"  class="list-group-item    {{tab==5?'bg-dark':'bg-secondary'}}  "><i class="fas fa-recycle"></i> <span>&nbsp;&nbsp;Vòng phỏng vấn</span></li> -->
+                  <li (click)="tabs(6)"  class="list-group-item    {{tab==6?'bg-dark':'bg-secondary'}}  "><i class="fas fa-map-marked-alt"></i> <span>&nbsp;&nbsp;Địa điểm phỏng vấn</span></li>
+                  <li (click)="tabs(7)"  class="list-group-item   {{tab==7?'bg-dark':'bg-secondary'}}   "><i class="fas fa-sitemap"></i> <span>&nbsp;&nbsp;Quyền đánh giá</span></li>
+                  <li (click)="tabs(8)"  class="list-group-item   {{tab==8?'bg-dark':'bg-secondary'}}   "><i class="fas fa-share-alt-square"></i> <span>&nbsp;&nbsp;Nguồn thông tin</span></li>
+                  <!-- <li (click)="tabs(9)"  class="list-group-item   {{tab==9?'bg-dark':'bg-secondary'}}   "><i class="fas fa-user"></i> <span>&nbsp;&nbsp;tài khoản</span></li> -->
+                  <!-- <li (click)="tabs(10)"  class="list-group-item   {{tab==10?'bg-dark':'bg-secondary'}}   "><i class="fas fa-lock"></i> <span>&nbsp;&nbsp;Bảo mật</span></li> -->
+                  <!-- <li (click)="tabs(11)"  class="list-group-item    {{tab==11?'bg-dark':'bg-secondary'}}  "><i class="fas fa-users"></i> <span>&nbsp;&nbsp;Nhóm phê duyệt</span></li> -->
+                  <!-- <li (click)="tabs(12)"  class="list-group-item     {{tab==12?'bg-dark':'bg-secondary'}} "><i class="fas fa-wrench"></i> <span>&nbsp;&nbsp;Khác</span></li> -->
+                </ul>
+      </div>
+      <div class="col">
+        <app-tuyendung-danhmuc-congviec *ngIf="tab==0"></app-tuyendung-danhmuc-congviec>
+        <app-tuyendung-danhmuc-linhvuc *ngIf="tab==1"></app-tuyendung-danhmuc-linhvuc>
+        <app-tuyendung-danhmuc-chuyennganh *ngIf="tab==2"></app-tuyendung-danhmuc-chuyennganh>
+        <app-tuyendung-danhmuc-bacdaotao *ngIf="tab==3"></app-tuyendung-danhmuc-bacdaotao>
+        <app-tuyendung-danhmuc-tieuchidanhgia *ngIf="tab==4"></app-tuyendung-danhmuc-tieuchidanhgia>
+        <app-tuyendung-danhmuc-diadiemphongvan  *ngIf="tab==6"></app-tuyendung-danhmuc-diadiemphongvan>
+        <app-tuyendung-danhmuc-nguonthongtin  *ngIf="tab==8"></app-tuyendung-danhmuc-nguonthongtin>
+      </div>
+</div>

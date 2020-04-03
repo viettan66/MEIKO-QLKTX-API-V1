@@ -26,6 +26,7 @@ export class QLPComponent implements OnInit {
   public listkhu: KTX0001[] = []
   public listtang: KTX0001[] = []
   public listphong: KTX0001[] = []
+  public listphongf:any[] = []
   public listgiuong: KTX0002[] = []
   public listkhoa: KTX0003[] = []
   public listkhoaadd: KTX0003[] = []
@@ -179,7 +180,6 @@ export class QLPComponent implements OnInit {
           
         })
       })
-
       $('.filter').change(function () {
         that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/' + $('#listkhu').val() + '/' + $('#listtoanhash').val() + '/' + $('#listtangsh').val()).subscribe(data => {
           ////console.log(data)
@@ -187,7 +187,22 @@ export class QLPComponent implements OnInit {
           that.listphong = []
           that.listgiuong = []
           that.listphong = data.filter(c => { return c.type === 4 })
-          
+          let l=[]
+          that.listphongf=[]
+          that.listphong.forEach(f=>{
+            if(l.indexOf(f.idcha)==-1){
+              l.push(f.idcha)
+              that.listphongf.push([])
+            }
+          })
+          l.forEach((h,index)=>{
+            that.listphong.forEach(f=>{
+              if(f.idcha==h){
+                that.listphongf[index].push(f)
+              }
+            })
+          })
+         // console.log(that.listphongf)
           that.ktx01out.emit(that.listphong)
         })
       })

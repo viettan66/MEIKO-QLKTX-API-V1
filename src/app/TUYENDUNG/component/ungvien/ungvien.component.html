@@ -1,0 +1,78 @@
+<div class="row no-gutters h-100">
+    <app-menu></app-menu>
+    <div class="col px-2 py-2"  >
+        <div class="card  " style="background-color: rgba(255, 255, 255, 0.842);">
+            <div class="card-header">
+              <div class="row">
+                <div class="col">DANH SÁCH ỨNG VIÊN</div>
+                <div class="col-auto">
+                  <select class="btn btn-secondary mr-2" (change)="bophanchange($event)">
+                    <option value="all">BỘ PHẬN All</option>
+                    <option value="{{element.T098C}}" *ngFor="let element of listmkv9998">{{element.T002C}}</option>
+                  </select>
+                  <select class="btn btn-secondary mr-2" (change)="vitrichange($event)">
+                    <option value="all">VỊ TRÍ All</option>
+                    <option value="{{element.T005C}}" *ngFor="let element of listrm0001">{{element.T005C}}</option>
+                  </select>
+                  <button class="btn btn-primary" (click)="themungvien()"><i class="fa fa-plus"></i></button>
+                </div>
+              </div>
+              
+            </div>
+            <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
+              <div class="row no-gutters">
+                <table class="table table-bordered tablelistdon" id="tabletoexport">
+                  <thead><tr>
+                    <th style="width: 20px;"><input type="checkbox" ></th>
+                    <th style="width: 40px;">STT</th>
+                    <th>Họ tên</th>
+                    <th>Ngày sinh</th>
+                    <th>CMTND</th>
+                    <th>Giới</th>
+                    <th>SDT</th>
+                    <th>Vị trí 1</th>
+                    <th>Vị trí 2</th>
+                    <th>Thông tin</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let element of listrm0010;let i=index;" style="cursor: pointer;padding: 0;">
+                    
+                      <td style="width: 20px;"><input type="checkbox" ></td>
+                      <td style="width: 40px;">STT</td>
+                      <td>{{element.HODEM + element.TEN}}</td>
+                      <td>{{element.NGAYSINH|date:'dd/MM/yyyy'}}</td>
+                      <td>{{element.CMTND_SO}}</td>
+                      <td>{{element.GIOITINH==null?"":(element.GIOITINH?"Nam":"Nữ")}}</td>
+                      <td>{{element.MOBILE}}</td>
+                      <td>{{element.RM0001!=null?element.RM0001.tenCongViec:""}}</td>
+                      <td>{{element.RM0001_2!=null?element.RM0001_2.tenCongViec:""}}</td>
+                      <th>
+                        <div class="progress" style="height: 20px;" (click)="showdetail(element)">
+                          <div class="progress-bar" role="progressbar" [ngStyle]="{'width':((100-parseint(element.i/element.j*100))+'%')}"  aria-valuemin="0" aria-valuemax="100">{{100-parseint(element.i/element.j*100)}}%</div>
+                        </div>
+                      </th>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
+            </div>
+  
+          </div>
+    </div>
+</div>
+
+<div class="modal fade " id="modalungvien" role="dialog"  data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog   modal-900" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">Chọn</h5>
+				<button type="button" class="close" (click)="close()">&times;</button>
+			</div>
+			<div class="modal-body ">
+        <app-form-lylichungvien [rm0010in]="rm0010in" (rm0010out)="getrm0010($event)"></app-form-lylichungvien>
+			</div>
+		</div>
+	</div>
+</div>
