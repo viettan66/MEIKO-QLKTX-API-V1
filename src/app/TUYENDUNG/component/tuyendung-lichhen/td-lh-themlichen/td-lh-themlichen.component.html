@@ -1,1 +1,41 @@
-<p>td-lh-themlichen works!</p>
+<div class="row no-gutters px-2 py-2">
+    <div class="col-lg-3">
+        <div class="card">
+            <div class="card-header">
+                  Thông tin lịch hẹn
+            </div>
+            <div class="card-body form">
+                  <label for="dateinterview">Ngày phỏng vấn</label>
+                  <input type="date" id="dateinterview" class="form-control"
+                        required="required" /><br>
+                  <label for="timeinterview">Giờ phỏng vấn</label>
+                  <input type="time" id="timeinterview" class="form-control"
+                        required="required" /><br>
+                  <label for="diadieminterview">Địa điểm phỏng vấn</label>
+                  <select class="form-control" id="diadieminterview">
+                        <option selected>Xin chọn địa điểm</option>
+                        <option *ngFor="let element of rm0008" value="{{element['rM0008_ID']}}">
+                              {{element['diaDiem']}}
+                        </option>
+                  </select><br>
+                  <label for="diadieminterview">Hội đồng phỏng vấn</label><br>
+                  <div class=""
+                        style=" border: 1px solid #ced4da;padding: 10px 5px;border-radius: .25rem;">
+
+                        <button id="addaccount" style="" class="btn btn-outline-success my-2 my-sm-0"
+                              type="submit">
+                              <i class="fas  fa-search"></i></button>
+                        <span id="accountchoose" style="width: 100%;"></span>
+                  </div>
+                  <span class="labellabel" style="">
+
+                  </span><br>
+                  <button id="themlichhen" class="form-control btn-primary">Thêm lịch hẹn</button>
+
+            </div>
+      </div>
+      <div class="col-lg">
+        <app-ungvien></app-ungvien>
+      </div>
+    </div>
+</div>
