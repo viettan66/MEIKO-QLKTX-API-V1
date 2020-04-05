@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { RESTService } from 'src/app/Service/rest.service';
 import { yeucau } from '../../Models/yeucau';
 import* as Global from 'src/app/Service/global.service';
@@ -13,7 +13,7 @@ declare var $:any
   styleUrls: ['./ungvien.component.css']
 })
 export class UngvienComponent implements OnInit {
-
+@Output('listRM0010')listRM0010=new EventEmitter<RM0010[]>()
   constructor(public rest:RESTService) { }
   public listdon:A0028[]=[]
   public bophanid=''
@@ -45,6 +45,7 @@ export class UngvienComponent implements OnInit {
       })
     })
     console.log(this.listrm0010)
+    this.listRM0010.emit(this.listrm0010)
   }
   themungvien(){
     // if(this.bophanid==''||this.bophanid=='all'){

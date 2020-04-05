@@ -1,6 +1,6 @@
-<div class="row no-gutters h-100">
+<!-- <div class="row no-gutters h-100">
     <app-menu></app-menu>
-    <div class="col px-2 py-2"  >
+    <div class="col px-2 py-2"  > -->
         <div class="card  " style="background-color: rgba(255, 255, 255, 0.842);">
             <div class="card-header">
               <div class="row">
@@ -38,7 +38,7 @@
                   <tbody>
                     <tr *ngFor="let element of listrm0010;let i=index;" style="cursor: pointer;padding: 0;">
                     
-                      <td style="width: 20px;"><input type="checkbox" ></td>
+                      <td style="width: 20px;"><input type="checkbox" [(ngModel)]="element.check" ></td>
                       <td style="width: 40px;">STT</td>
                       <td>{{element.HODEM + element.TEN}}</td>
                       <td>{{element.NGAYSINH|date:'dd/MM/yyyy'}}</td>
@@ -60,14 +60,14 @@
             </div>
   
           </div>
-    </div>
-</div>
+    <!-- </div>
+</div> -->
 
 <div class="modal fade " id="modalungvien" role="dialog"  data-backdrop="static" data-keyboard="false" >
 	<div class="modal-dialog   modal-900" >
 		<div class="modal-content " >
 			<div class="modal-header">
-				<h5 class="modal-title">Chọn</h5>
+				<h5 class="modal-title">Thông tin chi tiết ứng viên</h5>
 				<button type="button" class="close" (click)="close()">&times;</button>
 			</div>
 			<div class="modal-body ">

@@ -46,7 +46,10 @@ export class LoginComponent implements OnInit {
           })
         } else {
           localStorage.setItem('KTX_User', JSON.stringify(data));
-          that.router.navigate(['']);
+              that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAcctionWidthMKV9999ID/'+data.MKV9999_ID).subscribe(data=>{
+                localStorage.setItem('KTX_Menu', JSON.stringify(data)); 
+                window.location.assign('')
+              })
         }
 
 
@@ -74,18 +77,6 @@ export class LoginComponent implements OnInit {
                 }
               })
               if(checkf){
-                // let newmkv=new MKV9999
-                // newmkv.matkhau=$('#PASS').val()
-                // newmkv.cmtnd_so=$('#ID').val()
-                // newmkv.phong_id='98556f84-6d3e-42fa-a084-6b9d22839181'
-                // that.rest.PostDataToAPI<result<MKV9999>>(newmkv, 'Account/add').subscribe(data1 => {
-                //   if (data1.code == "OK") {
-                //     //alert('Tài khoản của bạn đã được tạo')
-                //     LOGIN(data1.data, true)
-                //   } else {
-                //     alert(data1.mess)
-                //   }
-                // })
                 that.router.navigate(['NewComer'],{ queryParams: { cmtnd_so: $('#ID').val() } })
               }
               
@@ -93,9 +84,8 @@ export class LoginComponent implements OnInit {
           }
           else {
             if( data.matkhau == $('#PASS').val())
-            LOGIN(data, true)
+            LOGIN(data, false)
             else{
-              //console.log(data)
               alert('Sai mật khẩu')
             }
 

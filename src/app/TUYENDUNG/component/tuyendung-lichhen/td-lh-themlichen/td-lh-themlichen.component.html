@@ -1,41 +1,95 @@
-<div class="row no-gutters px-2 py-2">
-    <div class="col-lg-3">
+<div class="row no-gutters px-1 py-2">
+    <div class="col-lg-3 px-1">
         <div class="card">
             <div class="card-header">
                   Thông tin lịch hẹn
             </div>
             <div class="card-body form">
-                  <label for="dateinterview">Ngày phỏng vấn</label>
-                  <input type="date" id="dateinterview" class="form-control"
-                        required="required" /><br>
-                  <label for="timeinterview">Giờ phỏng vấn</label>
-                  <input type="time" id="timeinterview" class="form-control"
-                        required="required" /><br>
-                  <label for="diadieminterview">Địa điểm phỏng vấn</label>
-                  <select class="form-control" id="diadieminterview">
-                        <option selected>Xin chọn địa điểm</option>
-                        <option *ngFor="let element of rm0008" value="{{element['rM0008_ID']}}">
-                              {{element['diaDiem']}}
-                        </option>
-                  </select><br>
-                  <label for="diadieminterview">Hội đồng phỏng vấn</label><br>
-                  <div class=""
-                        style=" border: 1px solid #ced4da;padding: 10px 5px;border-radius: .25rem;">
-
-                        <button id="addaccount" style="" class="btn btn-outline-success my-2 my-sm-0"
-                              type="submit">
-                              <i class="fas  fa-search"></i></button>
-                        <span id="accountchoose" style="width: 100%;"></span>
+                  <div class="row no-gutters py-2">
+                        <div class="col">
+                              <div class="row"><label>Thời gian phỏng vấn</label></div>
+                              <div class="row ">
+                                    <div class="col-6 px-0"><input type="date"  class="form-control" [(ngModel)]="ngay" /></div>
+                                    <div class="col-6 px-0"><input type="time"  class="form-control"  [(ngModel)]="gio"  /></div>
+                              </div>
+                        </div>
+                        
+                        
                   </div>
-                  <span class="labellabel" style="">
-
-                  </span><br>
-                  <button id="themlichhen" class="form-control btn-primary">Thêm lịch hẹn</button>
+                  <div class="row py-2"><label >Địa điểm phỏng vấn</label>
+                        <select class="form-control"  [(ngModel)]="diadiem " >
+                              <option value="null" selected>Xin chọn địa điểm</option>
+                              <option *ngFor="let element of listRM0008" value="{{element['RM0008_ID']}}"> {{element['DiaDiem']}}</option>
+                        </select>
+                  </div>
+                  <div class="row py-2">
+                  <label >Hội đồng phỏng vấn</label>
+                        <table class="table table-bordered">
+                              <tr>
+                                    <td>ID</td>
+                                    <td>Họ tên</td>
+                                    <td style="width: 40px;"><button (click)="selectaccount()" class="btn btn-sm btn-success"><i class="fa fa-search"></i></button></td>
+                              </tr>
+                              <ng-container *ngFor="let element of listMKV9999choose">
+                                    <tr>
+                                          <td>{{element.manhansu}}</td>
+                                          <td>{{element.hodem+' '+element.ten}}</td>
+                                          <td><button (click)="removechoose(element)" class="btn btn-sm"><i class="fa fa-trash"></i></button></td>
+                                    </tr>
+                              </ng-container>
+                        </table>
+                  </div>
+                  <button id="themlichhen" class="form-control btn-primary" (click)="themlichhen()">Thêm lịch hẹn</button>
 
             </div>
       </div>
-      <div class="col-lg">
-        <app-ungvien></app-ungvien>
-      </div>
     </div>
+      <div class="col-lg px-1">
+        <app-ungvien (listRM0010)="getlistRM0010($event)"></app-ungvien>
+      </div>
+</div>
+
+
+<div class="modal fade " id="selectaccount" role="dialog" >
+	<div class="modal-dialog   modal-700" >
+		<div class="modal-content " >
+			<div class="modal-header">
+                        <div class="row w-100">
+                              <div class="col"><h5 class="modal-title">Chọn tài khoản phỏng vấn</h5> </div>
+                              <div class="col-auto">
+                                    <span class="mr-3">{{((start+1)*step)>=listMKV9999.length?listMKV9999.length:((start+1)*step)}}/{{listMKV9999.length}}</span>
+                                          <button (click)="pre()" class="btn btn-sm btn-secondary mr-1" ><i class="fas fa-angle-left"></i></button>
+                                          <button (click)="nex()" class="btn btn-sm btn-secondary mr-3" ><i class="fas fa-angle-right"></i></button>
+                                          <button (click)="closeselectaccount()" class="btn btn-sm btn-secondary" ><i class="fa fa-times"></i></button>
+                              </div>
+                        </div>
+				
+				
+			</div>
+			<div class="modal-body ">
+                        <table class="table table-bordered">
+                              <thead>
+                                    <tr>
+                                          <th>STT</th>
+                                          <th>ID</th>
+                                          <th>Tên</th>
+                                          <th>Bộ phận</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <ng-container *ngFor="let element of listMKV9999;let i=index">
+                                          <ng-container *ngIf="(i>=start*step) && (i<(start+1)*step)">
+                                                <tr style="cursor: pointer;" id="tr{{element.manhansu}}" (click)="chooseaccount(element)" class="{{checkelement(element)}}">
+                                                      <td>{{i+1}}</td>
+                                                      <td>{{element.manhansu}}</td>
+                                                      <td>{{element.hodem+' '+element.ten}}</td>
+                                                      <td>{{element.thetu_id}}</td>
+                                                </tr>
+                                          </ng-container>
+                                    </ng-container>
+                              </tbody>
+                        </table>
+			</div>
+		</div>
+	</div>
 </div>

@@ -46,6 +46,7 @@ export class RM0010{
     public  DUDINHHOCTIEPCHUYENNGANH:string ;
     public  bophanid:string ;
     public  DUDINHHOCTIEP:Boolean ;
+    public  check:Boolean ;
 
     public i:number=0;
     public j:number=0;

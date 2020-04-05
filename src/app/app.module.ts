@@ -59,6 +59,7 @@ import { TuyendungDanhmucNguonthongtinComponent } from './TUYENDUNG/component/tu
 import { FormLylichungvienComponent } from './TUYENDUNG/component/Form/form-lylichungvien/form-lylichungvien.component';
 import { TdLhThemlichenComponent } from './TUYENDUNG/component/tuyendung-lichhen/td-lh-themlichen/td-lh-themlichen.component';
 import { TdLhDanhsachlichenComponent } from './TUYENDUNG/component/tuyendung-lichhen/td-lh-danhsachlichen/td-lh-danhsachlichen.component';
+import { TuyendungUngvienComponent } from './TUYENDUNG/component/tuyendung-ungvien/tuyendung-ungvien.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent,canActivate:[Auth]},
@@ -82,7 +83,7 @@ const routes: Routes = [
   {path: 'NewComer', component: DangkyComponent},
   
   {path: 'TUYENDUNG', component: TuyendungDashboardComponent,canActivate:[Auth]},
-  {path: 'TUYENDUNG/UV', component: UngvienComponent,canActivate:[Auth]},
+  {path: 'TUYENDUNG/UV', component: TuyendungUngvienComponent,canActivate:[Auth]},
   {path: 'TUYENDUNG/YC', component: TuyendungYeucauComponent,canActivate:[Auth]},
   {path: 'TUYENDUNG/LH', component: TuyendungLichhenComponent,canActivate:[Auth]},
   {path: 'TUYENDUNG/DG', component: TuyendungDanhgiaComponent,canActivate:[Auth]},
@@ -144,6 +145,7 @@ const routes: Routes = [
     FormLylichungvienComponent,
     TdLhThemlichenComponent,
     TdLhDanhsachlichenComponent,
+    TuyendungUngvienComponent,
     
   ],
   imports: [
