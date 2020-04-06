@@ -4,7 +4,7 @@ import { RM0081_A } from './RM0081_A';
 import { RM0081_B } from './RM0081_B';
 import { RM0081_C, RM0081_D, RM0081_E, RM0081_F } from './RM0080_C';
 export class RM0010{
-    public  RM0010_ID :string    ;
+    public  RM0010_ID :number    ;
     public  maID : string   ;
     public  HODEM : string   ;
     public  TEN : string   ;

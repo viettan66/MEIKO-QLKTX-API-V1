@@ -1,0 +1,74 @@
+<div class="row no-gutters">
+
+  
+    <div class="col" style="padding: 10px;">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">DANH SÁCH TÀI KHOẢN </div>
+                    <div class="col-auto">
+                        <div class="row no-gutters">
+                            <div class="col-auto px-1"><span class="mr-3">Đang xem {{((start+1)*step)>=listMKV9999.length?listMKV9999.length:((start+1)*step)}}/{{listMKV9999.length}}</span></div>
+                            <div class="col-auto px-1"><button (click)="pre()" class="btn  btn-secondary " ><i class="fas fa-angle-left"></i></button></div>
+                            <div class="col-auto px-1"><button (click)="nex()" class="btn btn-secondary " ><i class="fas fa-angle-right"></i></button></div>
+                            <div class="col-auto px-1"><input  type="text" style="width: 160px;" class="form-control" placeholder="ID, Tên" (keydown)="onKeydown($event)" [(ngModel)]="keysearch" ></div>
+                            <div class="col-auto px-1">
+                                <select  class="form-control" [(ngModel)]="phong_id">
+                                    <option value="all">BP All</option>
+                                    <option value="{{element.phong_id}}" *ngFor="let element of listMKV9999">{{element.thetu_id}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+                
+                <!-- <button id="savelisst" class="btn btn-secondary" title="Lưu danh sách lĩnh vực"><i class="fa fa-save"></i></button> -->
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered table-hover" id="tablecongviec">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox"></th>
+                            <th>STT</th>
+                            <th>ID</th>
+                            <th>TÊN</th>
+                            <th>Bộ phận</th>
+                            <ng-container *ngFor="let element of listRM0006">
+                                <th style="text-align: center;padding-left: 0;padding-right: 0;">{{element.tenTieuChiDG}}</th>
+                            </ng-container>
+                            <!-- <th style="width: 90px;">Chức năng</th> -->
+                        </tr>
+                    </thead>
+                    <tbody >
+                        <ng-container *ngFor="let element of listMKV9999;let i = index">
+                            <ng-container *ngIf="element.phong_id==phong_id||phong_id=='all'">
+
+                                <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))&&keysearch==''||checkkey(element)&&keysearch!=''">
+                                    <tr style="cursor: pointer;"  >
+                                        <th><input type="checkbox"></th>
+                                        <td>{{i+1}}</td>
+                                        <td>{{element.manhansu}}</td>
+                                        <td>{{element.hodem+' '+element.ten}}</td>
+                                        <td>{{element.thetu_id}}</td>
+                                        <ng-container *ngFor="let element2 of element.RM0006">
+                                            <td style="text-align: center;" class="{{element2.RM0007==null?'btn-secondary':'btn-success'}}" (click)="setpermistion(element,element2)"><i class="fa {{element2.RM0007==null?'fa-times':'fa-check'}} "></i></td>
+                                        </ng-container>
+                                        <!-- <td><button class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
+                                            <button class="btn btn-sm deleteitem"><i class="far fa-trash-alt"></i></button></td> -->
+                                    </tr>
+                                </ng-container>
+                            </ng-container>
+
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    </div>
+    </div>
+

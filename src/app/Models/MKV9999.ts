@@ -1,4 +1,5 @@
 import { MKV9991 } from './MKV9991';
+import { RM0006 } from '../TUYENDUNG/Models/RM0006';
 
 export class MKV9999{
     public  MKV9999_ID :number     ;
@@ -42,6 +43,7 @@ export class MKV9999{
     public  thetu_id :   string  ;
     public bophan:MKV9991;
     public ban:MKV9991;
+    public RM0006:RM0006[]=[]
     // public virtual ICollection<MKV9980 MKV9980 :     ;
     // public virtual MKV9998 MKV9998 :     ;
 }

@@ -4,6 +4,7 @@ import { RESTService } from 'src/app/Service/rest.service';
 import { MKV9999 } from 'src/app/Models/MKV9999';
 import { RM0010 } from 'src/app/TUYENDUNG/Models/RM0010';
 import { result } from 'src/app/QLKTX/models/result';
+import { RM0015 } from 'src/app/TUYENDUNG/Models/RM0015';
 declare var $:any
 
 @Component({
@@ -13,8 +14,8 @@ declare var $:any
 })
 export class TdLhThemlichenComponent implements OnInit {
 public listRM0008:RM0008[]=[]
-public listMKV9999:MKV9999[]=[]
 public listRM0010:RM0010[]=[]
+public listMKV9999:MKV9999[]=[]
 public listMKV9999choose:MKV9999[]=[]
 public ngay=null
 public gio=null
@@ -79,7 +80,18 @@ public step:number=20
       alert("Bạn chưa chọn ứng viên phỏng vấn.")
       return false
     }
-    let data= await this.rest.PostDataToAPI<any>({thoigian:(this.ngay+' '+this.gio),diadiem:this.diadiem,RM0010:this.listRM0010.filter(c=>{return c.check===true})},'RM0015/add').toPromise()
-    console.log(data)
+    let data= await this.rest.PostDataToAPI<result< RM0015>[]>({thoigian:(this.ngay+' '+this.gio),diadiem:this.diadiem,RM0010:this.listRM0010.filter(c=>{return c.check===true}),
+  MKV9999:this.listMKV9999choose},'RM0015/add').toPromise()
+  let count=0
+    data.forEach(val=>{
+      if(val.code=="OK"){
+       let l= this.listRM0010.filter(c=>{return c.RM0010_ID===val.data.RM0010_ID})
+       if(l.length>0){
+         count++
+         this.listRM0010.splice(this.listRM0010.indexOf(l[0]),1)
+       }
+      }
+    })
+    alert("Đã thêm lịch hẹn cho "+count+" ứng viên.")
   }
 }

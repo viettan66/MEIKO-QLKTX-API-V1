@@ -74,7 +74,7 @@
             <td>Quan hệ</td>
             <td>Họ và tên</td>
             <td style="position: relative;">Làm gì, ở đâu...?</td>
-            <td style="width: 40px; "><button (click)="thanhphangiadinh()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
+            <td class=" {{check?'none3':''}}" style="width: 40px; "><button (click)="thanhphangiadinh()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
         </tr>
     </thead>
     <tbody >
@@ -82,7 +82,7 @@
             <td><input type="text" name="quanhe" [(ngModel)]="lop.QUANHE"></td>
             <td><input type="text" name="hoten" [(ngModel)]="lop.HOTEN"></td>
             <td><input type="text" name="lamgi" [(ngModel)]="lop.LAMGIODAU"></td>
-            <td><button class="btn btn-sm btn-secondary" (click)="thanhphangiadinh(lop)"><i class="fa fa-trash"></i></button></td>
+            <td class=" {{check?'none3':''}}"><button class="btn btn-sm btn-secondary" (click)="thanhphangiadinh(lop)"><i class="fa fa-trash"></i></button></td>
         </tr>
     </tbody>
 </table>
@@ -234,7 +234,7 @@
             <td rowspan="2">Quốc gia</td>
             <td rowspan="2">Hệ đào tạo</td>
             <td rowspan="2" style="position: relative;" rowspan="2">Xếp loại</td>
-            <td style="width: 40px;" rowspan="2"><button (click)="addrm0081_a()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
+            <td class=" {{check?'none3':''}}" style="width: 40px;" rowspan="2"><button (click)="addrm0081_a()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
         </tr>
         <tr>
             <td>Bắt đầu</td>
@@ -259,7 +259,7 @@
                     <option value="Yếu">Yếu</option>
                     <option value="Kém">Kém</option>
                 </select></td>
-                <td><button (click)="addrm0081_a(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
+                <td class=" {{check?'none3':''}}"><button (click)="addrm0081_a(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
         </tr>
     </tbody>
 </table>
@@ -273,7 +273,7 @@
             <td rowspan="2">Xếp loại/Điểm</td>
             <td rowspan="2">Ngày cấp</td>
             <td rowspan="1" style="position: relative;" colspan="4">Chi tiết (Tốt, khá, trung bình, yếu)</td>
-            <td rowspan="2" style="width: 40px;"><button (click)="addrm0081_b()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
+            <td class=" {{check?'none3':''}}" rowspan="2" style="width: 40px;"><button (click)="addrm0081_b()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
         </tr>
         <tr>
             <td>Nghe</td>
@@ -293,7 +293,7 @@
             <td><input type="text" name="NOI" [(ngModel)]="lop.NOI"></td>
             <td><input type="text" name="DOC" [(ngModel)]="lop.DOC"></td>
             <td><input type="text" name="VIET" [(ngModel)]="lop.VIET"></td>
-            <td><button (click)="addrm0081_b(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
+            <td class=" {{check?'none3':''}}"><button (click)="addrm0081_b(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
         </tr>
     </tbody>
 </table>
@@ -303,7 +303,7 @@
         <tr>
             <td>Tên phần mềm</td>
             <td style="position: relative;">Trình độ</td>
-            <td style="width: 40px;"><button (click)="vitinh()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
+            <td class=" {{check?'none3':''}}" style="width: 40px;"><button (click)="vitinh()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
         </tr>
     </thead>
     <tbody id="trinhdovitinh">
@@ -318,7 +318,7 @@
                     <option value="4">Thành thạo</option>
                 </select>
             </td>
-            <td><button (click)="vitinh(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
+            <td class=" {{check?'none3':''}}"><button (click)="vitinh(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
         </tr>
     </tbody>
 </table>
@@ -331,7 +331,7 @@
             <td>Lĩnh vực gì</td>
             <td>Tổ chức nào trao</td>
             <td style="position: relative;">Năm</td>
-           <td  style="width: 40px;"><button (click)="giaithuong()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
+           <td class=" {{check?'none3':''}}"  style="width: 40px;"><button (click)="giaithuong()" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i></button></td>
         </tr>
     </thead>
     <tbody id="giaithuongbangkhenkhac">
@@ -347,7 +347,7 @@
             <td><input type="text" name="TOCHUCTRAO" [(ngModel)]="lop.TOCHUCTRAO"></td>
             <td><input type="date" name="NAM" (ngModelChange)="lop.NAM = $event" [ngModel]="lop.NAM|date:'yyyy-MM-dd'">
             </td>
-            <td><button (click)="giaithuong(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
+            <td class=" {{check?'none3':''}}"><button (click)="giaithuong(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
         </tr>
     </tbody>
 </table>
@@ -356,7 +356,7 @@
         mới tốt nghiệp ra trường)</b></h6>
 <table class="table table-bordered" id="quatrinhlamviec">
     <thead>
-        <tr>
+        <tr class=" {{check?'none3':''}}">
             <td style="position: relative;" colspan="9">
                 <button (click)="qtlv()" class="btn btn-sm btn-primary float-right"><i class="fa fa-plus"></i></button>
             </td>
@@ -368,7 +368,7 @@
             <td rowspan="2">Tên Công ty </td>
             <td rowspan="2">Của nước nào</td>
             <td rowspan="2">Ở tỉnh, thành phố nào</td>
-            <td rowspan="2"><button (click)="qtlv(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
+            <td class=" {{check?'none3':''}}" rowspan="2"><button (click)="qtlv(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
         </tr>
         <tr>
             <td>Bắt đầu</td>
@@ -408,7 +408,7 @@
             <td>Vị trí công tác</td>
             <td>Đơn vị công tác</td>
             <td >Điện thoại liên lạc</td>
-            <td style="width: 40px;"> <button (click)="ntk()" class="btn btn-sm btn-primary float-right"><i class="fa fa-plus"></i></button></td>
+            <td class=" {{check?'none3':''}}"  style="width: 40px;"> <button (click)="ntk()" class="btn btn-sm btn-primary float-right"><i class="fa fa-plus"></i></button></td>
         </tr>
     </thead>
     <tbody id="nguoithamkhao">
@@ -417,7 +417,7 @@
             <td><input type="text" name="VITRI" [(ngModel)]="lop.VITRI"></td>
             <td><input type="text" name="DONVI" [(ngModel)]="lop.DONVI"></td>
             <td><input type="text" name="MOBILE" [(ngModel)]="lop.MOBILE"></td>
-            <td><button (click)="ntk(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
+            <td class=" {{check?'none3':''}}" ><button (click)="ntk(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
         </tr>
     </tbody>
 </table>

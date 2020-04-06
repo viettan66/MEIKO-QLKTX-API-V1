@@ -60,6 +60,8 @@ import { FormLylichungvienComponent } from './TUYENDUNG/component/Form/form-lyli
 import { TdLhThemlichenComponent } from './TUYENDUNG/component/tuyendung-lichhen/td-lh-themlichen/td-lh-themlichen.component';
 import { TdLhDanhsachlichenComponent } from './TUYENDUNG/component/tuyendung-lichhen/td-lh-danhsachlichen/td-lh-danhsachlichen.component';
 import { TuyendungUngvienComponent } from './TUYENDUNG/component/tuyendung-ungvien/tuyendung-ungvien.component';
+import { DanhsachdanhgiaComponent } from './TUYENDUNG/component/tuyendung-danhgia/danhsachdanhgia/danhsachdanhgia.component';
+import { TuyendungDanhmucQuyendanhgiaComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc-quyendanhgia/tuyendung-danhmuc-quyendanhgia.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent,canActivate:[Auth]},
@@ -146,6 +148,8 @@ const routes: Routes = [
     TdLhThemlichenComponent,
     TdLhDanhsachlichenComponent,
     TuyendungUngvienComponent,
+    DanhsachdanhgiaComponent,
+    TuyendungDanhmucQuyendanhgiaComponent,
     
   ],
   imports: [

@@ -34,7 +34,8 @@ export class UngvienComponent implements OnInit {
       this.listdon=data.data
       console.log(this.listdon)
     })
-    this.listrm0010=await this.rest.GetDataFromAPI<RM0010[]>('RM0010/Getall').toPromise()
+    this.listrm0010=await this.rest.PostDataToAPI<RM0010[]>({type:true},'RM0010/Getall').toPromise()
+    console.log(this.listrm0010)
     this.listrm0010.forEach(val=>{
       val.i=0
       val.j=0
@@ -44,7 +45,6 @@ export class UngvienComponent implements OnInit {
           val.j+=1
       })
     })
-    console.log(this.listrm0010)
     this.listRM0010.emit(this.listrm0010)
   }
   themungvien(){

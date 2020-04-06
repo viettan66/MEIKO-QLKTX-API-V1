@@ -8,6 +8,7 @@ import { RM0081_A } from 'src/app/TUYENDUNG/Models/RM0081_A';
 import { RM0081_B } from 'src/app/TUYENDUNG/Models/RM0081_B';
 import { RM0081_C, RM0081_D, RM0081_E, RM0081_F } from 'src/app/TUYENDUNG/Models/RM0080_C';
 import { result } from 'src/app/QLKTX/models/result';
+declare var $:any
 
 @Component({
   selector: 'app-form-lylichungvien',
@@ -16,13 +17,21 @@ import { result } from 'src/app/QLKTX/models/result';
 })
 export class FormLylichungvienComponent implements OnInit {
 @Input() rm0010in:RM0010
+@Input() check:boolean
 @Output('rm0010out') rm0010out=new EventEmitter<RM0010>()
   constructor(public rest:RESTService) { }
 public listrm0001:RM0001[]=[]
 public rm0100:RM0009[]=[]
  async ngOnInit() {
+   let that=this
    this.listrm0001=await this.rest.GetDataFromAPI<RM0001[]>('RM0001/Getall').toPromise()
    this.rm0100=await this.rest.GetDataFromAPI<RM0009[]>('RM0009/Getall').toPromise()
+   $(document).ready(function(){
+     if(that.check){
+       $('input,textarea,select').attr('disabled',true).addClass('none')
+       $('button').addClass('none2')
+     }
+   })
   }
 
 save(){
