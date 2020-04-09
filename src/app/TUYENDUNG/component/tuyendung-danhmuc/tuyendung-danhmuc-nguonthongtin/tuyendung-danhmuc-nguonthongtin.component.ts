@@ -21,8 +21,9 @@ export class TuyendungDanhmucNguonthongtinComponent implements OnInit {
     console.log(this.listdata)
     })
   }
-  themcongviec(){
-    $('#myModalungvieninfo').modal()
+ async themcongviec(){
+    let data=await this.rest.PostDataToAPI<result<RM0009>>(new RM0009(),'RM0009/add').toPromise()
+    if(data.code=="OK")this.listdata.push(data.data)
   }
   savecongviec(){
     console.log(this.newdm)
@@ -33,4 +34,32 @@ export class TuyendungDanhmucNguonthongtinComponent implements OnInit {
       else alert(data.mess)
     })
   }
+  choose(element:RM0009){
+    element.check==null?true:!element.check
+  }
+  public checkall=false
+  public tinhTrang=true
+  allchange(){
+    this.listdata.map(x=>x.check=this.checkall)
+  }
+  async edititem(element:RM0009){
+    if( $('#edit'+element.RM0009_ID).find('i').hasClass('fa-edit')){
+       $('#row'+element.RM0009_ID).find('input:text,select').removeClass('none').removeAttr('disabled') 
+       $('#edit'+element.RM0009_ID).find('i').removeClass('fa-edit').addClass('fa-save')
+     }else{
+       $('#row'+element.RM0009_ID).find('input:text,select').addClass('none').attr('disabled',true)
+       $('#edit'+element.RM0009_ID).find('i').removeClass('fa-save').addClass('fa-edit')
+       let dataa= await this.rest.PutDataToAPI<result<RM0009>>(element,'RM0009/update').toPromise()
+       console.log(dataa)
+       if(dataa.code=="OK"){{
+         element=dataa.data
+       }}
+     }
+   }
+  async xoacongviec(){
+    if(!confirm('Bạn có chắc chắn muốn xóa '))return false
+    let data=await this.rest.PutDataToAPI<result<RM0009>[]>(this.listdata.filter(c=>{return c.check===true}),'RM0009/delete').toPromise()
+    console.log(this.listdata.filter(c=>{return c.check===true}))
+    data.filter(c=>{return c.code==="OK"}).forEach(val=>{this.listdata.filter(c=>{return c.RM0009_ID===val.data.RM0009_ID}).map(x=>{this.listdata.splice(this.listdata.indexOf(x),1)})})
+   }
 }

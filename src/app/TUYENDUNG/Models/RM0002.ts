@@ -4,6 +4,7 @@ export class RM0002{
         public  tenLinhVuc : string   ;
         public  thuTu :number    ;
         public tinhTrang :boolean    ;
+        public check :boolean    ;
         public  ghiChu : string   ;
     
         // public  RM0012 :RM0012[]    ;

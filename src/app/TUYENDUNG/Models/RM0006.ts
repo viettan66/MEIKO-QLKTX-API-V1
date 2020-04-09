@@ -14,6 +14,7 @@ export class RM0006{
     public  tenTieuChiDG : string   ;
     public thuTu : number   ;
     public  tinhTrang : boolean   ;
+    public  check : boolean   ;
     public  ghiChu :string    ;
 
     public  RM0013 :RM0013    ;

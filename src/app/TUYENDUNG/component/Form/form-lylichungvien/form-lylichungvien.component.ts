@@ -28,7 +28,7 @@ public rm0100:RM0009[]=[]
    this.rm0100=await this.rest.GetDataFromAPI<RM0009[]>('RM0009/Getall').toPromise()
    $(document).ready(function(){
      if(that.check){
-       $('input,textarea,select').attr('disabled',true).addClass('none')
+       $('.input,.textarea,.select').attr('disabled',true).addClass('none')
        $('button').addClass('none2')
      }
    })
@@ -37,10 +37,13 @@ public rm0100:RM0009[]=[]
 save(){
   console.log(this.rm0010in)
   if(this.rm0010in.RM0010_ID==null){
-    this.rest.PostDataToAPI<result<RM0010>>(this.rm0010in,"RM0010/add").subscribe(data=>{
-      if(data.code=="OK"){
-        this.rm0010out.emit(data.data)
+    this.rest.PostDataToAPI<result<RM0010>[]>([this.rm0010in],"RM0010/add").subscribe(data=>{
+      data.forEach(val=>{
+        
+      if(val.code=="OK"){
+        this.rm0010out.emit(val.data)
       }
+      })
     })
   }else{
     this.rest.PutDataToAPI<result<RM0010>>(this.rm0010in,"RM0010/update").subscribe(data=>{

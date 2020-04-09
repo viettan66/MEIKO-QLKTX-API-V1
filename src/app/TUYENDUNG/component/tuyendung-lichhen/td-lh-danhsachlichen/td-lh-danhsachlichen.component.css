@@ -1,3 +1,4 @@
 .show{display: unset;}
 .hide{display: none;}
 .actived{background-color: rgb(252, 255, 204);}
+.tablelistdon td{padding: 5px !important;}

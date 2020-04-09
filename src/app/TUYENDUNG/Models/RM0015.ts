@@ -12,6 +12,7 @@ export class RM0015{
     public  thoiGianPhongVan :string  ;
     public  ghiChu :string   ;
     public  trangThai : boolean  ;
+    public  check : boolean  ;
     public  ketQua :boolean   ;
     public  vongPhongVan :number   ;
     public  RM0015A :RM0015A[]   ;

@@ -14,13 +14,14 @@ public newrm0001:RM0001=new RM0001()
 public listrm0001:RM0001[]=[]
   constructor(public rest:RESTService) { }
 
-  ngOnInit() {
-    this.rest.GetDataFromAPI<RM0001[]>('RM0001/Getall').subscribe(data=>{
-      this.listrm0001=data
-    })
+ async ngOnInit() {
+   this.listrm0001=await this.rest.GetDataFromAPI<RM0001[]>('RM0001/Getall').toPromise()
+   console.log(this.listrm0001)
   }
-  themcongviec(){
-    $('#myModalungvieninfo').modal()
+ async themcongviec(){
+    let data=await this.rest.PostDataToAPI<result<RM0001>>(new RM0001(),'RM0001/add').toPromise()
+    if(data.code=="OK")this.listrm0001.push(data.data)
+    //$('#myModalungvieninfo').modal()
   }
   savecongviec(){
     console.log(this.newrm0001)
@@ -30,5 +31,30 @@ public listrm0001:RM0001[]=[]
       }
       else alert(data.mess)
     })
+  }
+  async edititem(element:RM0001){
+   if( $('#edit'+element.RM0001_ID).find('i').hasClass('fa-edit')){
+      $('#row'+element.RM0001_ID).find('input:text,select').removeClass('none').removeAttr('disabled') 
+      $('#edit'+element.RM0001_ID).find('i').removeClass('fa-edit').addClass('fa-save')
+    }else{
+      $('#row'+element.RM0001_ID).find('input:text,select').addClass('none').attr('disabled',true)
+      $('#edit'+element.RM0001_ID).find('i').removeClass('fa-save').addClass('fa-edit')
+      let dataa= await this.rest.PutDataToAPI<result<RM0001>>(element,'RM0001/update').toPromise()
+      console.log(dataa)
+      if(dataa.code=="OK"){{
+        element=dataa.data
+      }}
+    }
+  }
+  choose(element:RM0001){
+    element.check==null?true:!element.check
+  }
+  public checkall=false
+  public tinhTrang=true
+  allchange(){
+    this.listrm0001.map(x=>x.check=this.checkall)
+  }
+  kjkj($event){
+    this.tinhTrang=$event.target.value=='true'
   }
 }

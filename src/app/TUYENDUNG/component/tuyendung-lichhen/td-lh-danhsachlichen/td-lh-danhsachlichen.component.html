@@ -5,70 +5,80 @@
               <div class="row">
                 <div class="col">DANH SÁCH LỊCH HẸN</div>
                 <div class="col-auto">
+                  <span class="mr-3">
+                      <span class="mr-3">Xem {{((start+1)*step)>=listRM0015.length?((listRM0015.length-step+1)<0?1:(listRM0015.length-step+1)):((start+1)*step-(step)+1)}}-{{((start+1)*step)>=listRM0015.length?listRM0015.length:((start+1)*step)}} của {{listRM0015.length}}</span>
+                      <button (click)="pre()" class="btn btn-sm btn-secondary mr-1" ><i class="fas fa-angle-left"></i></button>
+                      <button (click)="nex()" class="btn btn-sm btn-secondary mr-2" ><i class="fas fa-angle-right"></i></button>
+                  </span>
+                      <button *ngIf="disabled==false" title="Đồng ý lịch hẹn" (click)="agree()" class="btn  btn-success mr-2" ><i class="fas fa-check"></i></button>
+                  <button title="Xuất file" class="btn btn-info mr-2" (click)="download('tableexport')"><i class="fa fa-download"></i></button>
                   <select class="btn btn-secondary mr-2" (change)="bophanchange($event)">
                     <option value="all">BỘ PHẬN All</option>
-                    <option value="{{element.T098C}}" *ngFor="let element of listmkv9998">{{element.T002C}}</option>
+                    <option value="{{element.phong_id}}" *ngFor="let element of listMKV9998">{{element.bophan_ten}}</option>
                   </select>
                   <select class="btn btn-secondary mr-2" (change)="vitrichange($event)">
                     <option value="all">VỊ TRÍ All</option>
-                    <option value="{{element.T005C}}" *ngFor="let element of listrm0001">{{element.T005C}}</option>
+                    <option value="{{element.RM0001_ID}}" *ngFor="let element of listRM0001">{{element.tenCongViec}}</option>
                   </select>
-                  <button class="btn btn-primary" (click)="themungvien()"><i class="fa fa-plus"></i></button>
+                  <button *ngIf="disabled==true" title="Xóa lịch hẹn đã chọn" class="btn btn-secondary mr-2" (click)="deleteall()"><i class="fa fa-trash"></i></button>
                 </div>
               </div>
               
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
               <div class="row no-gutters">
-                <table class="table table-bordered tablelistdon" id="tabletoexport">
+                <table class="table table-bordered tablelistdon" id="tableexport" >
                   <thead><tr>
-                    <th style="width: 20px;"><input type="checkbox" ></th>
-                    <th style="width: 40px;">STT</th>
+                    <th style="width: 20px;"><input type="checkbox" (change)="Chooseall()" [(ngModel)]="checkall" ></th>
+                    <th style="width: 20px;">S</th>
                     <th>Ứng viên</th>
                     <th>Vị trí 1</th>
                     <th>Vị trí 2</th>
                     <th>Thời gian</th>
                     <th>Địa điểm</th>
                     <th>Hội đồng PV</th>
-                    <th style="width: 90px;text-align: center;"><i class="fa fa-list"></i></th>
+                    <th  *ngIf="disabled==true"  style="width: 80px;text-align: center;"><i class="fa fa-list"></i></th>
                   </tr>
                   </thead>
                   <tbody>
-                    <tr  id="tr{{element.RM0015_ID}}"  *ngFor="let element of listRM0015;let i=index;" style="cursor: pointer;padding: 0;">
-                    
-                      <td style="width: 20px;"><input type="checkbox" [(ngModel)]="element.check" ></td>
-                      <td style="width: 40px;">{{i+1}}</td>
-                      <td (click)="showungvien(element)">{{element.RM0010.HODEM+" " + element.RM0010.TEN}}</td>
-                      <td>{{element.RM0010.RM0001!=null?element.RM0010.RM0001.tenCongViec:''}}</td>
-                      <td>{{element.RM0010.RM0001_2!=null?element.RM0010.RM0001_2.tenCongViec:""}}</td>
-                        <td>
-                            <span class="show">{{element.ngayPV+' ' + element.thoiGianPV |date:'dd/MM/yyyy hh:mm'}}</span>
-                            <input class="hide form-control w-50" type="date" [ngModel]="element.ngayPV" (ngModelChange)="element.ngayPV=$event">
-                            <input class="hide form-control w-50" type="time" [ngModel]="element.thoiGianPV" (ngModelChange)="element.thoiGianPV=$event">
-                        </td>
-                      <td>
-                            <span class="show">{{element.RM0008!=null?element.RM0008.DiaDiem:""}}</span>
-                            <select class="hide form-control"  [(ngModel)]="element.RM0008_ID " >
-                                <option >Xin chọn địa điểm</option>
-                                <option *ngFor="let element of listRM0008" value="{{element['RM0008_ID']}}"> {{element['DiaDiem']}}</option>
-                            </select>
-                      </td>
-                      <td>
-                          <ng-container *ngFor="let button of element.RM0015A">
-                            <button class="btn btn-sm btn-secondary mr-1">{{button.MKV9999.hodem+' '+button.MKV9999.ten}} <i (click)="removeaccount(element,button)" class="fa fa-times {{button.check?'show':'hide'}}"></i></button>
+                    <ng-container *ngFor="let element of listRM0015;let i=index;">
+                      <ng-container *ngIf="element.RM0010.bophanid==bophanid||bophanid=='all'">
+                      <ng-container *ngIf="element.RM0010.RM0001.RM0001_ID==vitriid||vitriid=='all'">
+                        <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))||bophanid!='all'">
+                              <tr (click)="Choose(element)"  id="tr{{element.RM0015_ID}}"  style="cursor: pointer;padding: 0;">
+                                <td style="text-align: center;"><input  type="checkbox" [(ngModel)]="element.check" ></td>
+                                <td style="width: 40px;">{{i+1}}</td>
+                                <td><u (click)="showungvien(element)">{{element.RM0010.HODEM+" " + element.RM0010.TEN}}</u></td>
+                                <td>{{element.RM0010.RM0001!=null?element.RM0010.RM0001.tenCongViec:''}}</td>
+                                <td>{{element.RM0010.RM0001_2!=null?element.RM0010.RM0001_2.tenCongViec:""}}</td>
+                                  <td>
+                                      <span class="show">{{element.ngayPV+' ' + element.thoiGianPV |date:'dd/MM/yyyy hh:mm'}}</span>
+                                      <input class="hide form-control w-50" type="date" [ngModel]="element.ngayPV" (ngModelChange)="element.ngayPV=$event">
+                                      <input class="hide form-control w-50" type="time" [ngModel]="element.thoiGianPV" (ngModelChange)="element.thoiGianPV=$event">
+                                  </td>
+                                <td>
+                                      <span class="show">{{element.RM0008!=null?element.RM0008.DiaDiem:""}}</span>
+                                      <select class="hide form-control"  [(ngModel)]="element.RM0008_ID "  >
+                                          <option >Xin chọn địa điểm</option>
+                                          <option  *ngFor="let element of listRM0008" value="{{element['RM0008_ID']}}"> {{element['DiaDiem']}}</option>
+                                      </select>
+                                </td>
+                                <td>
+                                    <ng-container *ngFor="let button of element.RM0015A">
+                                      <button style="padding: 2px 3px;" (click)="info(button)" class="btn btn-sm {{button.trangThai?'btn-success':'btn-secondary'}} mr-1 mt-1">{{button.MKV9999.hodem+' '+button.MKV9999.ten}} <i (click)="removeaccount(element,button)" class="fa fa-times {{button.check?'show':'hide'}}"></i></button>
+                                    </ng-container>
+                                    <button style="padding: 2px 3px;"  class="btn btn-sm btn-primary hide mt-1 mr-1" (click)="selectaccount(element)"><i class="fa fa-plus"></i></button>
+                                </td>
+                                  <td  *ngIf="disabled==true" >
+                                      <button (click)="edititem(element)" id="edit{{element.RM0015_ID}}" class="btn btn-sm"><i class="fa fa-edit"></i></button>
+                                      <button (click)="deleteitem(element)"  id="delete{{element.RM0015_ID}}"  class="btn btn-sm"><i class="fa fa-trash"></i></button>
+                                  </td>
+                              </tr>
+
                           </ng-container>
-                          <button class="btn btn-sm btn-primary hide" (click)="selectaccount(element)"><i class="fa fa-plus"></i></button>
-                      </td>
-                        <td>
-                            <button (click)="edititem(element)" id="edit{{element.RM0015_ID}}" class="btn btn-sm"><i class="fa fa-edit"></i></button>
-                            <button (click)="deleteitem(element)"  id="delete{{element.RM0015_ID}}"  class="btn btn-sm"><i class="fa fa-trash"></i></button>
-                        </td>
-                      <!-- <th>
-                        <div class="progress" style="height: 20px;" (click)="showdetail(element)">
-                          <div class="progress-bar" role="progressbar" [ngStyle]="{'width':((100-parseint(element.i/element.j*100))+'%')}"  aria-valuemin="0" aria-valuemax="100">{{100-parseint(element.i/element.j*100)}}%</div>
-                        </div>
-                      </th> -->
-                    </tr>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
                   </tbody>
                 </table>
               </div>
@@ -102,9 +112,9 @@
                         <div class="row w-100">
                               <div class="col"><h5 class="modal-title">Chọn tài khoản phỏng vấn</h5> </div>
                               <div class="col-auto">
-                                    <span class="mr-3">{{((start+1)*step)>=listMKV9999.length?listMKV9999.length:((start+1)*step)}}/{{listMKV9999.length}}</span>
-                                          <button (click)="pre()" class="btn btn-sm btn-secondary mr-1" ><i class="fas fa-angle-left"></i></button>
-                                          <button (click)="nex()" class="btn btn-sm btn-secondary mr-3" ><i class="fas fa-angle-right"></i></button>
+                                    <span class="mr-3">{{((start2+1)*step2)>=listMKV9999.length?listMKV9999.length:((start2+1)*step2)}}/{{listMKV9999.length}}</span>
+                                          <button (click)="pre2()" class="btn btn-sm btn-secondary mr-1" ><i class="fas fa-angle-left"></i></button>
+                                          <button (click)="nex2()" class="btn btn-sm btn-secondary mr-3" ><i class="fas fa-angle-right"></i></button>
                                           <button (click)="closeselectaccount()" class="btn btn-sm btn-secondary" ><i class="fa fa-times"></i></button>
                               </div>
                         </div>
@@ -123,7 +133,7 @@
                               </thead>
                               <tbody>
                                     <ng-container *ngFor="let element of listMKV9999;let i=index">
-                                          <ng-container *ngIf="(i>=start*step) && (i<(start+1)*step)">
+                                          <ng-container *ngIf="(i>=start2*step2) && (i<(start2+1)*step2)">
                                                 <tr style="cursor: pointer;" id="tracc{{element.manhansu}}" (click)="chooseaccount(element)" class="{{checkelement(element)}}">
                                                       <td>{{i+1}}</td>
                                                       <td>{{element.manhansu}}</td>
@@ -137,4 +147,51 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+
+
+
+
+ <div class="modal fade " id="userinfor" role="dialog"  >
+  <div class="modal-dialog   modal-500" >
+      <div class="modal-content " >
+          <div class="modal-header">
+              <h5 class="modal-title">CHI TIẾT TÀI KHOẢN</h5>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body ">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <td colspan="2"><img src="" alt="ẢNH ĐẠI DIỆN"></td>
+                </tr>
+                <tr>
+                  <td>ID</td>
+                  <td>{{userinfor.MKV9999!=null?userinfor.MKV9999.manhansu:''}}</td>
+                </tr>
+                <tr>
+                  <td>TÊN</td>
+                  <td>{{userinfor.MKV9999!=null?userinfor.MKV9999.hodem+' '+userinfor.MKV9999.ten:''}}</td>
+                </tr>
+                <tr>
+                  <td>BỘ PHẬN</td>
+                  <td>{{userinfor.MKV9999!=null?userinfor.MKV9999.thetu_id:''}}</td>
+                </tr>
+                <tr>
+                  <td>SDT</td>
+                  <td>{{userinfor.MKV9999!=null?userinfor.MKV9999.dienthoai_didong:''}}</td>
+                </tr>
+                <TR>
+                  <td colspan="2">
+                    <app-button-messager></app-button-messager>
+                    <app-button-email></app-button-email>
+                    <app-button-call></app-button-call>
+                  </td>
+                </TR>
+              </thead>
+            </table>
+          </div>
+      </div>
+  </div>
 </div>

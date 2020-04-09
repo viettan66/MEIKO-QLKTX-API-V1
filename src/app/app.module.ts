@@ -62,6 +62,14 @@ import { TdLhDanhsachlichenComponent } from './TUYENDUNG/component/tuyendung-lic
 import { TuyendungUngvienComponent } from './TUYENDUNG/component/tuyendung-ungvien/tuyendung-ungvien.component';
 import { DanhsachdanhgiaComponent } from './TUYENDUNG/component/tuyendung-danhgia/danhsachdanhgia/danhsachdanhgia.component';
 import { TuyendungDanhmucQuyendanhgiaComponent } from './TUYENDUNG/component/tuyendung-danhmuc/tuyendung-danhmuc-quyendanhgia/tuyendung-danhmuc-quyendanhgia.component';
+import { ButtonMessagerComponent } from './Layout/button/button-messager/button-messager.component';
+import { ButtonEmailComponent } from './Layout/button/button-email/button-email.component';
+import { ButtonCallComponent } from './Layout/button/button-call/button-call.component';
+import { DanhsachtuyendungComponent } from './TUYENDUNG/component/tuyendung-yeucau/danhsachtuyendung/danhsachtuyendung.component';
+import { TuyendungYeucaubophanComponent } from './TUYENDUNG/component/tuyendung-yeucaubophan/tuyendung-yeucaubophan.component';
+import { TuyendungLichhencuatoiComponent } from './TUYENDUNG/component/tuyendung-lichhencuatoi/tuyendung-lichhencuatoi.component';
+import { TuyendungDanhgiacuatoiComponent } from './TUYENDUNG/component/tuyendung-danhgiacuatoi/tuyendung-danhgiacuatoi.component';
+import { ButtonDownloadComponent } from './Layout/button/button-download/button-download.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent,canActivate:[Auth]},
@@ -90,6 +98,9 @@ const routes: Routes = [
   {path: 'TUYENDUNG/LH', component: TuyendungLichhenComponent,canActivate:[Auth]},
   {path: 'TUYENDUNG/DG', component: TuyendungDanhgiaComponent,canActivate:[Auth]},
   {path: 'TUYENDUNG/DM', component: TuyendungDanhmucComponent,canActivate:[Auth]},
+  {path: 'TUYENDUNG/YCBP', component: TuyendungYeucaubophanComponent,canActivate:[Auth]},
+  {path: 'TUYENDUNG/LHCT', component: TuyendungLichhencuatoiComponent,canActivate:[Auth]},
+  {path: 'TUYENDUNG/DGCT', component: TuyendungDanhgiacuatoiComponent,canActivate:[Auth]},
   {path: '**', redirectTo:''},
 ];
 
@@ -150,6 +161,14 @@ const routes: Routes = [
     TuyendungUngvienComponent,
     DanhsachdanhgiaComponent,
     TuyendungDanhmucQuyendanhgiaComponent,
+    ButtonMessagerComponent,
+    ButtonEmailComponent,
+    ButtonCallComponent,
+    DanhsachtuyendungComponent,
+    TuyendungYeucaubophanComponent,
+    TuyendungLichhencuatoiComponent,
+    TuyendungDanhgiacuatoiComponent,
+    ButtonDownloadComponent,
     
   ],
   imports: [

@@ -6,8 +6,10 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">DANH SÁCH ĐỊA ĐIỂM PHỎNG VẤN</div>
-                    <div class="col-auto"><button (click)="themcongviec()" class="btn btn-secondary" title="Lưu danh sách lĩnh vực"><i class="fa fa-plus"></i></button></div>
-                </div>
+                    <div class="col-auto">
+                        <button (click)="themcongviec()" class="btn btn-secondary mr-2" title="Thêm CHUYÊN NGÀNH"><i class="fa fa-plus"></i></button>
+                        <button (click)="xoacongviec()" class="btn btn-secondary" title="Xóa danh sách đã chọn"><i class="fa fa-trash-alt"></i></button>
+                    </div>
                 
                 <!-- <button id="savelisst" class="btn btn-secondary" title="Lưu danh sách lĩnh vực"><i class="fa fa-save"></i></button> -->
             </div>
@@ -15,20 +17,20 @@
                 <table class="table table-bordered" id="tablecongviec">
                     <thead>
                         <tr>
-                            <th><input type="checkbox"></th>
+                            <th><input type="checkbox"  (change)="allchange()" [(ngModel)]="checkall"></th>
                             <th>MÃ ĐỊA ĐIỂM</th>
                             <th>TÊN ĐỊA ĐIỂM</th>
                             <th>GHI CHÚ</th>
-                            <th style="width: 90px;">CHỨC NĂNG</th>
+                            <th style="width: 140px;">CHỨC NĂNG</th>
                         </tr>
                     </thead>
                     <tbody >
-                        <tr *ngFor="let element of listdata;let i = index">
-                            <th><input type="checkbox"></th>
+                        <tr id="row{{element.RM0008_ID}}" *ngFor="let element of listdata;let i = index">
+                            <th><input type="checkbox" [(ngModel)]="element.check"></th>
                             <td><input type="hidden" name="ID" value="{{i}}"><input type="text" name="" disabled class="form-control none" [(ngModel)]="element.maDiaDiem" ></td>
                             <td><input type="text" name="" disabled class="form-control none"  [(ngModel)]="element.DiaDiem" ></td>
                             <td><input type="text" name="" disabled class="form-control none"  [(ngModel)]="element.ghiChu" ></td>
-                            <td><button class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
+                            <td><button  id="edit{{element.RM0008_ID}}" (click)="edititem(element)"  class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
                                 <button class="btn btn-sm deleteitem"><i class="far fa-trash-alt"></i></button></td>
                         </tr>
                     </tbody>

@@ -6,6 +6,7 @@ export class RM0001{
     public  moTa : string   ;
     public  thuTu :Number    ;
     public  tinhTrang : boolean   ;
+    public  check : boolean   ;
     public  ghiChu :string    ;
 
     // public RM0010 :RM0010[]    ;

@@ -6,7 +6,10 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">Danh sách lĩnh vực </div>
-                    <div class="col-auto"><button (click)="themcongviec()" class="btn btn-secondary" title="Lưu danh sách lĩnh vực"><i class="fa fa-plus"></i></button></div>
+                    <div class="col-auto">
+                        <button (click)="themcongviec()" class="btn btn-secondary mr-2" title="Thêm lĩnh vực"><i class="fa fa-plus"></i></button>
+                        <button (click)="xoacongviec()" class="btn btn-secondary" title="Xóa danh sách đã chọn"><i class="fa fa-trash-alt"></i></button>
+                    </div>
                 </div>
                 
                 <!-- <button id="savelisst" class="btn btn-secondary" title="Lưu danh sách lĩnh vực"><i class="fa fa-save"></i></button> -->
@@ -15,7 +18,7 @@
                 <table class="table table-bordered" id="tablecongviec">
                     <thead>
                         <tr>
-                            <th><input type="checkbox"></th>
+                            <th><input type="checkbox"  (change)="allchange()" [(ngModel)]="checkall"></th>
                             <th>Mã lĩnh vực</th>
                             <th>Tên lĩnh vực</th>
                             <th>Ghi chú</th>
@@ -23,12 +26,12 @@
                         </tr>
                     </thead>
                     <tbody >
-                        <tr *ngFor="let element of listrm0002;let i = index">
-                            <th><input type="checkbox"></th>
+                        <tr id="row{{element.RM0002_ID}}" *ngFor="let element of listrm0002;let i = index">
+                            <th><input type="checkbox" [(ngModel)]="element.check"></th>
                             <td><input type="hidden" name="ID" value="{{i}}"><input type="text" name="" disabled class="form-control none" [(ngModel)]="element.maLinhVuc" ></td>
                             <td><input type="text" name="" disabled class="form-control none"  [(ngModel)]="element.tenLinhVuc" ></td>
                             <td><input type="text" name="" disabled class="form-control none"  [(ngModel)]="element.ghiChu" ></td>
-                            <td><button class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
+                            <td><button id="edit{{element.RM0002_ID}}" (click)="edititem(element)"  class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
                                 <button class="btn btn-sm deleteitem"><i class="far fa-trash-alt"></i></button></td>
                         </tr>
                     </tbody>

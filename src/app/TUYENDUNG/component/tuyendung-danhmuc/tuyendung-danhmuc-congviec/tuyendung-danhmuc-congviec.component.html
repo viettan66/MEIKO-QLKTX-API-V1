@@ -5,32 +5,49 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col">Danh sách công việc </div>
-                    <div class="col-auto"><button (click)="themcongviec()" class="btn btn-secondary" title="Lưu danh sách công việc"><i class="fa fa-plus"></i></button></div>
+                    <div class="col">DANH SÁCH VỊ TRÍ CÔNG VIỆC</div>
+                    <div class="col-auto">
+                        <button (click)="themcongviec()" class="btn btn-secondary mr-2" title="THÊM CÔNG VIỆC MỚI"><i class="fa fa-plus"></i></button>
+                        <button  class="btn btn-secondary mr-2" title="XOÁ CÔNG VIỆC ĐÃ CHỌN"><i class="fa fa-trash"></i></button>
+                        <!-- <select  class="btn btn-secondary" (change)="kjkj($event)"  >
+                            <option value="true">Bật</option>
+                            <option value="false">Tắt</option>
+                        </select> -->
+                    </div>
                 </div>
-                
-                <!-- <button id="savelisst" class="btn btn-secondary" title="Lưu danh sách công việc"><i class="fa fa-save"></i></button> -->
             </div>
             <div class="card-body">
                 <table class="table table-bordered" id="tablecongviec">
                     <thead>
                         <tr>
-                            <th><input type="checkbox"></th>
+                            <th><input type="checkbox" (change)="allchange()" [(ngModel)]="checkall"></th>
+                            <th>STT</th>
                             <th>Mã công việc</th>
                             <th>Tên công việc</th>
                             <th>Ghi chú</th>
+                            <th>Trạng thái</th>
                             <th style="width: 90px;">Chức năng</th>
                         </tr>
                     </thead>
                     <tbody >
-                        <tr *ngFor="let element of listrm0001;let i = index">
-                            <th><input type="checkbox"></th>
-                            <td><input type="hidden" name="ID" value="{{i}}"><input type="text" name="" disabled class="form-control none" [(ngModel)]="element.maCongViec" ></td>
-                            <td><input type="text" name="" disabled class="form-control none"  [(ngModel)]="element.tenCongViec" ></td>
-                            <td><input type="text" name="" disabled class="form-control none"  [(ngModel)]="element.moTa" ></td>
-                            <td><button class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
-                                <button class="btn btn-sm deleteitem"><i class="far fa-trash-alt"></i></button></td>
-                        </tr>
+                        <ng-container *ngFor="let element of listrm0001;let i = index">
+                            <!-- <ng-container *ngIf="element.tinhTrang==tinhTrang||element.tinhTrang==null"> -->
+                                <tr id="row{{element.RM0001_ID}}">
+                                    <th><input type="checkbox" [(ngModel)]="element.check"></th>
+                                    <td>{{i+1}}</td>
+                                    <td><input type="text"  disabled class="form-control none" [(ngModel)]="element.maCongViec" ></td>
+                                    <td><input type="text"  disabled class="form-control none"  [(ngModel)]="element.tenCongViec" ></td>
+                                    <td><input type="text"  disabled class="form-control none"  [(ngModel)]="element.moTa" ></td>
+                                    <td><select disabled class="form-control none"   [(ngModel)]="element.tinhTrang">
+                                        <option value="true">Bật</option>
+                                        <option value="false">Tắt</option>
+                                        <option value="null">Chưa đặt</option>
+                                    </select></td>
+                                    <td><button id="edit{{element.RM0001_ID}}" (click)="edititem(element)" class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
+                                        <button class="btn btn-sm deleteitem"><i class="far fa-trash-alt"></i></button></td>
+                                </tr>
+                            <!-- </ng-container> -->
+                        </ng-container>
                     </tbody>
                 </table>
             </div>
@@ -52,12 +69,12 @@
                             <input class="form-control form-control-sm" type="text" placeholder="Tên công việc"  [(ngModel)]="newrm0001.tenCongViec">
                             <textarea class="form-control form-control-sm" placeholder="Mô tả"  [(ngModel)]="newrm0001.moTa"></textarea>
                             <textarea class="form-control form-control-sm" placeholder="Ghi chú"   [(ngModel)]="newrm0001.ghiChu"></textarea>
-                            <select class="form-control form-control-sm choose" >
+                            <!-- <select class="form-control form-control-sm choose" >
                                 <option value="">---Chọn lĩnh vực---</option>
                             </select>
                             <select class="form-control form-control-sm choose"  [(ngModel)]="newrm0001.RM0004_ID">
                                 <option value="">---Chọn chuyên ngành---</option>
-                            </select>
+                            </select> -->
                             <select class="form-control form-control-sm"   [(ngModel)]="newrm0001.tinhTrang">
                                 <option value="true">Bật</option>
                                 <option value="false">Tắt</option>

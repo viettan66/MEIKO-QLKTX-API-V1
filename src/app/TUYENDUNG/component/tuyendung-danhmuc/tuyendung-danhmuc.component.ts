@@ -10,7 +10,7 @@ declare var $:any
   styleUrls: ['./tuyendung-danhmuc.component.css']
 })
 export class TuyendungDanhmucComponent implements OnInit {
-public tab=7
+public tab=0
   constructor(public rest:RESTService) { }
 
   ngOnInit() {

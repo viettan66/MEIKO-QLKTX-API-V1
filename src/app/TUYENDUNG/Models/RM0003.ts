@@ -6,6 +6,7 @@ export class RM0003{
     public  tenBacDaoTao :string    ;
     public  thuTu :number    ;
     public  tinhTrang :boolean    ;
+    public  check :boolean    ;
     public  ghiChu :string    ;
 
     // public  RM0012 :RM0012[]    ;

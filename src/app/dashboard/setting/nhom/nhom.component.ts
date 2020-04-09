@@ -22,6 +22,8 @@ export class NhomComponent implements OnInit {
   public listactionactive:MKV9981[]=[]
   public listacc:MKV9999[]=[]
   public listaccofgroup:MKV9999[]=[]
+  public listMKV9999show:MKV9999[]=[]
+  public listMKV9999input:MKV9999[]=[]
   public NHOM=""
   constructor(public rest:RESTService,public cookie : CookieService) { }
   ngOnInit() { 
@@ -113,6 +115,8 @@ export class NhomComponent implements OnInit {
         lochanhdong()
         that.rest.GetDataFromAPI<MKV9999[]>('Permistion/GetAllUserOfGroup/'+mkv9983_id).subscribe(data=>{
             that.listaccofgroup=data
+           that. listMKV9999input=data
+           that. listMKV9999show=data
             showacc();
             
           })

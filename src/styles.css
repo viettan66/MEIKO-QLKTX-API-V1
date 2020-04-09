@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
     .btn-rounded{border-radius: 100% !important;}
-
+.ShowToExport{display: none;}
     .actived{background-color: rgb(218, 218, 218);}
 html {
   height: 100%;

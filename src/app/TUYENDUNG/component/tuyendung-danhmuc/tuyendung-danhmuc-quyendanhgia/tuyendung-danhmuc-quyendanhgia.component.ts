@@ -16,6 +16,7 @@ export class TuyendungDanhmucQuyendanhgiaComponent implements OnInit {
   constructor(public rest: RESTService) { }
   public listMKV9999: MKV9999[] = []
   public listRM0006: RM0006[]=[]
+  public listDEPT=[]
   public start:number=0
   public step:number=20
   public keysearch=''
@@ -25,8 +26,13 @@ export class TuyendungDanhmucQuyendanhgiaComponent implements OnInit {
     if (this.listMKV9999.length > 0) {
       this.listRM0006=this.listMKV9999[0].RM0006
     }
+    this.listMKV9999.forEach(VAL=>{
+      if(this.listDEPT.filter(c=>{return c['id']===VAL.phong_id}).length==0&&VAL.phong_id!=null)
+      this.listDEPT.push({id:VAL.phong_id,ten:VAL.thetu_id})
+    })
     console.log(this.listMKV9999)
     console.log(this.listRM0006)
+    console.log(this.listDEPT)
   }
   async setpermistion(element: MKV9999,element2:RM0006){
     if(element2.RM0007==null)

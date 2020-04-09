@@ -94,4 +94,8 @@ public step:number=20
     })
     alert("Đã thêm lịch hẹn cho "+count+" ứng viên.")
   }
+  
+  Choose(element:RM0015){
+    element.check=element.check==null?true:!element.check
+  }
 }

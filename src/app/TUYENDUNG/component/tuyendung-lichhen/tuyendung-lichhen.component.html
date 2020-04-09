@@ -7,7 +7,7 @@
                 </ul>
       </div>
       <div class="col">
-        <app-td-lh-themlichen *ngIf="tab==0"></app-td-lh-themlichen>
-        <app-td-lh-danhsachlichen *ngIf="tab==1"></app-td-lh-danhsachlichen>
+        <app-td-lh-themlichen  *ngIf="tab==0"></app-td-lh-themlichen>
+        <app-td-lh-danhsachlichen [disabled]="true" *ngIf="tab==1"></app-td-lh-danhsachlichen>
       </div>
 </div>

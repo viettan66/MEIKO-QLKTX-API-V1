@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('KTX_User', JSON.stringify(data)); 
               that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAcctionWidthMKV9999ID/'+data.MKV9999_ID).subscribe(data=>{
                 localStorage.setItem('KTX_Menu', JSON.stringify(data)); 
-                window.location.assign('')
+                window.location.assign('/success')
               })
             })
           })
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('KTX_User', JSON.stringify(data));
               that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAcctionWidthMKV9999ID/'+data.MKV9999_ID).subscribe(data=>{
                 localStorage.setItem('KTX_Menu', JSON.stringify(data)); 
-                window.location.assign('')
+                window.location.assign('/success')
               })
         }
 
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
           }
           else {
             if( data.matkhau == $('#PASS').val())
-            LOGIN(data, false)
+            LOGIN(data, true)
             else{
               alert('Sai mật khẩu')
             }

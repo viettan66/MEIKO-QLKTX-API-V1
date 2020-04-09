@@ -33,7 +33,7 @@
 </div>
 <div class="row no-gutters py-2">
     <div class="col px-1">
-        <div class="card">
+        <!-- <div class="card">
             <h5 class="card-header">DANH SÁCH TÀI KHOẢN</h5>
             <div class="card-body">
                 <table class="table">
@@ -56,7 +56,8 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
+        <app-taikhoan [listMKV9999input]="listMKV9999input"></app-taikhoan>
     </div>
     <div class="col-auto px-1">
         <div class="row no-gutters py-2">
@@ -67,7 +68,7 @@
         </div>
     </div>
     <div class="col px-1">
-        <div class="card">
+        <!-- <div class="card">
             <h5 class="card-header">TÀI KHOẢN TRONG NHÓM {{NHOM}}</h5>
             <div class="card-body">
                 <table class="table">
@@ -90,7 +91,9 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
+        
+        <app-taikhoan [listMKV9999show]="listMKV9999show" id="taikhoanofgr"></app-taikhoan>
     </div>
 </div>
 

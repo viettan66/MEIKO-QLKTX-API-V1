@@ -3,4 +3,5 @@ export class RM0009{
     public  maNguonThongTin :  string  ;    
     public  tenNguongThongTin :  string  ;    
     public  ghiChu : string   ;    
+    public  check : boolean   ;    
 }

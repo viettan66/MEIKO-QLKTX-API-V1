@@ -6,6 +6,9 @@
               <div class="row">
                 <div class="col">DANH SÁCH ỨNG VIÊN</div>
                 <div class="col-auto">
+                  <span class="mr-3">Xem {{((start+1)*step)>=listrm0010.length?listrm0010.length:((start+1)*step)}}/{{listrm0010.length}}</span>
+                    <button (click)="pre()" class="btn btn-sm btn-secondary mr-1" ><i class="fas fa-angle-left"></i></button>
+                    <button (click)="nex()" class="btn btn-sm btn-secondary mr-5" ><i class="fas fa-angle-right"></i></button>
                   <select class="btn btn-secondary mr-2" (change)="bophanchange($event)">
                     <option value="all">BỘ PHẬN All</option>
                     <option value="{{element.T098C}}" *ngFor="let element of listmkv9998">{{element.T002C}}</option>
@@ -14,16 +17,24 @@
                     <option value="all">VỊ TRÍ All</option>
                     <option value="{{element.T005C}}" *ngFor="let element of listrm0001">{{element.T005C}}</option>
                   </select>
-                  <button class="btn btn-primary" (click)="themungvien()"><i class="fa fa-plus"></i></button>
+                  <select class="btn btn-secondary mr-2" (change)="ungvientypechange($event)" [(ngModel)]="ungvientype">
+                    <option value="true">CHƯA THAM GIA PV</option>
+                    <option value="false">ĐÃ THAM GIA PV</option>
+                  </select>
+                  <button class="btn btn-primary mr-2" (click)="themungvien()"><i class="fa fa-plus"></i></button>
+                  <button class="btn btn-primary mr-2" (click)="xoavien()"><i class="fa fa-trash"></i></button>
+                  <button class="btn btn-primary mr-2" (click)="download('tableExport1')"><i class="fa fa-download"></i></button>
+                  <button class="btn btn-primary mr-2" (click)="upload()"><i class="fa fa-upload"></i></button>
+                  <!-- <app-button-download tableID="tableexport1" tableName="tableExport" bg="btn-warning text-white" ></app-button-download> -->
                 </div>
               </div>
               
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
               <div class="row no-gutters">
-                <table class="table table-bordered tablelistdon" id="tabletoexport">
+                <table class="table table-bordered tablelistdon tableExport1" id="tableExport1">
                   <thead><tr>
-                    <th style="width: 20px;"><input type="checkbox" ></th>
+                    <th style="width: 20px;"><input type="checkbox" [(ngModel)]="checkall" (change)="checkallitem()" ></th>
                     <th style="width: 40px;">STT</th>
                     <th>Họ tên</th>
                     <th>Ngày sinh</th>
@@ -33,26 +44,111 @@
                     <th>Vị trí 1</th>
                     <th>Vị trí 2</th>
                     <th>Thông tin</th>
+                    <th class="ShowToExport">RM0010_ID</th>
+                    <th class="ShowToExport">maID</th>
+                    <th class="ShowToExport">HODEM</th>
+                    <th class="ShowToExport">TEN</th>
+                    <th class="ShowToExport">NGAYSINH</th>
+                    <th class="ShowToExport">NOISINH</th>
+                    <th class="ShowToExport">CMTND_SO</th>
+                    <th class="ShowToExport">CMTND_NGAYCAP</th>
+                    <th class="ShowToExport">CMTND_NOICAP</th>
+                    <th class="ShowToExport">GIOITINH</th>
+                    <th class="ShowToExport">HONNHAN</th>
+                    <th class="ShowToExport">TELEPHONE</th>
+                    <th class="ShowToExport">MOBILE</th>
+                    <th class="ShowToExport">CHIEUCAO</th>
+                    <th class="ShowToExport">CANNANG</th>
+                    <th class="ShowToExport">EMAIL</th>
+                    <th class="ShowToExport">THUONGTRU</th>
+                    <th class="ShowToExport">TAMTRU</th>
+                    <th class="ShowToExport">RM0001_ID</th>
+                    <th class="ShowToExport">RM0001_ID2</th>
+                    <th class="ShowToExport">NGAYCOTHELAM</th>
+                    <th class="ShowToExport">THUNHAPMONGMUON</th>
+                    <th class="ShowToExport">COTHELAMTHEM</th>
+                    <th class="ShowToExport">COTHEDICONGTAC</th>
+                    <th class="ShowToExport">COTHETHAYDOIDIADIEM</th>
+                    <th class="ShowToExport">DATUNGTHITUYENMEIKO</th>
+                    <th class="ShowToExport">NEUDATUNGTHITUYENMEIKO</th>
+                    <th class="ShowToExport">ID_NGUONTHONGTIN</th>
+                    <th class="ShowToExport">DUDINHTUONGLAI</th>
+                    <th class="ShowToExport">SOTHICH</th>
+                    <th class="ShowToExport">KHONGTHICH</th>
+                    <th class="ShowToExport">CACPHAMCHATKYNANG</th>
+                    <th class="ShowToExport">HOTENNGUOITHAN</th>
+                    <th class="ShowToExport">DIACHINGUOITHAN</th>
+                    <th class="ShowToExport">MOBILENGUOITHAN</th>
+                    <th class="ShowToExport">ANHCHANDUNG</th>
+                    <th class="ShowToExport">DUDINHHOCTIEPCHUYENNGANH</th>
+                    <th class="ShowToExport">DUDINHHOCTIEP</th>
+                    <th class="ShowToExport">bophanid</th>
                   </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let element of listrm0010;let i=index;" style="cursor: pointer;padding: 0;">
-                    
-                      <td style="width: 20px;"><input type="checkbox" [(ngModel)]="element.check" ></td>
-                      <td style="width: 40px;">STT</td>
-                      <td>{{element.HODEM + element.TEN}}</td>
-                      <td>{{element.NGAYSINH|date:'dd/MM/yyyy'}}</td>
-                      <td>{{element.CMTND_SO}}</td>
-                      <td>{{element.GIOITINH==null?"":(element.GIOITINH?"Nam":"Nữ")}}</td>
-                      <td>{{element.MOBILE}}</td>
-                      <td>{{element.RM0001!=null?element.RM0001.tenCongViec:""}}</td>
-                      <td>{{element.RM0001_2!=null?element.RM0001_2.tenCongViec:""}}</td>
-                      <th>
-                        <div class="progress" style="height: 20px;" (click)="showdetail(element)">
-                          <div class="progress-bar" role="progressbar" [ngStyle]="{'width':((100-parseint(element.i/element.j*100))+'%')}"  aria-valuemin="0" aria-valuemax="100">{{100-parseint(element.i/element.j*100)}}%</div>
-                        </div>
-                      </th>
-                    </tr>
+                    <ng-container *ngFor="let element of listrm0010;let i=index;" >
+                      <ng-container *ngIf="element.bophanid==bophanid||bophanid=='all'">
+                      <ng-container *ngIf="element.RM0001.RM0001_ID==vitriid||vitriid=='all'">
+                        <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))||bophanid!='all'">
+                          <tr style="cursor: pointer;padding: 0;" (click)="Choose(element)" >
+                            <td style="width: 20px;"><input  type="checkbox" [(ngModel)]="element.check" ></td>
+                            <td style="width: 40px;">{{i+1}}</td>
+                            <td>{{element.HODEM +' '+ element.TEN}}</td>
+                            <td>{{element.NGAYSINH|date:'yyyy/MM/dd'}}</td>
+                            <td>{{element.CMTND_SO}}</td>
+                            <td>{{element.GIOITINH==null?"":(element.GIOITINH?"Nam":"Nữ")}}</td>
+                            <td>{{element.MOBILE}}</td>
+                            <td>{{element.RM0001!=null?element.RM0001.tenCongViec:""}}</td>
+                            <td>{{element.RM0001_2!=null?element.RM0001_2.tenCongViec:""}}</td>
+                            <th>
+                              <div class="progress" style="height: 20px;" (click)="showdetail(element)">
+                                <div class="progress-bar" role="progressbar" [ngStyle]="{'width':((100-parseint(element.i/element.j*100))+'%')}"  aria-valuemin="0" aria-valuemax="100">{{100-parseint(element.i/element.j*100)}}%</div>
+                              </div>
+                            </th>
+                            <th class="ShowToExport">{{element.RM0010_ID}}</th>
+                                <th class="ShowToExport">{{element.maID}}</th>
+                                <th class="ShowToExport">{{element.HODEM}}</th>
+                                <th class="ShowToExport">{{element.TEN}}</th>
+                                <th class="ShowToExport">{{element.NGAYSINH}}</th>
+                                <th class="ShowToExport">{{element.NOISINH}}</th>
+                                <th class="ShowToExport">{{element.CMTND_SO}}</th>
+                                <th class="ShowToExport">{{element.CMTND_NGAYCAP}}</th>
+                                <th class="ShowToExport">{{element.CMTND_NOICAP}}</th>
+                                <th class="ShowToExport">{{element.GIOITINH}}</th>
+                                <th class="ShowToExport">{{element.HONNHAN}}</th>
+                                <th class="ShowToExport">{{element.TELEPHONE}}</th>
+                                <th class="ShowToExport">{{element.MOBILE}}</th>
+                                <th class="ShowToExport">{{element.CHIEUCAO}}</th>
+                                <th class="ShowToExport">{{element.CANNANG}}</th>
+                                <th class="ShowToExport">{{element.EMAIL}}</th>
+                                <th class="ShowToExport">{{element.THUONGTRU}}</th>
+                                <th class="ShowToExport">{{element.TAMTRU}}</th>
+                                <th class="ShowToExport">{{element.RM0001_ID}}</th>
+                                <th class="ShowToExport">{{element.RM0001_ID2}}</th>
+                                <th class="ShowToExport">{{element.NGAYCOTHELAM}}</th>
+                                <th class="ShowToExport">{{element.THUNHAPMONGMUON}}</th>
+                                <th class="ShowToExport">{{element.COTHELAMTHEM}}</th>
+                                <th class="ShowToExport">{{element.COTHEDICONGTAC}}</th>
+                                <th class="ShowToExport">{{element.COTHETHAYDOIDIADIEM}}</th>
+                                <th class="ShowToExport">{{element.DATUNGTHITUYENMEIKO}}</th>
+                                <th class="ShowToExport">{{element.NEUDATUNGTHITUYENMEIKO}}</th>
+                                <th class="ShowToExport">{{element.ID_NGUONTHONGTIN}}</th>
+                                <th class="ShowToExport">{{element.DUDINHTUONGLAI}}</th>
+                                <th class="ShowToExport">{{element.SOTHICH}}</th>
+                                <th class="ShowToExport">{{element.KHONGTHICH}}</th>
+                                <th class="ShowToExport">{{element.CACPHAMCHATKYNANG}}</th>
+                                <th class="ShowToExport">{{element.HOTENNGUOITHAN}}</th>
+                                <th class="ShowToExport">{{element.DIACHINGUOITHAN}}</th>
+                                <th class="ShowToExport">{{element.MOBILENGUOITHAN}}</th>
+                                <th class="ShowToExport">{{element.ANHCHANDUNG}}</th>
+                                <th class="ShowToExport">{{element.DUDINHHOCTIEPCHUYENNGANH}}</th>
+                                <th class="ShowToExport">{{element.DUDINHHOCTIEP}}</th>
+                                <th class="ShowToExport">{{element.bophanid}}</th>
+                          </tr>
+                        </ng-container>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
                   </tbody>
                 </table>
               </div>

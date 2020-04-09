@@ -1,34 +1,34 @@
 <h5 class="w-100" style="text-align: center;"><B>LÝ LỊCH ỨNG VIÊN</B></h5>
 <H6><B>I. THÔNG TIN CÁ NHÂN</B></H6>
-<input name="maID" type="hidden">
-<input name="RM0010_ID" type="hidden">
+<input class="input" name="maID" type="hidden">
+<input class="input" name="RM0010_ID" type="hidden">
 <table class="table table-bordered">
     <tr>
         <td>Họ<span style="color: red;"> (*)</span></td>
-        <td><input type="text"  name="HODEM" [(ngModel)]="rm0010in.HODEM"></td>
+        <td><input class="input" type="text"  name="HODEM" [(ngModel)]="rm0010in.HODEM"></td>
         <td style="width: 80px;">Tên<span style="color: red;"> (*)</span></td>
-        <td><input type="text" name="TEN" [(ngModel)]="rm0010in.TEN"></td>
+        <td><input class="input" type="text" name="TEN" [(ngModel)]="rm0010in.TEN"></td>
         <td>Ngày sinh<span style="color: red;"> (*)</span></td>
-        <td><input type="date" name="NGAYSINH" (ngModelChange)="rm0010in.NGAYSINH = $event"
+        <td><input class="input" type="date" name="NGAYSINH" (ngModelChange)="rm0010in.NGAYSINH = $event"
                 [ngModel]="rm0010in.NGAYSINH | date:'yyyy-MM-dd'"></td>
     </tr>
     <tr>
         <td>nơi sinh</td>
-        <td colspan="5"><input type="text" name="NOISINH" [(ngModel)]="rm0010in.NOISINH"></td>
+        <td colspan="5"><input class="input" type="text" name="NOISINH" [(ngModel)]="rm0010in.NOISINH"></td>
     </tr>
     <tr>
         <td>CMTND<span style="color: red;"> (*)</span></td>
-        <td><input type="text" name="CMTND_SO" [(ngModel)]="rm0010in.CMTND_SO"></td>
+        <td><input class="input" type="text" name="CMTND_SO" [(ngModel)]="rm0010in.CMTND_SO"></td>
         <td>Ngày cấp</td>
-        <td><input type="date" name="CMTND_NGAYCAP" (ngModelChange)="rm0010in.CMTND_NGAYCAP = $event"
+        <td><input class="input" type="date" name="CMTND_NGAYCAP" (ngModelChange)="rm0010in.CMTND_NGAYCAP = $event"
                 [ngModel]="rm0010in.CMTND_NGAYCAP | date:'yyyy-MM-dd'"></td>
         <td>Noi cấp</td>
-        <td><input type="text" name="CMTND_NOICAP" [(ngModel)]="rm0010in.CMTND_NOICAP"></td>
+        <td><input class="input" type="text" name="CMTND_NOICAP" [(ngModel)]="rm0010in.CMTND_NOICAP"></td>
     </tr>
     <tr>
         <td>Giới tính<span style="color: red;"> (*)</span></td>
         <td>
-            <select name="GIOITINH" [(ngModel)]="rm0010in.GIOITINH">
+            <select class="select" name="GIOITINH" [(ngModel)]="rm0010in.GIOITINH">
 
                 <option value="true">Nam</option>
                 <option value="false">Nữ</option>
@@ -36,34 +36,34 @@
         </td>
         <td><span>Hôn nhân</span> </td>
         <td>
-            <select name="HONNHAN" [(ngModel)]="rm0010in.HONNHAN">
+            <select  class="select"  name="HONNHAN" [(ngModel)]="rm0010in.HONNHAN">
 
                 <option value="false">Độc thân</option>
                 <option value="true">Đã kết hôn</option>
             </select>
         </td>
         <td style="width: 120px;">Điện thoại nhà</td>
-        <td><input type="text" name="TELEPHONE" [(ngModel)]="rm0010in.TELEPHONE"></td>
+        <td><input class="input" type="text" name="TELEPHONE" [(ngModel)]="rm0010in.TELEPHONE"></td>
     </tr>
     <tr>
         <td>Email</td>
-        <td colspan="3"><input type="text" name="EMAIL" [(ngModel)]="rm0010in.EMAIL"></td>
+        <td colspan="3"><input class="input" type="text" name="EMAIL" [(ngModel)]="rm0010in.EMAIL"></td>
         <td>Di động<span style="color: red;"> (*)</span></td>
-        <td><input type="text" name="MOBILE" [(ngModel)]="rm0010in.MOBILE"></td>
+        <td><input class="input" type="text" name="MOBILE" [(ngModel)]="rm0010in.MOBILE"></td>
     </tr>
     <tr>
         <td>Chiều cao</td>
-        <td colspan="2"><input type="text" name="CHIEUCAO" [(ngModel)]="rm0010in.CHIEUCAO"></td>
+        <td colspan="2"><input class="input" type="text" name="CHIEUCAO" [(ngModel)]="rm0010in.CHIEUCAO"></td>
         <td>Cân nặng</td>
-        <td colspan="2"><input type="text" name="CANNANG" [(ngModel)]="rm0010in.CANNANG"></td>
+        <td colspan="2"><input class="input" type="text" name="CANNANG" [(ngModel)]="rm0010in.CANNANG"></td>
     </tr>
     <tr>
         <td>Thường trú</td>
-        <td colspan="5"><input type="text" name="THUONGTRU" [(ngModel)]="rm0010in.THUONGTRU"></td>
+        <td colspan="5"><input class="input" type="text" name="THUONGTRU" [(ngModel)]="rm0010in.THUONGTRU"></td>
     </tr>
     <tr>
         <td>Tạm trú</td>
-        <td colspan="5"><input type="text" name="TAMTRU" [(ngModel)]="rm0010in.TAMTRU"></td>
+        <td colspan="5"><input class="input" type="text" name="TAMTRU" [(ngModel)]="rm0010in.TAMTRU"></td>
     </tr>
 </table>
 &nbsp;
@@ -79,9 +79,9 @@
     </thead>
     <tbody >
         <tr *ngFor="let lop of rm0010in.RM0080">
-            <td><input type="text" name="quanhe" [(ngModel)]="lop.QUANHE"></td>
-            <td><input type="text" name="hoten" [(ngModel)]="lop.HOTEN"></td>
-            <td><input type="text" name="lamgi" [(ngModel)]="lop.LAMGIODAU"></td>
+            <td><input class="input" type="text" name="quanhe" [(ngModel)]="lop.QUANHE"></td>
+            <td><input class="input" type="text" name="hoten" [(ngModel)]="lop.HOTEN"></td>
+            <td><input class="input" type="text" name="lamgi" [(ngModel)]="lop.LAMGIODAU"></td>
             <td class=" {{check?'none3':''}}"><button class="btn btn-sm btn-secondary" (click)="thanhphangiadinh(lop)"><i class="fa fa-trash"></i></button></td>
         </tr>
     </tbody>
@@ -93,7 +93,7 @@
         <td>Vị trí dự tuyển nguyện vọng 1<span style="color: red;"> (*)</span>:</td>
         <td>Vị trí</td>
         <td>
-            <select  class="form-control" id="nguyenvong1" [(ngModel)]="rm0010in.RM0001_ID">
+            <select  class="form-control select" id="nguyenvong1" [(ngModel)]="rm0010in.RM0001_ID">
                 <option *ngFor="let element of listrm0001" value="{{element['RM0001_ID']}}">{{element['tenCongViec']}}
                 </option>
             </select>
@@ -101,7 +101,7 @@
         <td>Nguyện vọng 2:</td>
         <td>Vị trí</td>
         <td>
-            <select class="form-control" name="RM0001_ID2" id="nguyenvong2" [(ngModel)]="rm0010in.RM0001_ID2">
+            <select class="form-control select" name="RM0001_ID2" id="nguyenvong2" [(ngModel)]="rm0010in.RM0001_ID2">
 
                 <option *ngFor="let element of listrm0001" value="{{element['RM0001_ID']}}">{{element['tenCongViec']}}
                 </option>
@@ -110,10 +110,10 @@
     </tr>
     <tr>
         <td colspan="2">Ngày có thể bắt đầu làm việc:</td>
-        <td><input type="date" name="NGAYCOTHELAM" (ngModelChange)="rm0010in.NGAYCOTHELAM = $event"
+        <td><input class="input" type="date" name="NGAYCOTHELAM" (ngModelChange)="rm0010in.NGAYCOTHELAM = $event"
                 [ngModel]="rm0010in.NGAYCOTHELAM | date:'yyyy-MM-dd'"></td>
         <td colspan="2">Thu nhập mong muốn<span style="color: red;"> (*)</span>:</td>
-        <td><input type="text" name="THUNHAPMONGMUON" [(ngModel)]="rm0010in.THUNHAPMONGMUON"></td>
+        <td><input class="input" type="text" name="THUNHAPMONGMUON" [(ngModel)]="rm0010in.THUNHAPMONGMUON"></td>
     </tr>
     <tr>
         <td colspan="2">Bạn có thể làm ngoài giờ Có </td>
@@ -122,21 +122,21 @@
     </tr>
     <tr>
         <td colspan="2">
-            <select name="COTHELAMTHEM" [(ngModel)]="rm0010in.COTHELAMTHEM">
+            <select class="select"  name="COTHELAMTHEM" [(ngModel)]="rm0010in.COTHELAMTHEM">
 
                 <option value="true">Có</option>
                 <option value="false">Không</option>
             </select>
         </td>
         <td colspan="2">
-            <select name="COTHEDICONGTAC" [(ngModel)]="rm0010in.COTHEDICONGTAC">
+            <select class="select"  name="COTHEDICONGTAC" [(ngModel)]="rm0010in.COTHEDICONGTAC">
 
                 <option value="true">Có</option>
                 <option value="false">Không</option>
             </select>
         </td>
         <td colspan="2">
-            <select name="COTHETHAYDOIDIADIEM" [(ngModel)]="rm0010in.COTHETHAYDOIDIADIEM">
+            <select class="select"  name="COTHETHAYDOIDIADIEM" [(ngModel)]="rm0010in.COTHETHAYDOIDIADIEM">
 
                 <option value="true">Có</option>
                 <option value="false">Không</option>
@@ -146,7 +146,7 @@
     <tr>
         <td colspan="5">Bạn đã từng thi tuyển vào Meiko chưa?</td>
         <td>
-            <select name="DATUNGTHITUYENMEIKO" [(ngModel)]="rm0010in.DATUNGTHITUYENMEIKO">
+            <select class="select"  name="DATUNGTHITUYENMEIKO" [(ngModel)]="rm0010in.DATUNGTHITUYENMEIKO">
 
                 <option value="true">Có</option>
                 <option value="false">Không</option>
@@ -158,13 +158,13 @@
             trước:</td>
     </tr>
     <tr>
-        <td colspan="6"><input type="text" name="NEUDATUNGTHITUYENMEIKO" [(ngModel)]="rm0010in.NEUDATUNGTHITUYENMEIKO">
+        <td colspan="6"><input class="input" type="text" name="NEUDATUNGTHITUYENMEIKO" [(ngModel)]="rm0010in.NEUDATUNGTHITUYENMEIKO">
         </td>
     </tr>
     <tr>
         <td colspan="5">Bạn biết thông tin tuyển dụng này từ nguồn nào?</td>
         <td>
-            <select name="ID_NGUONTHONGTIN" [(ngModel)]="rm0010in.ID_NGUONTHONGTIN">
+            <select class="select"  name="ID_NGUONTHONGTIN" [(ngModel)]="rm0010in.ID_NGUONTHONGTIN">
 
                 <option *ngFor="let element of rm0100" value="{{element['RM0009_ID']}}">{{element['tenNguongThongTin']}}
                 </option>
@@ -177,7 +177,7 @@
     </tr>
     <tr>
         <td colspan="2">
-            <select name="DUDINHTUONGLAI" [(ngModel)]="rm0010in.DUDINHTUONGLAI">
+            <select class="select"  name="DUDINHTUONGLAI" [(ngModel)]="rm0010in.DUDINHTUONGLAI">
 
                 <option selected value="1">Ổn định, phát triển theo công việc hiện tại</option>
                 <option value="2">Học thêm trong nước</option>
@@ -186,26 +186,26 @@
         </td>
         <td>dự định học tiếp: </td>
         <td>
-            <select name="DUDINHHOCTIEP" [(ngModel)]="rm0010in.DUDINHHOCTIEP">
+            <select class="select"  name="DUDINHHOCTIEP" [(ngModel)]="rm0010in.DUDINHHOCTIEP">
 
                 <option value="true">Có</option>
                 <option value="false">Không</option>
             </select>
         </td>
         <td style="width: 120px;">Chuyên ngành:</td>
-        <td><input type="text" name="DUDINHHOCTIEPCHUYENNGANH" [(ngModel)]="rm0010in.DUDINHHOCTIEPCHUYENNGANH"></td>
+        <td><input class="input" type="text" name="DUDINHHOCTIEPCHUYENNGANH" [(ngModel)]="rm0010in.DUDINHHOCTIEPCHUYENNGANH"></td>
     </tr>
     <tr>
         <td>Sở thích</td>
-        <td colspan="5"><textarea style="width: 100%;border: none;" [(ngModel)]="rm0010in.SOTHICH"></textarea></td>
+        <td colspan="5"><textarea class="textarea" style="width: 100%;border: none;" [(ngModel)]="rm0010in.SOTHICH"></textarea></td>
     </tr>
     <tr>
         <td>Không thích thích</td>
-        <td colspan="5"><textarea style="width: 100%;border: none;" [(ngModel)]="rm0010in.KHONGTHICH"></textarea></td>
+        <td colspan="5"><textarea class="textarea" style="width: 100%;border: none;" [(ngModel)]="rm0010in.KHONGTHICH"></textarea></td>
     </tr>
     <tr>
         <td colspan="1">Các phẩm chất, kỹ năng đặc biệt ( nếu có): </td>
-        <td colspan="5"><textarea style="width: 100%;border: none;"
+        <td colspan="5"><textarea class="textarea" style="width: 100%;border: none;"
                 [(ngModel)]="rm0010in.CACPHAMCHATKYNANG"></textarea></td>
     </tr>
 </table>
@@ -213,13 +213,13 @@
 <table class="table table-bordered">
     <tr>
         <td>Họ tên</td>
-        <td><input type="text" name="HOTENNGUOITHAN" [(ngModel)]="rm0010in.HOTENNGUOITHAN"></td>
+        <td><input class="input" type="text" name="HOTENNGUOITHAN" [(ngModel)]="rm0010in.HOTENNGUOITHAN"></td>
         <td>SDT</td>
-        <td><input type="text" name="MOBILENGUOITHAN" [(ngModel)]="rm0010in.MOBILENGUOITHAN"></td>
+        <td><input class="input" type="text" name="MOBILENGUOITHAN" [(ngModel)]="rm0010in.MOBILENGUOITHAN"></td>
     </tr>
     <tr>
         <td>Địa chỉ</td>
-        <td colspan="3"><input type="text" name="DIACHINGUOITHAN" [(ngModel)]="rm0010in.DIACHINGUOITHAN"></td>
+        <td colspan="3"><input class="input" type="text" name="DIACHINGUOITHAN" [(ngModel)]="rm0010in.DIACHINGUOITHAN"></td>
     </tr>
 </table>
 &nbsp;
@@ -243,15 +243,15 @@
     </thead>
     <tbody id="quatrinhhoctap">
         <tr *ngFor="let lop of rm0010in.RM0081_A">
-            <td><input type="date" name="batdau" (ngModelChange)="lop.BATDAU = $event"
+            <td><input class="input" type="date" name="batdau" (ngModelChange)="lop.BATDAU = $event"
                     [ngModel]="lop.BATDAU | date:'yyyy-MM-dd'"></td>
-            <td><input type="date" name="ketthuc" (ngModelChange)="lop.KETTHUC = $event"
+            <td><input class="input" type="date" name="ketthuc" (ngModelChange)="lop.KETTHUC = $event"
                     [ngModel]="lop.KETTHUC | date:'yyyy-MM-dd'"></td>
-            <td><input type="text" name="chuyennganh" [(ngModel)]="lop.CHUYENNGANH"></td>
-            <td><input type="text" name="tentruong" [(ngModel)]="lop.TENTRUONG"></td>
-            <td><input type="text" name="quocgia" [(ngModel)]="lop.QUOCGIA"></td>
-            <td><input type="text" name="hedaotao" [(ngModel)]="lop.HEDAOTAO"></td>
-            <td><select name="xeploai" [(ngModel)]="lop.XEPLOAI">
+            <td><input class="input" type="text" name="chuyennganh" [(ngModel)]="lop.CHUYENNGANH"></td>
+            <td><input class="input" type="text" name="tentruong" [(ngModel)]="lop.TENTRUONG"></td>
+            <td><input class="input" type="text" name="quocgia" [(ngModel)]="lop.QUOCGIA"></td>
+            <td><input class="input" type="text" name="hedaotao" [(ngModel)]="lop.HEDAOTAO"></td>
+            <td><select class="select"  name="xeploai" [(ngModel)]="lop.XEPLOAI">
                     <option value="Xuất sắc">Xuất sắc</option>
                     <option value="Giỏi">Giỏi</option>
                     <option value="Khá">Khá</option>
@@ -284,15 +284,15 @@
     </thead>
     <tbody id="quatrinhngoaingu">
         <tr *ngFor="let lop of rm0010in.RM0081_B">
-            <td><input type="text" name="NGOAINGU" [(ngModel)]="lop.NGOAINGU"></td>
-            <td><input type="text" name="CHUNGCHI" [(ngModel)]="lop.CHUNGCHI"></td>
-            <td><input type="text" name="XEPLOAI" [(ngModel)]="lop.XEPLOAI"></td>
-            <td><input type="date" name="NGAYCAP" (ngModelChange)="lop.NGAYCAP = $event"
+            <td><input class="input" type="text" name="NGOAINGU" [(ngModel)]="lop.NGOAINGU"></td>
+            <td><input class="input" type="text" name="CHUNGCHI" [(ngModel)]="lop.CHUNGCHI"></td>
+            <td><input class="input" type="text" name="XEPLOAI" [(ngModel)]="lop.XEPLOAI"></td>
+            <td><input class="input" type="date" name="NGAYCAP" (ngModelChange)="lop.NGAYCAP = $event"
                     [ngModel]="lop.NGAYCAP |date:'yyyy-MM-dd'"></td>
-            <td><input type="text" name="NGHE" [(ngModel)]="lop.NGHE"></td>
-            <td><input type="text" name="NOI" [(ngModel)]="lop.NOI"></td>
-            <td><input type="text" name="DOC" [(ngModel)]="lop.DOC"></td>
-            <td><input type="text" name="VIET" [(ngModel)]="lop.VIET"></td>
+            <td><input class="input" type="text" name="NGHE" [(ngModel)]="lop.NGHE"></td>
+            <td><input class="input" type="text" name="NOI" [(ngModel)]="lop.NOI"></td>
+            <td><input class="input" type="text" name="DOC" [(ngModel)]="lop.DOC"></td>
+            <td><input class="input" type="text" name="VIET" [(ngModel)]="lop.VIET"></td>
             <td class=" {{check?'none3':''}}"><button (click)="addrm0081_b(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
         </tr>
     </tbody>
@@ -308,9 +308,9 @@
     </thead>
     <tbody id="trinhdovitinh">
         <tr *ngFor="let lop of rm0010in.RM0081_C">
-            <td><input type="text" name="TENPHANMEM" [(ngModel)]="lop.TENPHANMEM"></td>
+            <td><input class="input" type="text" name="TENPHANMEM" [(ngModel)]="lop.TENPHANMEM"></td>
             <td>
-                <select name="TRINHDO" [(ngModel)]="lop.TRINHDO">
+                <select class="select"  name="TRINHDO" [(ngModel)]="lop.TRINHDO">
                     <option value="0">--Chọn--</option>
                     <option value="1">Trung bình</option>
                     <option value="2">Khá</option>
@@ -336,16 +336,16 @@
     </thead>
     <tbody id="giaithuongbangkhenkhac">
         <tr *ngFor="let lop of rm0010in.RM0081_D">
-            <td><input type="text" name="TENGIAITHUONG" [(ngModel)]="lop.TENGIAITHUONG"></td>
+            <td><input class="input" type="text" name="TENGIAITHUONG" [(ngModel)]="lop.TENGIAITHUONG"></td>
             <td>
-                <select name="RM0002_ID" [(ngModel)]="lop.RM0002_ID">
+                <select class="select"  name="RM0002_ID" [(ngModel)]="lop.RM0002_ID">
 
                     <option *ngFor="let element of rm0002" value="{{element['RM0002_ID']}}">{{element['tenLinhVuc']}}
                     </option>
                 </select>
             </td>
-            <td><input type="text" name="TOCHUCTRAO" [(ngModel)]="lop.TOCHUCTRAO"></td>
-            <td><input type="date" name="NAM" (ngModelChange)="lop.NAM = $event" [ngModel]="lop.NAM|date:'yyyy-MM-dd'">
+            <td><input class="input" type="text" name="TOCHUCTRAO" [(ngModel)]="lop.TOCHUCTRAO"></td>
+            <td><input class="input" type="date" name="NAM" (ngModelChange)="lop.NAM = $event" [ngModel]="lop.NAM|date:'yyyy-MM-dd'">
             </td>
             <td class=" {{check?'none3':''}}"><button (click)="giaithuong(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
         </tr>
@@ -375,27 +375,27 @@
             <td>Kết thúc</td>
         </tr>
         <tr>
-            <td><input type="date" name="BATDAU" (ngModelChange)="lop.BATDAU = $event"
+            <td><input class="input" type="date" name="BATDAU" (ngModelChange)="lop.BATDAU = $event"
                     [ngModel]="lop.BATDAU|date:'yyyy-MM-dd'"></td>
-            <td><input type="date" name="KETTHUC" (ngModelChange)="lop.KETTHUC = $event"
+            <td><input class="input" type="date" name="KETTHUC" (ngModelChange)="lop.KETTHUC = $event"
                     [ngModel]="lop.KETTHUC|date:'yyyy-MM-dd'"></td>
-            <td><input type="text" name="TENCONGTY" [(ngModel)]="lop.TENCONGTY"></td>
-            <td><input type="text" name="QUOCGIA" [(ngModel)]="lop.QUOCGIA"></td>
-            <td colspan="2"><input type="text" name="TINH" [(ngModel)]="lop.TINH"></td>
+            <td><input class="input" type="text" name="TENCONGTY" [(ngModel)]="lop.TENCONGTY"></td>
+            <td><input class="input" type="text" name="QUOCGIA" [(ngModel)]="lop.QUOCGIA"></td>
+            <td colspan="2"><input class="input" type="text" name="TINH" [(ngModel)]="lop.TINH"></td>
         </tr>
         <tr>
             <td>Vị trí công việc:</td>
-            <td colspan="2"><input type="text" name="VITRI" [(ngModel)]="lop.VITRI"></td>
+            <td colspan="2"><input class="input" type="text" name="VITRI" [(ngModel)]="lop.VITRI"></td>
             <td>Mức lương cuối cùng:</td>
-            <td colspan="2"><input type="text" name="MUCLUONG" [(ngModel)]="lop.MUCLUONG"></td>
+            <td colspan="2"><input class="input" type="text" name="MUCLUONG" [(ngModel)]="lop.MUCLUONG"></td>
         </tr>
         <tr>
             <td colspan="4"><i>Mô tả ngắn gọn về công việc và các thành tích đã đạt được:</i></td>
             <td colspan="2"><i>Lý do nghỉ việc:</i></td>
         </tr>
         <tr>
-            <td colspan="4"><input type="text" name="MOTA" [(ngModel)]="lop.MOTA"></td>
-            <td colspan="2"><input type="text" name="LYDONGHIVIEC" [(ngModel)]="lop.LYDONGHIVIEC"></td>
+            <td colspan="4"><input class="input" type="text" name="MOTA" [(ngModel)]="lop.MOTA"></td>
+            <td colspan="2"><input class="input" type="text" name="LYDONGHIVIEC" [(ngModel)]="lop.LYDONGHIVIEC"></td>
         </tr>
     </tbody>
 </table>
@@ -413,10 +413,10 @@
     </thead>
     <tbody id="nguoithamkhao">
         <tr *ngFor="let lop of rm0010in.RM0081_F">
-            <td><input type="text" name="HOTEN" [(ngModel)]="lop.HOTEN"></td>
-            <td><input type="text" name="VITRI" [(ngModel)]="lop.VITRI"></td>
-            <td><input type="text" name="DONVI" [(ngModel)]="lop.DONVI"></td>
-            <td><input type="text" name="MOBILE" [(ngModel)]="lop.MOBILE"></td>
+            <td><input class="input" type="text" name="HOTEN" [(ngModel)]="lop.HOTEN"></td>
+            <td><input class="input" type="text" name="VITRI" [(ngModel)]="lop.VITRI"></td>
+            <td><input class="input" type="text" name="DONVI" [(ngModel)]="lop.DONVI"></td>
+            <td><input class="input" type="text" name="MOBILE" [(ngModel)]="lop.MOBILE"></td>
             <td class=" {{check?'none3':''}}" ><button (click)="ntk(lop)" class="btn btn-sm btn-primary"><i class="fa fa-trash"></i></button></td>
         </tr>
     </tbody>

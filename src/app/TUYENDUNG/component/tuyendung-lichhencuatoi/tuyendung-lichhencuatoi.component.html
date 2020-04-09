@@ -1,0 +1,13 @@
+<div class="row no-gutters h-100">
+    <app-menu></app-menu>
+        <div class="col col-auto gh bg-dark h-100" >
+            <ul class="list-group list-group-flush h-100 bg-secondary" id="dfdfdfdf" >
+                  <li (click)="tabs(0)" class="list-group-item  {{tab==0?'bg-dark':'bg-secondary'}} "><i class="fas fa-user"></i><span>&nbsp;&nbsp;LỊCH HẸN CỦA TÔI</span></li>
+                  <li (click)="tabs(1)"  class="list-group-item   {{tab==1?'bg-dark':'bg-secondary'}}   "><i class="fas fa-users"></i> <span>&nbsp;&nbsp;LỊCH HẸN CỦA BỘ PHẬN</span></li>
+                </ul>
+      </div>
+      <div class="col">
+        <app-td-lh-danhsachlichen  [disabled]="false"  [MKV9999_ID]="user.MKV9999_ID" *ngIf="tab==0"></app-td-lh-danhsachlichen>
+        <app-td-lh-danhsachlichen [disabled]="false" [phong_id]="user.phong_id"  *ngIf="tab==1"></app-td-lh-danhsachlichen>
+      </div>
+</div>

@@ -6,29 +6,32 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">DANH SÁCH CHUYÊN NGÀNH</div>
-                    <div class="col-auto"><button (click)="themcongviec()" class="btn btn-secondary" title="Lưu danh sách lĩnh vực"><i class="fa fa-plus"></i></button></div>
+                    <div class="col-auto">
+                        <button (click)="themcongviec()" class="btn btn-secondary mr-2" title="Thêm CHUYÊN NGÀNH"><i class="fa fa-plus"></i></button>
+                        <button (click)="xoacongviec()" class="btn btn-secondary" title="Xóa danh sách đã chọn"><i class="fa fa-trash-alt"></i></button>
+                    </div>
                 </div>
                 
-                <!-- <button id="savelisst" class="btn btn-secondary" title="Lưu danh sách lĩnh vực"><i class="fa fa-save"></i></button> -->
+                <!-- <button id="savelisst" class="btn btn-secondary" title="Lưu danh sách CHUYÊN NGÀNH"><i class="fa fa-save"></i></button> -->
             </div>
             <div class="card-body">
                 <table class="table table-bordered" id="tablecongviec">
                     <thead>
                         <tr>
-                            <th><input type="checkbox"></th>
-                            <th>Mã lĩnh vực</th>
-                            <th>Tên lĩnh vực</th>
+                            <th><input type="checkbox"  (change)="allchange()" [(ngModel)]="checkall"></th>
+                            <th>Mã chuyên ngành</th>
+                            <th>Tên chuyên ngành</th>
                             <th>Ghi chú</th>
-                            <th style="width: 90px;">Chức năng</th>
+                            <th style="width: 110px;">Chức năng</th>
                         </tr>
                     </thead>
                     <tbody >
-                        <tr *ngFor="let element of listdata;let i = index">
-                            <th><input type="checkbox"></th>
+                        <tr id="row{{element.RM0004_ID}}" *ngFor="let element of listdata;let i = index">
+                            <th><input type="checkbox" [(ngModel)]="element.check"></th>
                             <td><input type="hidden" name="ID" value="{{i}}"><input type="text" name="" disabled class="form-control none" [(ngModel)]="element.maChuyenNganh" ></td>
                             <td><input type="text" name="" disabled class="form-control none"  [(ngModel)]="element.tenChuyenNganh" ></td>
                             <td><input type="text" name="" disabled class="form-control none"  [(ngModel)]="element.ghiChu" ></td>
-                            <td><button class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
+                            <td><button  id="edit{{element.RM0004_ID}}" (click)="edititem(element)"  class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
                                 <button class="btn btn-sm deleteitem"><i class="far fa-trash-alt"></i></button></td>
                         </tr>
                     </tbody>
@@ -44,13 +47,13 @@
         <div class="modal-dialog   modal-700" >
             <div class="modal-content " >
                 <div class="modal-header">
-                    <h5 class="modal-title">THÊM MỚI MỘT LĨNH VỰC</h5>
+                    <h5 class="modal-title">THÊM MỚI MỘT CHUYÊN NGÀNH</h5>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body ">
-                            <input class="form-control form-control-sm" type="text" placeholder="Mã lĩnh vực" [(ngModel)]="newdm.maChuyenNganh">
-                            <input class="form-control form-control-sm" type="text" placeholder="Tên lĩnh vực"  [(ngModel)]="newdm.tenChuyenNganh">
-                            <textarea class="form-control form-control-sm" placeholder="Ghi chú"   [(ngModel)]="newdm.ghiChu"></textarea>
+                            <input class="form-control form-control-sm" type="text" placeholder="MÃ CHUYÊN NGÀNH" [(ngModel)]="newdm.maChuyenNganh">
+                            <input class="form-control form-control-sm" type="text" placeholder="TÊN CHUYÊN NGÀNH"  [(ngModel)]="newdm.tenChuyenNganh">
+                            <textarea class="form-control form-control-sm" placeholder="GHI CHÚ"   [(ngModel)]="newdm.ghiChu"></textarea>
                             <select class="form-control form-control-sm"   [(ngModel)]="newdm.tinhTrang">
                                 <option value="true">Bật</option>
                                 <option value="false">Tắt</option>

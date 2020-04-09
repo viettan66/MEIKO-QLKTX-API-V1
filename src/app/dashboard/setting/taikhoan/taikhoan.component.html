@@ -1,24 +1,81 @@
 <DIV class="row no-gutters">
     <div class="col-12 px-1">
         <div class="card">
-            <h5 class="card-header">TÀI KHOẢN</h5>
+            <div class="card-header">
+                <div class="row">
+                    <div class="col">TÀI KHOẢN</div>
+                    <div class="col-auto px-1"  *ngIf="listMKV9999show==null"><span class="mr-3">Đang xem {{((start+1)*step)>=listacc.length?listacc.length:((start+1)*step)}}/{{listacc.length}}</span></div>
+                    <div class="col-auto px-1" *ngIf="listMKV9999show!=null"><span class="mr-3">Đang xem {{((start+1)*step)>=listMKV9999show.length?listMKV9999show.length:((start+1)*step)}}/{{listMKV9999show.length}}</span></div>
+                    <div class="col-auto px-1"><button (click)="pre()" class="btn  btn-secondary " ><i class="fas fa-angle-left"></i></button></div>
+                    <div class="col-auto px-1"><button (click)="nex()" class="btn btn-secondary " ><i class="fas fa-angle-right"></i></button></div>
+                    
+                    <div class="col-auto px-1"><input  type="text" style="width: 160px;" class="form-control" placeholder="ID, Tên"  [(ngModel)]="keysearch" ></div>
+                    <div class="col-auto px-1">
+                        <select  class="form-control" [(ngModel)]="phong_id">
+                            <option value="all">BP All</option>
+                            <option value="{{element.id}}" *ngFor="let element of listdept">{{element.ten}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div> 
             <div class="card-body">
                 <table class="table">
                     <thead>
                         <tr>
+                            <th>STT</th>
                             <th>ID</th>
                             <th>Tên</th>
                             <th>chucvu</th>
                             <th>Bộ phận</th>
+                            <th><i class="fa fa-list"></i></th>
                         </tr>
                     </thead>
-                    <tbody id="taikhoan">
-                        <tr *ngFor="let element of listacc">
-                            <td>{{element.manhansu}}</td>
-                            <td>{{element.hodem+' '+element.ten}}</td>
-                            <td>{{element.chucvu}}</td>
-                            <td>{{element.phong_id}}</td>
-                        </tr>
+                    <tbody id="{{id!=null?id:'taikhoan'}}" class="taikhoan">
+                        <ng-container *ngIf="listMKV9999show!=null"> 
+                            <ng-container *ngFor="let element of listMKV9999show;let i=index">
+                                <ng-container *ngIf="!checkin(element)">
+                                    <ng-container *ngIf="element.phong_id==phong_id||phong_id=='all'">
+
+                                        <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))&&keysearch==''||checkkey(element)&&keysearch!=''">
+                                            <tr>
+                                                <td>{{i+1}}<input type="hidden" value="{{element.MKV9999_ID}}" name="MKV9999_ID"></td>
+                                                <td>{{element.manhansu}}</td>
+                                                <td>{{element.hodem+' '+element.ten}}</td>
+                                                <td>{{element.chucvu}}</td>
+                                                <td>{{element.thetu_id}}</td>
+                                                <td>
+                                                    <button (click)="resetpass(element)" class="btn btn-sm"><i class="fa fa-key"></i></button>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+
+                        </ng-container>
+                        <ng-container *ngIf="listMKV9999show==null">
+                            <ng-container *ngFor="let element of listacc;let i=index">
+                                <ng-container *ngIf="!checkin(element)">
+                                    <ng-container *ngIf="element.phong_id==phong_id||phong_id=='all'">
+
+                                        <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))&&keysearch==''||checkkey(element)&&keysearch!=''">
+                                            <tr>
+                                                <td>{{i+1}}<input type="hidden" value="{{element.MKV9999_ID}}" name="MKV9999_ID"></td>
+                                                <td>{{element.manhansu}}</td>
+                                                <td>{{element.hodem+' '+element.ten}}</td>
+                                                <td>{{element.chucvu}}</td>
+                                                <td>{{element.thetu_id}}</td>
+                                                <td>
+                                                    <button (click)="resetpass(element)" class="btn btn-sm"><i class="fa fa-key"></i></button>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+                            </ng-container>
+
+                        </ng-container>
+                            
                     </tbody>
                 </table>
             </div>

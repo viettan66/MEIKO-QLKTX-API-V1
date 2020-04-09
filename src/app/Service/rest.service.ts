@@ -2,7 +2,8 @@ import { Injectable, Type } from '@angular/core';
 import * as Global from './global.service'
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import * as XLSX from 'xlsx'; 
-import {from, Observable} from 'rxjs';
+import { async } from 'rxjs/internal/scheduler/async';
+import { type } from 'os';
 declare var XDomainRequest
 
 @Injectable({
@@ -40,7 +41,7 @@ export class RESTService {
     return this.http.put<Type>(Global.APIUrl+uri,post, {headers: headers});
   }
   ExportTOExcel(TABLE,namefile?,title?) {  
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(TABLE);  
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(TABLE,  {display:false});  
     const wb: XLSX.WorkBook = XLSX.utils.book_new();  
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');  
     XLSX.writeFile(wb, (namefile!=null?namefile:"no_name_file")+'.xlsx');  
@@ -66,5 +67,34 @@ export class RESTService {
       xhr = null;
     }
     return xhr;
+  }
+ async ReadExcelFile<Type>(fileName:File){
+  return new Promise<any>((resolve, reject) =>{
+    let arrayBuffer:any;
+      let fileReader = new FileReader();
+      fileReader.onload =  ( e) => {
+        arrayBuffer = fileReader.result;
+        var data = new Uint8Array(arrayBuffer);
+        var arr = new Array();
+        for (var i = 0; i != data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+        var bstr = arr.join("");
+        var workbook = XLSX.read(bstr, { type: "binary" });
+        var first_sheet_name = workbook.SheetNames[0];
+        var worksheet = workbook.Sheets[first_sheet_name];
+        resolve(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
+      }
+      fileReader.onerror = reject;
+      fileReader.readAsArrayBuffer( fileName);
+    })
+  }
+  async ChooseFileExcel<Type>(){
+    return new Promise<Type>((resolve, reject) =>{
+      var input = document.createElement('input');
+      input.type = 'file';
+      input.onchange = async e => {
+      resolve(await this.ReadExcelFile<Type>(input.files[0])) 
+      }
+      input.click();
+    })
   }
 }
