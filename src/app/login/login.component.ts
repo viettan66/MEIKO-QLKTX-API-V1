@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     
     let that = this
     $(document).ready(function () {
-      function LOGIN(data: MKV9999, o?: boolean) {
+      function  LOGIN(data: MKV9999, o?: boolean) {
         if (o) {
           that.rest.Get207<MKV9991>('http://192.84.100.207/AsoftAPI/EC0002/' + data.phong_id).subscribe(dat => {
             data.bophan = dat
@@ -40,7 +40,10 @@ export class LoginComponent implements OnInit {
               localStorage.setItem('KTX_User', JSON.stringify(data)); 
               that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAcctionWidthMKV9999ID/'+data.MKV9999_ID).subscribe(data=>{
                 localStorage.setItem('KTX_Menu', JSON.stringify(data)); 
-                window.location.assign('/success')
+                that.router.navigate(['']).finally (() => {
+                  window.location.reload();
+                });
+                //window.location.reload()
               })
             })
           })
@@ -48,7 +51,10 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('KTX_User', JSON.stringify(data));
               that.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetAcctionWidthMKV9999ID/'+data.MKV9999_ID).subscribe(data=>{
                 localStorage.setItem('KTX_Menu', JSON.stringify(data)); 
-                window.location.assign('/success')
+                that.router.navigate([' ']).finally(() => {
+                  window.location.reload();
+                });
+                //window.location.reload()
               })
         }
 

@@ -19,12 +19,11 @@ export class DashboardComponent implements OnInit {
 public listapp:MKV9981[]=[]
   ngOnInit() {
     let that=this
-    $(document).ready(function(){
       let kf:MKV9981[]=JSON.parse( localStorage.getItem('KTX_Menu'))
    that.listapp=kf.filter(c=>{return c.CAPMENU===0})
       
       ////////////////////
-    })
+  
   }
 go(id:string,link:string){
   localStorage.setItem('KTX_Menu_Parent',id)

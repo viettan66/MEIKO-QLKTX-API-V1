@@ -52,6 +52,16 @@ $("#formdangdyokytucxa").modal('hide')
     this.element=element
 $("#formdangdyokytucxa").modal()
   }
+  async delete(element) {
+    if (!confirm("Bạn muốn xóa tin này?")) return false
+    let datas = await this.rest.PutDataToAPI<result<KTX0040>[]>([element], 'KTX0040/delete').toPromise()
+    datas.filter(c => { return c.code === "OK" }).map(data => {
+      if (data.code == "OK") {
+        this.listdon.filter(c => { return c.KTX0040_ID === data.data.KTX0040_ID }).map(x => { this.listdon.splice(this.listdon.indexOf(x), 1) })
+      }
+    })
+
+  }
   substr(t:string){
     return t.substring(0,t.length>200?200:t.length)+'...'
   }

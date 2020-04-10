@@ -1,8 +1,8 @@
 
 <div class="row h-100 d-flex justify-content-center" id="contentapp" style="padding: 10%;">
   <div *ngFor="let element of listapp">
-    <a *ngIf="element.CAPMENU==0" style="cursor: pointer;">
-      <div class="card bg-dark text-white" style="width: 20rem;margin:10px;"  (click)="go(element.MKV9980_ID,element.LINKMENU)">
+    <a *ngIf="element.CAPMENU==0" class="  " style="cursor: pointer; ;">
+      <div class="card bg-dark text-white " style="width: 20rem;margin:10px;box-shadow: 0 .3rem 3rem rgba(0, 0, 0, 0.719)!important;"  (click)="go(element.MKV9980_ID,element.LINKMENU)">
         <img class="card-img" src="{{element.IMAGE}}" alt="{{element.MKV9981_ID}}">
         <div class="card-img-overlay">
           <h5 class="card-title">{{element.TENHANHDONG}}</h5>

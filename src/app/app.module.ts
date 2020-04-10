@@ -70,6 +70,17 @@ import { TuyendungYeucaubophanComponent } from './TUYENDUNG/component/tuyendung-
 import { TuyendungLichhencuatoiComponent } from './TUYENDUNG/component/tuyendung-lichhencuatoi/tuyendung-lichhencuatoi.component';
 import { TuyendungDanhgiacuatoiComponent } from './TUYENDUNG/component/tuyendung-danhgiacuatoi/tuyendung-danhgiacuatoi.component';
 import { ButtonDownloadComponent } from './Layout/button/button-download/button-download.component';
+import { QlktxUploadComponent } from './QLKTX/component/qlktx-upload/qlktx-upload.component';
+import { DashboardFGPComponent } from './dashboard/setting/dashboard-fgp/dashboard-fgp.component';
+import { QlktxUploadPhongComponent } from './QLKTX/component/qlktx-upload/qlktx-upload-phong/qlktx-upload-phong.component';
+import { ButtonUploadComponent } from './Layout/button/button-upload/button-upload.component';
+import { QlktxUploadTuComponent } from './QLKTX/component/qlktx-upload/qlktx-upload-tu/qlktx-upload-tu.component';
+import { QlktxUploadGiuongComponent } from './QLKTX/component/qlktx-upload/qlktx-upload-giuong/qlktx-upload-giuong.component';
+import { QlktxUploadNhanvienComponent } from './QLKTX/component/qlktx-upload/qlktx-upload-nhanvien/qlktx-upload-nhanvien.component';
+import { ButtonNextComponent } from './Layout/button/button-next/button-next.component';
+import { ButtonPreviewComponent } from './Layout/button/button-preview/button-preview.component';
+import { ButtonCountComponent } from './Layout/button/button-count/button-count.component';
+import { ButtonDownloadJsonComponent } from './Layout/button/button-download-json/button-download-json.component';
 
 const routes: Routes = [
   {path: '', component: DashboardComponent,canActivate:[Auth]},
@@ -86,8 +97,10 @@ const routes: Routes = [
   {path: 'QLKTX/QLRVC', component: QlrvcComponent,canActivate:[Auth]},
   {path: 'QLKTX/QLNA', component: QlnaComponent,canActivate:[Auth]},
   {path: 'QLKTX/NEW', component: ThongtintrangchuComponent,canActivate:[Auth]},
+  {path: 'QLKTX/UL', component: QlktxUploadComponent,canActivate:[Auth]},
   {path: 'DASHBOARD/DTB', component: DatabaseComponent,canActivate:[Auth]},
   {path: 'DASHBOARD/SETTING', component: SettingComponent,canActivate:[Auth]},
+  {path: 'DASHBOARD/FGP', component: DashboardFGPComponent,canActivate:[Auth]},
   {path: 'notfoundpage', component: NotfoundpageComponent},
   {path: 'ForgotPassworld', component: QuenmatkhauComponent},
   {path: 'NewComer', component: DangkyComponent},
@@ -169,6 +182,17 @@ const routes: Routes = [
     TuyendungLichhencuatoiComponent,
     TuyendungDanhgiacuatoiComponent,
     ButtonDownloadComponent,
+    QlktxUploadComponent,
+    DashboardFGPComponent,
+    QlktxUploadPhongComponent,
+    ButtonUploadComponent,
+    QlktxUploadTuComponent,
+    QlktxUploadGiuongComponent,
+    QlktxUploadNhanvienComponent,
+    ButtonNextComponent,
+    ButtonPreviewComponent,
+    ButtonCountComponent,
+    ButtonDownloadJsonComponent,
     
   ],
   imports: [

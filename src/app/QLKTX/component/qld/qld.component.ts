@@ -23,7 +23,8 @@ export class QldComponent implements OnInit {
   public form=''
   public now=new Date()
   public now1=new Date().getFullYear()+"-"+(new Date().getMonth())+"-"+new Date().getDay()
-
+  public start=0;
+  public step=20;
   ngOnInit() {  let that=this
 this.user=JSON.parse(localStorage.getItem('KTX_User'))
     $(document).ready(function(){
@@ -175,5 +176,14 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
     $('.ddd').css('display','')
     this.rest.ExportTOExcel(document.getElementById('tabletoexport'),'Danh sách vào '+(new Date).getDay+(new Date).getMonth+(new Date).getFullYear)
     $('.ddd').css('display','none')
+  }
+  kj(){
+    console.log(this.start)
+  }
+  getstart($event){
+    this.start=$event
+  }
+  getstep($event){
+    this.step=$event
   }
 }

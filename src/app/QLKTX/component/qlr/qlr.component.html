@@ -10,6 +10,9 @@
               <!-- <button title="Thêm đơn" style="margin-left: 10px;"  class="btn btn-secondary float-right adddon"><i
                   class="fa fa-plus"></i></button> -->
                   <span class="float-right">
+                    <app-button-count [start]="start" [step]="step" [listdata]="listdon" class="mr-2" (step)="getstep($event)"  ></app-button-count>
+                    <app-button-preview [start]="start" [step]="step" [listdata]="listdon" (start)="getstart($event)"></app-button-preview>
+                    <app-button-next class="mr-2" [start]="start" [step]="step" [listdata]="listdon" (start)="getstart($event)"></app-button-next>
                       <button class="btn btn-primary" (click)="agree()"><i class="fa fa-check"></i></button>&nbsp;
                       <button class="btn btn-primary" (click)="print()"><i class="fa fa-check"></i><i class="fa fa-print"></i></button>&nbsp;
                       <!-- <button class="btn btn-danger" id="disagree"><i class="fa fa-times"></i></button>&nbsp; -->
@@ -19,8 +22,8 @@
                           <option value="">ALL</option>
                           <option value="true">Đã duyệt</option>
                           <option value="false">Chưa duyệt</option>
-                      </select>&nbsp;&nbsp;&nbsp;Từ ngày
-                    <input id="startdate" type="date" (change)="showdon()"  class="btn btn-outline-secondary py-1" placeholder="Từ ngày"   [ngModel]="now1 | date:'yyyy-MM-dd'" >đến
+                      </select>&nbsp;&nbsp;&nbsp;
+                    <input id="startdate" type="date" (change)="showdon()"  class="btn btn-outline-secondary py-1" placeholder="Từ ngày"   [ngModel]="now1 | date:'yyyy-MM-dd'" >
                     <input  id="enddate" type="date"  (change)="showdon()"  class="btn btn-outline-secondary py-1"    [ngModel]="now | date:'yyyy-MM-dd'" >&nbsp;
                     <button class="btn btn-info "><i class="fa fa-search"></i></button>&nbsp;
                   </span>
@@ -47,7 +50,9 @@
                   </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let element of listdon;let i=index;" style="cursor: pointer;padding: 0;">
+                    <ng-container *ngFor="let element of listdon;let i=index;" >
+                      <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))">
+                    <tr style="cursor: pointer;padding: 0;">
                       <td><input type="checkbox" [(ngModel)]="element.check"></td>
                       <td>{{i+1}} <input type="hidden" name="ID" value="{{i}}"> </td>
                       <td>{{element.nldhoten}}</td>
@@ -76,6 +81,8 @@
                         <button style="padding: 0;"  class="btn  " (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
                       </td>
                     </tr>
+                    </ng-container>
+                    </ng-container>
                   </tbody>
                 </table>
                 <!-- <table>

@@ -1,0 +1,40 @@
+<div class="card  " style="background-color: rgba(255, 255, 255, 0.89);">
+    <div class="card-header">
+        <div class="row no-gutters">
+            <div class="col">DANH SÁCH TỦ</div>
+            <div class="col-auto">
+                <app-button-upload bg="btn-info mr-1" (data)="getdata($event)"></app-button-upload>
+                <button class="btn btn btn-primary mr-1" (click)="save()"><i class="fa fa-save"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body" >
+        <table class="table table-bordered table-hover" style="text-align: center;">
+            <thead>
+                <tr>
+                    <th style="width: 20px;"><input type="checkbox" (change)="chooseall()"></th>
+                    <th  style="width: 50px;">STT</th>
+                    <th>PHÒNG</th>
+                    <TH>MÃ TỦ</TH>
+                    <TH>SỐ TỦ</TH>
+                    <TH> <i class="fa fa-list"></i> </TH>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let element of listKTX0003;let i=index">
+                    <tr id="tr{{element.MATU}}">
+                        <td><input type="checkbox" [ngModel]="element.check"></td>
+                        <td>{{i+1}}</td>
+                        <td><input type="text" [(ngModel)]="element.PHONG" disabled class="form-control none"> </td>
+                        <td><input type="text" [(ngModel)]="element.MATU" disabled class="form-control none"> </td>
+                        <td><input type="text" [(ngModel)]="element.SOTU" disabled class="form-control none"> </td>
+                        <td>
+                            <button id="edit{{element.MATU}}" (click)="edit(element)"  class="btn btn-sm"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-sm"><i class="fa fa-trash"></i></button>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<div class="row no-gutters h-100">
+    <app-menu></app-menu>        
+    <div class="col col-auto gh bg-dark h-100" >
+        <ul class="list-group list-group-flush h-100 bg-secondary" id="dfdfdfdf" >
+              <li (click)="tabs(0)" class="list-group-item  {{tab==0?'bg-dark':'bg-secondary'}} "><i class="fas fa-briefcase"></i><span>&nbsp;&nbsp;UPLOAD PHÒNG</span></li>
+              <li (click)="tabs(1)"  class="list-group-item   {{tab==1?'bg-dark':'bg-secondary'}}   "><i class="fas fa-h-square"></i> <span>&nbsp;&nbsp;UPLOAD TỦ</span></li>
+              <li (click)="tabs(2)"  class="list-group-item    {{tab==2?'bg-dark':'bg-secondary'}}  "><i class="fas fa-school"></i> <span>&nbsp;&nbsp;UPLOAD GIƯỜNG</span></li>
+              <li (click)="tabs(3)"  class="list-group-item    {{tab==3?'bg-dark':'bg-secondary'}}  "><i class="fas fa-school"></i> <span>&nbsp;&nbsp;UPLOAD NHÂN VIÊN</span></li>
+          </ul>
+  </div>
+  <div class="col p-2">
+    <app-qlktx-upload-phong *ngIf="tab==0"></app-qlktx-upload-phong>
+    <app-qlktx-upload-tu *ngIf="tab==1"></app-qlktx-upload-tu>
+    <app-qlktx-upload-giuong *ngIf="tab==2"></app-qlktx-upload-giuong>
+    <app-qlktx-upload-nhanvien *ngIf="tab==3"></app-qlktx-upload-nhanvien>
+  </div>
+</div>

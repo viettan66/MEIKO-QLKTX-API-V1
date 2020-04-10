@@ -1,0 +1,53 @@
+<div class="row no-gutters h-100">
+    <app-menu></app-menu>
+    <div class="col" style="padding: 5px;">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">TÀI KHOẢN</div>
+                        <!-- <div class="col-auto px-1"  *ngIf="listMKV9999show==null"><span class="mr-3">Đang xem {{((start+1)*step)>=listacc.length?listacc.length:((start+1)*step)}}/{{listacc.length}}</span></div>
+                        <div class="col-auto px-1" *ngIf="listMKV9999show!=null"><span class="mr-3">Đang xem {{((start+1)*step)>=listMKV9999show.length?listMKV9999show.length:((start+1)*step)}}/{{listMKV9999show.length}}</span></div> -->
+                        <!-- <div class="col-auto px-1"><button (click)="pre()" class="btn  btn-secondary " ><i class="fas fa-angle-left"></i></button></div>
+                        <div class="col-auto px-1"><button (click)="nex()" class="btn btn-secondary " ><i class="fas fa-angle-right"></i></button></div>
+                        
+                        <div class="col-auto px-1"><input  type="text" style="width: 160px;" class="form-control" placeholder="ID, Tên"  [(ngModel)]="keysearch" ></div>
+                         --><div class="col-auto px-1">
+                            <select  class="form-control" [(ngModel)]="filter" (change)="fil()">
+                                <option value="all"> All</option>
+                                <option value="false"> Chưa reset</option>
+                                <option value="true"> Đã reset</option>
+                            </select>
+                        </div>
+                    </div>
+                </div> 
+                <div class="card-body">
+                    <ng-container>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>TÀI KHOẢN</th>
+                                    <th>SDT</th>
+                                    <th>CMTND</th>
+                                    <th><i class="fa fa-list"></i></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ng-container *ngFor="let element of listMKV8801;let i=index">
+                                    <tr>
+                                        <td>{{element.taikhoan}}</td>
+                                        <td>{{element.sdt}}</td>
+                                        <td>{{element.cmnd}}</td>
+                                    <td>
+                                       <button (click)="agree(element)" class="btn btn-sm"><i class="fa fa-check"></i></button> 
+                                       <button class="btn btn-sm"><i class="fa fa-times"></i></button> 
+                                    </td>
+                                    </tr>
+                                </ng-container>
+                            </tbody>
+                        </table>
+                    </ng-container>
+                </div>
+            </div>
+       </div>
+    
+</div>

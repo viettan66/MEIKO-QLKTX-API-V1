@@ -6,7 +6,7 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">Tài khoản</div>
               </div>
-              <input type="text" class="form-control" id="ID" placeholder="Tài khoản" value="admin">
+              <input type="text" class="form-control" id="ID" placeholder="Tài khoản" [(ngModel)]="taikhoan">
             </div>
           </div>
           <div class="col-12 my-1">
@@ -14,7 +14,7 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">SDT</div>
               </div>
-              <input type="text" class="form-control"  placeholder="Số điện thoại" value="1">
+              <input type="text" class="form-control"  placeholder="Số điện thoại"  [(ngModel)]="sdt">
             </div>
           </div>
           <div class="col-12 my-1">
@@ -22,12 +22,12 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">CMTND</div>
               </div>
-              <input type="text" class="form-control"  placeholder="Số CMTND" value="1">
+              <input type="text" class="form-control"  placeholder="Số CMTND"  [(ngModel)]="cmnd">
             </div>
           </div>
           <div class="col-12 my-1">
             <div class="input-group d-flex justify-content-between">
-                <button class="btn btn-primary ">Gửi yêu cầu</button>
+                <button (click)="send()" class="btn btn-primary ">Gửi yêu cầu</button>
               <a class="float-right" (click)="login()" style="cursor: pointer;"><u>Quay lại đăng nhập.</u></a>
             </div>
           </div>

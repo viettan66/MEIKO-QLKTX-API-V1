@@ -97,4 +97,12 @@ export class RESTService {
       input.click();
     })
   }
+  
+  ExportTOExcelFromJson(datalist,namefile?,title?) {  
+    let ws: XLSX.WorkSheet =  XLSX.utils.json_to_sheet(datalist,{skipHeader:true})
+
+    let wb: XLSX.WorkBook = XLSX.utils.book_new();  
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');  
+    XLSX.writeFile(wb, (namefile!=null?namefile:"no_name_file")+'.xlsx');  
+  } 
 }

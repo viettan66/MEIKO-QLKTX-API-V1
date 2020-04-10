@@ -10,6 +10,9 @@
               <!-- <button title="Thêm đơn" style="margin-left: 10px;"  class="btn btn-secondary float-right adddon"><i
                   class="fa fa-plus"></i></button> -->
                   <span class="float-right">
+                    <app-button-count [start]="start" [step]="step" [listdata]="listdon" class="mr-2" (step)="getstep($event)" ></app-button-count>
+                    <app-button-preview [start]="start" [step]="step" [listdata]="listdon" (start)="getstart($event)"></app-button-preview>
+                    <app-button-next class="mr-2" [start]="start" [step]="step" [listdata]="listdon" (start)="getstart($event)"></app-button-next>
                       <button title="Duyệt sách đã chọn"  class="btn btn-primary" id="agree"><i class="fa fa-check"></i></button>&nbsp;
                       <!-- <button title="Không duyệt sách đã chọn"  class="btn btn-danger" id="disagree"><i class="fa fa-times"></i></button>&nbsp; -->
                       <button title="In danh sách đã chọn" class="btn btn-info" (click)="print2()" ><i class="fa fa-print"></i></button>&nbsp;
@@ -19,10 +22,10 @@
                           <option value="">ALL</option>
                           <option value="true">Đã duyệt</option>
                           <option value="false">Chưa duyệt</option>
-                      </select>&nbsp;&nbsp;&nbsp;Từ ngày
-                    <input id="startdate" type="date" (change)="showdon()"  class="btn btn-outline-secondary py-1" placeholder="Từ ngày"    [ngModel]="now1 | date:'yyyy-MM-dd'" >đến
+                      </select>&nbsp;&nbsp;&nbsp;
+                    <input id="startdate" type="date" (change)="showdon()"  class="btn btn-outline-secondary py-1" placeholder="Từ ngày"    [ngModel]="now1 | date:'yyyy-MM-dd'" >
                     <input  id="enddate" type="date"  (change)="showdon()"  class="btn btn-outline-secondary py-1"    [ngModel]="now | date:'yyyy-MM-dd'" >&nbsp;
-                    <button class="btn btn-info "><i class="fa fa-search"></i></button>&nbsp;
+                    <button (click)="kj()" class="btn btn-info "><i class="fa fa-search"></i></button>&nbsp;
                   </span>
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
@@ -46,26 +49,33 @@
                   </tr>
                   </thead>
                   <tbody class="abc">
-                    <tr *ngFor="let element of listdon;let i=index;" style="cursor: pointer;padding: 0;">
-                      <td><input type="checkbox" [(ngModel)]="element.check"></td>
-                      <td>{{i+1}} <input type="hidden" name="ID" value="{{i}}"> </td>
-                      <td><span style="display: inline;">{{element.hotenkhaisinh}}</span></td>
-                      <td>{{element.MKV9999.manhansu}}</td>
-                      <td>{{element.MKV9999.thetu_id}}</td>
-                      <td style="text-align: center;">{{element.MKV9999.capbac}}</td>
-                      <td>{{element.MKV9999.cmtnd_so}}</td>
-                      <td>{{element.MKV9999.cmtnd_ngayhethan| date:'yyyy/MM/dd'}}</td>
-                      <td>{{element.MKV9999.diachithuongtru}}</td>
-                      <td>{{element.ngaytaodon| date:'dd/MM/yyyy HH:mm'}}</td>
-                      <td style="text-align: center;">{{count(element)}}</td>
-                      <td style="text-align: center;">
-                        <span class="ddd">{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</span> 
-                        <i *ngIf="element.trangthai" class="fa fa-check"></i><i *ngIf="!element.trangthai" class="fa fa-sync-alt fa-spin"></i></td>
-                      <td style="text-align: center;">
-                        <!-- <button class="btn px-1" (click)="delete(element)"><i class="fas fa-trash-alt"></i></button> -->
-                        <button  class="btn  px-1" (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
-                      </td>
-                    </tr>
+                    <ng-container *ngFor="let element of listdon;let i=index;" >
+                      <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))">
+                          <tr style="cursor: pointer;padding: 0;">
+                              <td><input type="checkbox" [(ngModel)]="element.check"></td>
+                              <td>{{i+1}} <input type="hidden" name="ID" value="{{i}}"> </td>
+                              <td><span style="display: inline;">{{element.hotenkhaisinh}}</span></td>
+                              <td>{{element.MKV9999.manhansu}}</td>
+                              <td>{{element.MKV9999.thetu_id}}</td>
+                              <td style="text-align: center;">{{element.MKV9999.capbac}}</td>
+                              <td>{{element.MKV9999.cmtnd_so}}</td>
+                              <td>{{element.MKV9999.cmtnd_ngayhethan| date:'yyyy/MM/dd'}}</td>
+                              <td>{{element.MKV9999.diachithuongtru}}</td>
+                              <td>{{element.ngaytaodon| date:'dd/MM/yyyy HH:mm'}}</td>
+                              <td style="text-align: center;">{{count(element)}}</td>
+                              <td style="text-align: center;">
+                                <span class="ddd">{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</span> 
+                                <i *ngIf="element.trangthai" class="fa fa-check"></i><i *ngIf="!element.trangthai" class="fa fa-sync-alt fa-spin"></i></td>
+                              <td style="text-align: center;">
+                                <!-- <button class="btn px-1" (click)="delete(element)"><i class="fas fa-trash-alt"></i></button> -->
+                                <button  class="btn  px-1" (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
+                              </td>
+                            </tr>
+
+                      </ng-container>
+                          
+
+                    </ng-container>
                   </tbody>
                 </table>
                 <!-- <table>

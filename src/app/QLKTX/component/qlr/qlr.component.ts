@@ -21,6 +21,8 @@ export class QlrComponent implements OnInit {
   public now=new Date
   public now1=new Date().getFullYear()+"-"+(new Date().getMonth())+"-"+new Date().getDay()
   public form=''
+  public start=0;
+  public step=20;
   async ngOnInit() {
     let user: MKV9999 = JSON.parse(localStorage.getItem('KTX_User'))
      this.listdon=await this.rest.PostDataToAPI<KTX0023[]>({},'KTX0023/Getall').toPromise()
@@ -144,5 +146,11 @@ let that=this
     })
     alert('Đã xóa "'+ok+'" đơn. Lỗi "'+ng+'" đơn.')
   })
+  }
+  getstart($event){
+    this.start=$event
+  }
+  getstep($event){
+    this.step=$event
   }
 }
