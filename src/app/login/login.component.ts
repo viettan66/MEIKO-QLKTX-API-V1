@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
           }
           else {
             if( data.matkhau == $('#PASS').val())
-            LOGIN(data, true)
+            LOGIN(data, false)
             else{
               alert('Sai mật khẩu')
             }
