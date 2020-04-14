@@ -50,7 +50,7 @@ public listKTX0001
           let listphong=[]
           this.listKTX0001.filter(c=>{return c.TOA===val.data.ten}).filter(c=>{return c.TANG===val2.data.ten}).forEach(kkkk=>{
             if(listphong.filter(c=>{return c['ten']===kkkk.PHONG}).length==0)
-            listphong.push({khu:kkkk.TOA=="A"?"N":"F",ten:kkkk.PHONG,slot:kkkk.SLOT,capbac:kkkk.CAPBAC,ghichu:"Phòng mới",idcha:val2.data.KTX0001_ID,trangthai:true,type:4})
+            listphong.push({khu:kkkk.TOA=="A"?"N":"F",ten:kkkk.PHONG,slot:kkkk.SLOT,capbac:kkkk.CAPBAC,ghichu:"Phòng mới",makhoa:kkkk.MAKHOA,idcha:val2.data.KTX0001_ID,trangthai:true,type:4})
           })
           console.log(listphong)
           let dataphong=await this.rest.PostDataToAPI<result< KTX0001>[]>(listphong,"KTX0001/add").toPromise()

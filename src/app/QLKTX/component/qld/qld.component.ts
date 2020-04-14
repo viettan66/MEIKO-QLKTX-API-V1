@@ -156,21 +156,17 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
     },2000);
     
   }
-   count(element:KTX0020){
+  async count(element:KTX0020){
      let key=element.MKV9999.cmtnd_so!=null?element.MKV9999.cmtnd_so:
      (element.MKV9999.hochieu_so!=null?element.MKV9999.hochieu_so:
       (element.MKV9999.manhansu!=null?element.MKV9999.manhansu:(element.hotenkhaisinh))
       )
-    if(element.timkiem==null&&element.check2==null){
       element.check2=false
-        this.rest.PostDataToAPI<valuesearch>({key:key},'Search/Search').subscribe(data=>{
-        element.timkiem=data
+       element.timkiem=await this.rest.PostDataToAPI<valuesearch>({key:key},'Search/Search').toPromise()
         element.check2=true
-      })
+      element.count= element.timkiem.KTX0020.filter(v=>{return v.trangthai===true}).length
      //console.log(element.timkiem)
-    }else if(element.check2==true){
-      return element.timkiem.KTX0020.filter(v=>{return v.trangthai===true}).length
-    }
+    
   }
   export(){
     $('.ddd').css('display','')
@@ -185,5 +181,8 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
   }
   getstep($event){
     this.step=$event
+  }
+  getlist($event){
+    this.listdon=$event
   }
 }

@@ -4,7 +4,10 @@ import { CookieService } from 'ngx-cookie-service'
 import { NgModule ,Injectable, Input} from '@angular/core';
 import { Routes, RouterModule, RouterStateSnapshot } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import * as Globle from './Service/global.service';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './Layout/header/header.component';
@@ -81,7 +84,12 @@ import { ButtonNextComponent } from './Layout/button/button-next/button-next.com
 import { ButtonPreviewComponent } from './Layout/button/button-preview/button-preview.component';
 import { ButtonCountComponent } from './Layout/button/button-count/button-count.component';
 import { ButtonDownloadJsonComponent } from './Layout/button/button-download-json/button-download-json.component';
+import { ButtonDatetimepickerComponent } from './Layout/button/button-datetimepicker/button-datetimepicker.component';
+import { ButtonSortComponent } from './Layout/button/button-sort/button-sort.component';
+import { SelectAccountModalComponent } from './Layout/select-account-modal/select-account-modal.component';
 
+
+const config: SocketIoConfig = { url: Globle.SocketServer, options: {} };
 const routes: Routes = [
   {path: '', component: DashboardComponent,canActivate:[Auth]},
   {path: 'Login', component: LoginComponent},
@@ -193,15 +201,19 @@ const routes: Routes = [
     ButtonPreviewComponent,
     ButtonCountComponent,
     ButtonDownloadJsonComponent,
+    ButtonDatetimepickerComponent,
+    ButtonSortComponent,
+    SelectAccountModalComponent,
     
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   exports: [RouterModule],
-  providers: [CookieService,Auth,{provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [CookieService,Auth,{provide: LocationStrategy, useClass: HashLocationStrategy},DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
   styleUrls: ['./button-next.component.css']
 })
 export class ButtonNextComponent implements OnInit {
-@Input() class
+@Input() classs
 @Input() start
 @Output('start') dd=new EventEmitter<number>()
 @Input() step

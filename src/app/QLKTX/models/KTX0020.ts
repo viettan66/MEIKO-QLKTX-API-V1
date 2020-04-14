@@ -28,6 +28,7 @@ export class KTX0020{
     public  KTX0002_ID  : number     ;
     public  KTX0003_ID  : number     ;
     public  printcount  : number     ;
+    public  count  : number     ;
     public  khoaphong  : string     ;
     public  sotu  : string     ;
     public  sokhoatu  :  string    ;

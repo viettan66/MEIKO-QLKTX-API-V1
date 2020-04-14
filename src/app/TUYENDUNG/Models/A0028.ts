@@ -1,4 +1,8 @@
 import { A0028D } from './A0028D'
+import { RM0001 } from './RM0001'
+import { RM0002 } from './RM0002'
+import { RM0003 } from './RM0003'
+import { RM0004 } from './RM0004'
 
 export class A0028{
     A0028_ID: string
@@ -47,4 +51,8 @@ T098C: string
 T099C: string
 T100C: string
 A0028D:A0028D
+RM0001:RM0001;
+RM0002:RM0002;
+RM0003:RM0003
+RM0004:RM0004
 }

@@ -52,9 +52,11 @@
                                 <td>{{element.RM0010.RM0001!=null?element.RM0010.RM0001.tenCongViec:''}}</td>
                                 <td>{{element.RM0010.RM0001_2!=null?element.RM0010.RM0001_2.tenCongViec:""}}</td>
                                   <td>
-                                      <span class="show">{{element.ngayPV+' ' + element.thoiGianPV |date:'dd/MM/yyyy hh:mm'}}</span>
-                                      <input class="hide form-control w-50" type="date" [ngModel]="element.ngayPV" (ngModelChange)="element.ngayPV=$event">
-                                      <input class="hide form-control w-50" type="time" [ngModel]="element.thoiGianPV" (ngModelChange)="element.thoiGianPV=$event">
+                                      <span class="show">{{element.thoiGianPhongVan|date:'yyyy-MM-dd HH:mm' }}</span>
+                                      <!-- <input class="hide form-control w-50" type="date" [ngModel]="element.ngayPV" (ngModelChange)="element.ngayPV=$event">
+                                      <input class="hide form-control w-50" type="time" [ngModel]="element.thoiGianPV" (ngModelChange)="element.thoiGianPV=$event"> -->
+                                      <span class="hide"><app-button-datetimepicker classs="hide" ids="time{{element.RM0015_ID}}" [values]="element.thoiGianPhongVan"   (data)="getstartdate($event,element)" width="100%'"></app-button-datetimepicker></span>
+                                      
                                   </td>
                                 <td>
                                       <span class="show">{{element.RM0008!=null?element.RM0008.DiaDiem:""}}</span>
@@ -104,7 +106,7 @@
             </div>
         </div>
 
-        
+<!--         
 <div class="modal fade " id="selectaccount" role="dialog" >
 	<div class="modal-dialog   modal-700" >
 		<div class="modal-content " >
@@ -147,11 +149,12 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 
 
 
 
+<app-select-account-modal   (datasingle)="chooseaccount($event)" [listMKV9999choose]="listMKV9999choose"></app-select-account-modal>
 
  <div class="modal fade " id="userinfor" role="dialog"  >
   <div class="modal-dialog   modal-500" >
@@ -183,8 +186,8 @@
                   <td>{{userinfor.MKV9999!=null?userinfor.MKV9999.dienthoai_didong:''}}</td>
                 </tr>
                 <TR>
-                  <td colspan="2">
-                    <app-button-messager></app-button-messager>
+                  <td colspan="2" *ngIf="userinfor.MKV9999!=null">
+                    <app-button-messager [MKV9999]="user" [MKV99992]="userinfor.MKV9999"></app-button-messager>
                     <app-button-email></app-button-email>
                     <app-button-call></app-button-call>
                   </td>

@@ -12,7 +12,20 @@
           </form>
     </div> -->
     <div class="col-auto" *ngIf="user!=null">
-        <button  class="btn btn-sm text-white" ><i class="fas fa-comments"></i><b style="color: aliceblue;">0</b></button>
+       <span style="position: relative;"><button (click)="showmess()" class="btn btn-sm text-white" ><i class="fas fa-comments"></i>
+        <b style="color: aliceblue;">{{sum()}}</b></button>
+        <div *ngIf="isshowmess" style="width: 250px;position: absolute;top: 35px;left: 0;z-index: 999;box-shadow: 0 .3rem 3rem rgba(0, 0, 0, 0.719)!important;">
+          <ul class="list-group text-dark ">
+            <ng-container *ngFor="let element of listMKV7001;let i =index">
+                <li (click)="showmessage(element)" style="cursor: pointer;" class="list-group-item-action list-group-item d-flex justify-content-between align-items-center">
+                  {{ten(element)}}
+                  <span class="badge badge-primary badge-pill">{{element.count==null?0:element.count}}</span>
+                </li>
+            </ng-container>
+            
+          </ul>
+        </div>
+      </span> 
         <button  class="btn btn-sm text-white" ><i class="fas fa-envelope"></i><b style="color: aliceblue;">0</b></button>
         <button   class="btn btn-sm text-white" ><i class="fas fa-bell"></i><b style="color: aliceblue;">0</b></button>
         <button *ngIf="userclickc" (click)="changepass()"  title="Thay đổi mật khẩu"  class="btn btn-sm text-white" ><i class="fas fa-key"></i></button>
@@ -65,3 +78,35 @@
       </div>
     </div>
   </div>
+
+<div style="width: fit-content !important;height: 270px;" class=" fixed-bottom d-flex">
+<ng-container *ngFor="let element of listmesstoshow">
+  <div  class="card text-white bg-info user{{element.MKV9999_ID2+'_'+element.MKV9999_ID}} user{{element.MKV9999_ID+'_'+element.MKV9999_ID2}}" style="max-width: 18rem;">
+    <div class="card-header">{{ten(element)}} <i style="cursor: pointer;" class="fa fa-times float-right" (click)="removemessage(element)"></i></div>
+    <div class="card-body p-1" style="overflow: auto;">
+      <ng-container *ngFor="let element of element.list">
+
+        <div class="row no-gutters bg-primary mb-1 pr-1" *ngIf="element.MKV9999_ID==user.MKV9999_ID" style="border-radius: 10px;">
+          <div class="col-auto d-flex justify-content-center align-items-center" style="width: 30px;"><i class="fa fa-user"></i></div>
+          <div class="col">{{element.noiDung}} <br> <i style="font-size: 8px;">{{element.date==null?'':element.date|date:'dd/MM/yyyy hh:mm aa'}}</i></div>
+        </div>
+
+        <div class="row no-gutters bg-secondary mb-1 pl-1" *ngIf="element.MKV9999_ID!=user.MKV9999_ID" style="border-radius: 10px;">
+          <div class="col">{{element.noiDung}} <br> <i style="font-size: 8px;">{{element.date==null?'':element.date|date:'dd/MM/yyyy HH:mm'}}</i></div>
+          <div class="col-auto d-flex justify-content-center align-items-center" style="width: 30px;"><i class="fa fa-user"></i></div>
+        </div>
+
+      </ng-container>
+      <a (click)="loadmore(element)" style="font-size: 12px;cursor: pointer;"><u> Xem thêm...</u></a>
+    </div>
+    <div class="card-footer p-0">
+      <div class="row no-gutters">
+        <div class="col"><input type="text" class="form-control" (mousedown)="mousedown(element)" (change)="send($event,element)"></div>
+        <div class="col-auto"><button class="btn  btn-primary"><i class="fa fa-save"></i></button></div>
+      </div>
+      
+      
+    </div>
+  </div>
+</ng-container>
+</div>

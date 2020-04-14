@@ -3,10 +3,9 @@
             <div class="card-header">
                 DANH SÁCH ĐƠN
                 <span class="float-right">
-                    <span class="mr-3">Xem
-                        {{((start+1)*step)>=listdon.length?listdon.length:((start+1)*step)}}/{{listdon.length}}</span>
-                    <button (click)="pre()" class="btn btn-sm btn-secondary mr-1"><i class="fas fa-angle-left"></i></button>
-                    <button (click)="nex()" class="btn btn-sm btn-secondary mr-3"><i class="fas fa-angle-right"></i></button>
+                        <app-button-count [start]="start" [step]="step" [listdata]="listdon"  (step)="getstep ($event)"  ></app-button-count>
+                        <app-button-preview  [start]="start" [step]="step" [listdata]="listdon" (start)="getstart ($event)" ></app-button-preview>
+                        <app-button-next [start]="start" [step]="step" [listdata]="listdon"  (start)="getstart ($event)" classs="mr-1" ></app-button-next>
                     <select id="filter" class="btn btn-outline-secondary" (change)="bophanchange($event)">
                         <option value="all">ALL</option>
                         <option *ngFor="let element of listbophan;let i=index;" value="{{element.phong_id}}">{{element.bophan_ten}}
@@ -20,11 +19,11 @@
                         <thead>
                             <tr>
                                 <th style="width: 40px;">STT</th>
-                                <th>Tên người tạo</th>
+                                <th>Tên người tạo<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="hoVaTen"></app-button-sort></th>
                                 <th>Công việc</th>
                                 <th>Nội dung yêu cầu</th>
-                                <th>Bộ phận</th>
-                                <th>Ngày tạo</th>
+                                <th>Bộ phận<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="T002C"></app-button-sort></th>
+                                <th>Ngày tạo<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="ngayTao"></app-button-sort></th>
                                 <th>Tổng nhân lực</th>
                                 <th>Nam</th>
                                 <th>Nữ</th>
@@ -38,7 +37,7 @@
                                         <tr style="cursor: pointer;padding: 0;" class="trclick"
                                             id="TRR{{element.A0028D.A0028D_ID}}"
                                             (click)="trclick(element.A0028D.A0028D_ID)">
-                                            <td style="width: 40px;">STT</td>
+                                            <td style="width: 40px;">{{i+1}}</td>
                                             <td>{{element.hoVaTen}}</td>
                                             <td>{{element.T023C}}</td>
                                             <td>{{element.T012C}}</td>
@@ -54,23 +53,23 @@
                                                 <table class="table table-bordered">
                                                     <tr>
                                                         <td>Công việc</td>
-                                                        <td colspan="2"><span class="doter">{{element.T023C}}</span>
+                                                        <td colspan="2"><span class="doter">{{element.RM0001!=null?element.RM0001.tenCongViec:''}}</span>
                                                         </td>
                                                         <td>Lĩnh vực</td>
                                                         <td colspan="2"><span
-                                                                class="doter">{{element.A0028D.C024C}}</span></td>
+                                                                class="doter">{{element.RM0002!=null?element.RM0002.tenLinhVuc:''}}</span></td>
                                                         <td>Kinh nghiệm</td>
-                                                        <td colspan="2"><span
+                                                        <td colspan="3"><span
                                                                 class="doter">{{element.A0028D.C012C}}</span> Năm</td>
-                                                        <td></td>
+                                                        <!-- <td></td> -->
                                                     </tr>
                                                     <tr>
                                                         <td>Chuyên ngành</td>
                                                         <td colspan="2"><span
-                                                                class="doter">{{element.A0028D.C026C}}</span></td>
+                                                                class="doter">{{element.RM0004!=null?element.RM0004.tenChuyenNganh:''}}</span></td>
                                                         <td>Học vấn</td>
                                                         <td colspan="2"><span
-                                                                class="doter">{{element.A0028D.C025C}}</span></td>
+                                                                class="doter">{{element.RM0003!=null?element.RM0003.tenBacDaoTao:''}}</span></td>
                                                         <td>Ngoại ngữ</td>
                                                         <td colspan="2"><span
                                                                 class="doter">{{element.A0028D.C013C}}</span></td>
@@ -84,7 +83,7 @@
                                                         <td colspan="1">Thị lực</td>
                                                         <td colspan="1">Chiều cao</td>
                                                         <td rowspan="3" colspan="4">
-                                                            <span class="doter">{{element.A0028D.C019C}}</span>
+                                                            <span class="doter"style="white-space: pre-wrap;" class="doter">{{element.A0028D.C019C}}</span>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -103,13 +102,11 @@
                                                     </tr>
                                                     <tr>
                                                         <td colspan="1">Tính cách</td>
-                                                        <td colspan="9"><span
-                                                                class="doter">{{element.A0028D.C011C}}</span></td>
+                                                        <td colspan="9"><span style="white-space: pre-wrap;" class="doter">{{element.A0028D.C011C}}</span></td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="1">Yêu cầu đặc biệt</td>
-                                                        <td colspan="9"><span
-                                                                class="doter">{{element.A0028D.C018C}}</span></td>
+                                                        <td colspan="9"><span class="doter"style="white-space: pre-wrap;" >{{element.A0028D.C018C}}</span></td>
                                                     </tr>
                                                 </table>
                                             </td>

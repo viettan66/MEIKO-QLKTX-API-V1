@@ -1,0 +1,65 @@
+<div class="modal fade " id="select-account-modal" role="dialog" >
+	<div class="modal-dialog   modal-700" >
+		<div class="modal-content " >
+			<div class="modal-header">
+                        <div class="row w-100">
+                              <div class="col"><h5 class="modal-title"><i class="fa fa-users fa-2x"></i></h5> </div>
+                              <div class="col-auto">
+                                    <app-button-count [start]="start" [step]="step" [listdata]="listMKV9999s"  (step)="getstep ($event)"  ></app-button-count>
+                                    <app-button-preview  [start]="start" [step]="step" [listdata]="listMKV9999s" (start)="getstart ($event)" ></app-button-preview>
+                                    <app-button-next [start]="start" [step]="step" [listdata]="listMKV9999s" classs="mr-1"  (start)="getstart ($event)" ></app-button-next>
+                                    <span style="position: relative;">
+                                          <input type="text" style="width: 100px;" placeholder="ID, Tên" class="btn btn-outline-secondary mr-1" [(ngModel)]="keysearch">
+                                          <i (click)="te()" *ngIf="keysearch!=''" class="fa fa-times" style="text-align: start;position: absolute;top:7px;right: 14px;"></i>
+                                    </span>
+                                    
+                                    <select  class="btn btn-outline-secondary mr-1" (change)="bophanchange($event)">
+                                          <option value="all">ALL</option>
+                                          <option *ngFor="let element of listbophan;let i=index;" value="{{element.id}}">{{element.ten}}
+                                          </option>
+                                      </select>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              </div>
+                        </div>
+				
+				
+			</div>
+			<div class="modal-body ">
+                        <table class="table table-bordered">
+                              <thead>
+                                    <tr>
+                                          <th>STT</th>
+                                          <th>ID</th>
+                                          <th>Tên</th>
+                                          <th>Bộ phận</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <ng-container *ngFor="let element of listMKV9999s;let i=index">
+                                          <ng-container *ngIf="checkelement(element)=='actived'">
+                                                      <tr style="cursor: pointer;" id="tr{{element.manhansu}}" (click)="chooseaccount(element)" class="{{checkelement(element)}}">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{element.manhansu}}</td>
+                                                            <td>{{element.hodem+' '+element.ten}}</td>
+                                                            <td>{{element.thetu_id}}</td>
+                                                      </tr>
+                                          </ng-container>
+                                    </ng-container>
+                                    <ng-container *ngFor="let element of listMKV9999s;let i=index">
+                                          <ng-container *ngIf="checkelement(element)!='actived'">
+                                                <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))&&keysearch==''||checkkey(element)&&keysearch!=''">
+                                                      <tr  style="cursor: pointer;" id="tr{{element.manhansu}}" (click)="chooseaccount(element)" class="{{checkelement(element)}}">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{element.manhansu}}</td>
+                                                            <td>{{element.hodem+' '+element.ten}}</td>
+                                                            <td>{{element.thetu_id}}</td>
+                                                      </tr>
+                                                </ng-container>
+                                          </ng-container>
+                                    </ng-container>
+                              </tbody>
+                        </table>
+			</div>
+		</div>
+	</div>
+</div>

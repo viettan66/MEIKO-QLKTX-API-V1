@@ -34,7 +34,7 @@
                   <thead><tr>
                     <th style="width: 20px;"><input type="checkbox" ></th>
                     <th style="width: 40px;">STT</th>
-                    <th>Tên</th>
+                    <th>Tên <app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="hotenkhaisinh"></app-button-sort></th>
                     <th style="width: 80px;">ID</th>
                     <th style="width: 80px;">BP</th>
                     <th>Bậc</th>
@@ -62,7 +62,7 @@
                               <td>{{element.MKV9999.cmtnd_ngayhethan| date:'yyyy/MM/dd'}}</td>
                               <td>{{element.MKV9999.diachithuongtru}}</td>
                               <td>{{element.ngaytaodon| date:'dd/MM/yyyy HH:mm'}}</td>
-                              <td style="text-align: center;">{{count(element)}}</td>
+                              <td style="text-align: center;">{{element.check2==null? count(element):(element.count==null?0:element.count)}}</td>
                               <td style="text-align: center;">
                                 <span class="ddd">{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</span> 
                                 <i *ngIf="element.trangthai" class="fa fa-check"></i><i *ngIf="!element.trangthai" class="fa fa-sync-alt fa-spin"></i></td>

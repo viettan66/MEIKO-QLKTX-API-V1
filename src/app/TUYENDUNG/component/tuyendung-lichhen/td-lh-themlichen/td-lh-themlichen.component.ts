@@ -17,8 +17,7 @@ public listRM0008:RM0008[]=[]
 public listRM0010:RM0010[]=[]
 public listMKV9999:MKV9999[]=[]
 public listMKV9999choose:MKV9999[]=[]
-public ngay=null
-public gio=null
+public thoigianphongvan=null
 public diadiem=null
 public start:number=0
 public step:number=20
@@ -26,34 +25,12 @@ public step:number=20
 
   async ngOnInit() {
     this.listRM0008= await this.rest.GetDataFromAPI<RM0008[]>('RM0008/Getall').toPromise()
-    this.listMKV9999= await this.rest.GetDataFromAPI<MKV9999[]>('Account/Get').toPromise()
-    console.log(this.listMKV9999)
   }
   selectaccount(){
-    $("#selectaccount").modal()
+    $("#select-account-modal").modal()
   }
-  chooseaccount(element:MKV9999){
-    if(this.listMKV9999choose.indexOf(element)==-1){
-      this.listMKV9999choose.push(element)
-      $('#tr'+element.manhansu).addClass('actived')
-    }else{
-      this.listMKV9999choose.splice(this.listMKV9999choose.indexOf(element),1)
-      $('#tr'+element.manhansu).removeClass('actived')
-    }
-  }
-  pre(){
-    if(this.start==0)return false
-    this.start--
-  }
-  nex(){
-    if((this.start+1)*this.step>=this.listMKV9999.length)return false
-    this.start++
-  }
-  closeselectaccount(){
-    $('#selectaccount').modal('hide')
-  }
-  checkelement(element:MKV9999){
-    return this.listMKV9999choose.indexOf(element)==-1?'':'actived'
+  getlistdata($event){
+    this.listMKV9999choose=$event
   }
   removechoose(element:MKV9999){
       this.listMKV9999choose.splice(this.listMKV9999choose.indexOf(element),1)
@@ -64,12 +41,8 @@ public step:number=20
   }
   async themlichhen(){
    // console.log(this.listRM0010)
-    if(this.ngay==null){
-      alert("Bạn chưa chọn ngày phỏng vấn.")
-      return false
-    }
-    if(this.gio==null){
-      alert("Bạn chưa chọn giờ phỏng vấn.")
+    if(this.thoigianphongvan==null){
+      alert("Bạn chưa thiết lập thời gian phỏng vấn.")
       return false
     }
     if(this.diadiem==null||this.diadiem=='null'){
@@ -80,7 +53,7 @@ public step:number=20
       alert("Bạn chưa chọn ứng viên phỏng vấn.")
       return false
     }
-    let data= await this.rest.PostDataToAPI<result< RM0015>[]>({thoigian:(this.ngay+' '+this.gio),diadiem:this.diadiem,RM0010:this.listRM0010.filter(c=>{return c.check===true}),
+    let data= await this.rest.PostDataToAPI<result< RM0015>[]>({thoigian:this.thoigianphongvan,diadiem:this.diadiem,RM0010:this.listRM0010.filter(c=>{return c.check===true}),
   MKV9999:this.listMKV9999choose},'RM0015/add').toPromise()
   let count=0
     data.forEach(val=>{
@@ -97,5 +70,8 @@ public step:number=20
   
   Choose(element:RM0015){
     element.check=element.check==null?true:!element.check
+  }
+  getstartdate($event){
+    this.thoigianphongvan=$event
   }
 }

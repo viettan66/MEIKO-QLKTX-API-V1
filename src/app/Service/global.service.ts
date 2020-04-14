@@ -4,15 +4,16 @@ export const sep='/';
 export const regex_a_z = /([a-z])/g; 
 export const Khohang='F632672091174345B4B1F3BB5A9590FC';
 export const version: string="3.0";   
-        //export const APIUrl:string="https://localhost:44343/api/"; 
-    export const APIUrl:string="https://localhost:44335/api/";
-    //export const APIUrl:string="http://192.84.100.207/QLKTXAPI/api/";
+    export const SocketServer:string="http://localhost:3000"; 
+    //export const APIUrl:string="https://localhost:44335/api/";
+    export const APIUrl:string="http://192.84.100.207/QLKTXAPI/api/";
 //export const HostUrl:string="http://localhost:4200/"; 
 //export const HostUrl:string="http://192.84.100.196:4200/"; 
 export const AsoftAPI:string="http://192.84.100.207/AsoftAPI/E00003/GetByStatus/1/100000/1"; 
 export const AsoftAPI_Phong_id:string="http://192.84.100.207/AsoftAPI/EC0002/"; 
 
-export const HostSmartOffice:string="http://192.84.100.187:88/"; 
+export const HostSmartOffice:string="http://192.84.100.207/adminapi/"; 
+//export const HostSmartOffice:string="http://192.84.100.187:88/"; 
 
 export const color={
     0:'rgb(197, 2, 2)',

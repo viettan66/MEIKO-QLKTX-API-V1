@@ -2,85 +2,161 @@
     <app-menu></app-menu>
       <div class="col" id="contentmenu"> 
         <div class="row no-gutters align-items-center" id="hidecolumn">
-              <button class="list-group-item tab"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>Nhà ăn 1</span> </button>
-              <button class="list-group-item tab"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>Nhà ăn 2</span> </button>
-              <button class="list-group-item tab"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>Nhà ăn 3</span> </button>
-              <button class="list-group-item tab"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>Nhà ăn 4</span> </button>
+          <ng-container *ngFor="let element of listMKV8002;let i=index">
+              <button (click)="active(element)" class="list-group-item  {{tab==i?'active':''}}"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>{{element.ten}}</span> </button>
+          </ng-container>
+              <button (click)="themnhaan()" class="list-group-item tab"><i class="fas fa-plus"></i>&nbsp; </button>
                 <input class="form-control form-control-sm  w-25 "  type="text" placeholder="Search" value="017308002"  aria-label="Search" style="margin-left: 20px;" id="searchbox">
                 <button class="btn btn-sm btn-info" id="SEARCH" ><i style="cursor: pointer;" class="fas fa-search" aria-hidden="true"></i></button>
           </div>
         <div class="row no-gutters"  style="padding: 10px;" >
             <div class="col-12">
-                <div class="card  bg-transparent" id="testconvertPDF">
+                <div class="card  " id="testconvertPDF" style="background-color: rgba(255, 255, 255, 0.932);">
                     <div class="card-header">
-                      DANH NHÂN VIÊN 
-                      <span class="float-right">
-                        <button title="Thêm phòng" style="margin-left: 10px;"  id="print" class="btn btn-secondary qlp"><i class="fa fa-search"></i></button>&nbsp;
-                      </span>
-                      <!-- <span class="float-right">
-                        <input type="text" style="width: 100px;" list="datalisst" class="form-control">
-                        <datalist id="datalisst">
+                      <div class="row no-gutters">
+                        <div class="col"> DANH NHÂN VIÊN  </div>
+                        <div class="col-auto mr-1">
+                          <app-button-count [start]="start" [step]="step" [listdata]="listMKV9999"  (step)="getstep ($event)"  ></app-button-count>
+                          <app-button-preview  [start]="start" [step]="step" [listdata]="listMKV9999" (start)="getstart ($event)" ></app-button-preview>
+                          <app-button-next [start]="start" [step]="step" [listdata]="listMKV9999"  (start)="getstart ($event)" ></app-button-next>
+                        </div>
+                        <div class="col-auto">
+                          <app-button-datetimepicker ids="jkkjjjkdf"   (data)="getstartdate($event)"></app-button-datetimepicker>
+                        </div>
+                        <div class="col-auto">
+                          <app-button-datetimepicker ids="jkkjjjk"   (data)="getenddaate($event)"></app-button-datetimepicker>
+                        </div>
+                        <div class="col-auto">
+                          <input type="text" style="width: 100px;" list="datalisst" class="  form-control mr-1">
+                          <datalist id="datalisst">
                             <option value="20">Nhỏ hơn 20 lần</option>
                             <option value="15">Nhỏ hơn 15 lần</option>
                             <option value="10">Nhỏ hơn 10 lần</option>
-                        </datalist>
-                      </span> -->
-                      <span class="float-right" style="width: 300px;">
-                        <div class="col float-right">
-                            <div class="input-group mb-2">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">đến ngày</div>
-                              </div>
-                              <input style="font-weight: bold;"  type="date" class="form-control" >
-                            </div>
-                          </div>
-                      </span>
-                      <span class="float-right" style="width: 300px;">
-                        <div class="col float-right">
-                            <div class="input-group mb-2">
-                              <div class="input-group-prepend">
-                                <div class="input-group-text">Từ ngày</div>
-                              </div>
-                              <input style="font-weight: bold;"  type="date" class="form-control" >
-                            </div>
-                          </div>
-                      </span>
+                          </datalist>
+                        </div>
+                        <div class="col-auto">
+                          <button title="Tìm kiếm" (click)="getdataa()"  class="btn btn-secondary  mr-1"><i
+                              class="fa fa-search"></i></button>
+                        </div>
+                        <div class="col-auto">
+                          <app-button-download bg="btn-info" tableID="export" tableName="Danh sách ra vào cổng"></app-button-download>
+                        </div>
+                      </div>
                     </div>
                     <div class="card-body" style="padding: 5px;">
-                        <table class="table table-bordered">
-                            <thead><tr>
-                                <th style="width: 20px;"><input type="checkbox" ></th>
-                                <th style="width: 40px;">STT</th>
-                                <th>Tên</th>
-                                <th>ID</th>
-                                <th>BP</th>
-                                <th>Bậc</th>
-                                <th>CMTND</th>
-                                <th>Phòng</th>
-                                <th>Giường</th>
-                                <th>Số lần ra vào</th>
-                                <th style="padding: 0;"></th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                                  <tr>
-                                      <td><input type="checkbox" name="" id=""></td>
-                                      <td>1</td>
-                                      <td>Nguyễn việt tấn</td>
-                                      <td>017677</td>
-                                      <td>IT</td>
-                                      <td>4</td>
-                                      <td>123346789</td>
-                                      <td>A-101</td>
-                                      <td>GA-A101-G01</td>
-                                      <td>23</td>
-                                      <td><i class="fa fa-eye"></i></td>
-                                  </tr>
-                              </tbody>
-                        </table>
+                      <table class="table table-bordered" id="export">
+                          <thead><tr>
+                              <th style="width: 20px;"><input type="checkbox" ></th>
+                              <th style="width: 40px;">STT</th>
+                              <th>Tên <app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="ten"></app-button-sort></th>
+                              <th>ID<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="id"></app-button-sort></th>
+                              <th>BP</th>
+                              <th>Bậc</th>
+                              <th>CMTND</th>
+                              <th>Phòng</th>
+                              <th>Ra/vào<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="Count"></app-button-sort></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                              <ng-container *ngFor="let element of listMKV9999;let i=index">
+                                <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))">
+                                  <ng-container *ngIf="element.MKV9999!=null">
+                                      <tr>
+                                          <td><input type="checkbox" name="" id=""></td>
+                                          <td>{{i+1}}</td>
+                                          <td>{{element.MKV9999.hodem+' '+element.MKV9999.ten}}</td>
+                                          <td>{{element.MKV9999.manhansu}}</td>
+                                          <td>{{element.MKV9999.thetu_id}}</td>
+                                          <td>{{element.MKV9999.capbac}}</td>
+                                          <td>{{element.MKV9999.cmtnd_so}}</td>
+                                          <td>{{element.MKV9999.KTX0001!=null?element.MKV9999.KTX0001.ten:''}}</td>
+                                          <td>{{element.Count}}</td>
+                                      </tr>
+                                  </ng-container>
+                                  <ng-container *ngIf="element.MKV9999==null">
+                                      <tr>
+                                          <td><input type="checkbox" name="" id=""></td>
+                                          <td>{{i+1}}</td>
+                                          <td>Không có dữ liệu</td>
+                                          <td>{{element.User_ID}}</td>
+                                          <td>Không có dữ liệu</td>
+                                          <td>Không có dữ liệu</td>
+                                          <td>Không có dữ liệu</td>
+                                          <td>Không có dữ liệu</td>
+                                          <td>{{element.Count}}</td>
+                                      </tr>
+                                  </ng-container>
+                                </ng-container>
+                              </ng-container>
+                            </tbody>
+                      </table>
                     </div>
                 </div>
             </div>
         </div>
       </div>
+</div>
+
+
+<div class="modal fade " id="themnhaanmodal" role="dialog" >
+	<div class="modal-dialog   modal-900" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">THÊM NHÀ ĂN MỚI</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+        <TABLE class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <th> TÊN </th>
+              <TD><input type="text" [(ngModel)]="newnhaan.ten" placeholder="Tên máy vân tay" class="form-control"></TD>
+            </tr>
+            <tr>
+              <th> IP </th>
+              <TD><input type="text" [(ngModel)]="newnhaan.ip" placeholder="IP của máy vân tay" class="form-control"></TD>
+            </tr>
+            <tr>
+              <th> PORT  </th>
+              <TD><input type="text" [(ngModel)]="newnhaan.port" placeholder="Port, thường là 4370" class="form-control"></TD>
+            </tr>
+            <tr>
+              <th> COMMKEY </th>
+              <TD><input type="text" [(ngModel)]="newnhaan.commkey" placeholder="Cổng COMM, Thường là 0" class="form-control"></TD>
+            </tr>
+            <tr>
+              <th> GHI CHÚ </th>
+              <TD><input type="text" [(ngModel)]="newnhaan.ghiChu" placeholder="Ghi chú" class="form-control"></TD>
+            </tr>
+          </tbody>
+        </TABLE>
+        <button (click)="save()" class="btn btn-primary float-right"><i class="fa fa-save"></i></button>
+        <br>
+        <br>
+        <table class="table table-bordered table-hover">
+          <tr>
+            <td>STT</td>
+            <td>Tên</td>
+            <td style="width: fit-content;">IP</td>
+            <td style="width: 100px;">Port</td>
+            <td style="width: 100px;">Comm</td>
+            <td>Ghi chú</td>
+            <td><i class="fa fa-list"></i></td>
+          </tr>
+          <ng-container *ngFor="let element of listMKV8002;let i=index">
+            <tr id="row{{element.MKV8002_ID}}">
+              <td>{{i+1}}</td>
+              <td><input type="text" [(ngModel)]="element.ten" placeholder="Tên" disabled class="form-control none"></td>
+              <td><input type="text" [(ngModel)]="element.ip" placeholder="IP" disabled class="form-control none"></td>
+              <td><input type="text" [(ngModel)]="element.port" placeholder="Port" disabled class="form-control none"></td>
+              <td><input type="text" [(ngModel)]="element.commkey" placeholder="Commkey" disabled class="form-control none"></td>
+              <td><input type="text" [(ngModel)]="element.ghiChu" placeholder="Ghi chú" disabled class="form-control none"></td>
+            <td><button class="btn" id="edit{{element.MKV8002_ID}}" (click)="edititem(element)"><i class="fa fa-edit"></i></button>
+              <button class="btn btn-sm deleteitem" (click)="deleteitem(element)"><i class="far fa-trash-alt"></i></button></td>
+            </tr>
+          </ng-container>
+        </table>
+			</div>
+		</div>
+	</div>
 </div>

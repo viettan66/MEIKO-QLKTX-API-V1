@@ -27,16 +27,12 @@ public listRM0001: RM0001[] = []
 public rm0010in:RM0010=new RM0010()
 public start:number=0
 public step:number=20
-public start2:number=0
-public step2:number=20
-public listMKV9999:MKV9999[]=[]
 public user:MKV9999=new MKV9999()
  async ngOnInit() {
    this.user=JSON.parse(localStorage.getItem('KTX_User'))
    let arrtemp=[]
     this.listRM0015=await this.rest.PostDataToAPI<RM0015[]>({type:false,MKV9999_ID:this.MKV9999_ID,phong_id:this.phong_id},"RM0015/Getall").toPromise()
     this.listRM0008=await this.rest.GetDataFromAPI<RM0008[]>("RM0008/Getall").toPromise()
-    this.listMKV9999= await this.rest.GetDataFromAPI<MKV9999[]>('Account/Get').toPromise()
        console.log(this.listRM0015)
    this.listRM0015.forEach(val=>{
      if(val.RM0010.bophanid!=null)
@@ -58,6 +54,9 @@ public user:MKV9999=new MKV9999()
       }
     })
   }
+  getstartdate($event,element:RM0015){
+    element.thoiGianPhongVan=$event
+  }
   showungvien(element:RM0015){
     if(element.RM0010!=null){
       this.rm0010in=element.RM0010
@@ -76,8 +75,8 @@ public user:MKV9999=new MKV9999()
     if($('#edit'+element.RM0015_ID).find('i').hasClass('fa-edit'))$('#edit'+element.RM0015_ID).find('i').removeClass('fa-edit').addClass('fa-save')
     else{
       $('#edit'+element.RM0015_ID).find('i').removeClass('fa-save').addClass('fa-edit')
-      this.thisrm0015.thoiGianPhongVan=this.thisrm0015.ngayPV+' '+this.thisrm0015.thoiGianPV
-      console.log(this.thisrm0015)
+      //this.thisrm0015.thoiGianPhongVan=this.thisrm0015.ngayPV+' '+this.thisrm0015.thoiGianPV
+      //console.log(this.thisrm0015)
      let data= await this.rest.PutDataToAPI<result< RM0015>>(this.thisrm0015,'RM0015/update').toPromise()
      if(data.code=="OK"){
        this.thisrm0015['RM0008']=data.data['RM0008']
@@ -99,13 +98,11 @@ public user:MKV9999=new MKV9999()
   }
   public thisrm0015:RM0015=null
   selectaccount(element:RM0015){
-    $('#selectaccount').modal()
-
-  }
-  
-  checkelement(element:MKV9999){
-    if(this.thisrm0015==null)return false
-    return this.thisrm0015.RM0015A.indexOf(this.thisrm0015.RM0015A.filter(c=>{return c.MKV9999_ID===element.MKV9999_ID})[0])==-1?'':'actived'
+    this.thisrm0015=element
+    this.listMKV9999choose=[]
+    this.listMKV9999choose=(this.thisrm0015.RM0015A.map(x=>{return x.MKV9999}))
+    console.log(this.listMKV9999choose)
+    $('#select-account-modal').modal()
   }
   pre(){
     if(this.start==0)return false
@@ -115,18 +112,8 @@ public user:MKV9999=new MKV9999()
     if((this.start+1)*this.step>=this.listRM0015.length)return false
     this.start++
   }
-  pre2(){
-    if(this.start2==0)return false
-    this.start2--
-  }
-  nex2(){
-    if((this.start2+1)*this.step2>=this.listMKV9999.length)return false
-    this.start2++
-  }
-  closeselectaccount(){
-    $('#selectaccount').modal('hide')
-  }
-  
+  public listMKV9999choose:MKV9999[]=[]
+
   chooseaccount(element:MKV9999){
     if(this.thisrm0015.RM0015A.indexOf(this.thisrm0015.RM0015A.filter(c=>{return c.MKV9999_ID===element.MKV9999_ID})[0] )==-1){
       let temp:RM0015A=new RM0015A()
@@ -194,4 +181,5 @@ public user:MKV9999=new MKV9999()
   download(tableexport){
     this.rest.ExportTOExcel(document.getElementById(tableexport),'List')
   }
+  
 }
