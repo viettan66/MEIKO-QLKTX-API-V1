@@ -214,6 +214,7 @@ public title=""
         }
         that.listEP=[]
        let data= await that.rest.GetDataFromAPI<KTX0020[]>('QLSP/GetAllEp').toPromise()
+       console.log(data)
           data.forEach(cal=>{
             if(cal.gioitinh==(khu=='N'))
             that.listEP.push(cal)
@@ -280,24 +281,24 @@ public title=""
   }
   public ktx20tempprint:KTX0020[]=[]
   
-  sapphong(check:boolean){
+ async sapphong(check:boolean){
     let arr:xuatkho=new xuatkho()
     this.ktx20tempprint=[]
     let that=this
     //console.log(that.listEPcopy.filter(c=>{return c.check===true}))
-    that.rest.PostDataToAPI<result<KTX0020>[]>({arrPhong:that.listphongcopy.filter(c=>{return c.check===true}),EPs:that.listEPcopy.filter(c=>{return c.check===true}) },'QLSP/AddEPToGiuongAuto').subscribe(datas=>{
+  let  datas=await that.rest.PostDataToAPI<result<KTX0020>[]>({arrPhong:that.listphongcopy.filter(c=>{return c.check===true}),EPs:that.listEPcopy.filter(c=>{return c.check===true}) },'QLSP/AddEPToGiuongAuto').toPromise()
       //console.log(datas)
        let ok=0
         let ng=0
         that.ktx0010.forEach(kll=>{
           if(kll.soluongmacdinh>0)
-            arr.data.push({soLuong:kll.soluongmacdinh,donViTinh:kll.tenDonViTinh,WH0007_ID:kll.WH0007_ID})
+            arr.ListProduct.push({soLuong:kll.soluongmacdinh,donViTinh:kll.tenDonViTinh,WH0007_ID:kll.WH0007_ID})
         })
         
       datas.forEach(data=>{
         if(data.code=="OK"){
-          if(data.data.MKV9999.type==1){
-            arr.A0002_ID.push(data.data.MKV9999.manhansu)
+          if(data.data.MKV9999.type!=0){
+            arr.ListUser.push(data.data.MKV9999.manhansu)
           }
           this.ktx20tempprint.push(data.data)
           ok++
@@ -334,7 +335,15 @@ public title=""
              })
         }else ng++
       })
-      console.log(arr)
+      ///////////////////////////////////////////////
+      
+      //console.log(arr)
+    let input = new FormData();
+    input.append('ListUser',JSON.stringify(arr.ListUser) );
+    input.append('ListProduct',JSON.stringify(arr.ListProduct) );
+    let kkkk=await this.rest.Post<any>(input, Global.xuatkhoAPI).toPromise()
+     console.log(kkkk)
+     
       alert('Đã sắp phòng cho '+ok+' người\n'+(ng!=0?('Chưa sắp được phòng cho '+ng+' người'):''))
       if(check){
         
@@ -348,7 +357,6 @@ public title=""
           }, 200);
         },4000);
       }
-    })
     return
   }
   public loading=false

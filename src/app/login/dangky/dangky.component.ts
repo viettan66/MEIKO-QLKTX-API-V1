@@ -41,10 +41,13 @@ export class DangkyComponent implements OnInit {
       return false
     }
     this.newcomer.type=0
+    if(this.newcomer.manhansu==null||this.newcomer.manhansu=="")this.newcomer.manhansu=this.newcomer.cmtnd_so
     let data= await this.rest.PostDataToAPI<result<MKV9999>>(this.newcomer,'Account/add').toPromise();
     if(data.code=="OK"){
       alert('Đăng ký thành công, xin mời bạn quay lại trang đăng nhập')
       this.router.navigate(['Login'],{queryParams:{ID:data.data.cmtnd_so}})
+    }else{
+      alert(data.mess)
     }
   }
 }

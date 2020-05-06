@@ -23,7 +23,7 @@ export class TuyendungDanhmucBacdaotaoComponent implements OnInit {
     if(data.code=="OK")this.listdata.push(data.data)
   }
   savecongviec(){
-    console.log(this.newdm)
+    //console.log(this.newdm)
     this.rest.PostDataToAPI<result<RM0003>>(this.newdm,'RM0003/add').subscribe(data=>{
       if(data.code=="OK"){
         this.listdata.push(data.data)
@@ -47,16 +47,24 @@ export class TuyendungDanhmucBacdaotaoComponent implements OnInit {
        $('#row'+element.RM0003_ID).find('input:text,select').addClass('none').attr('disabled',true)
        $('#edit'+element.RM0003_ID).find('i').removeClass('fa-save').addClass('fa-edit')
        let dataa= await this.rest.PutDataToAPI<result<RM0003>>(element,'RM0003/update').toPromise()
-       console.log(dataa)
+       //console.log(dataa)
        if(dataa.code=="OK"){{
          element=dataa.data
        }}
      }
-   }
+   }  
+   public start=0
+   public step=20
+  getstart($event){
+      this.start=$event
+    }
+    getstep($event){
+      this.step=$event
+    }
   async xoacongviec(){
     if(!confirm('Bạn có chắc chắn muốn xóa '))return false
     let data=await this.rest.PutDataToAPI<result<RM0003>[]>(this.listdata.filter(c=>{return c.check===true}),'RM0003/delete').toPromise()
-    console.log(this.listdata.filter(c=>{return c.check===true}))
+    //console.log(this.listdata.filter(c=>{return c.check===true}))
     data.filter(c=>{return c.code==="OK"}).forEach(val=>{this.listdata.filter(c=>{return c.RM0003_ID===val.data.RM0003_ID}).map(x=>{this.listdata.splice(this.listdata.indexOf(x),1)})})
    }
 }

@@ -87,6 +87,10 @@ import { ButtonDownloadJsonComponent } from './Layout/button/button-download-jso
 import { ButtonDatetimepickerComponent } from './Layout/button/button-datetimepicker/button-datetimepicker.component';
 import { ButtonSortComponent } from './Layout/button/button-sort/button-sort.component';
 import { SelectAccountModalComponent } from './Layout/select-account-modal/select-account-modal.component';
+import { SelectAccountAddKTXComponent } from './Layout/select-account-add-ktx/select-account-add-ktx.component';
+import { TaikhoanchuadongboComponent } from './QLKTX/component/tracuuthongke/taikhoanchuadongbo/taikhoanchuadongbo.component';
+import { WindowChatComponent } from './Layout/window-chat/window-chat.component';
+import { ButtonSearchComponent } from './Layout/button/button-search/button-search.component';
 
 
 const config: SocketIoConfig = { url: Globle.SocketServer, options: {} };
@@ -204,6 +208,10 @@ const routes: Routes = [
     ButtonDatetimepickerComponent,
     ButtonSortComponent,
     SelectAccountModalComponent,
+    SelectAccountAddKTXComponent,
+    TaikhoanchuadongboComponent,
+    WindowChatComponent,
+    ButtonSearchComponent,
     
   ],
   imports: [

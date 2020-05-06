@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { MKV9982 } from 'src/app/Models/MKV9982';
 import { Router, ActivatedRoute } from '@angular/router';
 import { KTX0040 } from '../models/KTX0040';
+import { Title } from '@angular/platform-browser';
 declare var $:any
 
 @Component({
@@ -14,7 +15,7 @@ declare var $:any
 })
 export class KTXDashboardComponent implements OnInit {
 
-  constructor(public rest:RESTService,public cookie:CookieService,public route:ActivatedRoute) { }
+  constructor(private title: Title,public rest:RESTService,public cookie:CookieService,public route:ActivatedRoute) { }
 public menu:MKV9982[]=[]
 public listnew:KTX0040[]=[]
 public detail:KTX0040=new KTX0040()
@@ -26,6 +27,8 @@ substring(l){
   return l.substring(0,200)
 }
  async ngOnInit() {
+   
+  this.title.setTitle('Quản lý KTX Website');
     this.listnew= await (await this.rest.GetDataFromAPI<KTX0040[]>('KTX0040/Getall').toPromise()).filter(f=>f.trangthai===true)
     let that = this
    

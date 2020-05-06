@@ -6,9 +6,15 @@
                 <div class="col">DANH SÁCH LỊCH HẸN</div>
                 <div class="col-auto">
                   <span class="mr-3">
-                      <span class="mr-3">Xem {{((start+1)*step)>=listRM0015.length?((listRM0015.length-step+1)<0?1:(listRM0015.length-step+1)):((start+1)*step-(step)+1)}}-{{((start+1)*step)>=listRM0015.length?listRM0015.length:((start+1)*step)}} của {{listRM0015.length}}</span>
+                      <!-- <span class="mr-3">Xem {{((start+1)*step)>=listRM0015.length?((listRM0015.length-step+1)<0?1:(listRM0015.length-step+1)):((start+1)*step-(step)+1)}}-{{((start+1)*step)>=listRM0015.length?listRM0015.length:((start+1)*step)}} của {{listRM0015.length}}</span>
                       <button (click)="pre()" class="btn btn-sm btn-secondary mr-1" ><i class="fas fa-angle-left"></i></button>
-                      <button (click)="nex()" class="btn btn-sm btn-secondary mr-2" ><i class="fas fa-angle-right"></i></button>
+                      <button (click)="nex()" class="btn btn-sm btn-secondary mr-2" ><i class="fas fa-angle-right"></i></button> -->
+
+                      
+                    <app-button-count classs="tyuioi" [start]="start" [step]="step" [listdata]="listRM0015" class="mr-2" (step)="getstep($event)" ></app-button-count>
+                    <app-button-preview [start]="start" [step]="step" [listdata]="listRM0015" (start)="getstart($event)"></app-button-preview>
+                    <app-button-next class="mr-2" [start]="start" [step]="step" [listdata]="listRM0015" (start)="getstart($event)"></app-button-next>
+
                   </span>
                       <button *ngIf="disabled==false" title="Đồng ý lịch hẹn" (click)="agree()" class="btn  btn-success mr-2" ><i class="fas fa-check"></i></button>
                   <button title="Xuất file" class="btn btn-info mr-2" (click)="download('tableexport')"><i class="fa fa-download"></i></button>

@@ -5,9 +5,16 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col">DANH SÁCH NGUỒN THÔNG TIN</div>
+                    <div class="col">DANH SÁCH NGUỒN THÔNG TIN</div> 
+                    <div class="col-auto">
+                    <app-button-count classs="tyuioi" [start]="start" [step]="step" [listdata]="listdata" class="mr-2" (step)="getstep($event)" ></app-button-count>
+                    <app-button-preview [start]="start" [step]="step" [listdata]="listdata" (start)="getstart($event)"></app-button-preview>
+                    <app-button-next class="mr-2" [start]="start" [step]="step" [listdata]="listdata" (start)="getstart($event)"></app-button-next>
+
                     <button (click)="themcongviec()" class="btn btn-secondary mr-2" title="Thêm CHUYÊN NGÀNH"><i class="fa fa-plus"></i></button>
                     <button (click)="xoacongviec()" class="btn btn-secondary" title="Xóa danh sách đã chọn"><i class="fa fa-trash-alt"></i></button>
+
+                    </div>
                 </div>
                 
                 <!-- <button id="savelisst" class="btn btn-secondary" title="Lưu danh sách lĩnh vực"><i class="fa fa-save"></i></button> -->
@@ -24,7 +31,9 @@
                         </tr>
                     </thead>
                     <tbody >
-                        <tr id="row{{element.RM0009_ID}}"  *ngFor="let element of listdata;let i = index">
+                        <ng-container  *ngFor="let element of listdata;let i = index">
+                        <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))">
+                        <tr id="row{{element.RM0009_ID}}" >
                             <th><input type="checkbox" [(ngModel)]="element.check"></th>
                             <td><input type="hidden" name="ID" value="{{i}}"><input type="text" name="" disabled class="form-control none" [(ngModel)]="element.maNguonThongTin" ></td>
                             <td><input type="text" name="" disabled class="form-control none"  [(ngModel)]="element.tenNguongThongTin" ></td>
@@ -32,6 +41,8 @@
                             <td><button id="edit{{element.RM0009_ID}}" (click)="edititem(element)"  class="btn btn-sm edititem"><i class="far fa-edit"></i></button>
                                 <button class="btn btn-sm deleteitem"><i class="far fa-trash-alt"></i></button></td>
                         </tr>
+                        </ng-container>
+                    </ng-container>
                     </tbody>
                 </table>
             </div>

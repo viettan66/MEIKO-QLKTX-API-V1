@@ -93,7 +93,7 @@ export class NhomComponent implements OnInit {
             if(data.code=='OK'){
               $(this).removeClass('active')
             }
-            else console.log(data)
+            //else //console.log(data)
           })
         }
         else{
@@ -101,7 +101,7 @@ export class NhomComponent implements OnInit {
             if(data.code=='OK'){
               $(this).addClass('active')
             }
-            else console.log(data)
+            //else //console.log(data)
           })
           
         } 

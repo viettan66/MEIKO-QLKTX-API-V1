@@ -27,7 +27,7 @@ export class TuyendungDanhmucLinhvucComponent implements OnInit {
     //$('#myModalungvieninfo').modal()
   }
   savecongviec(){
-    console.log(this.newrm0002)
+    //console.log(this.newrm0002)
     this.rest.PostDataToAPI<result<RM0002>>(this.newrm0002,'RM0002/add').subscribe(data=>{
       if(data.code=="OK"){
         this.listrm0002.push(data.data)
@@ -52,7 +52,7 @@ export class TuyendungDanhmucLinhvucComponent implements OnInit {
        $('#row'+element.RM0002_ID).find('input:text,select').addClass('none').attr('disabled',true)
        $('#edit'+element.RM0002_ID).find('i').removeClass('fa-save').addClass('fa-edit')
        let dataa= await this.rest.PutDataToAPI<result<RM0002>>(element,'RM0002/update').toPromise()
-       console.log(dataa)
+       //console.log(dataa)
        if(dataa.code=="OK"){{
          element=dataa.data
        }}
@@ -62,5 +62,17 @@ export class TuyendungDanhmucLinhvucComponent implements OnInit {
     if(!confirm('Bạn có chắc chắn muốn xóa '))return false
     let data=await this.rest.PutDataToAPI<result<RM0002>[]>(this.listrm0002.filter(c=>{return c.check===true}),'RM0002/delete').toPromise()
     data.filter(c=>{return c.code==="OK"}).forEach(val=>{this.listrm0002.filter(c=>{return c.RM0002_ID===val.data.RM0002_ID}).map(x=>{this.listrm0002.splice(this.listrm0002.indexOf(x),1)})})
-   }
+   }  
+   public start=0
+   public step=20
+  getstart($event){
+      this.start=$event
+    }
+    getstep($event){
+      this.step=$event
+    }
+    // getlist($event){
+    //   this.listdon=$event
+    // }
+  
 }

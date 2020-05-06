@@ -1,0 +1,34 @@
+<div class="card  " id="testconvertPDF" style="background-color: rgba(255, 255, 255, 0.788);">
+    <div class="card-header">
+      DANH TÀI KHOẢN CHƯA ĐỒNG BỘ
+      <span class="float-right">
+        <button title="Đồng bộ" style="margin-left: 10px;" class="btn btn-info" (click)="dongbo()"><i class="fa fa-sync"></i></button>&nbsp;
+        <app-button-download tableID="rtyui" tableName="Danh sách tài khoản chưa đồng bộ"></app-button-download>
+      </span>
+    </div>
+    <div class="card-body" style="padding: 5px;">
+        <TABLE class="table table-bordered table-hover" id="rtyui">
+            <thead>
+                <tr>
+                    <th><input type="checkbox"></th>
+                    <th>STT</th>
+                    <th>TÊN</th>
+                    <TH>CMTND</TH>
+                    <TH>SDT</TH>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let element of listMKV9999;let i=index">
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>{{i+1}}</td>
+                        <td>{{element.hodem+' '+element.ten}}</td>
+                        <td>{{element.cmtnd_so}}</td>
+                        <td>{{element.dienthoai_didong}}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </TABLE>
+    </div>
+</div>
+<app-loading [loading]="loading" caption="Đang tải dữ liệu, vui lòng chờ..."></app-loading>

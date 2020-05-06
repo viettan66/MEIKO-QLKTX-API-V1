@@ -202,7 +202,7 @@ export class QLPComponent implements OnInit {
               }
             })
           })
-         // console.log(that.listphongf)
+         // //console.log(that.listphongf)
           that.ktx01out.emit(that.listphong)
         })
       })

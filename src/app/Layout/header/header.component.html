@@ -1,18 +1,11 @@
-<div class="row bg-dark no-gutters text-white px-4 py-1" style="border-bottom:2px gray solid ;">
+<nav class="row nav fixed-top bg-dark no-gutters text-white px-4 py-1" style="border-bottom:1px gray solid ;">
 
     <div class="col h-100">
-        <a class="text-white align-items-center" routerLink="/">
-            <img src="../../../assets/image/logo2.png" width="120" alt="">&nbsp; MEIKO ELECTRONICS VIETNAM</a>
+        <a class="text-white align-items-center" href="http://192.84.100.207/smartoffice">
+            <img src="{{localimage+'assets/image/logo2.png'}}" width="120" alt="">&nbsp; MEIKO ELECTRONICS VIETNAM</a>
     </div>
-    <!-- <div class="col-auto" *ngIf="user!=null">
-        <form class="form-inline d-flex justify-content-center md-form form-sm mt-0">
-            <i class="fas fa-search" aria-hidden="true"></i>
-            <input (change)="search($event)" class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search"
-              aria-label="Search">
-          </form>
-    </div> -->
     <div class="col-auto" *ngIf="user!=null">
-       <span style="position: relative;"><button (click)="showmess()" class="btn btn-sm text-white" ><i class="fas fa-comments"></i>
+       <span style="position: relative;"><button  title="Tin nhắn"  (click)="showmess()" class="btn btn-sm text-white" ><i class="fas fa-comments"></i>
         <b style="color: aliceblue;">{{sum()}}</b></button>
         <div *ngIf="isshowmess" style="width: 250px;position: absolute;top: 35px;left: 0;z-index: 999;box-shadow: 0 .3rem 3rem rgba(0, 0, 0, 0.719)!important;">
           <ul class="list-group text-dark ">
@@ -22,20 +15,21 @@
                   <span class="badge badge-primary badge-pill">{{element.count==null?0:element.count}}</span>
                 </li>
             </ng-container>
-            
+            <li style="cursor: pointer;" (click)="createroom()" class="list-group-item-action list-group-item d-flex justify-content-between align-items-center">
+             <i class="fa fa-plus">Tạo nhóm...</i>   </li>
           </ul>
         </div>
       </span> 
-        <button  class="btn btn-sm text-white" ><i class="fas fa-envelope"></i><b style="color: aliceblue;">0</b></button>
-        <button   class="btn btn-sm text-white" ><i class="fas fa-bell"></i><b style="color: aliceblue;">0</b></button>
+        <button title="Hộp thư"   class="btn btn-sm text-white" ><i class="fas fa-envelope"></i><b style="color: aliceblue;">0</b></button>
+        <button title="Thông báo"    class="btn btn-sm text-white" ><i class="fas fa-bell"></i><b style="color: aliceblue;">0</b></button>
         <button *ngIf="userclickc" (click)="changepass()"  title="Thay đổi mật khẩu"  class="btn btn-sm text-white" ><i class="fas fa-key"></i></button>
-        <button *ngIf="userclickc"  class="btn btn-sm text-white" (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
-        <button (click)="userclick()"  class="btn btn-sm text-white" >{{user.hodem+' '+user.ten}}&nbsp;<i class="fas fa-user-circle"></i></button>
+        <button title="Thoát hệ thống"  *ngIf="userclickc"  class="btn btn-sm text-white" (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
+        <button (click)="userclick()" title="Mở rộng"  class="btn btn-sm text-white" >{{user.hodem+' '+user.ten}}&nbsp;<i class="fas fa-user-circle"></i></button>
     </div>
     
-</div>
+  </nav>
 
-
+<app-select-account-modal ids="dkfdfkjkj" buttoncheck="true" (checked)="checked($event)"></app-select-account-modal>
 <div class="modal fade " id="changepassworld" role="dialog">
     <div class="modal-dialog   modal-700">
       <div class="modal-content ">
@@ -110,3 +104,4 @@
   </div>
 </ng-container>
 </div>
+<app-window-chat></app-window-chat>

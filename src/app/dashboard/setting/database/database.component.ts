@@ -17,6 +17,7 @@ run(){
 this.rest.PostDataToAPI<result<any>>({cmd:this.cmd},'Command/Run').subscribe(data=>{
   if(data.code='OK'){
     alert('OK')
+    console.log(data.data)
   }else{
     alert(data.mess)
   }

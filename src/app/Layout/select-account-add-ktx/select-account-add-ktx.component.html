@@ -1,0 +1,55 @@
+
+                <div class="row mb-2">
+                    <div class="col"></div>
+                    <div class="col-auto mr-1">
+                      <app-button-count classs="dfdfdfdfdfjjjj" [start]="startacc" [step]="stepacc" [listdata]="listKTX0052"  (step)="getstepacc ($event)"  ></app-button-count>
+                      <app-button-preview  [start]="startacc" [step]="stepacc" [listdata]="listKTX0052" (start)="getstartacc ($event)" ></app-button-preview>
+                      <app-button-next [start]="startacc" [step]="stepacc" [listdata]="listKTX0052"  (start)="getstartacc ($event)" ></app-button-next>
+                    </div>
+                    <div class="col-auto"><button (click)="deleteallacc()" class="btn btn-secondary"><i class="fa fa-trash-alt"></i></button></div>
+                  </div>
+                  <table class="table table-bordered table-hover ddddddddddddddddddddd">
+                    <thead>
+                      <tr>
+                        <th><input type="checkbox" (change)="checkall()" [(ngModel)]="checkallrow"></th>
+                        <th>User_ID</th>
+                        <th>Mã nhân sự</th>
+                        <th>Họ đệm</th>
+                        <th>Tên</th>
+                        <th>Giới tính</th>
+                        <th>Bộ phận</th>
+                        <th>CMTND</th>
+                        <th style="width: 20px;"><button (click)="addaccount()" class="btn btn-primary"><i class="fa fa-plus"></i></button></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let element of listKTX0052;let i=index">
+                        <ng-container *ngIf="((i>=startacc*stepacc) && (i<(startacc+1)*stepacc))">
+                        <tr id="rowacc{{element.KTX0052_ID}}">
+                        <th style="width: 30px;"><input type="checkbox" [(ngModel)]="element.check"></th>
+                          <td><input type="text" [(ngModel)]="element.User_ID" placeholder="User_ID" disabled class="form-control none"></td>
+                          <td><input type="text" [(ngModel)]="element.manhansu" placeholder="Mã nhân sự" disabled class="form-control none"></td>
+                          <td><input type="text" [(ngModel)]="element.hodem" placeholder="Họ đệm" disabled class="form-control none"></td>
+                          <td><input type="text" [(ngModel)]="element.ten" placeholder="Tên" disabled class="form-control none"></td>
+                          <td>
+                            <select disabled class="form-control none" [(ngModel)]="element.gioitinh" >
+                              <option value="">Chọn</option>
+                              <option value="true">Nam</option>
+                              <option value="false">Nữ</option>
+                            </select>
+                          </td>
+                          <td>
+                            <select disabled class="form-control none" [(ngModel)]="element.phong_id" >
+                              <option value="">Chọn</option>
+                              <option *ngFor="let element of listMKV9998; let i=index" value="element.bophan_id">{{element.bophan_ten}}</option>
+                            </select>
+                          </td>
+                          <td><input type="text" [(ngModel)]="element.cmtnd_so" placeholder="CMTND Số" disabled class="form-control none"></td>
+                          <td >
+                            <button id="editacc{{element.KTX0052_ID}}" (click)="edit(element)" class="btn"><i class="fa fa-edit"></i></button>
+                          </td>
+                        </tr>
+                      </ng-container>
+                      </ng-container>
+                    </tbody>
+                  </table>

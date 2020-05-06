@@ -7,8 +7,13 @@
                 <div class="row">
                     <div class="col">DANH SÁCH VỊ TRÍ CÔNG VIỆC</div>
                     <div class="col-auto">
+                        
+                    <app-button-count classs="tyuioi" [start]="start" [step]="step" [listdata]="listrm0001" class="mr-2" (step)="getstep($event)" ></app-button-count>
+                    <app-button-preview [start]="start" [step]="step" [listdata]="listrm0001" (start)="getstart($event)"></app-button-preview>
+                    <app-button-next class="mr-2" [start]="start" [step]="step" [listdata]="listrm0001" (start)="getstart($event)"></app-button-next>
+
                         <button (click)="themcongviec()" class="btn btn-secondary mr-2" title="THÊM CÔNG VIỆC MỚI"><i class="fa fa-plus"></i></button>
-                        <button  class="btn btn-secondary mr-2" title="XOÁ CÔNG VIỆC ĐÃ CHỌN"><i class="fa fa-trash"></i></button>
+                        <button  (click)="xoacongviec()"  class="btn btn-secondary mr-2" title="XOÁ CÔNG VIỆC ĐÃ CHỌN"><i class="fa fa-trash"></i></button>
                         <!-- <select  class="btn btn-secondary" (change)="kjkj($event)"  >
                             <option value="true">Bật</option>
                             <option value="false">Tắt</option>
@@ -31,6 +36,7 @@
                     </thead>
                     <tbody >
                         <ng-container *ngFor="let element of listrm0001;let i = index">
+                            <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))">
                             <!-- <ng-container *ngIf="element.tinhTrang==tinhTrang||element.tinhTrang==null"> -->
                                 <tr id="row{{element.RM0001_ID}}">
                                     <th><input type="checkbox" [(ngModel)]="element.check"></th>
@@ -47,6 +53,7 @@
                                         <button class="btn btn-sm deleteitem"><i class="far fa-trash-alt"></i></button></td>
                                 </tr>
                             <!-- </ng-container> -->
+                        </ng-container>
                         </ng-container>
                     </tbody>
                 </table>

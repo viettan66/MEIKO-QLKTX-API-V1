@@ -5,9 +5,15 @@
               <div class="row">
                 <div class="col">DANH SÁCH ĐÁNH GIÁ</div>
                 <div class="col-auto">
-                  <span class="mr-3">Xem {{((start+1)*step)>=listRM0015.length?listRM0015.length:((start+1)*step)}}/{{listRM0015.length}}</span>
+                  <!-- <span class="mr-3">Xem {{((start+1)*step)>=listRM0015.length?listRM0015.length:((start+1)*step)}}/{{listRM0015.length}}</span>
                     <button (click)="pre()" class="btn btn-sm btn-secondary mr-1" ><i class="fas fa-angle-left"></i></button>
-                    <button (click)="nex()" class="btn btn-sm btn-secondary mr-5" ><i class="fas fa-angle-right"></i></button>
+                    <button (click)="nex()" class="btn btn-sm btn-secondary mr-5" ><i class="fas fa-angle-right"></i></button> -->
+                    
+                    <app-button-count classs="tyuioi" [start]="start" [step]="step" [listdata]="listRM0015" class="mr-2" (step)="getstep($event)" ></app-button-count>
+                    <app-button-preview [start]="start" [step]="step" [listdata]="listRM0015" (start)="getstart($event)"></app-button-preview>
+                    <app-button-next class="mr-2" [start]="start" [step]="step" [listdata]="listRM0015" (start)="getstart($event)"></app-button-next>
+
+                    
                     <ng-container *ngIf="disabled==true&&filtertype=='false'">
                         <button  title="Không đạt"  class="btn btn-danger mr-2" (click)="danhGiaTruotAll()"><i class="fas fa-thumbs-down"></i></button>
                         <button  title="Ứng viên đạt" class="btn btn-success mr-2" (click)="danhGiaDatAll()"><i class="fas fa-thumbs-up"></i></button>
@@ -23,6 +29,11 @@
                   <select  class="btn btn-secondary mr-2" (change)="filter($event)" [(ngModel)]="filtertype">
                     <option selected value="false">CHƯA HOÀN THÀNH</option>
                     <option value="true">ĐÃ HOÀN THÀNH</option>
+                  </select>
+                  <select style="width: 100px;"  class="btn btn-secondary mr-2"   (change)="filterketquafunction($event)" >
+                    <option selected value="all">ALL</option>
+                    <option value="TRUE">ĐẠT</option>
+                    <option value="FALSE">KHÔNG ĐẠT</option>
                   </select>
                   <ng-container *ngIf="disabled==false">
                   <button *ngIf="filtertype=='true'" title="Tiến hành đánh giá lại"  class="btn btn-danger mr-2" (click)="danhgialai()"><i class="fas fa-times"></i></button>
@@ -41,20 +52,21 @@
                       <tr>
                         <th style="width: 20px;"><input type="checkbox" [(ngModel)]="checkall" (change)="chooserowall()"  ></th>
                         <th style="width: 40px;">STT</th>
-                        <th>Ứng viên</th>
-                        <th>Ngày sinh</th>
+                        <th>Ứng viên<app-button-sort [listdata]="listRM0015" (listdata)="getlist($event)" key="ten"></app-button-sort></th>
+                        <th style="width: 120px;">Ngày sinh<app-button-sort [listdata]="listRM0015" (listdata)="getlist($event)" key="ngaysinh"></app-button-sort></th>
                         <th>CMTND</th>
-                        <th>Vị trí 1</th>
+                        <th>Vị trí 1<app-button-sort [listdata]="listRM0015" (listdata)="getlist($event)" key="vitri1"></app-button-sort></th>
                         <th>Vị trí 2</th>
                         <ng-container *ngFor="let element of listRM0006">
-                            <th>{{element.tenTieuChiDG}}</th>
+                            <th colspan="2">{{element.tenTieuChiDG}}</th>
                         </ng-container>
-                        <th>Kết quả</th>
+                        <th>Kết quả<app-button-sort [listdata]="listRM0015" (listdata)="getlist($event)" key="ketQua"></app-button-sort></th>
                         <th style="width: 90px;text-align: center;"><i class="fa fa-list"></i></th>
                     </tr>
                   </thead>
                   <tbody>
                       <ng-container  *ngFor="let element of listRM0015;let i=index;">
+                      <ng-container  *ngIf="element.ketQua==filterketqua||filterketqua=='all'">
                           <ng-container *ngIf="element.RM0010.bophanid==phongid||phongid=='all'">
                           <ng-container *ngIf="element.RM0010.RM0001.RM0001_ID==vitriid||vitriid=='all'">
                             <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))||phongid!='all'">
@@ -67,6 +79,10 @@
                                     <td>{{element.RM0010!=null?(element.RM0010.RM0001!=null?element.RM0010.RM0001.tenCongViec:""):''}}</td>
                                     <td>{{element.RM0010!=null?(element.RM0010.RM0001_2!=null?element.RM0010.RM0001_2.tenCongViec:""):''}}</td>
                                     <ng-container *ngFor="let element2 of element.RM0006">
+                                        <td style="padding: 0;">
+                                            <textarea class="form-control" [(ngModel)]="element2.RM0013.nhanXet" (keydown)="checkper(element2)" (change)="test(element2.RM0013)"></textarea>
+                                            <span class="ShowToExport">{{element2.RM0013.nhanXet}}</span>
+                                        </td>
                                         <td style="text-align: center;"  (click)="danhgia(element,element2)" title="{{element2.RM0013!=null?element2.RM0013.nhanXet:'Đang chờ'}}" class=" {{element2.RM0013!=null?(element2.RM0013.ketQua==null?'btn-secondary':(element2.RM0013.ketQua?'btn-success':'btn-danger')):'btn-secondary'}}">
                                             <i class="fa {{element2.RM0013!=null?(element2.RM0013.ketQua==null?'fa-circle-notch fa-spin':(element2.RM0013.ketQua?'fa-thumbs-up':'fa-thumbs-down')):'fa-circle-notch fa-spin'}}"></i>
                                             <span class="ShowToExport">{{element2.RM0013!=null?(element2.RM0013.ketQua==null?'Đang chờ':(element2.RM0013.ketQua?'Đạt':'Trượt')):'Đang chờ'}}</span>
@@ -78,9 +94,10 @@
                                     </td>
                                     <td style="width: 100px;text-align: center;">
                                         <button (click)="hoidongphongvan(element)" class="btn-sm btn"><i class="fa fa-eye"></i></button> 
-                                        <button (click)="suachitietdanhgia(element)"  class="btn-sm btn"><i class="fa fa-edit"></i></button> 
+                                        <!-- <button (click)="suachitietdanhgia(element)"  class="btn-sm btn"><i class="fa fa-edit"></i></button>  -->
                                     </td>
                                 </tr>
+                          </ng-container>
                           </ng-container>
                           </ng-container>
                           </ng-container>

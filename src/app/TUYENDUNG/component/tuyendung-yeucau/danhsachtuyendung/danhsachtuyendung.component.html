@@ -1,56 +1,84 @@
 
         <div class="card  " style="background-color: rgb(255, 255, 255);">
             <div class="card-header">
-                DANH SÁCH ĐƠN
+                DANH SÁCH YÊU CẦU NHÂN SỰ
                 <span class="float-right">
-                        <app-button-count [start]="start" [step]="step" [listdata]="listdon"  (step)="getstep ($event)"  ></app-button-count>
+                        <app-button-count classs="sdfs" [start]="start" [step]="step" [listdata]="listdon"  (step)="getstep ($event)"  ></app-button-count>
                         <app-button-preview  [start]="start" [step]="step" [listdata]="listdon" (start)="getstart ($event)" ></app-button-preview>
                         <app-button-next [start]="start" [step]="step" [listdata]="listdon"  (start)="getstart ($event)" classs="mr-1" ></app-button-next>
-                    <select id="filter" class="btn btn-outline-secondary" (change)="bophanchange($event)">
-                        <option value="all">ALL</option>
-                        <option *ngFor="let element of listbophan;let i=index;" value="{{element.phong_id}}">{{element.bophan_ten}}
-                        </option>
+                    <select id="filter" class="btn btn-outline-secondary mr-1" (change)="bophanchange($event)">
+                        <option value="all">Bộ phận</option>
+                        <option *ngFor="let element of listbophan;let i=index;" value="{{element.phong_id}}">{{element.bophan_ten}} </option>
                     </select>
+                    <select id="filter2" class="btn btn-outline-secondary mr-1" [(ngModel)]="filtertrangthai">
+                        <option value="all">Trạng thái</option>
+                        <option value="2">Đã hoàn thành</option>
+                        <option value="1">Chưa hoàn thành</option>
+                    </select>
+                    <select id="filter2" class="btn btn-outline-secondary mr-1" [(ngModel)]="filtercapbac">
+                        <option value="all">Cấp bậc</option>
+                        <option value="1">Công nhân</option>
+                        <option value="2">Nhân viên</option>
+                    </select>
+                    <app-button-download tableID="tabletoexport" tableName="tableExport" bg="mr-1 btn-warning text-white" ></app-button-download>
+                    <button (click)="updateyeucau(2)" title="Hoàn thành yêu cầu" class="btn btn-primary mr-1"><i class="fab fa-font-awesome-flag"></i></button>
+                    <button (click)="updateyeucau(1)" title="Tuyển dụng lại yêu cầu" class="btn btn-primary mr-1"><i class="fas fa-redo-alt"></i></button>
                 </span>
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
                 <div class="row no-gutters">
-                    <table class="table table-bordered tablelistdon" id="tabletoexport">
-                        <thead>
+                    <table class="table-td-p-6-3 td table table-bordered tablelistdon table-hover" id="tabletoexport">
+                        <thead style="text-align: center;">
                             <tr>
-                                <th style="width: 40px;">STT</th>
-                                <th>Tên người tạo<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="hoVaTen"></app-button-sort></th>
-                                <th>Công việc</th>
-                                <th>Nội dung yêu cầu</th>
-                                <th>Bộ phận<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="T002C"></app-button-sort></th>
-                                <th>Ngày tạo<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="ngayTao"></app-button-sort></th>
-                                <th>Tổng nhân lực</th>
-                                <th>Nam</th>
-                                <th>Nữ</th>
+                                <td rowspan="2" style="width: 20px;"><input type="checkbox" (change)="checkallrow($event)"></td>
+                                <td rowspan="2" style="width: 40px;">Số YC</td>
+                                <td style="vertical-align: middle;" rowspan="2" >Tên người tạo<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="hoVaTen"></app-button-sort></td>
+                                <td rowspan="2" >Công việc</td>
+                                <td rowspan="2" >Cấp bậc<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="T006C"></app-button-sort></td>
+                                <td rowspan="2" >Nội dung yêu cầu</td>
+                                <td rowspan="2" >Bộ phận<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="T002C"></app-button-sort></td>
+                                <td rowspan="2" >Ngày tạo<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="ngayTao"></app-button-sort></td>
+                                <td colspan="3" >Số lượng YC</td>
+                                <td colspan="3" >Ứng viên</td>
+                                <td rowspan="2" style="width: 120px;">Trạng thái<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="trangThai"></app-button-sort></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 60px;">Nam</td>
+                                <td style="width: 60px;">Nữ</td>
+                                <td style="width: 60px;">Tổng</td>
+                                <td style="width: 60px;">OK<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="ok"></app-button-sort></td>
+                                <td style="width: 80px;">Chờ PV</td>
+                                <td style="width: 80px;">Còn nợ</td>
                             </tr>
                         </thead>
                         <ng-container *ngFor="let element of listdon;let i=index;">
                             <ng-container *ngIf="element.T098C==phongid||phongid=='all'">
-                                <!-- <ng-container *ngIf="element.RM0010.RM0001.RM0001_ID==vitriid||vitriid=='all'"> -->
+                                <ng-container *ngIf="(element.trangThai+'')==filtertrangthai||filtertrangthai=='all'">
+                                <ng-container *ngIf="filtercapbac=='all'||(filtercapbac=='1'?(element.T006C-0)<4:(element.T006C-0)>3) ">
                                 <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))||phongid!='all'">
                                     <tbody class="tbody" id="tbody{{element.A0028D.A0028D_ID}}">
                                         <tr style="cursor: pointer;padding: 0;" class="trclick"
                                             id="TRR{{element.A0028D.A0028D_ID}}"
                                             (click)="trclick(element.A0028D.A0028D_ID)">
-                                            <td style="width: 40px;">{{i+1}}</td>
+                                            <td><input type="checkbox" [(ngModel)]="element.check"  (click)="$event.stopPropagation();"></td>
+                                            <td style="width: 40px;">{{element.sophieu}}</td>
                                             <td>{{element.hoVaTen}}</td>
-                                            <td>{{element.T023C}}</td>
+                                            <td>{{element.RM0001!=null?element.RM0001.tenCongViec:''}}</td>
+                                            <td>{{element.T006C}}</td>
                                             <td>{{element.T012C}}</td>
                                             <td>{{element.T002C}}</td>
                                             <td>{{element.ngayTao| date:'dd/MM/yyyy'}}</td>
-                                            <td>{{(element.A0028D.C001C==null?0:element.A0028D.C001C-0)+(element.A0028D.C005C==null?0:element.A0028D.C005C-0)}}
-                                            </td>
                                             <td>{{element.A0028D.C001C==null?0:element.A0028D.C001C}}</td>
                                             <td>{{element.A0028D.C005C==null?0:element.A0028D.C005C}}</td>
+                                            <td>{{(element.A0028D.C001C==null?0:element.A0028D.C001C-0)+(element.A0028D.C005C==null?0:element.A0028D.C005C-0)}} </td>
+                                            <td>{{element.ok}}</td>
+                                            <td>{{element.wait-element.ok}}</td>
+                                            <td>{{((element.A0028D.C001C==null?0:element.A0028D.C001C-0)+(element.A0028D.C005C==null?0:element.A0028D.C005C-0))-element.ok}}</td>
+                                            <td>{{element.trangThai==1?"Đang tuyển":(element.trangThai==2?"Hoàn thành":"NaN")}}</td>
                                         </tr>
-                                        <tr class="trnone trtwo" id="{{element.A0028D.A0028D_ID}}">
-                                            <td colspan="9" style="padding: 0;">
-                                                <table class="table table-bordered">
+                                        <tr class="trnone trtwo" id="{{element.A0028D.A0028D_ID}}" >
+                                            <td colspan="15" style="padding: 0;">
+                                                <table class="table table-bordered table-td-p-6-3 td">
                                                     <tr>
                                                         <td>Công việc</td>
                                                         <td colspan="2"><span class="doter">{{element.RM0001!=null?element.RM0001.tenCongViec:''}}</span>
@@ -108,13 +136,33 @@
                                                         <td colspan="1">Yêu cầu đặc biệt</td>
                                                         <td colspan="9"><span class="doter"style="white-space: pre-wrap;" >{{element.A0028D.C018C}}</span></td>
                                                     </tr>
+                                                    <tr>
+                                                        <td colspan="1">ứng viên</td>
+                                                        <td colspan="9">
+                                                            <div class="row">
+                                                                <div class="col">
+                                                                    <ng-container *ngFor="let rm10 of element.RM0010;">
+                                                                        {{rm10.HODEM+' '+rm10.TEN+','}}
+                                                                    </ng-container>
+                                                                </div>
+                                                                <div class="col-auto">
+                                                                    <button title="Thêm ứng viên cho yêu cầu" (click)="getungvienmodal(element)" class="btn"><i class="fa fa-plus"></i></button>
+                                                                    <button title="Danh sách ứng viên" (click)="showRM0010(element)" class="btn"><i class="fa fa-eye"></i></button>
+                                                                    <button title="Tạo lịch hẹn" (click)="Createtimer(element)" class="btn"><i class="fas fa-calendar-alt"></i></button>
+                                                                    <button title="Đánh giá ứng viên" (click)="showinterview(element)" class="btn"><i class="fas fa-user-check"></i></button>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        
+                                                    </tr>
                                                 </table>
                                             </td>
                                         </tr>
                                     </tbody>
                                 </ng-container>
-                                <!-- </ng-container> -->
+                                </ng-container> 
                             </ng-container>
+                        </ng-container>
                         </ng-container>
 
                     </table>
@@ -123,3 +171,229 @@
             </div>
 
         </div>
+        
+<div class="modal fade " id="modalungviens" role="dialog"  data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog   modal-1360" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">Thêm ứng viên vào yêu cầu</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+                <app-ungvien   button1="true"   
+                button5="true"  button7="true" button8="true" button9="true" button10="true" 
+                emty="true"  (listRM0010)="getlistRM0010($event)"></app-ungvien>
+			</div>
+		</div>
+	</div>
+</div>
+           
+<div class="modal fade " id="modalungvienshow" role="dialog"  data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog   modal-1360" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">Danh sách ứng viên của yêu cầu số {{thisA0028.sophieu}}</h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+                <app-ungvien button6="true" [sophieu]="thisA0028.sophieu" ids="jfkd" (listRM0010delete)="listRM0010delete($event)" [rm0010show]="thisA0028.RM0010" button11="true" ></app-ungvien>
+			</div>
+		</div>
+	</div>
+</div>
+        <app-loading [loading]="loading" caption="Đang đồng bộ dữ liệu, vui lòng chờ."></app-loading>
+
+
+<div class="modal fade " id="modaldanhgia" role="dialog"  data-backdrop="static" data-keyboard="false" >
+    <div class="modal-dialog   modal-99" >
+        <div class="modal-content " >
+            <div class="modal-header">
+                <div class="row no-gutters w-100">
+                    <div class="col">DANH SÁCH ĐÁNH GIÁ CỦA YÊU CẦU SỐ {{thisA0028.sophieu}}</div>
+                    <div class="col-auto">
+                      <app-button-download bg="mr-1 btn-secondary" tableID="thkkdkkfjjkld" tableName="danh sách đánh giá"></app-button-download>
+                          <button class="btn btn-secondary mr-1" (click)="save2()" ><i class="fa fa-save"></i></button>
+                          <button class="btn btn-secondary"  data-dismiss="modal"><i class="fa fa-times"></i></button>
+                    </div>
+                  </div>
+            </div>
+            <div class="modal-body " >
+                <table class="table  table-bordered table-td-p-0-0 print" id="thkkdkkfjjkld">
+                    <tbody>
+                        <tr>
+                            <td colspan="17">
+                                <table class="table" style="font-size: 12px;text-align: center;">
+                                    <tbody style="text-align: center;">
+                                        <tr>
+                                            <td >Thời gian PV</td>
+                                            <td style="width: 150px;"><input type="text" class="form-control none"></td>
+                                            <td colspan="12" style="text-align: start;">
+                                                    <img src="{{localimage+'assets/image/logo.jpg'}}" alt="{{localimage+'assets/image/logo.jpg'}}" width="150">
+                                            </td>
+                                            <td>Người PV 1　一次面接評価者</td>
+                                            <td  style="width: 150px;"><input type="text" class="form-control none"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Địa điểm PV</td>
+                                            <td><input type="text" class="form-control none"></td>
+                                            <td colspan="12" rowspan="2"> <h5 >BẢNG ĐÁNH GIÁ PHỎNG VẤN</h5>
+                                                <h5>面接評価表</h5> 
+                                            </td>
+                                            <td>Người PV 2　一次面接評価者</td>
+                                            <td><input type="text" class="form-control none"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vị trí PV</td>
+                                            <td><input type="text" class="form-control none" value="{{thisA0028.RM0001!=null?thisA0028.RM0001.tenCongViec:''}}"></td>
+                                            <td>Người PV 3　一次面接評価者</td>
+                                            <td><input type="text" class="form-control none"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                   
+                    <tbody style="font-size: 12px;text-align: center;border: solid 1px gray;">
+                        <tr>
+                            <td rowspan="3">STT</td>
+                            <td rowspan="3">ID</td>
+                            <td rowspan="3">Họ tên<br>名前</td>
+                            <td rowspan="3">Ảnh<br>写真</td>
+                            <td rowspan="3">Năm sinh<br>生年</td>
+                            <td rowspan="3">Giới tính<br>性別</td>
+                            <td rowspan="3">Quê Quán<br>出身</td>
+                            <td rowspan="2" colspan="2">Học vấn<br> 学歴</td>
+                            <td rowspan="1" colspan="4">Nội dung đánh giá phỏng vấn<br>面接評価内容<br>(tốt (O), khá - trung bình (  )    , kém (X)<br>良い・フェア・ミドル・良くない)</td>
+                            <td rowspan="2" colspan="3">Kết quả bài thi viết<br>筆記試験結果</td>
+                            <td rowspan="3">Đánh giá chung kết quả PV<br>面接の全体評価<br>(tốt (O), khá - trung bình (  )    , kém (X)<br>良い・フェア・ミドル・良くない)</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">CVの参考</td>
+                            <!-- <td rowspan="2">Ghi chú về: Năng lực, Sử dụng Ngoại ngữ, Ghi chú thông tin tham khảo khác <br>能力, 外語, 他の備考情報の筆記</td> -->
+                        </tr>
+                        <tr>
+                            <td>Tên trường/ Chuyên ngành<br>学校名・学部</td>
+                            <td>Năm tốt nghiệp<br>卒業年</td>
+                            <!-- <td>Chuyên môn<br>専門</td>
+                            <td>Kinh nghiệm<br>経験</td> -->
+                            <ng-container *ngFor="let elementr06 of listRM0006">
+                                <td>{{elementr06.tenTieuChiDG}}</td>
+                                <td>NX</td>
+                            </ng-container>
+                            <td>KT chung<br>一般知識</td>
+                            <td>Ngoại ngữ<br>外語</td>
+                            <td>IQ,<br>EQ</td>
+                        </tr>
+                    </tbody>
+                    <tbody style="font-size: 12px;vertical-align: top;">
+                        <ng-container *ngFor="let element of thisA0028['RM0015'];let i=index">
+                            <ng-container>
+                                <ng-container>
+                                    <tr>
+                                        <td>{{i+1}}</td>
+                                        <td>{{element.RM0010.RM0010_ID}}</td>
+                                        <td>{{element.RM0010.HODEM+' '+element.RM0010.TEN}}</td>
+                                        <td></td>
+                                        <td>{{element.RM0010.NGAYSINH!=null?(element.RM0010.NGAYSINH|date:'yyyy'):''}}</td>
+                                        <td>{{element.RM0010.GIOITINH?'Nam':"Nữ"}}</td>
+                                        <td>{{element.RM0010.THUONGTRU}}</td>
+                                        <td>{{element.RM0010.RM0081_A!=null&&element.RM0010.RM0081_A.length>0?(element.RM0010.RM0081_A[(element.RM0010.RM0081_A.length-1)].TENTRUONG+'/'+element.RM0010.RM0081_A[(element.RM0010.RM0081_A.length-1)].CHUYENNGANH):''}}</td>
+                                        <td>{{element.RM0010.RM0081_A!=null&&element.RM0010.RM0081_A.length>0?(element.RM0010.RM0081_A[(element.RM0010.RM0081_A.length-1)].KETTHUC!=null?(element.RM0010.RM0081_A[(element.RM0010.RM0081_A.length-1)].KETTHUC|date:'yyyy'):''):''}}</td>
+                                        <!-- <td (click)="danhgiaelement(element)"></td>
+                                        <td></td> -->
+                                        <ng-container *ngFor="let kkkk of element.RM0006">
+                                            <td class="{{kkkk.RM0013.ketQua==null?('btn-secondary'):((kkkk.RM0013.ketQua=='true'||kkkk.RM0013.ketQua==true)?'btn-success':'btn-warning')}}">
+                                                <select class="btn p-0 w-100 h-100 " style="text-align: center;font-size: 12px;" [(ngModel)]="kkkk.RM0013.ketQua" (change)="updateRM0013(kkkk.RM0013)">
+                                                    <option ></option>
+                                                    <option value="true">OK</option>
+                                                    <option value="false">NG</option>
+                                                </select>
+                                            </td>
+                                            <td><textarea style="font-size: 12px;height: auto;"  class="form-control none" [(ngModel)]="kkkk.RM0013.ghiChu" (change)="updateRM0013(kkkk.RM0013)"></textarea></td>
+                                        </ng-container>
+                                        
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td style="text-align: center;" class="{{element.ketQua==null?('btn-secondary'):((element.ketQua=='true'||element.ketQua==true)?'btn-success':'btn-warning')}}">
+                                           <span style="color: black;">{{element.ketQua==null?(''):((element.ketQua=='true'||element.ketQua==true)?'Đạt':'Trượt')}}</span> 
+                                        </td>
+                                    </tr>
+                                </ng-container>
+                            </ng-container>
+                        </ng-container>
+                    </tbody>
+                </table>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+          
+<div class="modal fade " id="createtimer" role="dialog"  data-backdrop="static" data-keyboard="false" >
+	<div class="modal-dialog   modal-99" >
+		<div class="modal-content " >
+			<div class="modal-header"><div class="row no-gutters w-100">
+                <div class="col">TẠO LỊCH HẸN CHO YÊU CẦU SỐ {{thisA0028.sophieu}}</div>
+                <div class="col-auto">
+                    <button class="btn btn-secondary"  data-dismiss="modal"><i class="fa fa-times"></i></button>
+                </div>
+              </div>
+			</div>
+			<div class="modal-body ">
+                <div class="row no-gutters px-1 py-2">
+                    <div class="col-lg-3 px-1">
+                        <div class="card">
+                            <div class="card-header">
+                                  THÔNG TIN LỊCH HẸN
+                            </div>
+                            <div class="card-body form">
+                                  <div class="row no-gutters py-2">
+                                        <div class="col">
+                                              <div class="row"><label>Thời gian phỏng vấn</label></div>
+                                              <div class="row ">
+                                                    <app-button-datetimepicker ids="jkkjjjkdf"   (data)="getstartdate($event)" width="'100%''"></app-button-datetimepicker>
+                                              </div>
+                                        </div>
+                                        
+                                        
+                                  </div>
+                                  <div class="row py-2"><label >Địa điểm phỏng vấn</label>
+                                        <select class="form-control"  [(ngModel)]="diadiemphongvan" >
+                                              <option value="null" selected>Xin chọn địa điểm</option>
+                                              <option *ngFor="let element of listRM0008" value="{{element['RM0008_ID']}}"> {{element['DiaDiem']}}</option>
+                                        </select>
+                                  </div>
+                                  <div class="row py-2">
+                                  <label >Hội đồng phỏng vấn</label>
+                                        <table class="table table-bordered">
+                                              <tr>
+                                                    <td>ID</td>
+                                                    <td>Họ tên</td>
+                                                    <td style="width: 40px;"><button (click)="selectaccount()" class="btn btn-sm btn-success"><i class="fa fa-search"></i></button></td>
+                                              </tr>
+                                              <ng-container *ngFor="let element of listaccountchoose">
+                                                    <tr>
+                                                          <td>{{element.manhansu}}</td>
+                                                          <td>{{element.hodem+' '+element.ten}}</td>
+                                                          <td><button (click)="removechoose(element)" class="btn btn-sm"><i class="fa fa-trash"></i></button></td>
+                                                    </tr>
+                                              </ng-container>
+                                        </table>
+                                  </div>
+                                  <button id="themlichhen" class="form-control btn-primary" (click)="themlichhen()">Thêm lịch hẹn</button>
+                
+                            </div>
+                      </div>
+                    </div>
+                      <div class="col-lg px-1">
+                        <app-ungvien [rm0010show]="thisA0028.RM0010s" (listRM0010)="getlistRM0010show($event)"></app-ungvien>
+                      </div>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+<app-select-account-modal ids="uyt" (data)="getlistdataacc($event)" showmail="true"></app-select-account-modal>

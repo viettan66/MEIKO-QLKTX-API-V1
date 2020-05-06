@@ -15,14 +15,18 @@ export class TuyendungDanhmucQuyendanhgiaComponent implements OnInit {
 
   constructor(public rest: RESTService) { }
   public listMKV9999: MKV9999[] = []
+  public listMKV9999s: MKV9999[] = []
   public listRM0006: RM0006[]=[]
   public listDEPT=[]
   public start:number=0
   public step:number=20
   public keysearch=''
   public phong_id='all'
+  public loading=true
   async ngOnInit() {
     this.listMKV9999 = await this.rest.GetDataFromAPI<MKV9999[]>('RM0007/Getall').toPromise()
+    console.log(this.listMKV9999)
+    this.listMKV9999s=this.listMKV9999
     if (this.listMKV9999.length > 0) {
       this.listRM0006=this.listMKV9999[0].RM0006
     }
@@ -30,9 +34,10 @@ export class TuyendungDanhmucQuyendanhgiaComponent implements OnInit {
       if(this.listDEPT.filter(c=>{return c['id']===VAL.phong_id}).length==0&&VAL.phong_id!=null)
       this.listDEPT.push({id:VAL.phong_id,ten:VAL.thetu_id})
     })
-    console.log(this.listMKV9999)
-    console.log(this.listRM0006)
-    console.log(this.listDEPT)
+    //console.log(this.listMKV9999)
+    //console.log(this.listRM0006)
+    //console.log(this.listDEPT)
+    this.loading=false
   }
   async setpermistion(element: MKV9999,element2:RM0006){
     if(element2.RM0007==null)
@@ -42,17 +47,24 @@ export class TuyendungDanhmucQuyendanhgiaComponent implements OnInit {
       element2.RM0007=data.data
     }
   }
-  pre(){
-    if(this.start==0)return false
-    this.start--
+  
+  bophanchange($event){
+    this.listMKV9999s=this.listMKV9999.filter(c=>{return c.phong_id===$event.target.value})
+    if($event.target.value=='all')this.listMKV9999s=this.listMKV9999
   }
-  nex(){
-    if((this.start+1)*this.step>=this.listMKV9999.length)return false
-    this.start++
+  getstart($event) {
+    this.start = $event
+  }
+  getstep($event) {
+    this.step = $event
+    //console.log($event)
+  }
+  getlist($event) {
+    this.listMKV9999 = $event
   }
   onKeydown(event) {
     // if (event.key === "Enter") {
-    //   console.log(event);
+    //   //console.log(event);
     // }
     //this.keysearch=
   }

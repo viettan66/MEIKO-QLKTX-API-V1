@@ -13,6 +13,10 @@ export class SelectAccountModalComponent implements OnInit {
   @Output('data') data = new EventEmitter<MKV9999[]>()
   @Output('datasingle') datasingle = new EventEmitter<MKV9999>()
   @Input() listMKV9999choose: MKV9999[] = []
+  @Input() ids
+  @Input() showmail
+  @Input() buttoncheck
+  @Output('checked') checked = new EventEmitter<boolean>()
   constructor(public rest: RESTService) { }
   public start: number = 0
   public step: number = 20
@@ -27,6 +31,19 @@ export class SelectAccountModalComponent implements OnInit {
       if(this.listbophan.filter(c=>{return c['id']===val.phong_id}).length==0&&val.phong_id!=null)
       this.listbophan.push({id:val.phong_id,ten:val.thetu_id})
     })
+  }
+  check(){
+    this.checked.emit(true);
+  }
+ async savemail(element){
+    //console.log("save mail "+element.hodem+' '+element.ten+":"+element.email)
+    let dataa=await  this.rest.PutDataToAPI<any>(element,"Account/updateinfo").toPromise()
+    //console.log(dataa)
+  }
+  kkkk($event,element){
+    if ($event.key === "Enter") {
+      this.savemail(element)
+    }
   }
   bophanchange($event){
     this.listMKV9999s=this.listMKV9999.filter(c=>{return c.phong_id===$event.target.value})

@@ -1,6 +1,6 @@
-<div class="row h-100  d-flex justify-content-center d-flex align-items-center no-gutters">
+<div class="row h-100  d-flex justify-content-center d-flex align-items-center no-gutters" id="loginrow">
     <div class="" style="min-width: 300px;height: auto;background-color: rgba(196, 196, 196, 0.33);padding: 50px;border-radius: 20px;border: 1px solid gray;">
-        <span class=""><h2>ĐĂNG NHẬP HỆ THỐNG</h2></span><br>
+        <span class=""><h2 (click)="kk()">ĐĂNG NHẬP HỆ THỐNG</h2></span><br>
         <div class="col-12 my-1">
             <div class="input-group">
               <div class="input-group-prepend">
@@ -14,7 +14,7 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">Mật khẩu</div>
               </div>
-              <input type="password" class="form-control" id="PASS" placeholder="Mật khẩu" value="1">
+              <input type="password" class="form-control" id="PASS" placeholder="Mật khẩu" value="1" (keydown)="kkkk($event)">
             </div>
           </div>
           <div class="col-12 my-1">

@@ -5,6 +5,7 @@ import { dataservice } from '../Service/dataservice';
 import { MKV9981 } from '../Models/MKV9981';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MKV9999 } from '../Models/MKV9999';
+import { Title } from '@angular/platform-browser';
 declare var $:any
 
 @Component({
@@ -14,10 +15,11 @@ declare var $:any
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public rest:RESTService,public cookie:CookieService,
+  constructor(private title: Title,public rest:RESTService,public cookie:CookieService,
     public route: Router) { }
 public listapp:MKV9981[]=[]
   ngOnInit() {
+    this.title.setTitle('Meiko Website');
     let that=this
       let kf:MKV9981[]=JSON.parse( localStorage.getItem('KTX_Menu'))
    that.listapp=kf.filter(c=>{return c.CAPMENU===0})

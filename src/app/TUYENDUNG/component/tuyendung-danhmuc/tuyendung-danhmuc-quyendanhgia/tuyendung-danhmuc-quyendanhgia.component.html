@@ -8,12 +8,14 @@
                     <div class="col">DANH SÁCH TÀI KHOẢN </div>
                     <div class="col-auto">
                         <div class="row no-gutters">
-                            <div class="col-auto px-1"><span class="mr-3">Đang xem {{((start+1)*step)>=listMKV9999.length?listMKV9999.length:((start+1)*step)}}/{{listMKV9999.length}}</span></div>
-                            <div class="col-auto px-1"><button (click)="pre()" class="btn  btn-secondary " ><i class="fas fa-angle-left"></i></button></div>
-                            <div class="col-auto px-1"><button (click)="nex()" class="btn btn-secondary " ><i class="fas fa-angle-right"></i></button></div>
+                            <div class="col-auto mr-1">
+                              <app-button-count classs="few" [start]="start" [step]="step" [listdata]="listMKV9999s"  (step)="getstep ($event)"  ></app-button-count>
+                              <app-button-preview  [start]="start" [step]="step" [listdata]="listMKV9999s" (start)="getstart ($event)" ></app-button-preview>
+                              <app-button-next [start]="start" [step]="step" [listdata]="listMKV9999s"  (start)="getstart ($event)" ></app-button-next>
+                            </div>
                             <div class="col-auto px-1"><input  type="text" style="width: 160px;" class="form-control" placeholder="ID, Tên" (keydown)="onKeydown($event)" [(ngModel)]="keysearch" ></div>
                             <div class="col-auto px-1">
-                                <select  class="form-control" [(ngModel)]="phong_id">
+                                <select  class="form-control"  (change)="bophanchange($event)">
                                     <option value="all">BP All</option>
                                     <option value="{{element.id}}" *ngFor="let element of listDEPT">{{element.ten}}</option>
                                 </select>
@@ -44,10 +46,8 @@
                         </tr>
                     </thead>
                     <tbody >
-                        <ng-container *ngFor="let element of listMKV9999;let i = index">
-                            <ng-container *ngIf="element.phong_id==phong_id||phong_id=='all'">
-
-                                <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))&&keysearch==''||checkkey(element)&&keysearch!=''">
+                        <ng-container *ngFor="let element of listMKV9999s;let i=index">
+                                    <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))&&keysearch==''||checkkey(element)&&keysearch!=''">
                                     <tr style="cursor: pointer;"  >
                                         <th><input type="checkbox"></th>
                                         <td>{{i+1}}</td>
@@ -61,7 +61,6 @@
                                             <button class="btn btn-sm deleteitem"><i class="far fa-trash-alt"></i></button></td> -->
                                     </tr>
                                 </ng-container>
-                            </ng-container>
 
                         </ng-container>
                     </tbody>
@@ -72,3 +71,4 @@
     </div>
     </div>
 
+    <app-loading [loading]='loading' caption="Đang tải dữ liệu, xin vui lòng chờ..."></app-loading>

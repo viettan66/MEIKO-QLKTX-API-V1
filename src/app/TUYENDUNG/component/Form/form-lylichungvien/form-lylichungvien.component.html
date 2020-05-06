@@ -93,7 +93,7 @@
         <td>Vị trí dự tuyển nguyện vọng 1<span style="color: red;"> (*)</span>:</td>
         <td>Vị trí</td>
         <td>
-            <select  class="form-control select" id="nguyenvong1" [(ngModel)]="rm0010in.RM0001_ID">
+            <select disabled  class="form-control select" id="nguyenvong1" [(ngModel)]="rm0010in.RM0001_ID">
                 <option *ngFor="let element of listrm0001" value="{{element['RM0001_ID']}}">{{element['tenCongViec']}}
                 </option>
             </select>

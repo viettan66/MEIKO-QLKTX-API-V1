@@ -2,22 +2,25 @@
     <app-menu></app-menu>
       <div class="col" id="contentmenu"> 
         
-        <div class="row no-gutters align-items-center" id="hidecolumn">
+        <!-- <div class="row no-gutters align-items-center" id="hidecolumn">
           <ng-container *ngFor="let element of listMKV8002;let i=index">
               <button (click)="active(element)" class="list-group-item  {{tab==i?'active':''}}"><i class="fas fa-sign-out-alt"></i>&nbsp;<span>{{element.ten}}</span> </button>
           </ng-container>
               <button (click)="themnhaan()" class="list-group-item tab"><i class="fas fa-plus"></i>&nbsp; </button>
                 <input class="form-control form-control-sm  w-25 "  type="text" placeholder="Search" value="017308002"  aria-label="Search" style="margin-left: 20px;" id="searchbox">
                 <button class="btn btn-sm btn-info" id="SEARCH" ><i style="cursor: pointer;" class="fas fa-search" aria-hidden="true"></i></button>
-          </div>
+          </div> -->
         <div class="row no-gutters"  style="padding: 10px;" >
             <div class="col-12">
                 <div class="card " id="testconvertPDF" style="background-color: rgba(255, 255, 255, 0.897);">
-                    <div class="card-header">
-                      <div class="row no-gutters">
-                        <div class="col"> DANH NHÂN VIÊN  </div>
+                    <div class="card-header py-1">
+                      <div class="row no-gutters p-0">
+                        <div class="col">
+                          <!-- <span class="mr-2">Server:{{listdatamachine.length}}</span><span class="mr-2">Database:{{listdatadatabase.length}}</span>  
+                          <span></span> -->
+                        </div>
                         <div class="col-auto mr-1">
-                          <app-button-count [start]="start" [step]="step" [listdata]="listMKV9999"  (step)="getstep ($event)"  ></app-button-count>
+                          <app-button-count classs="eeeeeeeeeeeeeeee" [start]="start" [step]="step" [listdata]="listMKV9999"  (step)="getstep ($event)"  ></app-button-count>
                           <app-button-preview  [start]="start" [step]="step" [listdata]="listMKV9999" (start)="getstart ($event)" ></app-button-preview>
                           <app-button-next [start]="start" [step]="step" [listdata]="listMKV9999"  (start)="getstart ($event)" ></app-button-next>
                         </div>
@@ -27,20 +30,24 @@
                         <div class="col-auto">
                           <app-button-datetimepicker ids="jkkjjjk"   (data)="getenddaate($event)"></app-button-datetimepicker>
                         </div>
+                      
                         <div class="col-auto">
-                          <input type="text" style="width: 100px;" list="datalisst" class="  form-control mr-1">
-                          <datalist id="datalisst">
-                            <option value="20">Nhỏ hơn 20 lần</option>
-                            <option value="15">Nhỏ hơn 15 lần</option>
-                            <option value="10">Nhỏ hơn 10 lần</option>
-                          </datalist>
+                          <button title="Đồng bộ" (click)="getdataa(true)"  class="btn btn-success  mr-1"><i class="fas fa-sync-alt"></i></button>
                         </div>
                         <div class="col-auto">
-                          <button title="Tìm kiếm" (click)="getdataa()"  class="btn btn-secondary  mr-1"><i
-                              class="fa fa-search"></i></button>
+                          <app-button-download bg="btn-info mr-1" tableID="export" tableName="Danh sách ra vào cổng"></app-button-download>
                         </div>
                         <div class="col-auto">
-                          <app-button-download bg="btn-info" tableID="export" tableName="Danh sách ra vào cổng"></app-button-download>
+                          <button (click)="loadmachine()" class="btn btn-warning text-white mr-1" title="Download dữ liệu từ máy chấm vân tay về"><i class="fas fa-cloud-download-alt"></i></button>
+                        </div>
+                        <!-- <div class="col-auto">
+                          <button class="btn btn-success mr-1" (click)="upload()" title="Đồng bộ dữ liệu"><i class="fas fa-cloud-upload-alt"></i></button>
+                        </div> -->
+                        <div class="col-auto">
+                          <button class="btn btn-danger mr-1" (click)="delete()" title="Xóa dữ liệu máy chấm vấn tay"><i class="fas fa-trash-alt"></i></button>
+                        </div>
+                        <div class="col-auto">
+                          <button title="Thiết lập máy quẹt vân tay" (click)="themnhaan()"  class="btn btn-primary"><i class="fa fa-cog"></i></button>
                         </div>
                       </div>
                     </div>
@@ -55,7 +62,8 @@
                                 <th>Bậc</th>
                                 <th>CMTND</th>
                                 <th>Phòng</th>
-                                <th>Ra/vào<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="Count"></app-button-sort></th>
+                                <th>Ngày ở<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="count"></app-button-sort></th>
+                                <th>Không ở iên tiếp<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="step"></app-button-sort></th>
                               </tr>
                               </thead>
                               <tbody>
@@ -71,11 +79,12 @@
                                             <td>{{element.MKV9999.capbac}}</td>
                                             <td>{{element.MKV9999.cmtnd_so}}</td>
                                             <td>{{element.MKV9999.KTX0001!=null?element.MKV9999.KTX0001.ten:''}}</td>
-                                            <td>{{element.Count}}</td>
+                                            <td>{{element.count!=null?element.count:'NaN'}}</td>
+                                            <td>{{element.step!=null?element.step:'NaN'}}</td>
                                         </tr>
                                     </ng-container>
                                     <ng-container *ngIf="element.MKV9999==null">
-                                        <tr>
+                                        <tr style=" background-color: rgb(255, 238, 238);">
                                             <td><input type="checkbox" name="" id=""></td>
                                             <td>{{i+1}}</td>
                                             <td>Không có dữ liệu</td>
@@ -84,7 +93,8 @@
                                             <td>Không có dữ liệu</td>
                                             <td>Không có dữ liệu</td>
                                             <td>Không có dữ liệu</td>
-                                            <td>{{element.Count}}</td>
+                                            <td>{{element.count!=null?element.count:'NaN'}}</td>
+                                            <td>{{element.step!=null?element.step:'NaN'}}</td>
                                         </tr>
                                     </ng-container>
                                   </ng-container>
@@ -99,15 +109,41 @@
 </div>
 
 
+<app-loading [loading]="loading" caption="Đang đồng bộ dữ liệu, vui lòng chờ."></app-loading>
 
 <div class="modal fade " id="themnhaanmodal" role="dialog" >
-	<div class="modal-dialog   modal-900" >
+	<div class="modal-dialog   modal-1360" >
 		<div class="modal-content " >
-			<div class="modal-header">
-				<h5 class="modal-title">THÊM NHÀ ĂN MỚI</h5>
+			<div class="modal-header" >
+				<h5 class="modal-title"><i class="fa fa-cog"></i>&nbsp;&nbsp; SETTING</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body ">
+        <div id="accordion">
+          <div class="card">
+            <div class="card-header" data-toggle="collapse" data-target="#collapse2" aria-expanded="true"
+                  aria-controls="collapse2" id="heading2">
+              <h5 class="mb-0">
+                  <i class="fa fa-users">&nbsp;Cài đặt danh sách người ra vào không có trên hệ thống HR</i>
+              </h5>
+            </div>
+
+            <div id="collapse2" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+              <div class="card-body">
+                <app-select-account-add-ktx (listdata)="getlistdata($event)"></app-select-account-add-ktx>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                    aria-controls="collapseOne" id="headingOne">
+                <h5 class="mb-0">
+                    <i class="fa fa-cog">&nbsp;Cài đặt máy chấm vân tay</i>
+                </h5>
+              </div>
+  
+              <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
         <TABLE class="table table-bordered table-hover">
           <tbody>
             <tr>
@@ -158,6 +194,9 @@
             </tr>
           </ng-container>
         </table>
+      </div>
+    </div>
+  </div>
 			</div>
 		</div>
 	</div>

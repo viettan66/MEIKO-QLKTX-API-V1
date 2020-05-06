@@ -16,7 +16,7 @@ export class ButtonDownloadComponent implements OnInit {
   }
 
   download(){
-    console.log($('#'+this.tableID))
+    //console.log($('#'+this.tableID))
     //$('#'+this.tableID).find('.ShowToExport').css('display','')
     this.rest.ExportTOExcel(document.getElementById(this.tableID),this.tableName)
     //$('#'+this.tableID).find('.ShowToExport').css('display','none')

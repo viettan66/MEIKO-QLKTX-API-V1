@@ -1,0 +1,30 @@
+<button *ngIf="tab==0" (click)="tabs(1)" class="btn btn-info btn-rounded" style="position: fixed;bottom: 25px ;right: 25px;z-index: 999;box-shadow: 0 0 12px rgba(77, 77, 77, 0.705);"><i class="fa fa-comment fa-2x"></i></button>
+<div *ngIf="tab==1"  style="width: 300px;max-height: 400px;position: fixed;bottom: 25px ;right: 25px;z-index: 999;box-shadow: 0 0 12px rgba(77, 77, 77, 0.705);
+border-radius: 5px;background-color: rgb(223, 223, 223);
+" >
+
+
+<div class="card">
+    <div class="card-header p-0">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-auto"><button class="btn " (click)="tabs(0)" ><i class="fa fa-times"></i></button></div>
+        </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Special title treatment</h5>
+      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+    <div class="card-footer p-0">
+      <div class="row no-gutters">
+        <div class="col">
+          <input type="text" name="" id="" class="form-control">
+        </div>
+        <div class="col-auto">
+          <button class="btn"><i class="fa fa-search"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

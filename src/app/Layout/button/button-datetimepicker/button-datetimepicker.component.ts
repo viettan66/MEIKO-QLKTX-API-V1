@@ -19,14 +19,14 @@ Date= new Date().getDate()
 Hours=new Date().getHours()
 Minute=new Date().getMinutes()
 Second=new Date().getSeconds()
-public now = new Date().getFullYear() + '-' + (( this.Month)<10?'0':'') +this.Month+ '-' + (( this.Date)<10?'0':'') +this.Date + ' ' + (( this.Hours)<10?'0':'') +this.Hours + ':' + (( this.Minute)<10?'0':'') +this.Minute + ':' + (( this.Second)<10?'0':'') +this.Second
+public now = new Date().getFullYear() + '-' + (( this.Month)<10?'0':'') +this.Month+ '-' + (( this.Date)<10?'0':'') +this.Date + ' ' + (( this.Hours)<10?'0':'') +this.Hours + ':' + (( this.Minute)<10?'0':'') +this.Minute + ':00' 
   
 @Output("data") data=new EventEmitter<string>()
   ngOnInit() {
     let that=this
     $(document).ready(function(){
       send()
-      $('#'+that.ids).datetimepicker({onChangeDateTime:send,format:'Y-m-d H:m:s'})
+      $('#'+that.ids).datetimepicker({onChangeDateTime:send,format:'Y-m-d H:i:s',step:1})
       function send(){
       that.data.emit($('#'+that.ids).val())
         }

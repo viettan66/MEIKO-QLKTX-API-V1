@@ -99,7 +99,7 @@ export class RESTService {
   }
   
   ExportTOExcelFromJson(datalist,namefile?,title?) {  
-    let ws: XLSX.WorkSheet =  XLSX.utils.json_to_sheet(datalist,{skipHeader:true})
+    let ws: XLSX.WorkSheet =  XLSX.utils.json_to_sheet(datalist,)
 
     let wb: XLSX.WorkBook = XLSX.utils.book_new();  
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');  

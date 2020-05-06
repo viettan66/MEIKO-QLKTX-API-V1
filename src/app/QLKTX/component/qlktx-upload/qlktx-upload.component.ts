@@ -9,7 +9,7 @@ export class QlktxUploadComponent implements OnInit {
 
   constructor() { }
 
-  public tab=3
+  public tab=2
   ngOnInit() {
   }
 tabs(k){

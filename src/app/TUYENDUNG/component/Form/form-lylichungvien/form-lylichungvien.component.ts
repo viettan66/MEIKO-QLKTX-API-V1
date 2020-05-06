@@ -17,6 +17,7 @@ declare var $:any
 })
 export class FormLylichungvienComponent implements OnInit {
 @Input() rm0010in:RM0010
+@Input() sophieu
 @Input() check:boolean
 @Output('rm0010out') rm0010out=new EventEmitter<RM0010>()
   constructor(public rest:RESTService) { }
@@ -34,24 +35,22 @@ public rm0100:RM0009[]=[]
    })
   }
 
-save(){
+async save(){
   console.log(this.rm0010in)
   if(this.rm0010in.RM0010_ID==null){
-    this.rest.PostDataToAPI<result<RM0010>[]>([this.rm0010in],"RM0010/add").subscribe(data=>{
-      data.forEach(val=>{
-        
-      if(val.code=="OK"){
+    let data=await this.rest.PostDataToAPI<result<RM0010>[]>([this.rm0010in],"RM0010/add").toPromise()
+      data.filter(x=>x.code==="OK").map(val=>{
         this.rm0010out.emit(val.data)
-      }
       })
-    })
+      data.filter(x=>x.code!=="OK").map(val=>{
+        console.log(val)
+      })
   }else{
     this.rest.PutDataToAPI<result<RM0010>>(this.rm0010in,"RM0010/update").subscribe(data=>{
       if(data.code=="OK"){
         this.rm0010out.emit(data.data)
       }
     })
-    
   }
 }
 thanhphangiadinh(lop?:RM0080){

@@ -3,8 +3,10 @@ import { RM0001 } from './RM0001'
 import { RM0002 } from './RM0002'
 import { RM0003 } from './RM0003'
 import { RM0004 } from './RM0004'
+import { RM0010 } from './RM0010'
 
 export class A0028{
+sophieu: number
     A0028_ID: string
 A0002_ID: string
 hoVaTen: string
@@ -16,6 +18,7 @@ trangThai: number
 ngayTao: string
 noiDungCongViec: string
 daXoa: boolean
+check: boolean
 T001C: string
 T002C: string
 T003C: string
@@ -55,4 +58,5 @@ RM0001:RM0001;
 RM0002:RM0002;
 RM0003:RM0003
 RM0004:RM0004
+RM0010:RM0010[]=[]
 }

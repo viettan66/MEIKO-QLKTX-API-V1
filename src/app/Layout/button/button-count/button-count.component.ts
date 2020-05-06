@@ -13,16 +13,17 @@ export class ButtonCountComponent implements OnInit {
   @Input() start
   @Output('step') dd=new EventEmitter<number>()
   @Input() step
+  @Input() classs
   @Input() listdata
   ngOnInit() {
   }
   show(){
-    if($('#inputdatalisst').css('width')=='80px')
-    $('#inputdatalisst').css('width','0px')
+    if($('.zxcvbnm'+(this.classs==null?"":this.classs)).css('width')=='80px')
+    $('.zxcvbnm'+(this.classs==null?"":this.classs)).css('width','0px')
     else
-    $('#inputdatalisst').css('width','80px')
+    $('.zxcvbnm'+(this.classs==null?"":this.classs)).css('width','80px')
   }
   send(){
-    this.dd.emit($('#inputdatalisst').val())
+    this.dd.emit($('.zxcvbnm'+(this.classs==null?"":this.classs)).val())
   }
 }

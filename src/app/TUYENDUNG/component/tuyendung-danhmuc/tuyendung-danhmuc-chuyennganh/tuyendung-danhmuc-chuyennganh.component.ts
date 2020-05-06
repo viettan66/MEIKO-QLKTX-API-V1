@@ -18,15 +18,23 @@ export class TuyendungDanhmucChuyennganhComponent implements OnInit {
   ngOnInit() {
     this.rest.GetDataFromAPI<RM0004[]>('RM0004/Getall').subscribe(data=>{
       this.listdata=data
-    console.log(this.listdata)
+    //console.log(this.listdata)
     })
   }
  async themcongviec(){
     let data=await this.rest.PostDataToAPI<result<RM0004>>(new RM0004(),'RM0004/add').toPromise()
     if(data.code=="OK")this.listdata.push(data.data)
-  }
+  }  
+  public start=0
+  public step=20
+ getstart($event){
+     this.start=$event
+   }
+   getstep($event){
+     this.step=$event
+   }
   savecongviec(){
-    console.log(this.newdm)
+    //console.log(this.newdm)
     this.rest.PostDataToAPI<result<RM0004>>(this.newdm,'RM0004/add').subscribe(data=>{
       if(data.code=="OK"){
         this.listdata.push(data.data)
@@ -51,7 +59,7 @@ export class TuyendungDanhmucChuyennganhComponent implements OnInit {
        $('#row'+element.RM0004_ID).find('input:text,select').addClass('none').attr('disabled',true)
        $('#edit'+element.RM0004_ID).find('i').removeClass('fa-save').addClass('fa-edit')
        let dataa= await this.rest.PutDataToAPI<result<RM0004>>(element,'RM0004/update').toPromise()
-       console.log(dataa)
+       //console.log(dataa)
        if(dataa.code=="OK"){{
          element=dataa.data
        }}
@@ -60,7 +68,7 @@ export class TuyendungDanhmucChuyennganhComponent implements OnInit {
   async xoacongviec(){
     if(!confirm('Bạn có chắc chắn muốn xóa '))return false
     let data=await this.rest.PutDataToAPI<result<RM0004>[]>(this.listdata.filter(c=>{return c.check===true}),'RM0004/delete').toPromise()
-    console.log(this.listdata.filter(c=>{return c.check===true}))
+    //console.log(this.listdata.filter(c=>{return c.check===true}))
     data.filter(c=>{return c.code==="OK"}).forEach(val=>{this.listdata.filter(c=>{return c.RM0004_ID===val.data.RM0004_ID}).map(x=>{this.listdata.splice(this.listdata.indexOf(x),1)})})
    }
 }

@@ -2,7 +2,7 @@
 
 // import { RM0015 } from './RM0015';
 export class RM0008{
-    public  RM0008_ID :  string  ;
+    public  RM0008_ID :  Number  ;
     public  maDiaDiem :string    ;
     public  DiaDiem : string   ;
     public  ghiChu : string   ;

@@ -84,7 +84,7 @@ export class QlktxUploadNhanvienComponent implements OnInit {
       }
     })).then(k=>{
 
-    console.log($event)
+    //console.log($event)
     
    this.pending=false
     this.listKTX0002=$event
@@ -109,7 +109,7 @@ export class QlktxUploadNhanvienComponent implements OnInit {
   })) .then(fj=>{
 
    this.pending=false
-    console.log(data)
+    //console.log(data)
   })
     
   }
@@ -132,7 +132,7 @@ return element==null?'':new Date(element)
     await this.rest.PostDataToAPI({phong_id:dat3.id,bophan_ma:dat3.bophan_ma,bophan_ten:dat3.bophan_ten,idcha:dat3.idcha},'MKV9998/add').toPromise()
     a.matkhau='123456'
     let lkk=  await this.rest.PostDataToAPI<result<MKV9999>>(a,'Account/add').toPromise()
-    console.log(lkk)
+    //console.log(lkk)
   })
 }
 }

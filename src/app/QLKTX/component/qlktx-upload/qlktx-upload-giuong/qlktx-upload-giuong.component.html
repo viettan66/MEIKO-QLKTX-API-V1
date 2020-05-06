@@ -14,8 +14,9 @@
                 <tr>
                     <th style="width: 20px;"><input type="checkbox" (change)="chooseall()"></th>
                     <th  style="width: 50px;">STT</th>
-                    <th>PHÒNG</th>
-                    <TH>MÃ GIƯỜNG</TH>
+                    <TH>PHÒNG</TH>
+                    <th>ID</th>
+                    <TH>SỐ KHÓA TỦ</TH>
                     <TH> <i class="fa fa-list"></i> </TH>
                 </tr>
             </thead>
@@ -25,7 +26,8 @@
                         <td><input type="checkbox" [ngModel]="element.check"></td>
                         <td>{{i+1}}</td>
                         <td><input type="text" [(ngModel)]="element.PHONG" disabled class="form-control none"> </td>
-                        <td><input type="text" [(ngModel)]="element.MAGIUONG" disabled class="form-control none"> </td>
+                        <td><input type="text" [(ngModel)]="element.ID" disabled class="form-control none"> </td>
+                        <td><input type="text" [(ngModel)]="element.SOKHOATU" disabled class="form-control none"> </td>
                         <td>
                             <button id="edit{{element.MAGIUONG}}" (click)="edit(element)"  class="btn btn-sm"><i class="fa fa-edit"></i></button>
                             <button class="btn btn-sm"><i class="fa fa-trash"></i></button>

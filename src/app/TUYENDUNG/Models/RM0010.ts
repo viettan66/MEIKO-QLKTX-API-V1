@@ -47,6 +47,8 @@ export class RM0010{
     public  bophanid:string ;
     public  DUDINHHOCTIEP:Boolean ;
     public  check:Boolean ;
+    public  A0028_ID:string ;
+    public  sophieu:number ;
 
     public i:number=0;
     public j:number=0;

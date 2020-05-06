@@ -10,7 +10,7 @@
               <!-- <button title="Thêm đơn" style="margin-left: 10px;"  class="btn btn-secondary float-right adddon"><i
                   class="fa fa-plus"></i></button> -->
                   <span class="float-right">
-                    <app-button-count [start]="start" [step]="step" [listdata]="listdon" class="mr-2" (step)="getstep($event)" ></app-button-count>
+                    <app-button-count classs="tyuioi" [start]="start" [step]="step" [listdata]="listdon" class="mr-2" (step)="getstep($event)" ></app-button-count>
                     <app-button-preview [start]="start" [step]="step" [listdata]="listdon" (start)="getstart($event)"></app-button-preview>
                     <app-button-next class="mr-2" [start]="start" [step]="step" [listdata]="listdon" (start)="getstart($event)"></app-button-next>
                       <button title="Duyệt sách đã chọn"  class="btn btn-primary" id="agree"><i class="fa fa-check"></i></button>&nbsp;
@@ -21,7 +21,7 @@
                       <select id="filter" class="btn btn-outline-secondary">
                           <option value="">ALL</option>
                           <option value="true">Đã duyệt</option>
-                          <option value="false">Chưa duyệt</option>
+                          <option selected value="false">Chưa duyệt</option>
                       </select>&nbsp;&nbsp;&nbsp;
                     <input id="startdate" type="date" (change)="showdon()"  class="btn btn-outline-secondary py-1" placeholder="Từ ngày"    [ngModel]="now1 | date:'yyyy-MM-dd'" >
                     <input  id="enddate" type="date"  (change)="showdon()"  class="btn btn-outline-secondary py-1"    [ngModel]="now | date:'yyyy-MM-dd'" >&nbsp;
@@ -62,7 +62,7 @@
                               <td>{{element.MKV9999.cmtnd_ngayhethan| date:'yyyy/MM/dd'}}</td>
                               <td>{{element.MKV9999.diachithuongtru}}</td>
                               <td>{{element.ngaytaodon| date:'dd/MM/yyyy HH:mm'}}</td>
-                              <td style="text-align: center;">{{element.check2==null? count(element):(element.count==null?0:element.count)}}</td>
+                              <td style="text-align: center;">{{element.count}}</td>
                               <td style="text-align: center;">
                                 <span class="ddd">{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</span> 
                                 <i *ngIf="element.trangthai" class="fa fa-check"></i><i *ngIf="!element.trangthai" class="fa fa-sync-alt fa-spin"></i></td>
@@ -118,4 +118,4 @@
     </ng-container>
     
   </div>
-  <app-loading *ngIf="loading"></app-loading>
+  <app-loading [loading]="loading" caption="Xin vui lòng chờ..."></app-loading>

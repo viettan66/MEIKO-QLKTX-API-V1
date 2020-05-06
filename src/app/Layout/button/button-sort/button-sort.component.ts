@@ -21,16 +21,16 @@ export class ButtonSortComponent implements OnInit {
     if (this.up) {
         this.up=false
       this.out.emit(this.listdata.sort((a, b) => {
-        var aName = (a[this.key] + "").toLowerCase();
-        var bName = (b[this.key] + "").toLowerCase();
+        var aName = a[this.key] ;
+        var bName = b[this.key] ;
         return ((aName < bName) ? -1 : ((aName > bName) ? 1 : 0));
       }))
     }
     else {
         this.up=true
       this.out.emit(this.listdata.sort((a, b) => {
-        var aName = (a[this.key] + "").toLowerCase();
-        var bName = (b[this.key] + "").toLowerCase();
+        var aName = a[this.key] ;
+        var bName = b[this.key] ;
         return ((aName > bName) ? -1 : ((aName < bName) ? 1 : 0));
       }))
     }

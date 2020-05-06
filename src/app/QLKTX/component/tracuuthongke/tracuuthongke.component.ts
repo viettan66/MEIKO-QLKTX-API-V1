@@ -14,32 +14,21 @@ declare var $:any
 export class TracuuthongkeComponent implements OnInit {
 
   constructor(public rest:RESTService) { }
-  public tab=0
+  public tab=3
 
   ngOnInit() {
     let that=this
     $(document).ready(function(){{
-      $('.tab').click(function(){
-        that.tab=$(this).index()
-        $('.tab').removeClass('active')
-        $(this).addClass('active')
-      })
-      ////////////
-      $('.tab').click(function(){
-        that.tab=$(this).index()
-      })
-      ////////////////
       $('#searchbox').change(function(){
         that.inputchange($('#searchbox').val())
-        
       })
-      ////////////////
       $('#SEARCH').click(function(){
         that.inputchange($('#searchbox').val())
       })
-      //////////////
-
-    }})//end $(document).ready
+    }})
+  }
+  tabchange(i){
+    this.tab=i
   }
   public lisktx0020:KTX0020[]=[];
   public lisktx0023:KTX0023[]=[];
@@ -53,6 +42,5 @@ export class TracuuthongkeComponent implements OnInit {
       if(data.KTX0020!=null)this.lisktx0020=data.KTX0020
       if(data.KTX0023!=null)this.lisktx0023=data.KTX0023
     }
-    this.tab=3
   }
 }

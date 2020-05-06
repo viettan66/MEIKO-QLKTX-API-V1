@@ -22,6 +22,7 @@ export class DanhsachdanhgiaComponent implements OnInit {
 @Input()disabled
   public start:number=0
   public step:number=20
+  public filterketqua:any='all'
   public listRM0015: RM0015[] = []
   public listRM0006: RM0006[] = []
   public listRM0007: RM0007[] = []
@@ -37,7 +38,12 @@ export class DanhsachdanhgiaComponent implements OnInit {
     this.getdata()
    
   }
-
+  filterketquafunction($event){
+    if($event.target.value=='all'){this.filterketqua='all'
+  return}
+    this.filterketqua=($event.target.value)==="TRUE"
+    console.log(this.filterketqua)
+  }
   showungvien(element: RM0015) {
     if (element.RM0010 != null) {
       this.rm0010in = element.RM0010
@@ -76,7 +82,7 @@ export class DanhsachdanhgiaComponent implements OnInit {
         }else{
           alert(data.mess)
         }
-        console.log(datas)
+        //console.log(datas)
       })
     }else{
       
@@ -89,7 +95,7 @@ export class DanhsachdanhgiaComponent implements OnInit {
         }else{
           alert(data.mess)
         }
-        console.log(datas)
+        //console.log(datas)
       })
     }
     
@@ -125,14 +131,14 @@ export class DanhsachdanhgiaComponent implements OnInit {
         } else {
           alert(data.mess)
         }
-        console.log(datas)
+        //console.log(datas)
       })
       $('#suachitietdanhgia').modal('hide')
     this.updateRM0015(this.thisRM0015)
   }
  async updateRM0015(element:RM0015){
     let k=await this.rest.GetDataFromAPI<RM0015>("RM0015/Getall2/"+element.RM0015_ID).toPromise()
-    console.log(k)
+    //console.log(k)
     element.ketQua=k.ketQua
   }
   public phongid='all'
@@ -144,14 +150,6 @@ export class DanhsachdanhgiaComponent implements OnInit {
     this.vitriid=$event.target.value
   }
   
-  pre(){
-    if(this.start==0)return false
-    this.start--
-  }
-  nex(){
-    if((this.start+1)*this.step>=this.listRM0015.length)return false
-    this.start++
-  }
   checkRM0006_ID(RM0006_ID){
     if(this.listRM0007.filter(c=>{return c.RM0006_ID===RM0006_ID}).length==0) return false
     else return true
@@ -167,6 +165,13 @@ export class DanhsachdanhgiaComponent implements OnInit {
   async filter($event){
    await this.getdata()
   }
+  checkper(element2:RM0006){
+    if(this.listRM0007.filter(c=>c.RM0006_ID===element2.RM0006_ID).length==0){
+      alert('Bạn không có quyền đánh giá mục này, hãy liên hệ với Nhân sự.')
+      element2.RM0013.nhanXet=''
+      return false
+    }
+  }
   async getdata() {
     this.listRM0015=[]
     this.listRM0001=[]
@@ -174,6 +179,14 @@ export class DanhsachdanhgiaComponent implements OnInit {
     this.listMKV9998=[]
     this.listphongid=[]
     this.listRM0015 = await this.rest.PostDataToAPI<RM0015[]>({ type: true, MKV9999_ID: this.MKV9999_ID, trangthai: this.filtertype }, "RM0015/Getalldanhgia").toPromise()
+    for(const o of this.listRM0015){
+      await this.checkele(o)
+    }
+    this.listRM0015.map(x=>{
+      x['ten']=x.RM0010!=null?(x.RM0010.HODEM+' '+x.RM0010.TEN):''
+      x['ngaysinh']=x.RM0010!=null?(x.RM0010.NGAYSINH):''
+      x['vitri1']=x.RM0010!=null?(x.RM0010.RM0001!=null?x.RM0010.RM0001.tenCongViec:""):''
+    })
     console.log(this.listRM0015)
     if (this.listRM0015.length > 0) {
       this.listRM0015[0].RM0006.forEach(val => {
@@ -194,16 +207,18 @@ export class DanhsachdanhgiaComponent implements OnInit {
     })
     const uni = new Set(this.listphongid)
     this.listphongid = [...uni]
-    this.listphongid.forEach(async f => {
-      this.listMKV9998.push(await this.rest.PostDataToAPI<MKV9998>({ id: f }, "MKV9998/Getall").toPromise())
-    })
+    for(const f of this.listphongid){
+      let kkl=await this.rest.PostDataToAPI<MKV9998>({ id: f }, "MKV9998/Getall").toPromise()
+      if(kkl!=null)
+      this.listMKV9998.push(kkl)
+    }
     console.log(this.listMKV9998)
   }
   async hoanthanhdanhgia() {
     var arrtemp = this.listRM0015.filter(c => { return c.check === true })
     arrtemp.forEach(val => { val.trangThai = true })
     let datas = await this.rest.PostDataToAPI<result<RM0015>[]>(arrtemp, 'RM0015/update2').toPromise();
-    console.log(datas)
+    //console.log(datas)
     datas.forEach(val => {
       if (val.code == "OK") {
         this.listRM0015.splice(this.listRM0015.indexOf(this.listRM0015.filter(c => { return c.RM0015_ID === val.data.RM0015_ID })[0]), 1)
@@ -214,7 +229,7 @@ export class DanhsachdanhgiaComponent implements OnInit {
     var arrtemp = this.listRM0015.filter(c => { return c.check === true })
     arrtemp.forEach(val => { val.trangThai = false })
     let datas = await this.rest.PostDataToAPI<result<RM0015>[]>(arrtemp, 'RM0015/update2').toPromise();
-    console.log(datas)
+    //console.log(datas)
     datas.forEach(val => {
       if (val.code == "OK") {
         this.listRM0015.splice(this.listRM0015.indexOf(this.listRM0015.filter(c => { return c.RM0015_ID === val.data.RM0015_ID })[0]), 1)
@@ -239,4 +254,17 @@ export class DanhsachdanhgiaComponent implements OnInit {
     alert("Đã đánh giá "+arrtemp.length+' ứng viên.')
   }
   
+  getstart($event){
+    this.start=$event
+  }
+  getstep($event){
+    this.step=$event
+  }
+  getlist($event){
+    this.listRM0015=$event
+  }
+  async test(RM0013){
+    //console.log(RM0013.nhanXet)
+    let datas= await this.rest.PostDataToAPI<result<RM0013>[]>([RM0013],"RM0013/add").toPromise()
+  }
 }

@@ -25,6 +25,7 @@ export class QldComponent implements OnInit {
   public now1=new Date().getFullYear()+"-"+(new Date().getMonth())+"-"+new Date().getDay()
   public start=0;
   public step=20;
+  loading=true
   ngOnInit() {  let that=this
 this.user=JSON.parse(localStorage.getItem('KTX_User'))
     $(document).ready(function(){
@@ -84,16 +85,25 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
       })
     })
   }
-  showdon(){
+ async showdon(){
     
     let check=$('#filter').val()
     let startdate=$('#startdate').val()
     let enddate=$('#enddate').val()
-    this.rest.PostDataToAPI<KTX0020[]>({trangthai:check,startdate:startdate,enddate:enddate},'KTX0020/Getall').subscribe(data=>{
-      this.listdon=data
-      this.listdontemp=data
-      //console.log(data)
-    })
+    this.listdon=await this.rest.PostDataToAPI<KTX0020[]>({trangthai:check,startdate:startdate,enddate:enddate},'KTX0020/Getall').toPromise()
+    this.listdontemp=this.listdon
+  this.loading=false
+    for(const element of this.listdon){
+    let key=element.MKV9999.cmtnd_so!=null?element.MKV9999.cmtnd_so:
+     (element.MKV9999.hochieu_so!=null?element.MKV9999.hochieu_so:
+      (element.MKV9999.manhansu!=null?element.MKV9999.manhansu:(element.hotenkhaisinh))
+      )
+      element.check2=false
+       element.timkiem=await this.rest.PostDataToAPI<valuesearch>({key:key},'Search/Search').toPromise()
+        element.check2=true
+      element.count= element.timkiem.KTX0020.filter(v=>{return v.trangthai===true}).length
+    }
+    
   }
   showdetaildon(element){
         //console.log(element)
@@ -140,7 +150,6 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
   })
   }
   public ktx20tempprint:KTX0020[]=[]
-  public loading=false
  async print2(){
     
   this.ktx20tempprint=[]
@@ -156,25 +165,25 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
     },2000);
     
   }
-  async count(element:KTX0020){
-     let key=element.MKV9999.cmtnd_so!=null?element.MKV9999.cmtnd_so:
-     (element.MKV9999.hochieu_so!=null?element.MKV9999.hochieu_so:
-      (element.MKV9999.manhansu!=null?element.MKV9999.manhansu:(element.hotenkhaisinh))
-      )
-      element.check2=false
-       element.timkiem=await this.rest.PostDataToAPI<valuesearch>({key:key},'Search/Search').toPromise()
-        element.check2=true
-      element.count= element.timkiem.KTX0020.filter(v=>{return v.trangthai===true}).length
-     //console.log(element.timkiem)
+  // async count(element:KTX0020){
+  //    let key=element.MKV9999.cmtnd_so!=null?element.MKV9999.cmtnd_so:
+  //    (element.MKV9999.hochieu_so!=null?element.MKV9999.hochieu_so:
+  //     (element.MKV9999.manhansu!=null?element.MKV9999.manhansu:(element.hotenkhaisinh))
+  //     )
+  //     element.check2=false
+  //      element.timkiem=await this.rest.PostDataToAPI<valuesearch>({key:key},'Search/Search').toPromise()
+  //       element.check2=true
+  //     element.count= element.timkiem.KTX0020.filter(v=>{return v.trangthai===true}).length
+  //    //console.log(element.timkiem)
     
-  }
+  // }
   export(){
     $('.ddd').css('display','')
     this.rest.ExportTOExcel(document.getElementById('tabletoexport'),'Danh sách vào '+(new Date).getDay+(new Date).getMonth+(new Date).getFullYear)
     $('.ddd').css('display','none')
   }
   kj(){
-    console.log(this.start)
+    //console.log(this.start)
   }
   getstart($event){
     this.start=$event

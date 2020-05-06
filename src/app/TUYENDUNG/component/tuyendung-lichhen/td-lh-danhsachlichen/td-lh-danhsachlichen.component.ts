@@ -8,6 +8,7 @@ import { MKV9999 } from 'src/app/Models/MKV9999';
 import { result } from 'src/app/QLKTX/models/result';
 import { MKV9998 } from 'src/app/Models/MKV9998';
 import { RM0001 } from 'src/app/TUYENDUNG/Models/RM0001';
+import { Mail } from 'src/app/Models/Mail';
 declare var $:any
 
 @Component({
@@ -33,16 +34,17 @@ public user:MKV9999=new MKV9999()
    let arrtemp=[]
     this.listRM0015=await this.rest.PostDataToAPI<RM0015[]>({type:false,MKV9999_ID:this.MKV9999_ID,phong_id:this.phong_id},"RM0015/Getall").toPromise()
     this.listRM0008=await this.rest.GetDataFromAPI<RM0008[]>("RM0008/Getall").toPromise()
-       console.log(this.listRM0015)
-   this.listRM0015.forEach(val=>{
-     if(val.RM0010.bophanid!=null)
-      arrtemp.push(val.RM0010.bophanid)
-   })
-   arrtemp=[...new Set(arrtemp)]
-    arrtemp.forEach(async val=>{
-      this.listMKV9998.push(await this.rest.PostDataToAPI<MKV9998>({id:val},"MKV9998/Getall").toPromise())
-    })
-    console.log(this.listMKV9998)
+       //console.log(this.listRM0015)
+  //  this.listRM0015.forEach(val=>{
+  //    if(val.RM0010.bophanid!=null)
+  //     arrtemp.push(val.RM0010.bophanid)
+  //  })
+  //  arrtemp=[...new Set(arrtemp)]
+  //   arrtemp.forEach(async val=>{
+      // this.listMKV9998.push(await this.rest.PostDataToAPI<MKV9998>({id:val},"MKV9998/Getall").toPromise())
+      this.listMKV9998=await this.rest.PostDataToAPI<MKV9998[]>({},"MKV9998/Getall").toPromise()
+    // })
+    console.log(this.listRM0015)
     this.listRM0015.forEach(val=>{
       if(val.RM0010.RM0001!=null){
         if(this.listRM0001.filter(c=>{return c.RM0001_ID===val.RM0010.RM0001.RM0001_ID}).length==0)
@@ -80,6 +82,32 @@ public user:MKV9999=new MKV9999()
      let data= await this.rest.PutDataToAPI<result< RM0015>>(this.thisrm0015,'RM0015/update').toPromise()
      if(data.code=="OK"){
        this.thisrm0015['RM0008']=data.data['RM0008']
+       ////////////////////////////////////////////////////
+       for(const x of element.RM0015A){
+        let mail:Mail=new Mail()
+        mail.from=this.user.email
+        mail.to=x.MKV9999.email
+        mail.subject="[HR] Thay đổi lịch phỏng vấn | 面接スケジュールの変更"
+        mail.bobdy="Dear "+(x.MKV9999.gioitinh?"Mr. ":"Ms. ")+x.MKV9999.hodem+' '+x.MKV9999.ten+`.
+Bạn nhận được một thông báo về thay đổi lịch phỏng vấn từ bộ phận HR.
+Thông tin chi tiết:
+\t- Thời gian: `+element.thoiGianPhongVan+`
+\t- Địa điểm: `+element['RM0008'].DiaDiem+`
+\t- Ứng viên:\n\t\t`+element.RM0010.HODEM+' ' +element.RM0010.TEN+`
+\nĐây là email tự động, vui lòng không trả lời email này. Nếu có yêu cầu nào khác, hãy liên hệ với bộ phận HR theo mail: `+this.user.email+`
+------------------------------------------------------------------
+親愛なる `+(x.MKV9999.gioitinh?"Mr. ":"Ms. ")+x.MKV9999.hodem+' '+x.MKV9999.ten+`.
+人事部から面接スケジュール変更の通知を受け取る。
+詳細：
+\t-時間：`+element.thoiGianPhongVan+`
+\t-場所：`+element['RM0008'].DiaDiem+`
+\t-候補者：\n\t\t`+element.RM0010.HODEM+' ' +element.RM0010.TEN+`
+\nこれは自動メールです。 このメールには返信しないでください。 他にご要望がございましたら、人事部までメールでお問い合わせください:`+this.user.email+`
+  `
+       let kj=await this.rest.PostDataToAPI<result<any>>(mail,"Mail/Sendmail").toPromise()
+       console.log(kj)
+      }
+       //////////////////////////////////////////////////
      }
     } 
   }
@@ -101,7 +129,7 @@ public user:MKV9999=new MKV9999()
     this.thisrm0015=element
     this.listMKV9999choose=[]
     this.listMKV9999choose=(this.thisrm0015.RM0015A.map(x=>{return x.MKV9999}))
-    console.log(this.listMKV9999choose)
+    //console.log(this.listMKV9999choose)
     $('#select-account-modal').modal()
   }
   pre(){
@@ -140,8 +168,7 @@ public user:MKV9999=new MKV9999()
   public userinfor:RM0015A=new RM0015A()
   info(button:RM0015A){
     this.userinfor=button
-    console.log(this.userinfor
-      )
+    //console.log(this.userinfor )
    $('#userinfor') .modal()
   }
   public bophanid='all'
@@ -165,8 +192,8 @@ public user:MKV9999=new MKV9999()
       }
     })
     let data=await this.rest.PostDataToAPI<result<RM0015A>[]>(listtemp,'RM0015A/update').toPromise()
-    console.log(listtemp)
-    console.log(data)
+    //console.log(listtemp)
+    //console.log(data)
     data.forEach( async val=>{
       if(val.code=="OK"){
         let l= this.listRM0015.filter(c=>{return c.RM0015_ID===val.data.RM0015.RM0015_ID})
@@ -182,4 +209,13 @@ public user:MKV9999=new MKV9999()
     this.rest.ExportTOExcel(document.getElementById(tableexport),'List')
   }
   
+  getstart($event){
+    this.start=$event
+  }
+  getstep($event){
+    this.step=$event
+  }
+  // getlist($event){
+  //   this.listdon=$event
+  // }
 }
