@@ -18,7 +18,7 @@ export class TuyendungDanhmucDiadiemphongvanComponent implements OnInit {
   ngOnInit() {
     this.rest.GetDataFromAPI<RM0008[]>('RM0008/Getall').subscribe(data=>{
       this.listdata=data
-    //console.log(this.listdata)
+    //////console.log(this.listdata)
     })
   }  
   public start=0
@@ -34,7 +34,7 @@ export class TuyendungDanhmucDiadiemphongvanComponent implements OnInit {
     if(data.code=="OK")this.listdata.push(data.data)
   }
   savecongviec(){
-    //console.log(this.newdm)
+    //////console.log(this.newdm)
     this.rest.PostDataToAPI<result<RM0008>>(this.newdm,'RM0008/add').subscribe(data=>{
       if(data.code=="OK"){
         this.listdata.push(data.data)
@@ -58,7 +58,7 @@ export class TuyendungDanhmucDiadiemphongvanComponent implements OnInit {
        $('#row'+element.RM0008_ID).find('input:text,select').addClass('none').attr('disabled',true)
        $('#edit'+element.RM0008_ID).find('i').removeClass('fa-save').addClass('fa-edit')
        let dataa= await this.rest.PutDataToAPI<result<RM0008>>(element,'RM0008/update').toPromise()
-       //console.log(dataa)
+       //////console.log(dataa)
        if(dataa.code=="OK"){{
          element=dataa.data
        }}
@@ -67,7 +67,7 @@ export class TuyendungDanhmucDiadiemphongvanComponent implements OnInit {
   async xoacongviec(){
     if(!confirm('Bạn có chắc chắn muốn xóa '))return false
     let data=await this.rest.PutDataToAPI<result<RM0008>[]>(this.listdata.filter(c=>{return c.check===true}),'RM0008/delete').toPromise()
-    //console.log(this.listdata.filter(c=>{return c.check===true}))
+    //////console.log(this.listdata.filter(c=>{return c.check===true}))
     data.filter(c=>{return c.code==="OK"}).forEach(val=>{this.listdata.filter(c=>{return c.RM0008_ID===val.data.RM0008_ID}).map(x=>{this.listdata.splice(this.listdata.indexOf(x),1)})})
    }
 }

@@ -8,17 +8,21 @@ declare var $:any
 })
 export class ButtonDownloadComponent implements OnInit {
 @Input() tableID
+@Input() hide
 @Input() tableName
 @Input() bg
+@Input() step
+@Input() rows
   constructor(public rest:RESTService) { }
 
   ngOnInit() {
+    ////console.log(this.hide)
   }
 
   download(){
-    //console.log($('#'+this.tableID))
-    //$('#'+this.tableID).find('.ShowToExport').css('display','')
-    this.rest.ExportTOExcel(document.getElementById(this.tableID),this.tableName)
+ 
+      this.rest.ExportTOExcel(document.getElementById(this.tableID),this.tableName,null,this.hide)
+    
     //$('#'+this.tableID).find('.ShowToExport').css('display','none')
   }
 }

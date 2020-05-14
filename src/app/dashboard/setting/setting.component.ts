@@ -8,7 +8,7 @@ declare var $:any
 export class SettingComponent implements OnInit {
 
   constructor() { }
-public tabindex=0
+public tabindex=3
   ngOnInit() {
     let that=this
     $(document).ready(function(){

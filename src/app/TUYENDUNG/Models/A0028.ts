@@ -4,12 +4,15 @@ import { RM0002 } from './RM0002'
 import { RM0003 } from './RM0003'
 import { RM0004 } from './RM0004'
 import { RM0010 } from './RM0010'
+import { A0028E } from './A0028E'
 
 export class A0028{
 sophieu: number
     A0028_ID: string
 A0002_ID: string
 hoVaTen: string
+thoigian: string
+RM0008_ID: number
 A0016_ID: string
 A0022_ID: string
 A0032_ID: string
@@ -59,4 +62,5 @@ RM0002:RM0002;
 RM0003:RM0003
 RM0004:RM0004
 RM0010:RM0010[]=[]
+A0028E:A0028E[]=[]
 }

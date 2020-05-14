@@ -4,36 +4,44 @@
         <div class="card-header"><h5 class="float-left ">NHÓM</h5><button class="btn addgroup float-right"><i class="fa fa-plus"></i></button></div>
         <div class="card-body" style="padding: 0;">
             <ul class="list-group list-group-flush" id="listgroup">
-                <li id="{{element.MKV9983_ID}}" class="list-group-item" *ngFor="let element of listgroup">{{element.TENNHOM}}</li>
+                <li (click)="nhomclick(element)" class="list-group-item {{thisMKV9983!=null&&thisMKV9983.MKV9983_ID==element.MKV9983_ID?'active':''}}" *ngFor="let element of listgroup">{{element.TENNHOM}}</li>
               </ul>
         </div>
     </div>
 </div>
  
-    <div class="col-3 px-1">
+    <div class="col-1 px-1">
         <div class="card">
             <div class="card-header"><h5 class="float-left ">QUYỀN</h5></div>
             <div class="card-body" style="padding: 0;">
                 <ul class="list-group list-group-flush" id="listper">
-                    <li id="{{element.MKV9980_ID}}" class="list-group-item" *ngFor="let element of listper">{{element.TENQUYEN}}</li>
+                    <li  (click)="quyenclick(element)"  class="list-group-item {{thisMKV9980!=null&&thisMKV9980.MKV9980_ID==element.MKV9980_ID?'active':''}}" *ngFor="let element of listper">{{element.TENQUYEN}}</li>
                   </ul>
             </div>
         </div>
     </div>
-    <div class="col-3 px-1">
+    <div class="col-2 px-1">
         <div class="card">
             <div class="card-header"><h5 class="float-left ">HÀNH ĐỘNG</h5></div>
             <div class="card-body">
                 <ul class="list-group list-group-flush" id="listfunction">
-                    <li id="{{element.MKV9981_ID}}" class="list-group-item {{element['check'].length!=0?'active':''}}" *ngFor="let element of listaction">{{element.TENHANHDONG}}</li>
+                    <li  (click)="hanhdongclick(element)" class="list-group-item {{element['check'].length!=0?'active':''}}" *ngFor="let element of listaction">{{element.TENHANHDONG}}</li>
                   </ul>
             </div>
         </div>
     </div>
-</div>
-<div class="row no-gutters py-2">
     <div class="col px-1">
-        <!-- <div class="card">
+        <div class="card">
+            <div class="card-header"><h5 class="float-left ">TÀI KHOẢN</h5><button (click)="addtaikhoan()" class="btn float-right"><i class="fa fa-plus"></i></button></div>
+            <div class="card-body">
+               <app-taikhoan [listMKV9999input]="listaccofgroup"></app-taikhoan>
+            </div>
+        </div>
+    </div>
+</div>
+ <!-- <div class="row no-gutters py-2">
+    <div class="col px-1">
+       <div class="card">
             <h5 class="card-header">DANH SÁCH TÀI KHOẢN</h5>
             <div class="card-body">
                 <table class="table">
@@ -56,7 +64,7 @@
                     </tbody>
                 </table>
             </div>
-        </div> -->
+        </div>
         <app-taikhoan [listMKV9999input]="listMKV9999input"></app-taikhoan>
     </div>
     <div class="col-auto px-1">
@@ -67,7 +75,7 @@
             <button class="btn btn-primary" id="removeacctogroup"><i class="fas fa-angle-double-left"></i></button>
         </div>
     </div>
-    <div class="col px-1">
+    <div class="col px-1"> -->
         <!-- <div class="card">
             <h5 class="card-header">TÀI KHOẢN TRONG NHÓM {{NHOM}}</h5>
             <div class="card-body">
@@ -91,11 +99,11 @@
                     </tbody>
                 </table>
             </div>
-        </div> -->
+        </div>
         
         <app-taikhoan [listMKV9999show]="listMKV9999show" id="taikhoanofgr"></app-taikhoan>
     </div>
-</div>
+</div> -->
 
 
 
@@ -132,3 +140,4 @@
 		</div>
 	</div>
 </div>
+<app-select-account-modal ids="sdfghjkj"  (datasingle)="chooseaccount($event)" [listMKV9999choose]="listMKV9999choose"></app-select-account-modal>

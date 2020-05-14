@@ -24,7 +24,7 @@ export class QlktxUploadGiuongComponent implements OnInit {
       $event.splice($event.indexOf(x),1)
     })
     this.listKTX0002=$event
-    //console.log($event)
+    //////console.log($event)
   }
  async edit(element){
     if( $('#edit'+element.MAGIUONG).find('i').hasClass('fa-edit')){
@@ -39,7 +39,7 @@ export class QlktxUploadGiuongComponent implements OnInit {
   
  async save(){
   let data=await this.rest.PostDataToAPI<result< KTX0002>[]>(this.listKTX0002,"KTX0002/Add").toPromise()
-    //console.log(data)
+    //////console.log(data)
     
   }
 }

@@ -41,7 +41,7 @@ export class QlrvcComponent implements OnInit {
    if(!confirm("Bạn có chắc chắn muốn xóa dữ liệu?"))return false
   this.listMKV8002.map(async x=>{
     let data=await this.rest.PostDataToAPI<any>({ip:x.ip,port:x.port,commkey:x.commkey,startdate:this.startdate,enddate:this.enddate},'FingerPrint/Deletedata').toPromise()
-    console.log(data)
+    ////console.log(data)
   })
    
  }
@@ -100,7 +100,7 @@ export class QlrvcComponent implements OnInit {
           x.User_ID = "00000000".substring(0, 6 - x.User_ID.length) + x.User_ID
         for (const t of this.listMKV9999207.filter(c => { return c.manhansu === x.User_ID })) {
           t.matkhau = "123456"
-          //console.log(await this.rest.PostDataToAPI<result<MKV9999>>(t, 'Account/add').toPromise())
+          //////console.log(await this.rest.PostDataToAPI<result<MKV9999>>(t, 'Account/add').toPromise())
           x.MKV9999 = t
         x.id=x.MKV9999.manhansu
         x.ten=x.MKV9999.hodem+' '+x.MKV9999.ten
@@ -111,9 +111,9 @@ export class QlrvcComponent implements OnInit {
       }
       this.listKTX0052.filter(c=>c.User_ID===x.User_ID).map(xp=>{x.MKV9999=xp;x.ten=xp.hodem+' '+xp.ten})
     })
-    //console.log(this.listdatadatabase)
+    //////console.log(this.listdatadatabase)
     this.listMKV9999=this.listdatadatabase;
-    //console.log("done")
+    //////console.log("done")
     this.loading = false
 
   }
@@ -159,7 +159,7 @@ export class QlrvcComponent implements OnInit {
       $('#row' + element.MKV8002_ID).find('input:text,select').addClass('none').attr('disabled', true)
       $('#edit' + element.MKV8002_ID).find('i').removeClass('fa-save').addClass('fa-edit')
       let dataa = await this.rest.PutDataToAPI<result<MKV8002>>(element, 'MKV8002/update').toPromise()
-      //console.log(dataa)
+      //////console.log(dataa)
       if (dataa.code == "OK") {
         {
           element = dataa.data
@@ -167,5 +167,13 @@ export class QlrvcComponent implements OnInit {
       }
     }
   }
-
+  Downloadtable(){
+    let temp=this.step
+    this.step=10000
+    setTimeout(() => {
+      this.rest.ExportTOExcel(document.getElementById('export'),"Danh sách thanh toán tiền ăn KTX",null,false)
+      this.step=temp
+    }, 3000);
+    
+  }
 }

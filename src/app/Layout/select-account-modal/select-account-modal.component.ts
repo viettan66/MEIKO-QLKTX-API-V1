@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MKV9999 } from 'src/app/Models/MKV9999';
 import { RESTService } from 'src/app/Service/rest.service';
+import { MKV9998 } from 'src/app/Models/MKV9998';
+import { MKV9991 } from 'src/app/Models/MKV9991';
 declare var $: any
 
 @Component({
@@ -25,26 +27,28 @@ export class SelectAccountModalComponent implements OnInit {
   public listbophan:any[]=[]
   public keysearch=''
   async ngOnInit() {
-    this.listMKV9999 = await this.rest.GetDataFromAPI<MKV9999[]>('Account/Get').toPromise()
-    this.listMKV9999s=this.listMKV9999
-    this.listMKV9999.forEach(val=>{
-      if(this.listbophan.filter(c=>{return c['id']===val.phong_id}).length==0&&val.phong_id!=null)
-      this.listbophan.push({id:val.phong_id,ten:val.thetu_id})
+    this.rest.GetDataFromAPI<MKV9999[]>('Account/Get').subscribe(s=>{
+      this.listMKV9999=s 
+       this.listMKV9999s=this.listMKV9999
     })
+    // this.listMKV9999.map(async x=>{
+    //   let kk=await this.rest.Get207<MKV9991>('http://192.84.100.207/AsoftAPI/EC0002/' + x.phong_id).toPromise()
+    //   if(kk!=null)x.thetu_id=kk.bophan_ten
+    // })
+    //this.listMKV9999 = await this.rest.GetDataFromAPI<MKV9999[]>('Account/Get').toPromise()
+  this.rest.PostDataToAPI<MKV9998[]>({},'MKV9998/Getall').subscribe(s=>{
+    this.listbophan=s
+  })
   }
   check(){
     this.checked.emit(true);
   }
  async savemail(element){
-    //console.log("save mail "+element.hodem+' '+element.ten+":"+element.email)
+    //////console.log("save mail "+element.hodem+' '+element.ten+":"+element.email)
     let dataa=await  this.rest.PutDataToAPI<any>(element,"Account/updateinfo").toPromise()
-    //console.log(dataa)
+    //////console.log(dataa)
   }
-  kkkk($event,element){
-    if ($event.key === "Enter") {
-      this.savemail(element)
-    }
-  }
+ 
   bophanchange($event){
     this.listMKV9999s=this.listMKV9999.filter(c=>{return c.phong_id===$event.target.value})
     if($event.target.value=='all')this.listMKV9999s=this.listMKV9999
@@ -79,6 +83,11 @@ export class SelectAccountModalComponent implements OnInit {
     this.start = $event
   }
   getstep($event) {
+    //console.log($event)
     this.step = $event
+  }
+  getphongid(phong_id){
+    let l= this.listbophan.filter(c=>c.phong_id===phong_id)
+    l.length>0?l[0].bophan_ten:'gr'
   }
 }

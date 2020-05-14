@@ -1,5 +1,5 @@
 <span (click)="show()" style="cursor: pointer;" class="{{class!=null?class:''}}">{{((start+1)*step)>=listdata.length?((listdata.length-step+1)<0?(listdata.length==0?0:1):(listdata.length-step+1)):((start+1)*step-(step)+1)}}-{{((start+1)*step)>=listdata.length?listdata.length:((start+1)*step)}} của {{listdata.length}}&nbsp;&nbsp;</span>
-<input  class="zxcvbnm{{classs}}" type="number" value="" (change)='send()' list="datalist" style="width: 0px !important;;transition: 0.5s;">&nbsp;&nbsp;
+<input  class="zxcvbnm{{classs}}" type="number" value="" (change)='send($event)' list="datalist" style="width: 0px !important;;transition: 0.5s;">&nbsp;&nbsp;
 <datalist id="datalist">
     <option value="10"></option>
     <option value="20"></option>

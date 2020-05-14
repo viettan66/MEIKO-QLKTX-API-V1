@@ -91,6 +91,7 @@ import { SelectAccountAddKTXComponent } from './Layout/select-account-add-ktx/se
 import { TaikhoanchuadongboComponent } from './QLKTX/component/tracuuthongke/taikhoanchuadongbo/taikhoanchuadongbo.component';
 import { WindowChatComponent } from './Layout/window-chat/window-chat.component';
 import { ButtonSearchComponent } from './Layout/button/button-search/button-search.component';
+import { TaikhoanDongboComponent } from './dashboard/setting/taikhoan-dongbo/taikhoan-dongbo.component';
 
 
 const config: SocketIoConfig = { url: Globle.SocketServer, options: {} };
@@ -212,6 +213,7 @@ const routes: Routes = [
     TaikhoanchuadongboComponent,
     WindowChatComponent,
     ButtonSearchComponent,
+    TaikhoanDongboComponent,
     
   ],
   imports: [

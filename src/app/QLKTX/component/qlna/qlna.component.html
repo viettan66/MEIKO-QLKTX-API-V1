@@ -13,48 +13,38 @@
       <div class="row no-gutters"  style="padding: 10px;" >
           <div class="col-12">
               <div class="card " id="testconvertPDF" style="background-color: rgba(255, 255, 255, 0.897);">
-                  <div class="card-header">
+                  <div class="card-header p-0 " style="padding: 7px 7px 0  7px  !important;">
                     <div class="row no-gutters">
-                      <div class="col">
-                        <!-- <span class="mr-2">Server:{{listdatamachine.length}}</span><span class="mr-2">Database:{{listdatadatabase.length}}</span>  
-                        <span></span> -->
-                        
+                      <div class="col p-0">
                       </div>
-                      <div class="col-auto mr-1">
+                      <div class="col-auto mr-1 p-0">
                         <app-button-count classs="dsdsdsd" [start]="start" [step]="step" [listdata]="listMKV9999"  (step)="getstep ($event)"  ></app-button-count>
                         <app-button-preview  [start]="start" [step]="step" [listdata]="listMKV9999" (start)="getstart ($event)" ></app-button-preview>
                         <app-button-next [start]="start" [step]="step" [listdata]="listMKV9999"  (start)="getstart ($event)" ></app-button-next>
                       </div>
-                      <div class="col-auto">
+                      <div class="col-auto p-0">
                         <app-button-datetimepicker ids="jkkjjjkdf"   (data)="getstartdate($event)"></app-button-datetimepicker>
                       </div>
-                      <div class="col-auto">
+                      <div class="col-auto p-0">
                         <app-button-datetimepicker ids="jkkjjjk"   (data)="getenddaate($event)"></app-button-datetimepicker>
                       </div>
                     
-                      <div class="col-auto">
+                      <div class="col-auto py-0">
                         <select [(ngModel)]="loaidanhsach"  class="btn btn-secondary mr-1" (change)="filter()">
                           <option value="1">Danh sách chịu thuế</option>
                           <option value="2">Danh sách miễn thuế</option>
                         </select>
-                      </div>
-                      <div class="col-auto">
+                     
                         <button title="Đồng bộ dữ liệu" (click)="getdataa(true)"  class="btn btn-success  mr-1"><i class="fas fa-sync-alt  {{loading?'fa-spin':''}}"></i></button>
-                      </div>
-                      <div class="col-auto">
-                        <app-button-download bg="btn-info mr-1" tableID="export" tableName="Danh sách ra vào cổng"></app-button-download>
-                      </div>
-                      <div class="col-auto">
+                     
+                        <button class="btn btn-info mr-1" title="Lưu dưới dạng excel" (click)="Downloadtable()"><i class="fa fa-download"></i></button>
+                    
                         <button (click)="loadmachine()" class="btn btn-warning text-white mr-1" title="Download dữ liệu từ máy chấm vân tay về"><i class="fas fa-cloud-download-alt"></i></button>
-                      </div>
-                      <!-- <div class="col-auto">
-                        <button class="btn btn-success mr-1" (click)="upload()" title="Đồng bộ dữ liệu"><i class="fas fa-cloud-upload-alt"></i></button>
-                      </div> -->
-                      <div class="col-auto">
+                      
                         <button class="btn btn-danger mr-1" (click)="delete()" title="Xóa dữ liệu máy chấm vấn tay"><i class="fas fa-trash-alt"></i></button>
-                      </div>
-                      <div class="col-auto">
-                        <button title="Thiết lập máy quẹt vân tay" (click)="themnhaan()"  class="btn btn-primary"><i class="fa fa-cog"></i></button>
+                   
+                        <button title="Thiết lập máy quẹt vân tay" (click)="themnhaan()"  class="btn btn-primary mr-1"><i class="fa fa-cog"></i></button>
+                        <button title="Quyết toán những người đã chọn" (click)="quyettoan()"  class="btn " style="background: rgb(147, 42, 156);color: white;"><i class="fas fa-hand-holding-usd"></i> </button>
                       </div>
                     </div>
                   </div>
@@ -62,6 +52,7 @@
                       <table class="table table-bordered ddddddddddddddddddddd" id="export">
                           <thead>
                             <tr>
+                              <th rowspan="2" class="fulljustify"  style="width: 20px;"><input type="checkbox" (change)="checkallelement($event)"></th>
                               <th rowspan="2" class="fulljustify"  style="width: 40px;">STT</th>
                               <th rowspan="2" >Tên <app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="ten"></app-button-sort></th>
                               <th rowspan="2" >ID<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="id"></app-button-sort></th>
@@ -72,6 +63,8 @@
                               <th colspan="2">Bữa sáng<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="buasang"></app-button-sort></th>
                               <th colspan="2">Bữa trưa<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="buatrua"></app-button-sort></th>
                               <th colspan="2">Bữa tối<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="buatoi"></app-button-sort></th>
+                              <th rowspan="2" style="width: 120px;" >Tổng</th>
+                              <th rowspan="2" style="width: 120px;" >Đã TT</th>
                               <th rowspan="2" style="width: 120px;" >Thành tiền</th>
                             </tr>
                             <tr>
@@ -88,6 +81,7 @@
                                 <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))">
                                   <ng-container *ngIf="element.MKV9999!=null">
                                       <tr>
+                                          <td><input type="checkbox" [(ngModel)]="element.check"></td>
                                           <td>{{i+1}}</td>
                                           <td style="text-align: start;">{{element.MKV9999.hodem+' '+element.MKV9999.ten}}</td>
                                           <td>{{element.MKV9999.manhansu}}</td>
@@ -101,11 +95,14 @@
                                           <td style="text-align: start;">{{element.thanhtienbuatrua| currency : '':''   : '1.0-0' }}</td>
                                           <td>{{element.buatoi!=null?element.buatoi:'NaN'}}</td>
                                           <td style="text-align: start;">{{element.thanhtienbuatoi| currency : '':''   : '1.0-0' }}</td>
+                                          <td style="text-align: start;">{{element.tong| currency : '':''   : '1.0-0' }}</td>
+                                          <td style="text-align: start;">{{element.thanhtoan| currency : '':''   : '1.0-0' }}</td>
                                           <td style="text-align: start;">{{element.thanhtien| currency : '':''   : '1.0-0' }}</td>
                                       </tr>
                                   </ng-container>
                                   <ng-container *ngIf="element.MKV9999==null">
                                       <tr style="background-color: rgb(255, 220, 220);">
+                                          <td><input type="checkbox" [(ngModel)]="element.check"></td>
                                           <td>{{i+1}}</td>
                                           <td style="text-align: start;">Không có dữ liệu </td>
                                           <td>{{element.User_ID}}</td>
@@ -119,6 +116,8 @@
                                           <td style="text-align: start;">{{element.thanhtienbuatrua| currency : '':'': '1.0-0' }}</td>
                                           <td>{{element.buatoi!=null?element.buatoi:'NaN'}}</td>
                                           <td style="text-align: start;">{{element.thanhtienbuatoi| currency : '':'' : '1.0-0' }}</td>
+                                          <td style="text-align: start;">{{element.tong| currency : '':''   : '1.0-0' }}</td>
+                                          <td style="text-align: start;">{{element.thanhtoan| currency : '':''   : '1.0-0' }}</td>
                                           <td style="text-align: start;">{{element.thanhtien| currency : '':''   : '1.0-0' }}</td>
                                       </tr>
                                   </ng-container>

@@ -11,6 +11,8 @@ import { RM0008 } from 'src/app/TUYENDUNG/Models/RM0008';
 import { Mail } from 'src/app/Models/Mail';
 import { RM0015 } from 'src/app/TUYENDUNG/Models/RM0015';
 import { RM0013 } from 'src/app/TUYENDUNG/Models/RM0013';
+import { RM0007 } from 'src/app/TUYENDUNG/Models/RM0007';
+import { A0028E } from 'src/app/TUYENDUNG/Models/A0028E';
 declare var $: any
 
 @Component({
@@ -21,9 +23,21 @@ declare var $: any
 
 export class DanhsachtuyendungComponent implements OnInit {
   @Input() bophanID
+  @Input() button1
+  @Input() button2
+  @Input() button3
+  @Input() button4
+  @Input() button5
+  @Input() button6
+  @Input() button7
+  @Input() button8
+  @Input() button9
+  @Input() button10
+  @Input() checks
   constructor(public rest: RESTService) {
     this.thisA0028.RM0010 = []
     this.localimage = Global.localimage
+    
   }
   localimage = ""
   filtertrangthai = 'all'
@@ -35,6 +49,8 @@ export class DanhsachtuyendungComponent implements OnInit {
   public step: number = 20
   listRM0008: any
   async ngOnInit() {
+    
+    this.listRM0007 = await this.rest.PostDataToAPI<RM0007[]>({MKV9999_ID:this.user.MKV9999_ID},"RM0007/GetallMKV999ID").toPromise()
     this.listRM0008 = await this.rest.GetDataFromAPI<RM0008[]>('RM0008/Getall').toPromise()
     this.listbophan = await this.rest.PostDataToAPI<MKV9998[]>({}, 'MKV9998/Getall').toPromise()
     let arrtemp: any[] = []
@@ -48,17 +64,20 @@ export class DanhsachtuyendungComponent implements OnInit {
       //   arrtemp.push(element.T098C)
     }
     let noti = await this.rest.PostDataToAPI<result<A0028>[]>(data.data, "A0028/add").toPromise()
-    console.log(noti)
-    let datas = await this.rest.GetDataFromAPI<A0028[]>("A0028/Getall").toPromise()
+    //////console.log(noti)
+    let datas = await this.rest.PostDataToAPI<A0028[]>({phongid:this.bophanID},"A0028/Getall").toPromise()
     // for(const x of data.data){
     //   x.RM0010=await this.rest.PostDataToAPI<RM0010[]>({A0028_ID:x.A0028_ID},'RM0010/Getall').toPromise()
     // }
-    console.log(datas)
     // arrtemp = [...new Set(arrtemp)]
     // arrtemp.forEach(async val => {
     //   if (val != null) this.listbophan.push(await this.rest.PostDataToAPI<MKV9998>({ id: val }, 'MKV9998/Getall').toPromise())
 
     // })
+    datas.map(d=>
+      d['conno']=(Number(d.A0028D.C001C)+Number(d.A0028D.C005C))-d['ok']
+      )
+    ////console.log(datas)
     this.loading = false
     this.listdon = datas
   }
@@ -67,7 +86,7 @@ export class DanhsachtuyendungComponent implements OnInit {
     if (!confirm("Bạn có chắc chắn muốn chuyển trạng thái yêu cầu đã chọn sang " + (value == 1 ? "Đang tuyển" : "Hoàn thành"))) return
     this.listdon.filter(c => c.check).map(x => { x.trangThai = value; x.check = null })
     let data = await this.rest.PostDataToAPI<any>(this.listdon, "A0028/hoanthanhdanhgia").toPromise()
-    console.log(data)
+    ////console.log(data)
   }
   trclick(id) {
     $('.trtwo:not(#' + id + ')').addClass('trnone')
@@ -139,7 +158,7 @@ export class DanhsachtuyendungComponent implements OnInit {
 
   }
   async listRM0010delete($event) {
-    console.log(this.listrm0010)
+    ////console.log(this.listrm0010)
     $event.filter(c => c.check).map(x => {
       x.A0028_ID = null
     })
@@ -161,6 +180,8 @@ export class DanhsachtuyendungComponent implements OnInit {
 listRM0006:any=[]
   async showinterview(element) {
     this.thisA0028 = element; 
+    let data=await this.rest.GetDataFromAPI<A0028E[]>("A0028/getnguoiphongvan/"+this.thisA0028.A0028_ID).toPromise()
+    ////console.log(data)
     this.isactive()
     this.thisA0028['RM0015'] = await this.rest.PostDataToAPI<RM0015[]>({ A0028_ID: this.thisA0028.A0028_ID }, "RM0015/Getalldanhgia").toPromise()
     if(this.thisA0028['RM0015'].length!=0)
@@ -168,15 +189,16 @@ listRM0006:any=[]
     for(const o of this.thisA0028['RM0015']){
       await this.checkele(o)
     }
-    console.log(this.listRM0006)
+   // ////console.log(this.listRM0006)
     $('#modaldanhgia').modal()
   }
   isactive() {
     this.thisA0028['RM0010s'] = this.thisA0028.RM0010.filter(c => !c['isactive'])
-    // console.log(this.thisA0028['RM0010s'])
+    // ////console.log(this.thisA0028['RM0010s'])
   }
   Createtimer(element) {
-    this.thisA0028 = element; this.isactive()
+    this.thisA0028 = element; 
+    this.isactive()
     $('#createtimer').modal()
   }
   thoigianphongvan = ''
@@ -200,6 +222,7 @@ listRM0006:any=[]
     this.listRM0010show = $event
   }
   user = JSON.parse(localStorage.getItem("KTX_User"))
+  caption='Đang đồng bộ dữ liệu, vui lòng chờ.'
   async themlichhen() {
     if (this.user.email == null || this.user.email == '') {
       if (confirm("Bạn chưa có thông tin eMail. Bạn có muốn thiết lập?\n Bỏ qua để tiếp tục.")) {
@@ -227,7 +250,22 @@ listRM0006:any=[]
       alert("Bạn chưa chọn ứng viên phỏng vấn.")
       return false
     }
-    console.log(this.listaccountchoose)
+    this.loading=true
+    this.caption="Đang gửi thư mời phỏng vấn qua mail. Xin vui lòng chờ."
+    if(this.thisA0028.A0028E==null)this.thisA0028.A0028E=[]
+    this.thisA0028.thoigian=this.thoigianphongvan
+    this.thisA0028.RM0008_ID=Number(this.diadiemphongvan)
+    this.thisA0028['diadiem']=await this.rest.GetDataFromAPI<RM0008>("RM0008/Get/"+this.thisA0028.RM0008_ID).toPromise()
+    //this.thisA0028.A0028E.filter(c=>!this.listaccountchoose.map(d=>d.MKV9999_ID).includes(c.MKV9999_ID) ).map(c=>this.thisA0028.A0028E.push(new A0028E({MKV9999_ID:c.MKV9999_ID,A0028_ID:this.thisA0028.A0028_ID})))
+    let arr=[]
+    this.listaccountchoose.map(x=>{
+      arr.push(new A0028E({MKV9999_ID:x.MKV9999_ID,A0028_ID:this.thisA0028.A0028_ID}))
+    })
+    ////console.log(arr)
+    let kjkjkjr=await this.rest.PostDataToAPI<result<any>>(this.thisA0028,"A0028/updatethoidiandiadiem").toPromise()
+    let kjkjkj=await this.rest.PostDataToAPI<result<any>>(arr,"A0028/updatenguoiphongvan").toPromise()
+    ////console.log(kjkjkj)
+    //////console.log(this.listaccountchoose)
     for (const x of this.listaccountchoose) {
       let mail: Mail = new Mail()
       mail.from = this.user.email
@@ -263,13 +301,63 @@ Thông tin chi tiết:
         this.listRM0010show.splice(this.listRM0010show.indexOf(l[0]), 1)
       }
     })
+    this.loading=false
     alert("Đã thêm lịch hẹn cho " + count + " ứng viên.")
+
   }
   async danhgiaelement(element) {
    
   }
-  async updateRM0013(element){
-    let data=await this.rest.PostDataToAPI<result<RM0013>>([element],'RM0013/add').toPromise()
-    console.log(element)
+  public listRM0007: RM0007[] = []
+  check(element:RM0013){
+     if(this.listRM0007.filter(c=>{return c.RM0006_ID===element.RM0006_ID}).length==0){{
+     //alert("Bạn không có quyền đánh giá mục này, hãy liên hệ với Nhân sự.")
+      return false
+    }}
+    if(element.trangThai==true){{
+      //alert("Ứng viên này đã hoàn thành đánh giá, Nếu bạn muốn đánh giá lại, hãy liên hệ với bộ phận HR.")
+      return false
+    }}return true
+  }
+  async updateRM0013(element:RM0013,rm0015?){
+    if(this.listRM0007.filter(c=>{return c.RM0006_ID===element.RM0006_ID}).length==0){{
+      alert("Bạn không có quyền đánh giá mục này, hãy liên hệ với Nhân sự.")
+      return false
+    }}
+    if(element.trangThai==true){{
+      alert("Ứng viên này đã hoàn thành đánh giá, Nếu bạn muốn đánh giá lại, hãy liên hệ với bộ phận HR.")
+      return false
+    }}
+    let data=await this.rest.PostDataToAPI<result<RM0013>[]>([element],'RM0013/add').toPromise()
+    data.filter(c=>c.code==="OK").map(x=>{
+      if(x.data.RM0006_ID==element.RM0006_ID)element.RM0013_ID=x.data.RM0013_ID
+      
+    })
+    
+    this.updateRM0015(rm0015)
+  }
+  async updateRM0015(element:RM0015){
+    let k=await this.rest.GetDataFromAPI<RM0015>("RM0015/Getall2/"+element.RM0015_ID).toPromise()
+    //////console.log(k)
+    element.ketQua=k.ketQua
+  }
+  async updatecmtRM0015(element:RM0015){
+    let k=await this.rest.PutDataToAPI<RM0015>(element,"RM0015/update").toPromise()
+    ////console.log(k)
+    //element.ketQua=k.ketQua
+  }
+  async updateA0028(){
+    let datas = await this.rest.PostDataToAPI<A0028>({A0028_ID:this.thisA0028.A0028_ID},"A0028/Getall").toPromise()
+    this.thisA0028['ok']=datas['ok']
+    this.thisA0028['wait']=datas['wait']
+    this.thisA0028['conno']=(Number(datas.A0028D.C001C)+Number(datas.A0028D.C005C))-datas['ok']
+    ////console.log(datas)
+    $('#modaldanhgia').modal('hide')
+  }
+  dowloadtable(){
+   let kj= $('.trnone').find('tr')
+   kj.css('display','none')
+   this.rest.ExportTOExcel(document.getElementById('tabletoexport'),'Danh sách yêu cầu '+new Date(),null,true)
+   kj.css('display','')
   }
 }

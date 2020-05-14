@@ -16,7 +16,7 @@ public listrm0001:RM0001[]=[]
 
  async ngOnInit() {
    this.listrm0001=await this.rest.GetDataFromAPI<RM0001[]>('RM0001/Getall').toPromise()
-   //console.log(this.listrm0001)
+   //////console.log(this.listrm0001)
   }
  async themcongviec(){
     let data=await this.rest.PostDataToAPI<result<RM0001>>(new RM0001(),'RM0001/add').toPromise()
@@ -24,7 +24,7 @@ public listrm0001:RM0001[]=[]
     //$('#myModalungvieninfo').modal()
   }
   savecongviec(){
-    //console.log(this.newrm0001)
+    //////console.log(this.newrm0001)
     this.rest.PostDataToAPI<result<RM0001>>(this.newrm0001,'RM0001/add').subscribe(data=>{
       if(data.code=="OK"){
         this.listrm0001.push(data.data)
@@ -40,7 +40,7 @@ public listrm0001:RM0001[]=[]
       $('#row'+element.RM0001_ID).find('input:text,select').addClass('none').attr('disabled',true)
       $('#edit'+element.RM0001_ID).find('i').removeClass('fa-save').addClass('fa-edit')
       let dataa= await this.rest.PutDataToAPI<result<RM0001>>(element,'RM0001/update').toPromise()
-      //console.log(dataa)
+      //////console.log(dataa)
       if(dataa.code=="OK"){{
         element=dataa.data
       }}
@@ -60,7 +60,7 @@ public listrm0001:RM0001[]=[]
   async xoacongviec(){
   if(!confirm('Bạn có chắc chắn muốn xóa '))return false
   let data=await this.rest.PutDataToAPI<result<RM0001>[]>(this.listrm0001.filter(c=>{return c.check===true}),'RM0001/delete').toPromise()
-  //console.log(this.listrm0001.filter(c=>{return c.check===true}))
+  //////console.log(this.listrm0001.filter(c=>{return c.check===true}))
   data.filter(c=>{return c.code==="OK"}).forEach(val=>{this.listrm0001.filter(c=>{return c.RM0001_ID===val.data.RM0001_ID}).map(x=>{this.listrm0001.splice(this.listrm0001.indexOf(x),1)})})
  }
  public start=0

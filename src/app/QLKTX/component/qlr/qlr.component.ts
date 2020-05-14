@@ -26,13 +26,13 @@ export class QlrComponent implements OnInit {
   async ngOnInit() {
     let user: MKV9999 = JSON.parse(localStorage.getItem('KTX_User'))
      this.listdon=await this.rest.PostDataToAPI<KTX0023[]>({},'KTX0023/Getall').toPromise()
-      //console.log(this.listdon)
+      //////console.log(this.listdon)
    
 let that=this
     $(document).ready(function(){
 
       $('thead>tr>th>input:checkbox').change(function(){
-        //console.log($(this).is(':checked'))
+        //////console.log($(this).is(':checked'))
         $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       ////
@@ -65,10 +65,10 @@ let that=this
     let enddate = $('#enddate').val()
     this.rest.PostDataToAPI<KTX0023[]>({ 'trangthai': check, 'startdate': startdate, 'enddate': enddate }, 'KTX0023/Getall').subscribe(data => {
       this.listdon = data
-      //console.log(data)
-      //console.log('fffffffffffff')
+      //////console.log(data)
+      //////console.log('fffffffffffff')
     })
-      //console.log('fffffffffffff')
+      //////console.log('fffffffffffff')
   }
   public ktx23temp: KTX0023 = new KTX0023
   async getda(element:KTX0023){
@@ -82,7 +82,7 @@ let that=this
   }
   async showdetaildon(element: KTX0023) {
     await this.getda(element)
-    //console.log(element)
+    //////console.log(element)
     this.ktx23temp = element
     this.form = 'formket';
     $('#myModalungvieninfo').modal()
@@ -93,9 +93,9 @@ let that=this
   public ktx23tempprint:KTX0023[]=[]
   async agree(check?:boolean){
     this.ktx23tempprint=[]
-    //console.log(this.listdon.filter(c=>{return c.check===true}))
+    //////console.log(this.listdon.filter(c=>{return c.check===true}))
    let l= await this.rest.PutDataToAPI<result<KTX0023>[]>(this.listdon.filter(c=>{return c.check===true}),'KTX0023/Agree').toPromise()
-   //console.log(l)
+   //////console.log(l)
    l.forEach( cal=> {
      if(cal.code=="OK"){
      }
@@ -131,7 +131,7 @@ let that=this
     let ok=0,ng=0
     let that=this
     this.rest.PutDataToAPI<result< KTX0023>[]>(this.listdon.filter(c=>{return c.check===true}),'KTX0023/delete').subscribe(data=>{
-    //console.log(data)
+    //////console.log(data)
     data.forEach(val=>{
       if(val.code=="OK"){
         ok++

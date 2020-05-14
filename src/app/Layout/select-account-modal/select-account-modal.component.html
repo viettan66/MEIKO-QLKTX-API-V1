@@ -7,7 +7,7 @@
                                     <h5 class="modal-title"><i class="fa fa-users fa-2x"></i></h5>
                               </div>
                               <div class="col-auto">
-                                    <app-button-count [start]="start" [step]="step" [listdata]="listMKV9999s" (step)="getstep ($event)"></app-button-count>
+                                    <app-button-count classs="tyuiouggggrrrrg" [start]="start" [step]="step" [listdata]="listMKV9999s" (step)="getstep($event)"></app-button-count>
                                     <app-button-preview [start]="start" [step]="step" [listdata]="listMKV9999s"  (start)="getstart ($event)"></app-button-preview>
                                     <app-button-next [start]="start" [step]="step" [listdata]="listMKV9999s"   classs="mr-1" (start)="getstart ($event)"></app-button-next>
                                     <span style="position: relative;">
@@ -15,9 +15,9 @@
                                           <i (click)="te()" *ngIf="keysearch!=''" class="fa fa-times" style="text-align: start;position: absolute;top:7px;right: 14px;"></i>
                                     </span>
 
-                                    <select class="btn btn-outline-secondary mr-1" (change)="bophanchange($event)">
+                                    <select class="btn btn-outline-secondary mr-1" (change)="bophanchange($event)" style="width: 150px;">
                                           <option value="all">ALL</option>
-                                          <option *ngFor="let element of listbophan;let i=index;"  value="{{element.id}}">{{element.ten}}
+                                          <option *ngFor="let element of listbophan;let i=index;"  value="{{element.phong_id}}">{{element.bophan_ten}}
                                           </option>
                                     </select>
                                     <button *ngIf="buttoncheck" class="btn btn-primary" (click)="check()"><i class="fa fa-check"></i></button>
@@ -35,6 +35,8 @@
                                           <th>ID</th>
                                           <th>Tên</th>
                                           <th>Bộ phận</th>
+                                          <th>Cấp bậc</th>
+                                          <th>Chức vụ</th>
                                           <th *ngIf="showmail">Mail</th>
                                     </tr>
                               </thead>
@@ -48,13 +50,11 @@
                                                       <td>{{element.manhansu}}</td>
                                                       <td>{{element.hodem+' '+element.ten}}</td>
                                                       <td>{{element.thetu_id}}</td>
+                                                      <td>{{element.capbac}}</td>
+                                                      <td>{{element.chucvu}}</td>
                                                       <td *ngIf="showmail" class="p-0" (click)="$event.stopPropagation();">
-                                                            <div class="row no-gutters">
-                                                                  <div class="col">
-                                                                        <input type="text" [(ngModel)]="element.email" (keydown)="kkkk($event,element)"  class="form-control"/>
-                                                                  </div>
-                                                                  <div class="col-auto"><button (click)="savemail(element)"  class="btn"><i class="fa fa-save"></i></button></div>
-                                                            </div>
+                                                                        <input type="text" [(ngModel)]="element.email" (change)="savemail(element)"  class="form-control"/>
+                                                              
                                                       </td>
                                                 </tr>
                                           </ng-container>
@@ -70,14 +70,12 @@
                                                             <td>{{element.manhansu}}</td>
                                                             <td>{{element.hodem+' '+element.ten}}</td>
                                                             <td>{{element.thetu_id}}</td>
-                                                            <td *ngIf="showmail" class="p-0" (click)="$event.stopPropagation();">
-                                                                  <div class="row no-gutters">
-                                                                        <div class="col">
-                                                                              <input type="text" [(ngModel)]="element.email"  (keydown)="kkkk($event,element)" class="form-control"/>
-                                                                        </div>
-                                                                        <div class="col-auto"><button (click)="savemail(element)"  class="btn "><i class="fa fa-save"></i></button></div>
-                                                                  </div>
-                                                            </td>
+                                                      <td>{{element.capbac}}</td>
+                                                      <td>{{element.chucvu}}</td>
+                                                      <td *ngIf="showmail" class="p-0" (click)="$event.stopPropagation();">
+                                                                        <input type="text" [(ngModel)]="element.email" (change)="savemail(element)"  class="form-control"/>
+                                                              
+                                                      </td>
                                                       </tr>
                                                 </ng-container>
                                           </ng-container>

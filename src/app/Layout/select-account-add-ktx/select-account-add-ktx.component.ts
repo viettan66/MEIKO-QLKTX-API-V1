@@ -28,12 +28,12 @@ export class SelectAccountAddKTXComponent implements OnInit {
   public startacc=0
   public stepacc=20
   getstartacc($event) {
-    //console.log(this.startacc)
+    //////console.log(this.startacc)
     this.startacc = $event
   }
   getstepacc($event) {
     this.stepacc = $event
-    //console.log(this.stepacc)
+    //////console.log(this.stepacc)
   }
   getlistacc($event) {
     this.listKTX0052 = $event
@@ -46,7 +46,7 @@ export class SelectAccountAddKTXComponent implements OnInit {
       $('#rowacc' + element.KTX0052_ID).find('input:text,select').addClass('none').attr('disabled', true)
       $('#editacc' + element.KTX0052_ID).find('i').removeClass('fa-save').addClass('fa-edit')
       let dataa = await this.rest.PutDataToAPI<result<KTX0052>>(element, 'KTX0052/update').toPromise()
-      //console.log(dataa)
+      //////console.log(dataa)
       if (dataa.code == "OK") {
         {
           element = dataa.data
@@ -58,7 +58,7 @@ export class SelectAccountAddKTXComponent implements OnInit {
   async deleteallacc(){
     if(!confirm("Bạn có chắc chắn mốn xóa những tài khoản đã chọn không?"))return false
     let data=await this.rest.PutDataToAPI<result<KTX0052>[]>(this.listKTX0052.filter(c=>c.check),'KTX0052/delete').toPromise()
-    //console.log(data)
+    //////console.log(data)
     data.filter(c=>c.code==="OK").map(x=>this.listKTX0052.filter(c=>c.User_ID===x.data.User_ID).map(x=>this.listKTX0052.splice(this.listKTX0052.indexOf(x),1)))
     this.send()
   }

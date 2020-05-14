@@ -105,12 +105,12 @@ body {
         visibility: visible;  
         -webkit-print-color-adjust: exact !important;
     }
-    .print{   border: 1px solid white;
+    /* .print{   border: 1px solid white;
       height: 99% !important;
       page-break-after: avoid;
-      page-break-before: avoid;
+      page-break-before: avoid; */
   
-  }
+  /* } */
 
       
 }

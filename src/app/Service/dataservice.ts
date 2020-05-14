@@ -7,7 +7,7 @@ export class dataservice {
     return this.allowDays;
   }
   set in(val) {
-    //console.log('allowDays = '+val);
+    //////console.log('allowDays = '+val);
     this.allowDays = val;
   }
 

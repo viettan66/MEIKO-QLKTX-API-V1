@@ -10,13 +10,13 @@
                     <div class="col-auto px-1"><button (click)="nex()" class="btn btn-secondary " ><i class="fas fa-angle-right"></i></button></div>
                      -->
                      
-                    <app-button-count classs="tyuioi" [start]="start" [step]="step" [listdata]="listMKV9999show" class="mr-2" (step)="getstep($event)" ></app-button-count>
-                    <app-button-preview [start]="start" [step]="step" [listdata]="listMKV9999show" (start)="getstart($event)"></app-button-preview>
-                    <app-button-next class="mr-2" [start]="start" [step]="step" [listdata]="listMKV9999show" (start)="getstart($event)"></app-button-next>
+                    <app-button-count classs="tyuioi" [start]="start" [step]="step" [listdata]="listMKV9999input" class="mr-2" (step)="getstep($event)" ></app-button-count>
+                    <app-button-preview [start]="start" [step]="step" [listdata]="listMKV9999input" (start)="getstart($event)"></app-button-preview>
+                    <app-button-next class="mr-2" [start]="start" [step]="step" [listdata]="listMKV9999input" (start)="getstart($event)"></app-button-next>
 
                     <div class="col-auto px-1"><input  type="text" style="width: 160px;" class="form-control" placeholder="ID, Tên"  [(ngModel)]="keysearch" ></div>
                     <div class="col-auto px-1">
-                        <select  class="form-control" style="width: 100px;" [(ngModel)]="phong_id"   (change)="bophanchange($event)">
+                        <select  class="form-control" style="width: 100px;" (change)="bophanchange($event)">
                             <option value="all">BP All</option>
                             <option value="{{element.phong_id}}" *ngFor="let element of listdept">{{element.bophan_ten}}</option>
                         </select>
@@ -27,6 +27,7 @@
                 <table class="table">
                     <thead>
                         <tr>
+                            <td><input type="checkbox" (change)="checkall($event)"></td>
                             <th>STT</th>
                             <th>ID</th>
                             <th>Tên</th>
@@ -36,11 +37,12 @@
                         </tr>
                     </thead>
                     <tbody id="{{id!=null?id:'taikhoan'}}" class="taikhoan">
-                            <ng-container *ngFor="let element of listMKV9999show;let i=index">
-                                <ng-container *ngIf="!checkin(element)">
+                            <ng-container *ngFor="let element of listMKV9999input;let i=index">
 
+                                    <ng-container *ngIf="element.phong_id==phong_id||phong_id=='all'">
                                         <ng-container *ngIf="(((i>=start*step) && (i<(start+1)*step))&&keysearch=='')||(checkkey(element)&&keysearch!='')">
                                             <tr>
+                                                <td><input type="checkbox" [(ngModel)]="element.check"></td>
                                                 <td>{{i+1}}<input type="hidden" value="{{element.MKV9999_ID}}" name="MKV9999_ID"></td>
                                                 <td>{{element.manhansu}}</td>
                                                 <td>{{element.hodem+' '+element.ten}}</td>
@@ -51,7 +53,7 @@
                                                 </td>
                                             </tr>
                                         </ng-container>
-                                    </ng-container>
+                                        </ng-container>
                             </ng-container>
 
                         <!-- <ng-container *ngIf="listMKV9999show==null">

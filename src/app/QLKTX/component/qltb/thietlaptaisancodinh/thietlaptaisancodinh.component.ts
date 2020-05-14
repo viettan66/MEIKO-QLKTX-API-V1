@@ -23,7 +23,7 @@ export class ThietlaptaisancodinhComponent implements OnInit {
       ///////////////////
 
       $('thead>tr>td>input:checkbox').change(function(){
-        //console.log($(this).is(':checked'))
+        //////console.log($(this).is(':checked'))
         $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       $('.tabledodung').on('click','tbody>tr>td>input:checkbox',function(Event){

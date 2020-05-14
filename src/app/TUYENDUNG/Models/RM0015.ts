@@ -8,6 +8,9 @@ export class RM0015{
     public  RM0010_ID :number   ;
     public  RM0008_ID :number   ;
     public  ngayPV :string  ;
+    public  kqChung :string  ;
+    public  IQ :string  ;
+    public  ngoaingu :string  ;
     public  thoiGianPV :string  ;
     public  thoiGianPhongVan :string  ;
     public  ghiChu :string   ;

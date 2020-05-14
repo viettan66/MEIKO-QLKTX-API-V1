@@ -2,14 +2,16 @@
     <app-menu></app-menu>
     <div class="col col-auto h-100  no-gutters" >
         <ul class="list-group list-group-flush bg-dark listmenu">
-            <li class="list-group-item active">Tài khoản</li>
-            <li class="list-group-item">Menu</li>
-            <li class="list-group-item">Nhóm</li>
+            <li class="list-group-item {{tabindex==0?'active':''}}">Tài khoản</li>
+            <li class="list-group-item {{tabindex==1?'active':''}}">Menu</li>
+            <li class="list-group-item {{tabindex==2?'active':''}}">Nhóm</li>
+            <li class="list-group-item {{tabindex==3?'active':''}}">Đồng bộ tài khoản</li>
         </ul>
     </div>
     <div class="col" style="padding: 5px;">
         <app-taikhoan *ngIf="tabindex==0"></app-taikhoan>
         <app-menuaccount *ngIf="tabindex==1"></app-menuaccount>
         <app-nhom *ngIf="tabindex==2"></app-nhom>
+        <app-taikhoan-dongbo *ngIf="tabindex==3"></app-taikhoan-dongbo>
     </div>
 </div>

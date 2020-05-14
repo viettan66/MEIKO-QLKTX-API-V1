@@ -1,6 +1,6 @@
 import { Injectable, Type } from '@angular/core';
 import * as Global from './global.service'
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import * as XLSX from 'xlsx'; 
 import { async } from 'rxjs/internal/scheduler/async';
 import { type } from 'os';
@@ -40,8 +40,9 @@ export class RESTService {
     headers.set('Content-Type', 'application/json');
     return this.http.put<Type>(Global.APIUrl+uri,post, {headers: headers});
   }
-  ExportTOExcel(TABLE,namefile?,title?) {  
-    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(TABLE,  {display:false});  
+  ExportTOExcel(TABLE,namefile?,title?,hide?:boolean) {  
+    //////console.log(hide)
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(TABLE,{display:hide?true:false});  
     const wb: XLSX.WorkBook = XLSX.utils.book_new();  
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');  
     XLSX.writeFile(wb, (namefile!=null?namefile:"no_name_file")+'.xlsx');  
@@ -104,5 +105,11 @@ export class RESTService {
     let wb: XLSX.WorkBook = XLSX.utils.book_new();  
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');  
     XLSX.writeFile(wb, (namefile!=null?namefile:"no_name_file")+'.xlsx');  
+  } 
+  DownloadFile(uri: string,fileName: string) {  
+      const params = new HttpParams()
+      .set('filename', fileName)
+    return this.http.get(Global.APIUrl+uri,{ responseType: "blob",params });
+      
   } 
 }

@@ -35,7 +35,7 @@
                           <button title="Đồng bộ" (click)="getdataa(true)"  class="btn btn-success  mr-1"><i class="fas fa-sync-alt"></i></button>
                         </div>
                         <div class="col-auto">
-                          <app-button-download bg="btn-info mr-1" tableID="export" tableName="Danh sách ra vào cổng"></app-button-download>
+                          <button class="btn btn-info mr-1" title="Lưu dưới dạng excel" (click)="Downloadtable()"><i class="fa fa-download"></i></button>
                         </div>
                         <div class="col-auto">
                           <button (click)="loadmachine()" class="btn btn-warning text-white mr-1" title="Download dữ liệu từ máy chấm vân tay về"><i class="fas fa-cloud-download-alt"></i></button>

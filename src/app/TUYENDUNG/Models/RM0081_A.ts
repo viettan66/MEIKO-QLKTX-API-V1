@@ -1,4 +1,10 @@
-export class RM0081_A{  
+export class RM0081_A{   
+   constructor(obj?){
+   if(obj!=null)
+   Object.keys(obj).forEach(key=>{
+       this[key]=obj[key]
+   })
+}
     public  RM0010_ID :  string  ;
     public  BATDAU :  Date  ;
     public KETTHUC :  Date  ;

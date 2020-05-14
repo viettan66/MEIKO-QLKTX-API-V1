@@ -20,9 +20,9 @@
                         <option value="1">Công nhân</option>
                         <option value="2">Nhân viên</option>
                     </select>
-                    <app-button-download tableID="tabletoexport" tableName="tableExport" bg="mr-1 btn-warning text-white" ></app-button-download>
-                    <button (click)="updateyeucau(2)" title="Hoàn thành yêu cầu" class="btn btn-primary mr-1"><i class="fab fa-font-awesome-flag"></i></button>
-                    <button (click)="updateyeucau(1)" title="Tuyển dụng lại yêu cầu" class="btn btn-primary mr-1"><i class="fas fa-redo-alt"></i></button>
+                    <button class="btn mr-1 btn-warning text-white" (click)="dowloadtable()" ><i class="fa fa-download"></i></button>
+                    <button *ngIf="button5"  (click)="updateyeucau(2)" title="Hoàn thành yêu cầu" class="btn btn-primary mr-1"><i class="fab fa-font-awesome-flag"></i></button>
+                    <button *ngIf="button6"  (click)="updateyeucau(1)" title="Tuyển dụng lại yêu cầu" class="btn btn-primary mr-1"><i class="fas fa-redo-alt"></i></button>
                 </span>
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
@@ -47,8 +47,8 @@
                                 <td style="width: 60px;">Nữ</td>
                                 <td style="width: 60px;">Tổng</td>
                                 <td style="width: 60px;">OK<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="ok"></app-button-sort></td>
-                                <td style="width: 80px;">Chờ PV</td>
-                                <td style="width: 80px;">Còn nợ</td>
+                                <td style="width: 80px;">Chờ PV<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="wait"></app-button-sort></td>
+                                <td style="width: 80px;">Còn nợ<app-button-sort [listdata]="listdon" (listdata)="getlist($event)" key="conno"></app-button-sort></td>
                             </tr>
                         </thead>
                         <ng-container *ngFor="let element of listdon;let i=index;">
@@ -73,13 +73,13 @@
                                             <td>{{(element.A0028D.C001C==null?0:element.A0028D.C001C-0)+(element.A0028D.C005C==null?0:element.A0028D.C005C-0)}} </td>
                                             <td>{{element.ok}}</td>
                                             <td>{{element.wait-element.ok}}</td>
-                                            <td>{{((element.A0028D.C001C==null?0:element.A0028D.C001C-0)+(element.A0028D.C005C==null?0:element.A0028D.C005C-0))-element.ok}}</td>
+                                            <td>{{element.conno}}</td>
                                             <td>{{element.trangThai==1?"Đang tuyển":(element.trangThai==2?"Hoàn thành":"NaN")}}</td>
                                         </tr>
-                                        <tr class="trnone trtwo" id="{{element.A0028D.A0028D_ID}}" >
-                                            <td colspan="15" style="padding: 0;">
-                                                <table class="table table-bordered table-td-p-6-3 td">
-                                                    <tr>
+                                        <tr class="trnone trtwo" id="{{element.A0028D.A0028D_ID}}"  >
+                                            <td colspan="15" style="padding: 0">
+                                                <table class="table table-bordered table-td-p-6-3 td" >
+                                                    <tr >
                                                         <td>Công việc</td>
                                                         <td colspan="2"><span class="doter">{{element.RM0001!=null?element.RM0001.tenCongViec:''}}</span>
                                                         </td>
@@ -91,7 +91,7 @@
                                                                 class="doter">{{element.A0028D.C012C}}</span> Năm</td>
                                                         <!-- <td></td> -->
                                                     </tr>
-                                                    <tr>
+                                                    <tr >
                                                         <td>Chuyên ngành</td>
                                                         <td colspan="2"><span
                                                                 class="doter">{{element.RM0004!=null?element.RM0004.tenChuyenNganh:''}}</span></td>
@@ -103,7 +103,7 @@
                                                                 class="doter">{{element.A0028D.C013C}}</span></td>
                                                         <td><span class="doter">{{element.A0028D.C016C}}</span></td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr >
                                                         <td rowspan="3">Chi tiết</td>
                                                         <td style="border-right: 0;"></td>
                                                         <td colspan="1" style="border-left: 0;">Số lượng</td>
@@ -114,7 +114,7 @@
                                                             <span class="doter"style="white-space: pre-wrap;" class="doter">{{element.A0028D.C019C}}</span>
                                                         </td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr >
                                                         <td>Nam</td>
                                                         <td><span class="doter">{{element.A0028D.C001C}}</span></td>
                                                         <td><span class="doter">{{element.A0028D.C002C}}</span></td>
@@ -128,15 +128,15 @@
                                                         <td><span class="doter">{{element.A0028D.C007C}}</span></td>
                                                         <td><span class="doter">{{element.A0028D.C008C}}</span></td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr >
                                                         <td colspan="1">Tính cách</td>
                                                         <td colspan="9"><span style="white-space: pre-wrap;" class="doter">{{element.A0028D.C011C}}</span></td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr >
                                                         <td colspan="1">Yêu cầu đặc biệt</td>
                                                         <td colspan="9"><span class="doter"style="white-space: pre-wrap;" >{{element.A0028D.C018C}}</span></td>
                                                     </tr>
-                                                    <tr>
+                                                    <tr >
                                                         <td colspan="1">ứng viên</td>
                                                         <td colspan="9">
                                                             <div class="row">
@@ -146,10 +146,10 @@
                                                                     </ng-container>
                                                                 </div>
                                                                 <div class="col-auto">
-                                                                    <button title="Thêm ứng viên cho yêu cầu" (click)="getungvienmodal(element)" class="btn"><i class="fa fa-plus"></i></button>
-                                                                    <button title="Danh sách ứng viên" (click)="showRM0010(element)" class="btn"><i class="fa fa-eye"></i></button>
-                                                                    <button title="Tạo lịch hẹn" (click)="Createtimer(element)" class="btn"><i class="fas fa-calendar-alt"></i></button>
-                                                                    <button title="Đánh giá ứng viên" (click)="showinterview(element)" class="btn"><i class="fas fa-user-check"></i></button>
+                                                                    <button *ngIf="button1" title="Thêm ứng viên cho yêu cầu" (click)="getungvienmodal(element)" class="btn"><i class="fa fa-plus"></i></button>
+                                                                    <button *ngIf="button2"  title="Danh sách ứng viên" (click)="showRM0010(element)" class="btn"><i class="fa fa-eye"></i></button>
+                                                                    <button *ngIf="button3"  title="Tạo lịch hẹn" (click)="Createtimer(element)" class="btn"><i class="fas fa-calendar-alt"></i></button>
+                                                                    <button *ngIf="button4"  title="Đánh giá ứng viên" (click)="showinterview(element)" class="btn"><i class="fas fa-user-check"></i></button>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -180,9 +180,9 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body ">
-                <app-ungvien   button1="true"   
-                button5="true"  button7="true" button8="true" button9="true" button10="true" 
-                emty="true"  (listRM0010)="getlistRM0010($event)"></app-ungvien>
+                <app-ungvien [check]="checks"  [sophieu]="thisA0028.sophieu"    button1="true"   
+                button5="true"  button6="true"  button7="true" button8="true" button9="true" button10="true" 
+                emty="true"  (listRM0010)="getlistRM0010($event)"  ></app-ungvien>
 			</div>
 		</div>
 	</div>
@@ -196,12 +196,12 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body ">
-                <app-ungvien button6="true" [sophieu]="thisA0028.sophieu" ids="jfkd" (listRM0010delete)="listRM0010delete($event)" [rm0010show]="thisA0028.RM0010" button11="true" ></app-ungvien>
+                <app-ungvien [sophieu]="thisA0028.sophieu" [check]="checks"  [button6]="button7" [sophieu]="thisA0028.sophieu" ids="jfkd" (listRM0010delete)="listRM0010delete($event)" [rm0010show]="thisA0028.RM0010" [button11]="button8"  [button14]="button9" ></app-ungvien>
 			</div>
 		</div>
 	</div>
 </div>
-        <app-loading [loading]="loading" caption="Đang đồng bộ dữ liệu, vui lòng chờ."></app-loading>
+        <app-loading [loading]="loading" [caption]="caption"></app-loading>
 
 
 <div class="modal fade " id="modaldanhgia" role="dialog"  data-backdrop="static" data-keyboard="false" >
@@ -212,21 +212,20 @@
                     <div class="col">DANH SÁCH ĐÁNH GIÁ CỦA YÊU CẦU SỐ {{thisA0028.sophieu}}</div>
                     <div class="col-auto">
                       <app-button-download bg="mr-1 btn-secondary" tableID="thkkdkkfjjkld" tableName="danh sách đánh giá"></app-button-download>
-                          <button class="btn btn-secondary mr-1" (click)="save2()" ><i class="fa fa-save"></i></button>
-                          <button class="btn btn-secondary"  data-dismiss="modal"><i class="fa fa-times"></i></button>
+                          <button class="btn btn-secondary"   (click)="updateA0028()"><i class="fa fa-times"></i></button>
                     </div>
                   </div>
             </div>
-            <div class="modal-body " >
-                <table class="table  table-bordered table-td-p-0-0 print" id="thkkdkkfjjkld">
+            <div class="modal-body  print" >
+                <table class="table  table-bordered table-td-p-0-0 p-0 m-0" id="thkkdkkfjjkld">
                     <tbody>
                         <tr>
-                            <td colspan="17">
+                            <td colspan="17" style="padding: 0 !important;">
                                 <table class="table" style="font-size: 12px;text-align: center;">
                                     <tbody style="text-align: center;">
                                         <tr>
                                             <td >Thời gian PV</td>
-                                            <td style="width: 150px;"><input type="text" class="form-control none"></td>
+                                            <td style="width: 150px;">{{thisA0028.thoigian|date:'dd/MM/yyyy HH:MM'}}</td>
                                             <td colspan="12" style="text-align: start;">
                                                     <img src="{{localimage+'assets/image/logo.jpg'}}" alt="{{localimage+'assets/image/logo.jpg'}}" width="150">
                                             </td>
@@ -235,7 +234,7 @@
                                         </tr>
                                         <tr>
                                             <td>Địa điểm PV</td>
-                                            <td><input type="text" class="form-control none"></td>
+                                            <td>{{thisA0028.diadiem!=null?thisA0028.diadiem.DiaDiem:'' }}</td>
                                             <td colspan="12" rowspan="2"> <h5 >BẢNG ĐÁNH GIÁ PHỎNG VẤN</h5>
                                                 <h5>面接評価表</h5> 
                                             </td>
@@ -244,7 +243,7 @@
                                         </tr>
                                         <tr>
                                             <td>Vị trí PV</td>
-                                            <td><input type="text" class="form-control none" value="{{thisA0028.RM0001!=null?thisA0028.RM0001.tenCongViec:''}}"></td>
+                                            <td>{{thisA0028.RM0001!=null?thisA0028.RM0001.tenCongViec:''}}</td>
                                             <td>Người PV 3　一次面接評価者</td>
                                             <td><input type="text" class="form-control none"></td>
                                         </tr>
@@ -279,7 +278,7 @@
                             <td>Kinh nghiệm<br>経験</td> -->
                             <ng-container *ngFor="let elementr06 of listRM0006">
                                 <td>{{elementr06.tenTieuChiDG}}</td>
-                                <td>NX</td>
+                                <td>NX/コメント</td>
                             </ng-container>
                             <td>KT chung<br>一般知識</td>
                             <td>Ngoại ngữ<br>外語</td>
@@ -304,18 +303,18 @@
                                         <td></td> -->
                                         <ng-container *ngFor="let kkkk of element.RM0006">
                                             <td class="{{kkkk.RM0013.ketQua==null?('btn-secondary'):((kkkk.RM0013.ketQua=='true'||kkkk.RM0013.ketQua==true)?'btn-success':'btn-warning')}}">
-                                                <select class="btn p-0 w-100 h-100 " style="text-align: center;font-size: 12px;" [(ngModel)]="kkkk.RM0013.ketQua" (change)="updateRM0013(kkkk.RM0013)">
+                                                <select  class="btn p-0 w-100 h-100 {{check(kkkk)?'':'dis'}}" title="{{check(kkkk)?'':'Không có quyền đánh giá. liên hệ với bp HR.'}}" style="text-align: center;font-size: 12px;" [(ngModel)]="kkkk.RM0013.ketQua" (change)="updateRM0013(kkkk.RM0013,element)">
                                                     <option ></option>
                                                     <option value="true">OK</option>
                                                     <option value="false">NG</option>
                                                 </select>
                                             </td>
-                                            <td><textarea style="font-size: 12px;height: auto;"  class="form-control none" [(ngModel)]="kkkk.RM0013.ghiChu" (change)="updateRM0013(kkkk.RM0013)"></textarea></td>
+                                            <td><textarea style="font-size: 12px;height: auto;"  title="{{check(kkkk)?'':'Không có quyền đánh giá. liên hệ với bp HR.'}}" class="form-control none {{check(kkkk)?'':'dis'}}" [(ngModel)]="kkkk.RM0013.nhanXet" (change)="updateRM0013(kkkk.RM0013,element)"></textarea></td>
                                         </ng-container>
                                         
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td><textarea style="font-size: 12px;height: auto;"  class="form-control none {{button10?'ww':'dis'}}" [(ngModel)]="element.kqChung" (change)="updatecmtRM0015(element)"></textarea></td>
+                                        <td><textarea style="font-size: 12px;height: auto;"  class="form-control none {{button10?'ww':'dis'}}" [(ngModel)]="element.ngoaingu" (change)="updatecmtRM0015(element)"></textarea></td>
+                                        <td><textarea style="font-size: 12px;height: auto;"  class="form-control none {{button10?'ww':'dis'}}" [(ngModel)]="element.IQ" (change)="updatecmtRM0015(element)"></textarea></td>
                                         <td style="text-align: center;" class="{{element.ketQua==null?('btn-secondary'):((element.ketQua=='true'||element.ketQua==true)?'btn-success':'btn-warning')}}">
                                            <span style="color: black;">{{element.ketQua==null?(''):((element.ketQua=='true'||element.ketQua==true)?'Đạt':'Trượt')}}</span> 
                                         </td>
@@ -389,7 +388,7 @@
                       </div>
                     </div>
                       <div class="col-lg px-1">
-                        <app-ungvien [rm0010show]="thisA0028.RM0010s" (listRM0010)="getlistRM0010show($event)"></app-ungvien>
+                        <app-ungvien [check]="checks"  [rm0010show]="thisA0028.RM0010s" (listRM0010)="getlistRM0010show($event)"></app-ungvien>
                       </div>
                 </div>
 			</div>

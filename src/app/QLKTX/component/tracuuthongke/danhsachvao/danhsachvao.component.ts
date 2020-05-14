@@ -16,7 +16,7 @@ export class DanhsachvaoComponent implements OnInit {
 public listktx0020:KTX0020[]=[]
   ngOnInit() {
     let that=this
-    //console.log(this.olddate)
+    //////console.log(this.olddate)
 this.show()
 $(document).ready(function(){{
   $('.filter').change(function(){{
@@ -27,7 +27,7 @@ $(document).ready(function(){{
  async show(){
   let data=await this.rest.PostDataToAPI<KTX0020[]>({startdate:this.olddate,enddate:this.newdate,trangthai:true,trangthai2:false,ID:this.id},'KTX0020/DangOKTX').toPromise()
   this.listktx0020=data
-   //console.log(data)
+   //////console.log(data)
 }
 export(){
  $('.ddd').css('display','')
@@ -35,8 +35,8 @@ export(){
  $('.ddd').css('display','none')
 }
 shows(){
-//console.log(this.newdate)
-//console.log(this.olddate)
+//////console.log(this.newdate)
+//////console.log(this.olddate)
 }
 }
 //phòng phân tích 360 mất mạng

@@ -25,11 +25,11 @@ $(document).ready(function(){{
   }
 
   async show(){
-    //console.log('1')
+    //////console.log('1')
    let data=await this.rest.PostDataToAPI<KTX0020[]>({startdate:this.olddate,enddate:this.newdate,trangthai:true,trangthai2:true,ID:this.id},'KTX0020/DangOKTX').toPromise()
-    //console.log('2')
+    //////console.log('2')
     this.listktx0020=data
-    //console.log(data)
+    //////console.log(data)
  }
  
  export(){
