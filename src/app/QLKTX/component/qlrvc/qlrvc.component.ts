@@ -41,7 +41,7 @@ export class QlrvcComponent implements OnInit {
    if(!confirm("Bạn có chắc chắn muốn xóa dữ liệu?"))return false
   this.listMKV8002.map(async x=>{
     let data=await this.rest.PostDataToAPI<any>({ip:x.ip,port:x.port,commkey:x.commkey,startdate:this.startdate,enddate:this.enddate},'FingerPrint/Deletedata').toPromise()
-    ////console.log(data)
+    ////////console.log(data)
   })
    
  }
@@ -81,12 +81,14 @@ export class QlrvcComponent implements OnInit {
       return false
     }
     let data = await this.rest.PostDataToAPI<any[]>({ip:this.listMKV8002,  startdate: this.startdate, enddate: this.enddate,style:2 }, 'KTX0050/Getall').toPromise()
-
+////console.log(data)
     this.listdatadatabase = $.merge(this.listdatadatabase, data)
     let newdate=this.enddate.slice(0,10).replace(/-/g,'')
     let starttime=this.startdate.slice(0,10).replace(/-/g,'')
     this.listdatadatabase.map(x=>{
+      x.phong='_'
       x.ten='ư'
+      x.iddd=Number(x.User_ID)
       x.list.push(newdate)
       x.list.unshift (starttime)
       x.step=0
@@ -100,7 +102,7 @@ export class QlrvcComponent implements OnInit {
           x.User_ID = "00000000".substring(0, 6 - x.User_ID.length) + x.User_ID
         for (const t of this.listMKV9999207.filter(c => { return c.manhansu === x.User_ID })) {
           t.matkhau = "123456"
-          //////console.log(await this.rest.PostDataToAPI<result<MKV9999>>(t, 'Account/add').toPromise())
+          //////////console.log(await this.rest.PostDataToAPI<result<MKV9999>>(t, 'Account/add').toPromise())
           x.MKV9999 = t
         x.id=x.MKV9999.manhansu
         x.ten=x.MKV9999.hodem+' '+x.MKV9999.ten
@@ -111,9 +113,13 @@ export class QlrvcComponent implements OnInit {
       }
       this.listKTX0052.filter(c=>c.User_ID===x.User_ID).map(xp=>{x.MKV9999=xp;x.ten=xp.hodem+' '+xp.ten})
     })
-    //////console.log(this.listdatadatabase)
+    //////////console.log(this.listdatadatabase)
     this.listMKV9999=this.listdatadatabase;
-    //////console.log("done")
+    // this.listMKV9999.map(async x => {
+    //   let kk = await this.rest.GetDataFromAPI<any>('KTX0001/GetMKV9999_ID/'+(x.MKV9999!=null?x.MKV9999.manhansu:x.User_ID)).toPromise()
+    //   if(kk!=null)x.phong=kk.ten
+    // })
+    //////////console.log("done")
     this.loading = false
 
   }
@@ -159,7 +165,7 @@ export class QlrvcComponent implements OnInit {
       $('#row' + element.MKV8002_ID).find('input:text,select').addClass('none').attr('disabled', true)
       $('#edit' + element.MKV8002_ID).find('i').removeClass('fa-save').addClass('fa-edit')
       let dataa = await this.rest.PutDataToAPI<result<MKV8002>>(element, 'MKV8002/update').toPromise()
-      //////console.log(dataa)
+      //////////console.log(dataa)
       if (dataa.code == "OK") {
         {
           element = dataa.data

@@ -23,7 +23,7 @@ public idcha=0
   public menu:MKV9981[]=[]
   ngOnInit() {
     this.uri=this.route.url
-    //////console.log(this.uri)
+    //////////console.log(this.uri)
     let that = this 
     $(document).ready(function () {
      let temp:MKV9981[]=JSON.parse(localStorage.getItem('KTX_Menu'))

@@ -90,7 +90,7 @@ export class NhomComponent implements OnInit {
   //           if(data.code=='OK'){
   //             $(this).removeClass('active')
   //           }
-  //           //else //////console.log(data)
+  //           //else //////////console.log(data)
   //         })
   //       }
   //       else{
@@ -98,7 +98,7 @@ export class NhomComponent implements OnInit {
   //           if(data.code=='OK'){
   //             $(this).addClass('active')
   //           }
-  //           //else //////console.log(data)
+  //           //else //////////console.log(data)
   //         })
           
   //       } 
@@ -209,14 +209,14 @@ export class NhomComponent implements OnInit {
   thisMKV9981:any
   async hanhdongclick(element){
     this.thisMKV9981=element
-    //console.log(element)
+    //////console.log(element)
     if (element.check) {
       this.rest.GetDataFromAPI<result<MKV9982>>('Permistion/AddAction/' + this.thisMKV9983.MKV9983_ID + '/' + element.MKV9981_ID).subscribe(data => {
         if (data.code == 'OK') {
           element.check = []
 
         }
-        //console.log(data)
+        //////console.log(data)
       })
     }
     else {
@@ -225,7 +225,7 @@ export class NhomComponent implements OnInit {
           element.check = [2]
           element.check.push({dsd:23})
         }
-        //console.log(data)
+        //////console.log(data)
       })
 
     } 
@@ -233,21 +233,21 @@ export class NhomComponent implements OnInit {
   async lochanhdong(){
     if(this.thisMKV9980!=null&&this.thisMKV9983!=null){
       this.listaction= await this.rest.GetDataFromAPI<MKV9981[]>('Permistion/GetActionofgroup/'+this.thisMKV9983.MKV9983_ID+'/'+this.thisMKV9980.MKV9980_ID).toPromise()
-      //console.log(this.listaction)
+      //////console.log(this.listaction)
     }
   }
   addtaikhoan(){
     $('#sdfghjkj').modal()
   }
 async  chooseaccount($event){
-    //console.log($event)
+    //////console.log($event)
     var mkv84:MKV9984[]=[]
         let t:MKV9984=new MKV9984()
         t.MKV9983_ID=this.thisMKV9983.MKV9983_ID
         t.MKV9999_ID= $event.MKV9999_ID
         mkv84.push(t)
       
-         //console.log(mkv84)
+         //////console.log(mkv84)
     
  let  data=await this.rest.PostDataToAPI<result<MKV9999>[]>(mkv84,'Permistion/AddUserToGr').toPromise()
       data.filter(c=>c.code==="OK").forEach(val=>{

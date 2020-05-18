@@ -109,7 +109,7 @@ export class MenuaccountComponent implements OnInit {
   save81(){
     let that=this
     this.rest.PutDataToAPI<result<MKV9981>[]>([this.mkv9981],'MKV9981/Edit').subscribe(data=>{
-      //////console.log(data)
+      //////////console.log(data)
       data.forEach(val=>{
         if(val.code=="OK"){
           let k=that.listaction.filter(c=>{return c.MKV9981_ID===val.data.MKV9981_ID})

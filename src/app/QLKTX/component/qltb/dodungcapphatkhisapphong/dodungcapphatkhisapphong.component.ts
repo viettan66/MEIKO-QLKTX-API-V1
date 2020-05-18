@@ -22,14 +22,14 @@ export class DodungcapphatkhisapphongComponent implements OnInit {
   public count=0
   public i=1
   ngOnInit() {
-    //////console.log(this.ktx10temp)
+    //////////console.log(this.ktx10temp)
     this.ktx0010=this.ktx10temp.filter(c=>{return c.loai===2})
     let that = this
     this.show()
     $(document).ready(function () {
       
       $('thead>tr>td>input:checkbox').change(function(){
-        //////console.log($(this).is(':checked'))
+        //////////console.log($(this).is(':checked'))
         $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       $('.tabledodung').on('click','tbody>tr>td>input:checkbox',function(Event){
@@ -61,7 +61,7 @@ export class DodungcapphatkhisapphongComponent implements OnInit {
     that.rest.Post<any>(input, 'http://192.84.100.207/AdminAPI/api/WH/R1_GetKhoHang').subscribe(data => {
       that.arr = JSON.parse(data['data'])[0]
       that.count=Number(JSON.parse(data['data'])[1][0]['c']) 
-      //////console.log(that.arr )
+      //////////console.log(that.arr )
     })
   }
   next(){
@@ -76,7 +76,7 @@ export class DodungcapphatkhisapphongComponent implements OnInit {
   expand(colexpan){
     $('.colexpand:not(#'+colexpan+')').removeClass('col-8').removeClass('col-6').addClass('col-4')
     $('#'+colexpan).parent().addClass('col-8').removeClass('col-4')
-    ////////console.log($(colexpan.toElement).parent())
+    ////////////console.log($(colexpan.toElement).parent())
   }
   save(){
     let arradd=this.arr.filter(c=>{return c.check===true})
@@ -106,7 +106,7 @@ export class DodungcapphatkhisapphongComponent implements OnInit {
   }
   savedo() {
     this.rest.PutDataToAPI<result<KTX0010>[]>(this.ktx0010, 'KTX0010/edit').subscribe(vals => {
-      //////console.log(vals)
+      //////////console.log(vals)
       vals.forEach(val => {
         if (val.code == 'OK') {
           this.ktx10out.emit(val.data)

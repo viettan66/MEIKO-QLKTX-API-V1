@@ -1,24 +1,24 @@
 
           <div class="row no-gutters px-1 py-2">
-            <div class="col-8 px-1">
+            <div class="col-9 px-1">
               <div class="card " style="background-color: rgba(255, 255, 255, 0.877);"  >
                 <div class="card-header">
                   DANH SÁCH ĐỒ DÙNG / THIẾT BỊ
                    <button title="Sửa" class="btn  deleteitem btn-danger float-right"><i class="fa fa-trash"></i></button>
                 </div>
                 <div class="card-body " style="">
-                    <TABLE class="table tabledodung" >
+                    <TABLE class="table tabledodung table-td-p-4-0" >
                       <thead>
                         <TR>
 
                         <td style="width: 20px;"><input type="checkbox" ></td>
                         <td style="width: 20px;">STT</td>
                         <td>TÊN ĐỒ DÙNG/TB</td>
-                        <td style="width: 100px;">GIÁ TIỀN</td>
+                        <td style="width: 160px;">GIÁ TIỀN</td>
                         <td>GHI CHÚ</td>
                         <td>LOẠI</td>
                         <td>TRẠNG THÁI</td>
-                        <td>CHỨC NĂNG</td>
+                        <td style="width: 25px;"><i class="fa fa-list"></i></td>
                         </TR>
                       </thead>
                       <TBOdy>
@@ -26,7 +26,7 @@
                             <td><input type="checkbox" [(ngModel)]="element.check"></td>
                             <td>{{index+1}}<input type="hidden" disabled class="form-control none" name=""  value="{{element.KTX0010_ID }}" ></td>
                             <td><input type="text" disabled class="form-control none" name="ten"  value="{{element.ten }}" ></td>
-                            <td><input type="text" disabled class="form-control none" name="giatien"  value="{{element.giatien }}"></td>
+                            <td><input style="text-align: end;" type="text" disabled class="form-control none" name="giatien"  value="{{element.giatien| currency : '':''   : '1.0-0'}}" ></td>
                             <td><input type="text" disabled class="form-control none" name="ghichu"  value="{{element.ghichu }}"></td>
                             <td>
                               <select class="none form-control" disabled name="loai">
@@ -50,7 +50,7 @@
                 
               </div> 
             </div>
-            <div class="col-4 px-1">
+            <div class="col-3 px-1">
               <div class="card" >
                 <div class="card-header">
                   THÊM THIẾT BỊ

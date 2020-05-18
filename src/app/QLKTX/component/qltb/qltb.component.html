@@ -2,9 +2,9 @@
     <app-menu></app-menu>
       <div class="col" id="contentmenu">
         <div class="row no-gutters" id="hidecolumn">
-          <button class="list-group-item tab"><i class="fas fa-list"></i>&nbsp;<span>Danh mục đồ dùng thiết bị</span> </button>
-          <button class="list-group-item tab"><i class="fas fa-sort-amount-up-alt"></i>&nbsp;<span>Thiết lập tài sản cố định</span> </button>
-          <button class="list-group-item tab"><i class="fas fa-sort-amount-up-alt"></i>&nbsp;<span>Thiết lập đồ dùng cấp phát</span> </button>
+          <button class="list-group-item tab {{tab==0?'active':''}}"><i class="fas fa-list"></i>&nbsp;<span>Danh mục đồ dùng thiết bị</span> </button>
+          <button class="list-group-item tab {{tab==1?'active':''}}"><i class="fas fa-sort-amount-up-alt"></i>&nbsp;<span>Thiết lập tài sản cố định</span> </button>
+          <button class="list-group-item tab {{tab==2?'active':''}}"><i class="fas fa-sort-amount-up-alt"></i>&nbsp;<span>Thiết lập đồ dùng cấp phát</span> </button>
       </div>
           <app-danhmuctaisasn [ktx10temp]="ktx0010" (ktx10out)="getktx10($event)" (ktx10delete)="deletektx10($event)"  *ngIf="tab==0"></app-danhmuctaisasn>
           <app-thietlaptaisancodinh [ktx10temp]="ktx0010" *ngIf="tab==1"></app-thietlaptaisancodinh>

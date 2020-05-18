@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe } from '@angular/core';
 import * as Global from '../../Service/global.service'
 import { RESTService } from 'src/app/Service/rest.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -152,6 +152,8 @@ substring(l){
 // });
       ////////////////////////
     })
-  }
-
+  } 
+  
 }
+
+ 

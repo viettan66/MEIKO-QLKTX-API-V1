@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { HashLocationStrategy, LocationStrategy, DatePipe } from '@angular/common';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import * as Globle from './Service/global.service';
+import { CKEditorModule } from 'ngx-ckeditor';
+import { Safe } from './Service/innerHTML';
+
 
 
 import { AppComponent } from './app.component';
@@ -214,13 +217,13 @@ const routes: Routes = [
     WindowChatComponent,
     ButtonSearchComponent,
     TaikhoanDongboComponent,
-    
+    Safe
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,FormsModule,
     HttpClientModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),CKEditorModule
   ],
   exports: [RouterModule],
   providers: [CookieService,Auth,{provide: LocationStrategy, useClass: HashLocationStrategy},DatePipe],

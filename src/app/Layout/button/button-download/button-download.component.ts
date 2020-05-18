@@ -16,7 +16,7 @@ export class ButtonDownloadComponent implements OnInit {
   constructor(public rest:RESTService) { }
 
   ngOnInit() {
-    ////console.log(this.hide)
+    ////////console.log(this.hide)
   }
 
   download(){

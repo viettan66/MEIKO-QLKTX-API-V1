@@ -27,7 +27,7 @@ export class QlnaComponent implements OnInit {
   public start = 0;
   public tab = 0
   public step = 30;
-  public loaidanhsach = '1'
+  public loaidanhsach = '0'
   public listMKV8002: MKV8002[] = []
   public newnhaan = new MKV8002()
   public loading = true
@@ -63,13 +63,16 @@ export class QlnaComponent implements OnInit {
     let data = await this.rest.PostDataToAPI<any[]>({ip:this.listMKV8002,  startdate: this.startdate, enddate: this.enddate,style:1 }, 'KTX0050/Getall').toPromise()
 
     this.listdatadatabase = $.merge(this.listdatadatabase, data)
-    for(const x of this.listdatadatabase){ x.ten='zzz'
+    for(const x of this.listdatadatabase){ 
+      x.ten='zzz'
+      x.phong=''
+      x.iddd=Number(x.User_ID)
       if(x.MKV9999==null){
           x.User_ID = "00000000".substring(0, 6 - x.User_ID.length) + x.User_ID
          let lej= this.listMKV9999207.filter(c => { return c.manhansu === x.User_ID })
         for (const t of lej) {
           t.matkhau = "123456"
-          //////console.log(await this.rest.PostDataToAPI<result<MKV9999>>(t, 'Account/add').toPromise())
+          //////////console.log(await this.rest.PostDataToAPI<result<MKV9999>>(t, 'Account/add').toPromise())
           x.MKV9999 = t
         x.id=x.MKV9999.manhansu
         x.ten=x.MKV9999.hodem+' '+x.MKV9999.ten
@@ -82,41 +85,62 @@ export class QlnaComponent implements OnInit {
         x.ten=x.MKV9999.hodem+' '+x.MKV9999.ten
       }
     }
-    //console.log(this.listdatadatabase)
+    //////console.log(this.listdatadatabase)
     //this.listMKV9999=this.listdatadatabase;
-    for(const x of this.listdatadatabase){
-      if(x.User_ID==null)console.log(x)
-      let tien=await this.rest.PostDataToAPI<any>({User_ID:x.User_ID,startdate:this.startdate,enddate:this.enddate},'KTX0049/GetPay').toPromise()
+    // for(const x of this.listdatadatabase){
+    //   if(x.User_ID==null)////console.log(x)
+    //   let tien=await this.rest.PostDataToAPI<any>({values:{User_ID:x.User_ID,startdate:this.startdate,enddate:this.enddate},ip:(this.listMKV8002.map(x=>{return x.ip}))},'KTX0049/GetPay').toPromise()
   
-      x.thanhtoan=tien.thanhtien
+    //   x.thanhtoan=tien.thanhtien
+    // }
+    this.listdatadatabase.map(async x => {
+      let kk = await this.rest.GetDataFromAPI<any>('KTX0001/GetMKV9999_ID/'+(x.MKV9999!=null?x.MKV9999.manhansu:x.User_ID)).toPromise()
+      if(kk!=null)x.phong=kk.ten
+    })
+    Promise.all(this.listdatadatabase.map(async x => {
+      if (x.User_ID == null) {
+        //console.log(x)
+      }
+      let tien = await this.rest.PostDataToAPI<any>({ values: { User_ID: x.User_ID, startdate: this.startdate, enddate: this.enddate }, ip: (this.listMKV8002.map(x => { return x.ip })) }, 'KTX0049/GetPay').toPromise()
+
+      x.thanhtoan = tien.thanhtien
+    })).then(s => {
+      let listtemp = [...new Set(this.listKTX0052.map(g => g.User_ID))]
+      for (const x of this.listdatadatabase.filter(c => !listtemp.includes(c.User_ID))) {
+        x.thanhtienbuasang = x.thanhtienbuasang * 1.1;
+        x.thanhtienbuatrua = x.thanhtienbuatrua * 1.1;
+        x.thanhtienbuatoi = x.thanhtienbuatoi * 1.1;
+        x.thanhtoan = x.thanhtoan * 1.1;
+      }
+      for (const x of this.listdatadatabase) {
+        x.tong = x.thanhtienbuasang + x.thanhtienbuatrua + x.thanhtienbuatoi
+        x.thanhtien = x.tong - x.thanhtoan
+      }
+
+      this.filter()
+      ////////console.log("done")
+      this.loading = false
     }
-    let listtemp=[...new Set(this.listKTX0052.map(g=>g.User_ID))]
-    for(const x of this.listdatadatabase.filter(c=>!listtemp.includes(c.User_ID))){
-      x.thanhtienbuasang=x.thanhtienbuasang*1.1;
-      x.thanhtienbuatrua=x.thanhtienbuatrua*1.1;
-      x.thanhtienbuatoi=x.thanhtienbuatoi*1.1;
-      x.thanhtoan=x.thanhtoan*1.1;
-    }
-    for(const x of this.listdatadatabase){
-      x.tong=x.thanhtienbuasang+x.thanhtienbuatrua+x.thanhtienbuatoi
-      x.thanhtien=x.tong-x.thanhtoan
-    }
-        
-    this.filter()
-    ////console.log("done")
-    this.loading = false
+
+
+    )
 
   }
-  filter(){this.listMKV9999=[]
-        let listtemp=[...new Set(this.listKTX0052.map(g=>g.User_ID))]
-        if(this.loaidanhsach=='1'){
-          this.listMKV9999=this.listdatadatabase.filter(c=>!listtemp.includes(c.User_ID));
-        }else
-      
-      if(this.loaidanhsach=='2')
-      this.listMKV9999=this.listdatadatabase.filter(c=>listtemp.includes(c.User_ID));
+  filter() {
+    this.listMKV9999 = []
+    let listtemp = [...new Set(this.listKTX0052.map(g => g.User_ID))]
+    if (this.loaidanhsach == '0') {
+      this.listMKV9999 = this.listdatadatabase
+    }
+    if (this.loaidanhsach == '1') {
+      this.listMKV9999 = this.listdatadatabase.filter(c => !listtemp.includes(c.User_ID));
+    } else if (this.loaidanhsach == '2') {
+      this.listMKV9999 = this.listdatadatabase.filter(c => listtemp.includes(c.User_ID));
+    }
 
-    
+
+
+
 
   }
   async loadmachine(){
@@ -156,7 +180,7 @@ export class QlnaComponent implements OnInit {
   if(!confirm("Bạn có chắc chắn muốn xóa dữ liệu?"))return false
    this.listMKV8002.map(async x=>{
      let data=await this.rest.PostDataToAPI<any>({ip:x.ip,port:x.port,commkey:x.commkey,startdate:this.startdate,enddate:this.enddate},'FingerPrint/Deletedata').toPromise()
-     ////console.log(data)
+     ////////console.log(data)
    })
     
   }
@@ -180,7 +204,7 @@ export class QlnaComponent implements OnInit {
       $('#row' + element.MKV8002_ID).find('input:text,select').addClass('none').attr('disabled', true)
       $('#edit' + element.MKV8002_ID).find('i').removeClass('fa-save').addClass('fa-edit')
       let dataa = await this.rest.PutDataToAPI<result<MKV8002>>(element, 'MKV8002/update').toPromise()
-      //////console.log(dataa)
+      //////////console.log(dataa)
       if (dataa.code == "OK") {
         {
           element = dataa.data
@@ -204,7 +228,7 @@ element.ngay=$event
       $('#editmocthoigiantr' + element.KTX0053_ID).find('input:text,select').addClass('none').attr('disabled', true)
       $('#editmocthoigian' + element.KTX0053_ID).find('i').removeClass('fa-save').addClass('fa-edit')
       let dataa = await this.rest.PutDataToAPI<result<KTX0053>>(element, 'KTX0053/update').toPromise()
-      //////console.log(dataa)
+      //////////console.log(dataa)
       if (dataa.code == "OK") {
         {
           element = dataa.data
@@ -213,7 +237,7 @@ element.ngay=$event
     }
   }
 checkallelement($event){
-  //console.log($event.target.checked)
+  //////console.log($event.target.checked)
   this.listMKV9999.map(x=>x.check=$event.target.checked)
   }
  async quyettoan(){
@@ -223,9 +247,9 @@ checkallelement($event){
     this.listMKV9999.filter(c=>c.check).map(p=>{
       arr.push({User_ID:(p.User_ID),startdate:this.startdate,enddate:this.enddate,ghichu:'',trangthai:true})
     })
-    //console.log(arr)
+    //////console.log(arr)
     let data=await this.rest.PostDataToAPI<result<KTX0049>[]>(arr,"KTX0049/add").toPromise()
-    //console.log(data)
+    //////console.log(data)
     alert("OK. hãy tải lại trang để đồng bộ lại dữ liệu.")
   }
   Downloadtable(){

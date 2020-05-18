@@ -182,7 +182,8 @@
 			<div class="modal-body ">
                 <app-ungvien [check]="checks"  [sophieu]="thisA0028.sophieu"    button1="true"   
                 button5="true"  button6="true"  button7="true" button8="true" button9="true" button10="true" 
-                emty="true"  (listRM0010)="getlistRM0010($event)"  ></app-ungvien>
+                emty="true"  (listRM0010)="getlistRM0010($event)" 
+                 ></app-ungvien>
 			</div>
 		</div>
 	</div>
@@ -212,6 +213,7 @@
                     <div class="col">DANH SÁCH ĐÁNH GIÁ CỦA YÊU CẦU SỐ {{thisA0028.sophieu}}</div>
                     <div class="col-auto">
                       <app-button-download bg="mr-1 btn-secondary" tableID="thkkdkkfjjkld" tableName="danh sách đánh giá"></app-button-download>
+                          <button class="mr-1 btn btn-secondary"   (click)="print()"><i class="fa fa-print"></i></button>
                           <button class="btn btn-secondary"   (click)="updateA0028()"><i class="fa fa-times"></i></button>
                     </div>
                   </div>

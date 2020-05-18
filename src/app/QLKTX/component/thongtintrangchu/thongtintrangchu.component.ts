@@ -17,15 +17,18 @@ public listdon:KTX0040[]=[]
   constructor(public rest:RESTService) { }
   async ngOnInit() {
 this.listdon=await this.rest.GetDataFromAPI<KTX0040[]>('KTX0040/Getall').toPromise();
-//////console.log(this.listdon)
+//////////console.log(this.listdon)
   }
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
 }
 uploadFileToActivity() {
   this.rest.postFile(this.fileToUpload).then(data=>{
-    //////console.log(data)
+    //////////console.log(data)
   })
+}
+themthem(){
+  $("#themthem").modal()
 }
   save(){
     //this.uploadFileToActivity()

@@ -20,7 +20,7 @@ export class TaikhoanComponent implements OnInit {
   public keysearch=''
   public phong_id='all'
  async ngOnInit() {
-   //console.log(this.listMKV9999input)
+   //////console.log(this.listMKV9999input)
     let that=this
      this.listacc= this.listMKV9999input
        this.listdept=await this.rest.PostDataToAPI<any>({},"MKV9998/Getall").toPromise()
@@ -55,6 +55,6 @@ else
  return  this.listMKV9999input.filter(c=>{return c.MKV9999_ID===element.MKV9999_ID}).length==0?false:true
   }
   checkall($event){
-    //console.log(this.listMKV9999input)
+    //////console.log(this.listMKV9999input)
   }
 }

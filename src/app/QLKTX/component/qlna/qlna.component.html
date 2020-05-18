@@ -31,6 +31,7 @@
                     
                       <div class="col-auto py-0">
                         <select [(ngModel)]="loaidanhsach"  class="btn btn-secondary mr-1" (change)="filter()">
+                          <option value="0">ALL</option>
                           <option value="1">Danh sách chịu thuế</option>
                           <option value="2">Danh sách miễn thuế</option>
                         </select>
@@ -55,7 +56,7 @@
                               <th rowspan="2" class="fulljustify"  style="width: 20px;"><input type="checkbox" (change)="checkallelement($event)"></th>
                               <th rowspan="2" class="fulljustify"  style="width: 40px;">STT</th>
                               <th rowspan="2" >Tên <app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="ten"></app-button-sort></th>
-                              <th rowspan="2" >ID<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="id"></app-button-sort></th>
+                              <th rowspan="2" >ID<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="iddd"></app-button-sort></th>
                               <th rowspan="2" >BP</th>
                               <th rowspan="2" >Bậc</th>
                               <th rowspan="2" >CMTND</th>
@@ -88,7 +89,7 @@
                                           <td style="text-align: start;">{{element.MKV9999.thetu_id}}</td>
                                           <td>{{element.MKV9999.capbac}}</td>
                                           <td style="text-align: start;">{{element.MKV9999.cmtnd_so}}</td>
-                                          <td>{{element.MKV9999.KTX0001!=null?element.MKV9999.KTX0001.ten:''}}</td>
+                                          <td>{{element.phong}}</td>
                                           <td>{{element.buasang!=null?element.buasang:'NaN'}}</td>
                                           <td style="text-align: start;">{{element.thanhtienbuasang| currency : '':''  : '1.0-0' }}</td>
                                           <td>{{element.buatrua!=null?element.buatrua:'NaN'}}</td>
@@ -109,7 +110,7 @@
                                           <td style="text-align: start;">Không có dữ liệu</td>
                                           <td>Không có dữ liệu</td>
                                           <td>Không có dữ liệu</td>
-                                          <td style="text-align: start;"></td>
+                                          <td style="text-align: start;">{{element.phong}}</td>
                                           <td>{{element.buasang!=null?element.buasang:'NaN'}}</td>
                                           <td style="text-align: start;">{{element.thanhtienbuasang| currency : '':'' : '1.0-0' }}</td>
                                           <td>{{element.buatrua!=null?element.buatrua:'NaN'}}</td>

@@ -36,14 +36,14 @@ public rm0100:RM0009[]=[]
   }
 
 async save(){
-  ////console.log(this.rm0010in)
+  ////////console.log(this.rm0010in)
   if(this.rm0010in.RM0010_ID==null){
     let data=await this.rest.PostDataToAPI<result<RM0010>[]>([this.rm0010in],"RM0010/add").toPromise()
       data.filter(x=>x.code==="OK").map(val=>{
         this.rm0010out.emit(val.data)
       })
       data.filter(x=>x.code!=="OK").map(val=>{
-        ////console.log(val)
+        ////////console.log(val)
       })
   }else{
     this.rest.PutDataToAPI<result<RM0010>>(this.rm0010in,"RM0010/update").subscribe(data=>{
