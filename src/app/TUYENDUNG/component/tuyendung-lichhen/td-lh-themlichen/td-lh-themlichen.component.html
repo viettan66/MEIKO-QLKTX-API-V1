@@ -9,7 +9,7 @@
                         <div class="col">
                               <div class="row"><label>Thời gian phỏng vấn</label></div>
                               <div class="row ">
-                                    <app-button-datetimepicker ids="jkkjjjkdf"   (data)="getstartdate($event)" width="'100%''"></app-button-datetimepicker>
+                                    <app-button-datetimepicker  classs="form-control w-100"   ids="jkkjjjkdf"   (data)="getstartdate($event)" width="'100%''"></app-button-datetimepicker>
                               </div>
                         </div>
                         
@@ -44,7 +44,7 @@
       </div>
     </div>
       <div class="col-lg px-1">
-        <app-ungvien (listRM0010)="getlistRM0010($event)"></app-ungvien>
+        <app-ungvien button4="true" (listRM0010)="getlistRM0010($event)"></app-ungvien>
       </div>
 </div>
 

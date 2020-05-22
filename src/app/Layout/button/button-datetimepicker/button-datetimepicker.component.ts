@@ -23,6 +23,7 @@ public now = new Date().getFullYear() + '-' + (( this.Month)<10?'0':'') +this.Mo
   
 @Output("data") data=new EventEmitter<string>()
   ngOnInit() {
+    //console.log(this.classs)
     let that=this
     $(document).ready(function(){
       send()

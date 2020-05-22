@@ -36,11 +36,11 @@ public listktx0010:KTX0010[]=[]
        if(val.trangthaidodung=="")val.trangthaidodung="Đủ"
        else val.trangthaidodung=val.trangthaidodung.substring(0,val.trangthaidodung.length-1)
      })
-    //////////console.log()
+    ////////////console.log()
   }
   onKey(event: any) { // without type info
       $('#exporttoexvel>tbody>tr').css('display','none')
-      //////////console.log($('#exporttoexvel>tbody>tr>td:eq(4):contains('+event.target.value+')'))
+      ////////////console.log($('#exporttoexvel>tbody>tr>td:eq(4):contains('+event.target.value+')'))
      $('#exporttoexvel>tbody>tr>td:eq(4):contains('+event.target.value+')').parent().css('display','')
   }
   export(){

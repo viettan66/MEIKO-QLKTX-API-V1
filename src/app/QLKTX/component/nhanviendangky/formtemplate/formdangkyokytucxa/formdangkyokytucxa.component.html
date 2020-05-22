@@ -96,7 +96,7 @@
       <tr *ngIf="!check">
         <td colspan="1" rowspan="3">Ban QLKT</td>
         <td colspan="1">Số phòng</td>
-        <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.KTX0001_ID"></td>
+        <td colspan="2"><input *ngIf="ktx0020.KTX0001!=null" class="formcontrol" type="text"  [(ngModel)]="ktx0020.KTX0001.ten"></td>
         <td colspan="1">Số tủ</td>
         <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0020.sotu"></td>
       </tr>
@@ -273,11 +273,11 @@
           <tbody>
             <tr *ngFor="let element of ktx0020.KTX0022;let i=index">
               <td>{{i+1}}</td>
-              <td><input type="text" class="formcontrol" [(ngModel)]="element.HoTen"></td>
-              <td><input type="text" class="formcontrol" [(ngModel)]="element.NamSinh"></td>
-              <td><input type="text" class="formcontrol" [(ngModel)]="element.QuanHe"></td>
-              <td><input type="text" class="formcontrol" [(ngModel)]="element.NgheNghiep"></td>
-              <td><input type="text" class="formcontrol" [(ngModel)]="element.ChoOHienNay"></td>
+              <td><textarea type="text" class="formcontrol" [(ngModel)]="element.HoTen"></textarea></td>
+              <td><textarea type="text" class="formcontrol" [(ngModel)]="element.NamSinh"></textarea></td>
+              <td><textarea type="text" class="formcontrol" [(ngModel)]="element.QuanHe"></textarea></td>
+              <td><textarea type="text" class="formcontrol" [(ngModel)]="element.NgheNghiep"></textarea></td>
+              <td><textarea class="formcontrol" [(ngModel)]="element.ChoOHienNay"></textarea></td>
               <td><button class="btn btn-secondary" (click)="removeitem(element)"><i class="fa fa-trash"></i></button></td>
             </tr>
           </tbody>

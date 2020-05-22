@@ -27,6 +27,7 @@ export class ButtonCountComponent implements OnInit {
   //   this.dd.emit($('.zxcvbnm'+(this.classs==null?"":this.classs)).val())
   // }
   send($event){
+    this.show()
     this.dd.emit($event.target.value)
   }
 }

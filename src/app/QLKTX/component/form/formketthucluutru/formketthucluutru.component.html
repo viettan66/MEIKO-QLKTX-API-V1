@@ -1,4 +1,4 @@
-<div class="row d-flex justify-content-center form1ketthuc" id="form1">
+<div class="row d-flex justify-content-center form1ketthuc" id="form1" *ngIf="ktx0023temp.MKV9999!=null">
     <div class="modal-900  ui-page print" >
         <div class="row no-gutters py-2" style="border-bottom: solid 1px gray;">
             <div class="col-4"><img src="../../../../assets/image/icon/logo-1.jpg" width="200" alt=""></div>
@@ -31,11 +31,11 @@
         </div>
         <div class="row no-gutters align-items-center">
             <div class="col-auto">Phòng</div>
-            <div class="col"><input type="text" class="formcontrol none"   [(ngModel)]="ktx0023temp.MKV9999.bophan.bophan_ten"></div>
+            <div class="col"><input type="text" class="formcontrol none"   [(ngModel)]="ktx0023temp.MKV9999.thetu_id"></div>
             <div class="col-auto">Bộ phận</div>
-            <div class="col"><input type="text" class="formcontrol none"    [(ngModel)]="ktx0023temp.MKV9999.bophan.bophan_ten"></div>
+            <div class="col"><input type="text" class="formcontrol none"    [(ngModel)]="ktx0023temp.MKV9999.thetu_id"></div>
             <div class="col-auto">Ban</div>
-            <div class="col"><input type="text" class="formcontrol none"  value="{{ktx0023temp.MKV9999.ban!=null?ktx0023temp.MKV9999.ban.bophan_ten:''}}"></div>
+            <div class="col"><input type="text" class="formcontrol none"  value="{{ktx0023temp.MKV9999.ban!=null?ktx0023temp.MKV9999.ban.thetu_id:''}}"></div>
             <div class="col-auto">Công đoạn</div>
             <div class="col"><input type="text" class="formcontrol none"   value=""></div>
         </div>

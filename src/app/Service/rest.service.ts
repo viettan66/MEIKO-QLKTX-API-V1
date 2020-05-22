@@ -41,7 +41,7 @@ export class RESTService {
     return this.http.put<Type>(Global.APIUrl+uri,post, {headers: headers});
   }
   ExportTOExcel(TABLE,namefile?,title?,hide?:boolean) {  
-    //////////console.log(hide)
+    ////////////console.log(hide)
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(TABLE,{display:hide?true:false});  
     const wb: XLSX.WorkBook = XLSX.utils.book_new();  
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');  

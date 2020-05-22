@@ -34,7 +34,7 @@ public user:MKV9999=new MKV9999()
    let arrtemp=[]
     this.listRM0015=await this.rest.PostDataToAPI<RM0015[]>({type:false,MKV9999_ID:this.MKV9999_ID,phong_id:this.phong_id},"RM0015/Getall").toPromise()
     this.listRM0008=await this.rest.GetDataFromAPI<RM0008[]>("RM0008/Getall").toPromise()
-       //////////console.log(this.listRM0015)
+       ////////////console.log(this.listRM0015)
   //  this.listRM0015.forEach(val=>{
   //    if(val.RM0010.bophanid!=null)
   //     arrtemp.push(val.RM0010.bophanid)
@@ -44,7 +44,7 @@ public user:MKV9999=new MKV9999()
       // this.listMKV9998.push(await this.rest.PostDataToAPI<MKV9998>({id:val},"MKV9998/Getall").toPromise())
       this.listMKV9998=await this.rest.PostDataToAPI<MKV9998[]>({},"MKV9998/Getall").toPromise()
     // })
-    ////////console.log(this.listRM0015)
+    //////////console.log(this.listRM0015)
     this.listRM0015.forEach(val=>{
       if(val.RM0010.RM0001!=null){
         if(this.listRM0001.filter(c=>{return c.RM0001_ID===val.RM0010.RM0001.RM0001_ID}).length==0)
@@ -78,7 +78,7 @@ public user:MKV9999=new MKV9999()
     else{
       $('#edit'+element.RM0015_ID).find('i').removeClass('fa-save').addClass('fa-edit')
       //this.thisrm0015.thoiGianPhongVan=this.thisrm0015.ngayPV+' '+this.thisrm0015.thoiGianPV
-      //////////console.log(this.thisrm0015)
+      ////////////console.log(this.thisrm0015)
      let data= await this.rest.PutDataToAPI<result< RM0015>>(this.thisrm0015,'RM0015/update').toPromise()
      if(data.code=="OK"){
        this.thisrm0015['RM0008']=data.data['RM0008']
@@ -105,7 +105,7 @@ Thông tin chi tiết:
 \nこれは自動メールです。 このメールには返信しないでください。 他にご要望がございましたら、人事部までメールでお問い合わせください:`+this.user.email+`
   `
        let kj=await this.rest.PostDataToAPI<result<any>>(mail,"Mail/Sendmail").toPromise()
-       ////////console.log(kj)
+       //////////console.log(kj)
       }
        //////////////////////////////////////////////////
      }
@@ -129,7 +129,7 @@ Thông tin chi tiết:
     this.thisrm0015=element
     this.listMKV9999choose=[]
     this.listMKV9999choose=(this.thisrm0015.RM0015A.map(x=>{return x.MKV9999}))
-    //////////console.log(this.listMKV9999choose)
+    ////////////console.log(this.listMKV9999choose)
     $('#select-account-modal').modal()
   }
   pre(){
@@ -168,7 +168,7 @@ Thông tin chi tiết:
   public userinfor:RM0015A=new RM0015A()
   info(button:RM0015A){
     this.userinfor=button
-    //////////console.log(this.userinfor )
+    ////////////console.log(this.userinfor )
    $('#userinfor') .modal()
   }
   public bophanid='all'
@@ -192,8 +192,8 @@ Thông tin chi tiết:
       }
     })
     let data=await this.rest.PostDataToAPI<result<RM0015A>[]>(listtemp,'RM0015A/update').toPromise()
-    //////////console.log(listtemp)
-    //////////console.log(data)
+    ////////////console.log(listtemp)
+    ////////////console.log(data)
     data.forEach( async val=>{
       if(val.code=="OK"){
         let l= this.listRM0015.filter(c=>{return c.RM0015_ID===val.data.RM0015.RM0015_ID})

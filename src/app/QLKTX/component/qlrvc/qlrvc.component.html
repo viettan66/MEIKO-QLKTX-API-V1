@@ -19,40 +19,31 @@
                           <!-- <span class="mr-2">Server:{{listdatamachine.length}}</span><span class="mr-2">Database:{{listdatadatabase.length}}</span>  
                           <span></span> -->
                         </div>
-                        <div class="col-auto mr-1">
+                        <div class="col-auto">
                           <app-button-count classs="eeeeeeeeeeeeeeee" [start]="start" [step]="step" [listdata]="listMKV9999"  (step)="getstep ($event)"  ></app-button-count>
-                          <app-button-preview  [start]="start" [step]="step" [listdata]="listMKV9999" (start)="getstart ($event)" ></app-button-preview>
-                          <app-button-next [start]="start" [step]="step" [listdata]="listMKV9999"  (start)="getstart ($event)" ></app-button-next>
-                        </div>
-                        <div class="col-auto">
-                          <app-button-datetimepicker ids="jkkjjjkdf"   (data)="getstartdate($event)"></app-button-datetimepicker>
-                        </div>
-                        <div class="col-auto">
-                          <app-button-datetimepicker ids="jkkjjjk"   (data)="getenddaate($event)"></app-button-datetimepicker>
-                        </div>
+                          <app-button-preview classs="btn-sm"  [start]="start" [step]="step" [listdata]="listMKV9999" (start)="getstart ($event)" ></app-button-preview>
+                          <app-button-next classs="btn-sm mr-2" [start]="start" [step]="step" [listdata]="listMKV9999"  (start)="getstart ($event)" ></app-button-next>
+                  
+                          <app-button-datetimepicker classs="btn btn-sm btn-outline-secondary mr-1"  ids="jkkjjjkdf"   (data)="getstartdate($event)"></app-button-datetimepicker>
+                        
+                          <app-button-datetimepicker classs="btn btn-sm btn-outline-secondary mr-1"  ids="jkkjjjk"   (data)="getenddaate($event)"></app-button-datetimepicker>
+                        
+                          <input type="text" placeholder="ID, Tên" class="btn btn-outline-secondary mr-1 btn-sm" [(ngModel)]="keysearch">
                       
-                        <div class="col-auto">
-                          <button title="Đồng bộ" (click)="getdataa(true)"  class="btn btn-success  mr-1"><i class="fas fa-sync-alt"></i></button>
-                        </div>
-                        <div class="col-auto">
-                          <button class="btn btn-info mr-1" title="Lưu dưới dạng excel" (click)="Downloadtable()"><i class="fa fa-download"></i></button>
-                        </div>
-                        <div class="col-auto">
-                          <button (click)="loadmachine()" class="btn btn-warning text-white mr-1" title="Download dữ liệu từ máy chấm vân tay về"><i class="fas fa-cloud-download-alt"></i></button>
-                        </div>
-                        <!-- <div class="col-auto">
-                          <button class="btn btn-success mr-1" (click)="upload()" title="Đồng bộ dữ liệu"><i class="fas fa-cloud-upload-alt"></i></button>
-                        </div> -->
-                        <div class="col-auto">
-                          <button class="btn btn-danger mr-1" (click)="delete()" title="Xóa dữ liệu máy chấm vấn tay"><i class="fas fa-trash-alt"></i></button>
-                        </div>
-                        <div class="col-auto">
-                          <button title="Thiết lập máy quẹt vân tay" (click)="themnhaan()"  class="btn btn-primary"><i class="fa fa-cog"></i></button>
+                          <button title="Đồng bộ" (click)="getdataa(true)"  class="btn btn-success  mr-1 btn-sm"><i class="fas fa-sync-alt"></i></button>
+                        
+                          <button class="btn btn-info mr-1 btn-sm" title="Lưu dưới dạng excel" (click)="Downloadtable()"><i class="fa fa-download"></i></button>
+                        
+                          <button (click)="loadmachine()" class="btn btn-warning text-white mr-1 btn-sm" title="Download dữ liệu từ máy chấm vân tay về"><i class="fas fa-cloud-download-alt"></i></button>
+                        
+                          <button class="btn btn-danger mr-1 btn-sm" (click)="delete()" title="Xóa dữ liệu máy chấm vấn tay"><i class="fas fa-trash-alt"></i></button>
+                      
+                          <button title="Thiết lập máy quẹt vân tay" (click)="themnhaan()"  class="btn btn-primary btn-sm"><i class="fa fa-cog"></i></button>
                         </div>
                       </div>
                     </div>
                     <div class="card-body" style="padding: 5px;">
-                        <table class="table table-bordered" id="export">
+                        <table class="table table-bordered ddddddddddddddddddddd" id="export" style="font-size: 12px;">
                             <thead><tr>
                                 <th style="width: 20px;"><input type="checkbox" ></th>
                                 <th style="width: 40px;">STT</th>
@@ -61,14 +52,15 @@
                                 <th>BP</th>
                                 <th>Bậc</th>
                                 <th>CMTND</th>
-                                <th>Phòng</th>
+                                <th>Phòng<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="phong"></app-button-sort></th>
+                                <th>Ngày vào</th>
                                 <th>Ngày ở<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="count"></app-button-sort></th>
                                 <th>Không ở iên tiếp<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="step"></app-button-sort></th>
                               </tr>
                               </thead>
                               <tbody>
                                 <ng-container *ngFor="let element of listMKV9999;let i=index">
-                                  <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))">
+                                  <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))&&keysearch==''||search(element)&&keysearch!=''">
                                     <ng-container *ngIf="element.MKV9999!=null">
                                         <tr>
                                             <td><input type="checkbox" name="" id=""></td>
@@ -78,9 +70,10 @@
                                             <td>{{element.MKV9999.thetu_id}}</td>
                                             <td>{{element.MKV9999.capbac}}</td>
                                             <td>{{element.MKV9999.cmtnd_so}}</td>
-                                            <td>{{element.MKV9999.KTX0001!=null?element.MKV9999.KTX0001.ten:''}}</td>
+                                            <td>{{element.MKV9999.email}}</td>
+                                            <td>{{element.MKV9999.hochieu_ngaycap!=null?(element.MKV9999.hochieu_ngaycap|date:'dd/MM/yyyy'):''}}</td>
                                             <td>{{element.count!=null?element.count:'NaN'}}</td>
-                                            <td>{{element.step!=null?element.step:'NaN'}}</td>
+                                            <td>{{element.step!=null?element.step:'NaN'}} <i style="cursor: pointer;" title="{{element.list.join('&#10;')}}" class="fa fa-eye float-right"></i> </td>
                                         </tr>
                                     </ng-container>
                                     <ng-container *ngIf="element.MKV9999==null">
@@ -92,7 +85,8 @@
                                             <td>Không có dữ liệu</td>
                                             <td>Không có dữ liệu</td>
                                             <td>Không có dữ liệu</td>
-                                            <td>Không có dữ liệu</td>
+                                            <td></td>
+                                            <td></td>
                                             <td>{{element.count!=null?element.count:'NaN'}}</td>
                                             <td>{{element.step!=null?element.step:'NaN'}}</td>
                                         </tr>

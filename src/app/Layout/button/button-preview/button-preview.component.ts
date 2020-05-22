@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ButtonPreviewComponent implements OnInit {
 
   constructor() { }
-  @Input() class
+  @Input() classs
   @Input() start
   @Output('start') dd=new EventEmitter<number>()
   @Input() step

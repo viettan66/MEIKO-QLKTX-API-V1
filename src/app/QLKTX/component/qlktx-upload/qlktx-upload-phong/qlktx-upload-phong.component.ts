@@ -16,7 +16,7 @@ public listKTX0001
   }
   getdata($event){
     this.listKTX0001=$event
-    //////////console.log($event)
+    ////////////console.log($event)
   }
  async edit(element){
     if( $('#edit'+element.PHONG).find('i').hasClass('fa-edit')){
@@ -35,7 +35,7 @@ public listKTX0001
       if(listToa.filter(c=>{return c['ten']===val.TOA}).length==0)
       listToa.push({khu:val.TOA=="A"?"N":"F",ten:val.TOA,makhoa:val.MAKHOA,ghichu:"Tòa mới",trangthai:true,type:2})
     })
-    //////////console.log(listToa)
+    ////////////console.log(listToa)
     let data=await this.rest.PostDataToAPI<result< KTX0001>[]>(listToa,"KTX0001/add").toPromise()
     data.filter(c=>{return c.code==="OK"}).forEach(async val=>{
       let listTang=[]
@@ -43,7 +43,7 @@ public listKTX0001
         if(listTang.filter(c=>{return c['ten']===kkkk.TANG}).length==0)
         listTang.push({khu:kkkk.TOA=="A"?"N":"F",ten:kkkk.TANG,ghichu:"Tầng mới",idcha:val.data.KTX0001_ID,trangthai:true,type:3})
       })
-      //////////console.log(listTang)
+      ////////////console.log(listTang)
       let datatang=await this.rest.PostDataToAPI<result< KTX0001>[]>(listTang,"KTX0001/add").toPromise()
 
         datatang.filter(c=>{return c.code==="OK"}).forEach(async val2=>{
@@ -52,9 +52,9 @@ public listKTX0001
             if(listphong.filter(c=>{return c['ten']===kkkk.PHONG}).length==0)
             listphong.push({khu:kkkk.TOA=="A"?"N":"F",ten:kkkk.PHONG,slot:kkkk.SLOT,capbac:kkkk.CAPBAC,ghichu:"Phòng mới",makhoa:kkkk.MAKHOA,idcha:val2.data.KTX0001_ID,trangthai:true,type:4})
           })
-          //////////console.log(listphong)
+          ////////////console.log(listphong)
           let dataphong=await this.rest.PostDataToAPI<result< KTX0001>[]>(listphong,"KTX0001/add").toPromise()
-          //////////console.log(dataphong)
+          ////////////console.log(dataphong)
         })
 
     })

@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
     if(this.user!=null){
     this.socket.emit('ChangeStatusUser', this.user);
     this.listMKV7001 = await this.rest.PostDataToAPI<MKV7001[]>({ MKV9999_ID: this.user.MKV9999_ID, mybox: true }, 'MKV7001/Getall').toPromise()
-    //////////console.log(this.listMKV7001)
+    ////////////console.log(this.listMKV7001)
     this.listMKV7001.map(x=>{
       if(this.listMKV7001.filter(c=>{return c.MKV9999_ID===x.MKV9999_ID2}).length==1)this.listMKV7001.splice(this.listMKV7001.indexOf(x),1)
     })
@@ -85,7 +85,7 @@ export class HeaderComponent implements OnInit {
     }
 
     this.rest.PostDataToAPI<any>({ MKV9999_ID: this.user.MKV9999_ID, MKV9999_ID2: (element.MKV9999_ID == this.user.MKV9999_ID ? element.MKV9999_ID2 : element.MKV9999_ID) }, 'MKV7001/markread').subscribe(df => {
-      //////////console.log(df)
+      ////////////console.log(df)
     })
     element.count = 0;
   }
@@ -109,7 +109,7 @@ export class HeaderComponent implements OnInit {
       date: new Date(),
       type: 1
     }), 'MKV7001/CreateMess').toPromise()
-    //////////console.log(data)
+    ////////////console.log(data)
     if (data != null) {
       this.socket.emit("Message", data)
     }

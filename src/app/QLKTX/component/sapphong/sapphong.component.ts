@@ -38,7 +38,7 @@ public title=""
       $('.qlp').css('display','none')
       $('.qlsp').css('display','unset')
       $('thead>tr>td>input:checkbox').change(function(){
-        ////////////console.log($(this).is(':checked'))
+        //////////////console.log($(this).is(':checked'))
         $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       $('.table-click').on('click','tbody>tr',function(Event){
@@ -71,18 +71,18 @@ public title=""
         tenphong = $(this).attr('title')
         option = 1
         that.title = "Chọn " + that.listgiuong.filter(c => { return c.trangthai === false }).length + " nhân viên cho phòng: " + $(this).find('.card-title').text()
-        //////////console.log('1')
+        ////////////console.log('1')
         let ch
           getdata(that.phong.khu).then(da=>{
                 ch=da
-          //////////console.log('2')   
+          ////////////console.log('2')   
         if (ch == false) {
           return false
         } else {
        that.listEPcopy=that.listEP.filter(c=>{return c.capbac===that.phong.capbac})
           that.showdodung().then(data => {
             if (data) {
-              ////////////console.log(that.ktx0010)
+              //////////////console.log(that.ktx0010)
               $('#sapphongtudongmodal').modal()
             }
           })
@@ -93,7 +93,7 @@ public title=""
         //$('#sapphongtudongmodal').modal()
     })​
       //////////////////
-      $('#sapphongtudong').click(function(e){////////////console.log(e.which)14%
+      $('#sapphongtudong').click(function(e){//////////////console.log(e.which)14%
         let khu=that.phong!=null?that.phong.khu:$('#listkhu').val()
         if(khu=='a'){
           alert('Bạn phải chọn khu Nam Nữ trước.')
@@ -108,7 +108,7 @@ public title=""
            that.listphongcopy=that.listphong.filter(c=>{return (c.slotuse<c.slot)})
            that.showdodung().then(data => {
             if (data) {
-              ////////////console.log(that.ktx0010)
+              //////////////console.log(that.ktx0010)
               $('#sapphongtudongmodal').modal()
             }
           })
@@ -128,7 +128,7 @@ public title=""
         idgiuong=$(this).attr('id')
         if($(this).hasClass('bg-success')){
           that.rest.GetDataFromAPI<KTX0002>('KTX0002/Get/'+idgiuong).subscribe(data=>{
-            //////////console.log(data)
+            ////////////console.log(data)
             that.giuong=data
             that.title="Giường: "+$(this).find('.card-title').text()
           $('#nguoitronggiuong').modal()
@@ -147,7 +147,7 @@ public title=""
           that.listEPcopy=that.listEP
           that.showdodung().then(data => {
             if (data) {
-              ////////////console.log(that.ktx0010)
+              //////////////console.log(that.ktx0010)
               $('#sapphongtudongmodal').modal()
             }
           })}
@@ -169,7 +169,7 @@ public title=""
               }
               $('#nguoitronggiuong').modal('hide')
             }else{
-              //////////console.log(data.mess)
+              ////////////console.log(data.mess)
             }
           })
         })
@@ -187,7 +187,7 @@ public title=""
       //     if(option==2){
       //       var EP=that.listEP[$(this).find('input[name=ID]').val()]
       //       that.rest.PostDataToAPI<result<KTX0020>>(EP,'QLSP/AddEPToGiuong/'+idgiuong).subscribe(data=>{
-      //         //////////console.log(data)
+      //         ////////////console.log(data)
       //         if(data.code=="OK"){
       //           $('.giuongclick').each(function(){
       //             if($(this).attr('id')==data.data.KTX0002_ID){
@@ -214,7 +214,7 @@ public title=""
         }
         that.listEP=[]
        let data= await that.rest.GetDataFromAPI<KTX0020[]>('QLSP/GetAllEp').toPromise()
-       ////////console.log(data)
+       //////////console.log(data)
           data.forEach(cal=>{
             if(cal.gioitinh==(khu=='N'))
             that.listEP.push(cal)
@@ -285,9 +285,9 @@ public title=""
     let arr:xuatkho=new xuatkho()
     this.ktx20tempprint=[]
     let that=this
-    //////////console.log(that.listEPcopy.filter(c=>{return c.check===true}))
+    ////////////console.log(that.listEPcopy.filter(c=>{return c.check===true}))
   let  datas=await that.rest.PostDataToAPI<result<KTX0020>[]>({arrPhong:that.listphongcopy.filter(c=>{return c.check===true}),EPs:that.listEPcopy.filter(c=>{return c.check===true}) },'QLSP/AddEPToGiuongAuto').toPromise()
-      //////////console.log(datas)
+      ////////////console.log(datas)
        let ok=0
         let ng=0
         that.ktx0010.forEach(kll=>{
@@ -324,7 +324,7 @@ public title=""
              arr31.push(tem)
            })
              that.rest.PostDataToAPI<result<KTX0031>[]>(arr31,'KTX0031/add').subscribe(data=>{
-               //////////console.log(data)
+               ////////////console.log(data)
                data.forEach(val=>{
                  if(val.code=="OK"){
                   
@@ -337,12 +337,12 @@ public title=""
       })
       ///////////////////////////////////////////////
       
-      //////////console.log(arr)
+      ////////////console.log(arr)
     let input = new FormData();
     input.append('ListUser',JSON.stringify(arr.ListUser) );
     input.append('ListProduct',JSON.stringify(arr.ListProduct) );
     let kkkk=await this.rest.Post<any>(input, Global.xuatkhoAPI).toPromise()
-     ////////console.log(kkkk)
+     //////////console.log(kkkk)
      
       alert('Đã sắp phòng cho '+ok+' người\n'+(ng!=0?('Chưa sắp được phòng cho '+ng+' người'):''))
       if(check){
@@ -364,7 +364,7 @@ public title=""
     this.sapphong(true)
   }
   loc(){
-    ////////////console.log(this.listEP)
+    //////////////console.log(this.listEP)
     let value=Number($('#loc').val()) 
     if(value!=0){
       this.listphongcopy=this.listphongtemp.filter(c=>{return c.capbac===value})

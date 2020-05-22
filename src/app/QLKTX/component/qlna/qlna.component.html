@@ -19,38 +19,39 @@
                       </div>
                       <div class="col-auto mr-1 p-0">
                         <app-button-count classs="dsdsdsd" [start]="start" [step]="step" [listdata]="listMKV9999"  (step)="getstep ($event)"  ></app-button-count>
-                        <app-button-preview  [start]="start" [step]="step" [listdata]="listMKV9999" (start)="getstart ($event)" ></app-button-preview>
-                        <app-button-next [start]="start" [step]="step" [listdata]="listMKV9999"  (start)="getstart ($event)" ></app-button-next>
+                        <app-button-preview  classs="btn-sm"  [start]="start" [step]="step" [listdata]="listMKV9999" (start)="getstart ($event)" ></app-button-preview>
+                        <app-button-next classs="btn-sm" [start]="start" [step]="step" [listdata]="listMKV9999"  (start)="getstart ($event)" ></app-button-next>
                       </div>
                       <div class="col-auto p-0">
-                        <app-button-datetimepicker ids="jkkjjjkdf"   (data)="getstartdate($event)"></app-button-datetimepicker>
+                        <app-button-datetimepicker classs="btn btn-sm btn-outline-secondary mr-1 px-0"  ids="jkkjjjkdf"   (data)="getstartdate($event)"></app-button-datetimepicker>
                       </div>
                       <div class="col-auto p-0">
-                        <app-button-datetimepicker ids="jkkjjjk"   (data)="getenddaate($event)"></app-button-datetimepicker>
+                        <app-button-datetimepicker classs="btn btn-sm btn-outline-secondary mr-1 px-0" ids="jkkjjjk"   (data)="getenddaate($event)"></app-button-datetimepicker>
                       </div>
                     
                       <div class="col-auto py-0">
-                        <select [(ngModel)]="loaidanhsach"  class="btn btn-secondary mr-1" (change)="filter()">
+                        <select style="width: 130px;padding-left: 0 !important;padding-right: 0 !important"  [(ngModel)]="loaidanhsach"  class="btn btn-secondary mr-1 btn-sm" (change)="filter()">
                           <option value="0">ALL</option>
                           <option value="1">Danh sách chịu thuế</option>
                           <option value="2">Danh sách miễn thuế</option>
                         </select>
+                        <input style="width: 90px;" type="text" placeholder="ID, Tên" class="btn btn-outline-secondary mr-1 btn-sm" [(ngModel)]="keysearch">
                      
-                        <button title="Đồng bộ dữ liệu" (click)="getdataa(true)"  class="btn btn-success  mr-1"><i class="fas fa-sync-alt  {{loading?'fa-spin':''}}"></i></button>
+                        <button title="Đồng bộ dữ liệu" (click)="getdataa(true)"  class="btn btn-success  mr-1 btn-sm"><i class="fas fa-sync-alt  {{loading?'fa-spin':''}}"></i></button>
                      
-                        <button class="btn btn-info mr-1" title="Lưu dưới dạng excel" (click)="Downloadtable()"><i class="fa fa-download"></i></button>
+                        <button class="btn btn-info mr-1 btn-sm" title="Lưu dưới dạng excel" (click)="Downloadtable()"><i class="fa fa-download"></i></button>
                     
-                        <button (click)="loadmachine()" class="btn btn-warning text-white mr-1" title="Download dữ liệu từ máy chấm vân tay về"><i class="fas fa-cloud-download-alt"></i></button>
+                        <button (click)="loadmachine()" class="btn btn-warning text-white mr-1 btn-sm" title="Download dữ liệu từ máy chấm vân tay về"><i class="fas fa-cloud-download-alt"></i></button>
                       
-                        <button class="btn btn-danger mr-1" (click)="delete()" title="Xóa dữ liệu máy chấm vấn tay"><i class="fas fa-trash-alt"></i></button>
+                        <button class="btn btn-danger mr-1 btn-sm" (click)="delete()" title="Xóa dữ liệu máy chấm vấn tay"><i class="fas fa-trash-alt"></i></button>
                    
-                        <button title="Thiết lập máy quẹt vân tay" (click)="themnhaan()"  class="btn btn-primary mr-1"><i class="fa fa-cog"></i></button>
-                        <button title="Quyết toán những người đã chọn" (click)="quyettoan()"  class="btn " style="background: rgb(147, 42, 156);color: white;"><i class="fas fa-hand-holding-usd"></i> </button>
+                        <button title="Quyết toán những người đã chọn" (click)="quyettoan()"  class="btn  mr-1 btn-sm" style="background: rgb(147, 42, 156);color: white;"><i class="fas fa-hand-holding-usd"></i> </button>
+                        <button title="Thiết lập máy quẹt vân tay" (click)="themnhaan()"  class="btn btn-primary btn-sm"><i class="fa fa-cog"></i></button>
                       </div>
                     </div>
                   </div>
                   <div class="card-body" style="padding: 5px;">
-                      <table class="table table-bordered ddddddddddddddddddddd" id="export">
+                      <table class="table table-bordered ddddddddddddddddddddd" style="font-size: 12px;" id="export">
                           <thead>
                             <tr>
                               <th rowspan="2" class="fulljustify"  style="width: 20px;"><input type="checkbox" (change)="checkallelement($event)"></th>
@@ -61,12 +62,14 @@
                               <th rowspan="2" >Bậc</th>
                               <th rowspan="2" >CMTND</th>
                               <th rowspan="2" >Phòng</th>
+                              <th rowspan="2" >Ngày vào</th>
                               <th colspan="2">Bữa sáng<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="buasang"></app-button-sort></th>
                               <th colspan="2">Bữa trưa<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="buatrua"></app-button-sort></th>
                               <th colspan="2">Bữa tối<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="buatoi"></app-button-sort></th>
-                              <th rowspan="2" style="width: 120px;" >Tổng</th>
-                              <th rowspan="2" style="width: 120px;" >Đã TT</th>
-                              <th rowspan="2" style="width: 120px;" >Thành tiền</th>
+                              <th rowspan="2" style="width: 70px;" >Tổng</th>
+                              <th rowspan="2" style="width: 70px;" >Đã TT</th>
+                              <th rowspan="2" style="width: 70px;padding: 0 !important ;" >Thành tiền</th>
+                              <th rowspan="2" style="width: 20px;" ><i class="fa fa-list"></i></th>
                             </tr>
                             <tr>
                               <th>SL</th>
@@ -79,7 +82,7 @@
                             </thead>
                             <tbody>
                               <ng-container *ngFor="let element of listMKV9999;let i=index">
-                                <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))">
+                                <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))&&keysearch==''||search(element)&&keysearch!=''">
                                   <ng-container *ngIf="element.MKV9999!=null">
                                       <tr>
                                           <td><input type="checkbox" [(ngModel)]="element.check"></td>
@@ -89,7 +92,8 @@
                                           <td style="text-align: start;">{{element.MKV9999.thetu_id}}</td>
                                           <td>{{element.MKV9999.capbac}}</td>
                                           <td style="text-align: start;">{{element.MKV9999.cmtnd_so}}</td>
-                                          <td>{{element.phong}}</td>
+                                          <td>{{element.MKV9999.email}}</td>
+                                          <td>{{element.MKV9999.hochieu_ngaycap!=null?(element.MKV9999.hochieu_ngaycap|date:'dd/MM/yyyy'):''}}</td>
                                           <td>{{element.buasang!=null?element.buasang:'NaN'}}</td>
                                           <td style="text-align: start;">{{element.thanhtienbuasang| currency : '':''  : '1.0-0' }}</td>
                                           <td>{{element.buatrua!=null?element.buatrua:'NaN'}}</td>
@@ -99,6 +103,7 @@
                                           <td style="text-align: start;">{{element.tong| currency : '':''   : '1.0-0' }}</td>
                                           <td style="text-align: start;">{{element.thanhtoan| currency : '':''   : '1.0-0' }}</td>
                                           <td style="text-align: start;">{{element.thanhtien| currency : '':''   : '1.0-0' }}</td>
+                                          <td style=""><button (click)="detailrow(element)" class="btn btn-sm p-0"><i class="fa fa-eye"></i></button></td>
                                       </tr>
                                   </ng-container>
                                   <ng-container *ngIf="element.MKV9999==null">
@@ -110,7 +115,8 @@
                                           <td style="text-align: start;">Không có dữ liệu</td>
                                           <td>Không có dữ liệu</td>
                                           <td>Không có dữ liệu</td>
-                                          <td style="text-align: start;">{{element.phong}}</td>
+                                          <td style="text-align: start;"></td>
+                                          <td style="text-align: start;"></td>
                                           <td>{{element.buasang!=null?element.buasang:'NaN'}}</td>
                                           <td style="text-align: start;">{{element.thanhtienbuasang| currency : '':'' : '1.0-0' }}</td>
                                           <td>{{element.buatrua!=null?element.buatrua:'NaN'}}</td>
@@ -120,6 +126,7 @@
                                           <td style="text-align: start;">{{element.tong| currency : '':''   : '1.0-0' }}</td>
                                           <td style="text-align: start;">{{element.thanhtoan| currency : '':''   : '1.0-0' }}</td>
                                           <td style="text-align: start;">{{element.thanhtien| currency : '':''   : '1.0-0' }}</td>
+                                          <td style=""><button (click)="detailrow(element)"  class="btn  btn-sm p-0"><i class="fa fa-eye"></i></button></td>
                                       </tr>
                                   </ng-container>
                                 </ng-container>
@@ -276,3 +283,36 @@
   </div>
 </div>
 <app-loading [loading]="loading" caption="Đang đồng bộ dữ liệu, vui lòng chờ."></app-loading>
+
+<div class="modal fade " id="detailrowmodal" role="dialog" >
+	<div class="modal-dialog   modal-700" >
+		<div class="modal-content " >
+			<div class="modal-header">
+				<h5 class="modal-title">Chi tiết bữa ăn của nhân viên </h5>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body ">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>STT</th>
+              <th>User_ID</th>
+              <th>Thời gian chấm vân tay</th>
+              <th>Loại bữa ăn</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let element of datashow;let i=index">
+              <tr>
+                <td>{{i+1}}</td>
+                <td>{{element.User_ID}}</td>
+                <td>{{element.Verify_Date|date:'dd/MM/yyyy hh:mm:ss'}}</td>
+                <td>{{element.loaibuaan}}</td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+			</div>
+		</div>
+	</div>
+</div>

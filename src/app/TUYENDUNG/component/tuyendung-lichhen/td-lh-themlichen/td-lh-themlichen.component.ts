@@ -41,7 +41,7 @@ public user:MKV9999
   }
   getlistRM0010($event:RM0010[]){
     this.listRM0010=$event
-    //////////console.log($event)
+    ////////////console.log($event)
   }
   async themlichhen(){
     if(this.user.email==null||this.user.email==''){
@@ -68,7 +68,7 @@ public user:MKV9999
       alert("Bạn chưa chọn ứng viên phỏng vấn.")
       return false
     }
-    ////////console.log(this.listMKV9999choose)
+    //////////console.log(this.listMKV9999choose)
     for(const x of this.listMKV9999choose){
       let mail:Mail=new Mail()
       mail.from=this.user.email
