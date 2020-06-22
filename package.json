@@ -26,7 +26,7 @@
     "domsanitizer": "^0.2.2",
     "file-saver": "^2.0.2",
     "html2canvas": "^1.0.0-rc.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jquery-datetimepicker": "^2.5.21",
     "jquery-validation": "^1.19.2",
     "jspdf": "^1.5.3",
