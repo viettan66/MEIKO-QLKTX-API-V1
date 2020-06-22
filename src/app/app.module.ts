@@ -88,6 +88,8 @@ import { ButtonPreviewComponent } from './Layout/button/button-preview/button-pr
 import { ButtonCountComponent } from './Layout/button/button-count/button-count.component';
 import { ButtonDownloadJsonComponent } from './Layout/button/button-download-json/button-download-json.component';
 import { ButtonDatetimepickerComponent } from './Layout/button/button-datetimepicker/button-datetimepicker.component';
+import { ButtonDatetimepickerComponent2 } from './Layout/button/button-datetimepicker2/button-datetimepicker.component';
+import { ButtonDatetimepickerComponent3 } from './Layout/button/button-datetimepicker3/button-datetimepicker.component';
 import { ButtonSortComponent } from './Layout/button/button-sort/button-sort.component';
 import { SelectAccountModalComponent } from './Layout/select-account-modal/select-account-modal.component';
 import { SelectAccountAddKTXComponent } from './Layout/select-account-add-ktx/select-account-add-ktx.component';
@@ -210,6 +212,8 @@ const routes: Routes = [
     ButtonCountComponent,
     ButtonDownloadJsonComponent,
     ButtonDatetimepickerComponent,
+    ButtonDatetimepickerComponent2,
+    ButtonDatetimepickerComponent3,
     ButtonSortComponent,
     SelectAccountModalComponent,
     SelectAccountAddKTXComponent,

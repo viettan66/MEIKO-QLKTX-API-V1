@@ -39,7 +39,10 @@ export class UngvienComponent implements OnInit {
   @Input() sophieu
   @Output('listRM0010') listRM0010 = new EventEmitter<RM0010[]>()
   @Output('listRM0010delete') listRM0010delete = new EventEmitter<RM0010[]>()
-  constructor(public rest: RESTService) { }
+  constructor(public rest: RESTService) {
+//console.log("Liển"<"Dung")
+
+   }
   public listdon: A0028[] = []
   public bophanid = 'all'
   public vitriid = 'all'
@@ -61,8 +64,10 @@ export class UngvienComponent implements OnInit {
             this.listmkv9998.push(element)
       });
       this.listdon = data.data
-      ////////////console.log(this.listdon)
+     //console.log(this.listdon)
     })
+    this.listRM0001=await this.rest.GetDataFromAPI<RM0001[]>("RM0001/Getall").toPromise()
+    //console.log(this.listRM0001)
     await this.getdatarm0010('all')
     this.bophanchange({target:{value:'all'}})
   }
@@ -81,25 +86,25 @@ export class UngvienComponent implements OnInit {
     $("#"+(this.ids==null? "modalungvien":this.ids)).modal()
   }
   bophanchange(id) { 
-    this.listRM0001=[]
-    this.bophanid = id.target.value
-    if (this.bophanid != 'all'){
-      this.listrm0001 =[...new Set(this.listdon.filter(c => { return c.T098C === this.bophanid }).map(x=>{return x.T005C}))] 
-      ////////////console.log(this.listrm0001)
-      this.listrm0001.forEach(async b=>{
-        this.listRM0001.push(await this.rest.GetDataFromAPI<RM0001>('RM0001/Getid/'+b).toPromise())
-      })
-    }
-    else  {
-      this.listrm0001 =[...new Set(this.listdon.map(x=>{return x.T005C}))] 
-    this.listrm0001.forEach(async b=>{
-      this.listRM0001.push(await this.rest.GetDataFromAPI<RM0001>('RM0001/Getid/'+b).toPromise())
-    })
-    }
+    // this.listRM0001=[]
+    // this.bophanid = id.target.value
+    // if (this.bophanid != 'all'){
+    //   this.listrm0001 =[...new Set(this.listdon.filter(c => { return c.T098C === this.bophanid }).map(x=>{return x.T005C}))] 
+    //   //console.log(this.listrm0001)
+    //   this.listrm0001.forEach(async b=>{
+    //     this.listRM0001.push(await this.rest.GetDataFromAPI<RM0001>('RM0001/Getid/'+b).toPromise())
+    //   })
+    // }
+    // else  {
+    //   this.listrm0001 =[...new Set(this.listdon.map(x=>{return x.T005C}))] 
+    // this.listrm0001.forEach(async b=>{
+    //   this.listRM0001.push(await this.rest.GetDataFromAPI<RM0001>('RM0001/Getid/'+b).toPromise())
+    // })
+    // }
   }
   vitrichange($event) {
     this.vitriid = $event.target.value
-    // ////////////console.log(this.bophanid)
+    // //////////////console.log(this.bophanid)
   }
   getrm0010($event) {
     if(this.rm0010show==null){
@@ -128,7 +133,7 @@ export class UngvienComponent implements OnInit {
   public detailrm0010 = new RM0010()
   showdetail(element: RM0010) {
     this.rm0010in = element
-    //////////console.log('fffffff')
+    ////////////console.log('fffffff')
     $("#"+(this.ids==null? "modalungvien":this.ids)).modal()
   }
   close(c,d?) {
@@ -153,7 +158,7 @@ export class UngvienComponent implements OnInit {
     
   }
   checkallitem($event) {
-    ////////////console.log( $event.target.checked)
+    //////////////console.log( $event.target.checked)
     if(this.rm0010show!=null){
       this.rm0010show.forEach(val => val.check =$event.target.checked)
     }else{
@@ -177,7 +182,7 @@ export class UngvienComponent implements OnInit {
 
   async save2(){
     let data = await this.rest.PostDataToAPI<result<RM0010>[]>(this.listrm0010DUPLICATE.filter(c=>c.check===true), "RM0010/add").toPromise()
-    //////////console.log(data)
+    ////////////console.log(data)
     data.filter(c=>c.code==="OK").map(x=>{
       this.listrm0010DUPLICATE.filter(b=>b.CMTND_SO.toString()===x.data.CMTND_SO.toString()).map(h=>this.listrm0010DUPLICATE.splice(this.listrm0010DUPLICATE.indexOf(h),1))
       this.listrm0010.push(x.data)
@@ -188,12 +193,12 @@ export class UngvienComponent implements OnInit {
   async upload() {
       this.listrm0010DUPLICATE=[]
     var listtemp: RM0010[] = await this.rest.ChooseFileExcel<RM0010[]>()
-    listtemp.map(f=>{
+    for(const f of listtemp){
       f.RM0081_A=[]
       f.RM0081_B=[]
-      f.CMTND_SO=f.CMTND_SO+""
-      f.MOBILE=f.MOBILE+""
-      f.EMAIL=f.EMAIL+""
+      f.CMTND_SO=f.CMTND_SO==undefined?null:(f.CMTND_SO +"")
+      f.MOBILE=f.MOBILE ==undefined?null:(f.MOBILE+"")
+      f.EMAIL=f.EMAIL  ==undefined?null:(f.EMAIL+"")
       f.RM0081_A.push(new RM0081_A({
         BATDAU:f['BATDAU'],
         KETTHUC:f['KETTHUC'],
@@ -213,12 +218,12 @@ export class UngvienComponent implements OnInit {
         DOC:f['DOC'],
         VIET:f['VIET']
       }))
-  })
-  ////////////console.log(listtemp) 
+  }
+  //////////////console.log(listtemp) 
     let dataf =await this.rest.PostDataToAPI<RM0010[]>({cmtnd:listtemp.filter(x=>x.CMTND_SO!="").map(x=>x.CMTND_SO),sdt:listtemp.filter(x=>x.MOBILE!="").map(x=>x.MOBILE),email:listtemp.filter(x=>x.EMAIL!="").map(x=>x.EMAIL),}, "RM0010/GetallCMTND").toPromise()
    
-    let arr=listtemp.filter(c=>!dataf.map(v=>v.CMTND_SO ).includes(c.CMTND_SO))
-    //////////console.log(arr)
+    let arr=listtemp.filter(c=>!dataf.map(v=>v.CMTND_SO ).includes(c.CMTND_SO)&&!dataf.map(v=>v.MOBILE ).includes(c.MOBILE)&&!dataf.map(v=>v.EMAIL ).includes(c.EMAIL))
+    ////////////console.log(arr)
     arr=$.merge(arr,listtemp.filter(c=>{return c.RM0010_ID!=null}))
     let data = await this.rest.PostDataToAPI<result<RM0010>[]>(arr, "RM0010/add").toPromise()
     if(dataf.length>0){
@@ -230,8 +235,8 @@ export class UngvienComponent implements OnInit {
       this.listrm0010DUPLICATE=listtemp.filter(c=>((dataf.filter(x=>x.CMTND_SO!="").map(v=>v.CMTND_SO ).includes(c.CMTND_SO)||dataf.filter(x=>x.MOBILE!="").map(v=>v.MOBILE ).includes(c.MOBILE)||dataf.filter(x=>x.EMAIL!="").map(v=>v.EMAIL ).includes(c.EMAIL))&&c.RM0010_ID==null))
       // this.listrm0010DUPLICATE=$.merge(this.listrm0010DUPLICATE,listtemp.filter(c=>(dataf.filter(x=>x.MOBILE!="").map(v=>v.MOBILE ).includes(c.MOBILE)&&c.RM0010_ID==null)))
       // this.listrm0010DUPLICATE=$.merge(this.listrm0010DUPLICATE,listtemp.filter(c=>(dataf.filter(x=>x.EMAIL!="").map(v=>v.EMAIL ).includes(c.EMAIL)&&c.RM0010_ID==null)))
-       //////////console.log(this.listrm0010DUPLICATE)
-      // //////////console.log(this.listrm0010)
+       ////////////console.log(this.listrm0010DUPLICATE)
+      // ////////////console.log(this.listrm0010)
       if(this.listrm0010DUPLICATE.length>0)
       $('#ungvienduplicate').modal()
     }
@@ -289,7 +294,7 @@ export class UngvienComponent implements OnInit {
   }
  async updatecomment(element){{
   let data=await this.rest.PutDataToAPI<result<any>>(element,"RM0010/updatecomment").toPromise()
-    //////////console.log(data)
+    ////////////console.log(data)
   }}
   downloadtemplate(){
       this.rest.DownloadFile("File/DownloadFile",'Ung_Vien_Template.xlsx').subscribe((result: any) => {

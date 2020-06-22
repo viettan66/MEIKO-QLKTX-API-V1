@@ -64,7 +64,7 @@ export class DanhsachtuyendungComponent implements OnInit {
       //   arrtemp.push(element.T098C)
     }
     let noti = await this.rest.PostDataToAPI<result<A0028>[]>(data.data, "A0028/add").toPromise()
-    ////////////console.log(noti)
+    //////////////console.log(noti)
     let datas = await this.rest.PostDataToAPI<A0028[]>({phongid:this.bophanID},"A0028/Getall").toPromise()
     // for(const x of data.data){
     //   x.RM0010=await this.rest.PostDataToAPI<RM0010[]>({A0028_ID:x.A0028_ID},'RM0010/Getall').toPromise()
@@ -77,7 +77,7 @@ export class DanhsachtuyendungComponent implements OnInit {
     datas.map(d=>
       d['conno']=(Number(d.A0028D.C001C)+Number(d.A0028D.C005C))-d['ok']
       )
-    //////////console.log(datas)
+    ////////////console.log(datas)
     this.loading = false
     this.listdon = datas
   }
@@ -86,7 +86,7 @@ export class DanhsachtuyendungComponent implements OnInit {
     if (!confirm("Bạn có chắc chắn muốn chuyển trạng thái yêu cầu đã chọn sang " + (value == 1 ? "Đang tuyển" : "Hoàn thành"))) return
     this.listdon.filter(c => c.check).map(x => { x.trangThai = value; x.check = null })
     let data = await this.rest.PostDataToAPI<any>(this.listdon, "A0028/hoanthanhdanhgia").toPromise()
-    //////////console.log(data)
+    ////////////console.log(data)
   }
   trclick(id) {
     $('.trtwo:not(#' + id + ')').addClass('trnone')
@@ -158,7 +158,7 @@ export class DanhsachtuyendungComponent implements OnInit {
 
   }
   async listRM0010delete($event) {
-    //////////console.log(this.listrm0010)
+    ////////////console.log(this.listrm0010)
     $event.filter(c => c.check).map(x => {
       x.A0028_ID = null
     })
@@ -181,7 +181,7 @@ listRM0006:any=[]
   async showinterview(element) {
     this.thisA0028 = element; 
     let data=await this.rest.GetDataFromAPI<A0028E[]>("A0028/getnguoiphongvan/"+this.thisA0028.A0028_ID).toPromise()
-    //////////console.log(data)
+    ////////////console.log(data)
     this.isactive()
     this.thisA0028['RM0015'] = await this.rest.PostDataToAPI<RM0015[]>({ A0028_ID: this.thisA0028.A0028_ID }, "RM0015/Getalldanhgia").toPromise()
     if(this.thisA0028['RM0015'].length!=0)
@@ -189,12 +189,12 @@ listRM0006:any=[]
     for(const o of this.thisA0028['RM0015']){
       await this.checkele(o)
     }
-   // //////////console.log(this.listRM0006)
+   // ////////////console.log(this.listRM0006)
     $('#modaldanhgia').modal()
   }
   isactive() {
     this.thisA0028['RM0010s'] = this.thisA0028.RM0010.filter(c => !c['isactive'])
-    // //////////console.log(this.thisA0028['RM0010s'])
+    // ////////////console.log(this.thisA0028['RM0010s'])
   }
   Createtimer(element) {
     this.thisA0028 = element; 
@@ -261,11 +261,11 @@ listRM0006:any=[]
     this.listaccountchoose.map(x=>{
       arr.push(new A0028E({MKV9999_ID:x.MKV9999_ID,A0028_ID:this.thisA0028.A0028_ID}))
     })
-    //////////console.log(arr)
+    ////////////console.log(arr)
     let kjkjkjr=await this.rest.PostDataToAPI<result<any>>(this.thisA0028,"A0028/updatethoidiandiadiem").toPromise()
     let kjkjkj=await this.rest.PostDataToAPI<result<any>>(arr,"A0028/updatenguoiphongvan").toPromise()
-    //////////console.log(kjkjkj)
-    ////////////console.log(this.listaccountchoose)
+    ////////////console.log(kjkjkj)
+    //////////////console.log(this.listaccountchoose)
     for (const x of this.listaccountchoose) {
       let mail: Mail = new Mail()
       mail.from = this.user.email
@@ -338,12 +338,12 @@ Thông tin chi tiết:
   }
   async updateRM0015(element:RM0015){
     let k=await this.rest.GetDataFromAPI<RM0015>("RM0015/Getall2/"+element.RM0015_ID).toPromise()
-    ////////////console.log(k)
+    //////////////console.log(k)
     element.ketQua=k.ketQua
   }
   async updatecmtRM0015(element:RM0015){
     let k=await this.rest.PutDataToAPI<RM0015>(element,"RM0015/update").toPromise()
-    //////////console.log(k)
+    ////////////console.log(k)
     //element.ketQua=k.ketQua
   }
   async updateA0028(){
@@ -351,7 +351,7 @@ Thông tin chi tiết:
     this.thisA0028['ok']=datas['ok']
     this.thisA0028['wait']=datas['wait']
     this.thisA0028['conno']=(Number(datas.A0028D.C001C)+Number(datas.A0028D.C005C))-datas['ok']
-    //////////console.log(datas)
+    ////////////console.log(datas)
     $('#modaldanhgia').modal('hide')
   }
   dowloadtable(){

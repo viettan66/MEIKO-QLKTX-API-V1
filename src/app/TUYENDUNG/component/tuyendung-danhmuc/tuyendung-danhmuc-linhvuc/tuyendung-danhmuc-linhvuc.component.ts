@@ -27,7 +27,7 @@ export class TuyendungDanhmucLinhvucComponent implements OnInit {
     //$('#myModalungvieninfo').modal()
   }
   savecongviec(){
-    ////////////console.log(this.newrm0002)
+    //////////////console.log(this.newrm0002)
     this.rest.PostDataToAPI<result<RM0002>>(this.newrm0002,'RM0002/add').subscribe(data=>{
       if(data.code=="OK"){
         this.listrm0002.push(data.data)
@@ -52,7 +52,7 @@ export class TuyendungDanhmucLinhvucComponent implements OnInit {
        $('#row'+element.RM0002_ID).find('input:text,select').addClass('none').attr('disabled',true)
        $('#edit'+element.RM0002_ID).find('i').removeClass('fa-save').addClass('fa-edit')
        let dataa= await this.rest.PutDataToAPI<result<RM0002>>(element,'RM0002/update').toPromise()
-       ////////////console.log(dataa)
+       //////////////console.log(dataa)
        if(dataa.code=="OK"){{
          element=dataa.data
        }}

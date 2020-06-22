@@ -1,33 +1,41 @@
 
         <div class="card  " style="background-color: rgb(255, 255, 255);">
-            <div class="card-header">
-                DANH SÁCH YÊU CẦU NHÂN SỰ
-                <span class="float-right">
-                        <app-button-count classs="sdfs" [start]="start" [step]="step" [listdata]="listdon"  (step)="getstep ($event)"  ></app-button-count>
-                        <app-button-preview  [start]="start" [step]="step" [listdata]="listdon" (start)="getstart ($event)" ></app-button-preview>
-                        <app-button-next [start]="start" [step]="step" [listdata]="listdon"  (start)="getstart ($event)" classs="mr-1" ></app-button-next>
-                    <select id="filter" class="btn btn-outline-secondary mr-1" (change)="bophanchange($event)">
+            <div class="card-header p-1">
+                
+                 <div class="row no-gutters">
+                     <div class="col" style="justify-content: center;">
+                          <!-- DANH SÁCH YÊU CẦU NHÂN SỰ -->
+                     </div>
+                     <div class="col-auto">
+                         <app-button-count classs="sdfs" [start]="start" [step]="step" [listdata]="listdon"  (step)="getstep ($event)"  ></app-button-count>
+                        <app-button-preview classs="btn btn-sm" [start]="start" [step]="step" [listdata]="listdon" (start)="getstart ($event)" ></app-button-preview>
+                        <app-button-next classs="btn btn-sm"  [start]="start" [step]="step" [listdata]="listdon"  (start)="getstart ($event)" classs="mr-1" ></app-button-next>
+                    <select id="filter" class="btn btn-outline-secondary mr-1 btn-sm" (change)="bophanchange($event)" style="width: 120px;">
                         <option value="all">Bộ phận</option>
                         <option *ngFor="let element of listbophan;let i=index;" value="{{element.phong_id}}">{{element.bophan_ten}} </option>
                     </select>
-                    <select id="filter2" class="btn btn-outline-secondary mr-1" [(ngModel)]="filtertrangthai">
+                    <select id="filter2" class="btn btn-outline-secondary mr-1 btn-sm" [(ngModel)]="filtertrangthai">
                         <option value="all">Trạng thái</option>
                         <option value="2">Đã hoàn thành</option>
                         <option value="1">Chưa hoàn thành</option>
                     </select>
-                    <select id="filter2" class="btn btn-outline-secondary mr-1" [(ngModel)]="filtercapbac">
+                    <select id="filter2" class="btn btn-outline-secondary mr-1 btn-sm" [(ngModel)]="filtercapbac">
                         <option value="all">Cấp bậc</option>
                         <option value="1">Công nhân</option>
                         <option value="2">Nhân viên</option>
                     </select>
-                    <button class="btn mr-1 btn-warning text-white" (click)="dowloadtable()" ><i class="fa fa-download"></i></button>
-                    <button *ngIf="button5"  (click)="updateyeucau(2)" title="Hoàn thành yêu cầu" class="btn btn-primary mr-1"><i class="fab fa-font-awesome-flag"></i></button>
-                    <button *ngIf="button6"  (click)="updateyeucau(1)" title="Tuyển dụng lại yêu cầu" class="btn btn-primary mr-1"><i class="fas fa-redo-alt"></i></button>
-                </span>
+                    <button class="btn mr-1 btn-warning text-white btn-sm" (click)="dowloadtable()" ><i class="fa fa-download"></i></button>
+                    <button *ngIf="button5"  (click)="updateyeucau(2)" title="Hoàn thành yêu cầu" class="btn btn-primary mr-1 btn-sm"><i class="fab fa-font-awesome-flag"></i></button>
+                    <button *ngIf="button6"  (click)="updateyeucau(1)" title="Tuyển dụng lại yêu cầu" class="btn btn-primary mr-1 btn-sm"><i class="fas fa-redo-alt"></i></button>
+                
+                     </div>
+                 </div>
+                <!-- <span class="float-right">
+                        </span> -->
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
                 <div class="row no-gutters">
-                    <table class="table-td-p-6-3 td table table-bordered tablelistdon table-hover" id="tabletoexport">
+                    <table class="table-td-p-6-3 td table table-bordered tablelistdon table-hover" id="tabletoexport" style="font-size: 12px;">
                         <thead style="text-align: center;">
                             <tr>
                                 <td rowspan="2" style="width: 20px;"><input type="checkbox" (change)="checkallrow($event)"></td>

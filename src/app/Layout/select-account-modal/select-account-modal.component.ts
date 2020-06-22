@@ -44,9 +44,9 @@ export class SelectAccountModalComponent implements OnInit {
     this.checked.emit(true);
   }
  async savemail(element){
-    ////////////console.log("save mail "+element.hodem+' '+element.ten+":"+element.email)
+    //////////////console.log("save mail "+element.hodem+' '+element.ten+":"+element.email)
     let dataa=await  this.rest.PutDataToAPI<any>(element,"Account/updateinfo").toPromise()
-    ////////////console.log(dataa)
+    //////////////console.log(dataa)
   }
  
   bophanchange($event){
@@ -83,7 +83,7 @@ export class SelectAccountModalComponent implements OnInit {
     this.start = $event
   }
   getstep($event) {
-    ////////console.log($event)
+    //////////console.log($event)
     this.step = $event
   }
   getphongid(phong_id){

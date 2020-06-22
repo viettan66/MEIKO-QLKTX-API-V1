@@ -36,12 +36,12 @@ export class QlktxUploadNhanvienComponent implements OnInit {
      x.phong=(x.phong+"").replace(/\s/g,'').trim()
      if((x.manhansu+'').length<6){
        x.manhansu='00000000'.substring(0,6-x.manhansu.length)+x.manhansu
-       ////////////console.log(x)
+       //////////////console.log(x)
      }
      
       let l=await this.listMKV9999.filter( c=>{return c.manhansu===x.manhansu})
-      ////////////console.log(l)
-      ////////////console.log(x)
+      //////////////console.log(l)
+      //////////////console.log(x)
       if(l.length!=0){
         l[0].matkhau="123456"
         let lkk=  await this.rest.PostDataToAPI<result<MKV9999>>(l[0],'Account/add').toPromise()
@@ -84,7 +84,7 @@ export class QlktxUploadNhanvienComponent implements OnInit {
       }
     })).then(k=>{
 
-    ////////////console.log($event)
+    //////////////console.log($event)
     
    this.pending=false
     this.listKTX0002=$event
@@ -109,7 +109,7 @@ export class QlktxUploadNhanvienComponent implements OnInit {
   })) .then(fj=>{
 
    this.pending=false
-    ////////////console.log(data)
+    //////////////console.log(data)
   })
     
   }
@@ -132,7 +132,7 @@ return element==null?'':new Date(element)
     await this.rest.PostDataToAPI({phong_id:dat3.id,bophan_ma:dat3.bophan_ma,bophan_ten:dat3.bophan_ten,idcha:dat3.idcha},'MKV9998/add').toPromise()
     a.matkhau='123456'
     let lkk=  await this.rest.PostDataToAPI<result<MKV9999>>(a,'Account/add').toPromise()
-    //if(lkk.code==="OK")////////console.log(lkk)
+    //if(lkk.code==="OK")//////////console.log(lkk)
   })
 }
 }

@@ -47,9 +47,9 @@
                             <thead><tr>
                                 <th style="width: 20px;"><input type="checkbox" ></th>
                                 <th style="width: 40px;">STT</th>
-                                <th>Tên <app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="ten"></app-button-sort></th>
-                                <th>ID<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="iddd"></app-button-sort></th>
-                                <th>BP</th>
+                                <th>Tên <app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="hoten"></app-button-sort></th>
+                                <th>ID<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="manhansu"></app-button-sort></th>
+                                <th (click)="test()">BP</th>
                                 <th>Bậc</th>
                                 <th>CMTND</th>
                                 <th>Phòng<app-button-sort [listdata]="listMKV9999" (listdata)="getlist($event)" key="phong"></app-button-sort></th>
@@ -61,22 +61,22 @@
                               <tbody>
                                 <ng-container *ngFor="let element of listMKV9999;let i=index">
                                   <ng-container *ngIf="((i>=start*step) && (i<(start+1)*step))&&keysearch==''||search(element)&&keysearch!=''">
-                                    <ng-container *ngIf="element.MKV9999!=null">
+                                    <ng-container >
                                         <tr>
                                             <td><input type="checkbox" name="" id=""></td>
                                             <td>{{i+1}}</td>
-                                            <td>{{element.MKV9999.hodem+' '+element.MKV9999.ten}}</td>
-                                            <td>{{element.MKV9999.manhansu}}</td>
-                                            <td>{{element.MKV9999.thetu_id}}</td>
-                                            <td>{{element.MKV9999.capbac}}</td>
-                                            <td>{{element.MKV9999.cmtnd_so}}</td>
-                                            <td>{{element.MKV9999.email}}</td>
-                                            <td>{{element.MKV9999.hochieu_ngaycap!=null?(element.MKV9999.hochieu_ngaycap|date:'dd/MM/yyyy'):''}}</td>
-                                            <td>{{element.count!=null?element.count:'NaN'}}</td>
-                                            <td>{{element.step!=null?element.step:'NaN'}} <i style="cursor: pointer;" title="{{element.list.join('&#10;')}}" class="fa fa-eye float-right"></i> </td>
+                                            <td>{{element.hoten}}</td>
+                                            <td>{{element.manhansu}}</td>
+                                            <td>{{element.bophan_ten}}</td>
+                                            <td>{{element.capbac}}</td>
+                                            <td>{{element.cmtnd_so}}</td>
+                                            <td>{{element.phong}}</td>
+                                            <td>{{element.ngaycohieuluc}}</td>
+                                            <td>{{element.count}}</td>
+                                           <td>{{element.step-1}}  <!-- <i style="cursor: pointer;" title="element.list.join('&#10;')" class="fa fa-eye float-right"></i>--> </td> 
                                         </tr>
                                     </ng-container>
-                                    <ng-container *ngIf="element.MKV9999==null">
+                                    <!-- <ng-container *ngIf="element.MKV9999==null">
                                         <tr style=" background-color: rgb(255, 238, 238);">
                                             <td><input type="checkbox" name="" id=""></td>
                                             <td>{{i+1}}</td>
@@ -85,12 +85,12 @@
                                             <td>Không có dữ liệu</td>
                                             <td>Không có dữ liệu</td>
                                             <td>Không có dữ liệu</td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{element.phong2}}</td>
+                                            <td>{{element.ngayvao!=null?(element.ngayvao|date:'dd/MM/yyyy'):''}}</td>
                                             <td>{{element.count!=null?element.count:'NaN'}}</td>
                                             <td>{{element.step!=null?element.step:'NaN'}}</td>
                                         </tr>
-                                    </ng-container>
+                                    </ng-container> -->
                                   </ng-container>
                                 </ng-container>
                               </tbody>
@@ -103,7 +103,7 @@
 </div>
 
 
-<app-loading [loading]="loading" caption="Đang đồng bộ dữ liệu, vui lòng chờ."></app-loading>
+<app-loading [loading]="loading" caption="Đang đồng bộ dữ liệu. Có thể mất vài phút, xin vui lòng chờ."></app-loading>
 
 <div class="modal fade " id="themnhaanmodal" role="dialog" >
 	<div class="modal-dialog   modal-1360" >

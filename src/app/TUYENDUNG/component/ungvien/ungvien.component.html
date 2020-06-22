@@ -2,39 +2,39 @@
     <app-menu></app-menu>
     <div class="col px-2 py-2"  > -->
         <div class="card  " style="background-color: rgba(255, 255, 255, 0.842);">
-            <div class="card-header">
-              <div class="row">
-                <div class="col">ỨNG VIÊN</div>
+            <div class="card-header p-1">
+              <div class="row no-gutters">
+                <div class="col px-2">ỨNG VIÊN</div>
                 <div class="col-auto">
                   <!-- <span class="mr-3">Xem {{((start+1)*step)>=listrm0010.length?listrm0010.length:((start+1)*step)}}/{{listrm0010.length}}</span>
                     <button (click)="pre()" class="btn btn-sm btn-secondary mr-1" ><i class="fas fa-angle-left"></i></button>
                     <button (click)="nex()" class="btn btn-sm btn-secondary mr-5" ><i class="fas fa-angle-right"></i></button> -->
                     
-                    <app-button-count *ngIf="button1" classs="tyuioi" [start]="start" [step]="step" [listdata]="listrm0010" class="mr-2" (step)="getstep($event)" ></app-button-count>
-                    <app-button-preview *ngIf="button1"  [start]="start" [step]="step" [listdata]="listrm0010" (start)="getstart($event)"></app-button-preview>
-                    <app-button-next *ngIf="button1"  class="mr-2" [start]="start" [step]="step" [listdata]="listrm0010" (start)="getstart($event)"></app-button-next>
+                    <app-button-count classs=" btn-sm" *ngIf="button1" classs="tyuioi" [start]="start" [step]="step" [listdata]="listrm0010" class="mr-2" (step)="getstep($event)" ></app-button-count>
+                    <app-button-preview classs=" btn-sm"  *ngIf="button1"  [start]="start" [step]="step" [listdata]="listrm0010" (start)="getstart($event)"></app-button-preview>
+                    <app-button-next *ngIf="button1"  classs="mr-2 btn-sm" [start]="start" [step]="step" [listdata]="listrm0010" (start)="getstart($event)"></app-button-next>
 
-                  <select  *ngIf="button2"   class="btn btn-secondary mr-2" (change)="bophanchange($event)">
+                  <select  *ngIf="button2"   class="btn btn-secondary mr-2 btn-sm" (change)="bophanchange($event)">
                     <option value="all">BỘ PHẬN All</option>
                     <option value="{{element.T098C}}" *ngFor="let element of listmkv9998">{{element.T002C}}</option>
                   </select>
-                  <select  *ngIf="button3"      class="btn btn-secondary mr-2" (change)="vitrichange($event)">
+                  <select  *ngIf="button3" style="width: 120px;"     class="btn btn-secondary mr-2 btn-sm" (change)="vitrichange($event)">
                     <option value="all">VỊ TRÍ All</option>
                     <option value="{{element.RM0001_ID}}" *ngFor="let element of listRM0001">{{element.tenCongViec}}</option>
                   </select>
-                  <select   *ngIf="button4"     class="btn btn-secondary mr-2" (change)="ungvientypechange($event)" [(ngModel)]="ungvientype">
+                  <select   *ngIf="button4"     class="btn btn-secondary mr-2 btn-sm" (change)="ungvientypechange($event)" [(ngModel)]="ungvientype">
                     <option value="all">ALL</option>
                     <option value="true">CHƯA THAM GIA PV</option>
                     <option value="false">ĐÃ THAM GIA PV</option>
                   </select>
                   <!-- <input  *ngIf="button5"   type="text"  class="btn border border-secondary  mr-2 " placeholder="ID, CMTND, TÊN"> -->
-                  <button  *ngIf="button6"   class="btn btn-primary mr-2" (click)="themungvien()"><i class="fa fa-plus"></i></button>
-                  <button  *ngIf="button7"   class="btn btn-primary mr-2" (click)="xoavien()"><i class="fa fa-trash"></i></button>
-                  <button  *ngIf="button8"   class="btn btn-primary mr-2" (click)="download2(listrm0010,'Danh sách ứng viên')"><i class="fa fa-download"></i></button>
-                  <button  *ngIf="button9"   class="btn btn-primary mr-2" (click)="upload()"><i class="fa fa-upload"></i></button>
-                  <button  *ngIf="button10"   class="btn btn-primary mr-2" (click)="ok()"><i class="fa fa-check"></i></button>
-                  <button  *ngIf="button11"   class="btn btn-primary mr-2" (click)="deleteitem()"><i class="fa fa-times"></i></button>
-                  <button title="Download mẫu file "  *ngIf="button15"   class="btn btn-primary mr-2" (click)="downloadtemplate()"><i class="fas fa-paperclip"></i></button>
+                  <button  *ngIf="button6"   class="btn btn-primary mr-2 btn-sm" (click)="themungvien()"><i class="fa fa-plus"></i></button>
+                  <button  *ngIf="button7"   class="btn btn-primary mr-2 btn-sm" (click)="xoavien()"><i class="fa fa-trash"></i></button>
+                  <button  *ngIf="button8"   class="btn btn-primary mr-2 btn-sm" (click)="download2(listrm0010,'Danh sách ứng viên')"><i class="fa fa-download"></i></button>
+                  <button  *ngIf="button9"   class="btn btn-primary mr-2 btn-sm" (click)="upload()"><i class="fa fa-upload"></i></button>
+                  <button  *ngIf="button10"   class="btn btn-primary mr-2 btn-sm" (click)="ok()"><i class="fa fa-check"></i></button>
+                  <button  *ngIf="button11"   class="btn btn-primary mr-2 btn-sm" (click)="deleteitem()"><i class="fa fa-times"></i></button>
+                  <button title="Download mẫu file "  *ngIf="button15"   class="btn btn-primary btn-sm" (click)="downloadtemplate()"><i class="fas fa-paperclip"></i></button>
                   <!-- <app-button-download tableID="tableexport1" tableName="tableExport" bg="btn-warning text-white" ></app-button-download> -->
                 </div>
               </div>
@@ -42,7 +42,7 @@
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
               <div class="row no-gutters">
-                <table class="table table-bordered table-hover tablelistdon tableExport1 table-td-p-4-0" id="tableExport1">
+                <table class="table table-sm table-bordered table-hover tablelistdon tableExport1 table-td-p-4-0" id="tableExport1" style="font-size: 12px;">
                   <thead><tr>
                     <th style="width: 20px;"><input type="checkbox"  (change)="checkallitem($event)" ></th>
                     <th style="width: 40px;">STT</th>
@@ -58,8 +58,11 @@
                     <th>Vị trí 1</th>
                     <th>Vị trí 2</th>
                     <th>Lần PV</th>
+                    <th>Headhunt</th>
+                    <th>Position</th>
+                    <th>Date</th>
                     <th>Ghi chú. <app-button-sort [listdata]="listrm0010" (listdata)="getlist($event)" key="ghichu"></app-button-sort></th>
-                    <th style="width: 50px;"><i class="fa fa-list"></i></th>
+                    <th style="width: 20px;padding-left:0 ;padding-right: 0;text-align: center;"><button  class="btn btn-sm p-0"><i class="fa fa-list" ></i></button></th>
                   </tr>
                   </thead>
                   <tbody>
@@ -80,12 +83,15 @@
                               <td>{{element.RM0001!=null?element.RM0001.tenCongViec:""}}</td>
                               <td>{{element.RM0001_2!=null?element.RM0001_2.tenCongViec:""}}</td>
                               <td>{{element.count}}</td>
+                              <td>{{element.Headhunt}}</td>
+                              <td>{{element.Position}}</td>
+                              <td>{{element.Date}}</td>
                               <td><textarea (change)="updatecomment(element)" [(ngModel)]="element.ghichu" rows="1" class="form-control {{button14==null?'dis':''}}"></textarea></td>
                               <td>
                                 <!-- <div class="progress" style="height: 20px;" (click)="showdetail(element)">
                                   <div class="progress-bar" role="progressbar" [ngStyle]="{'width':((100-parseint(element.i/element.j*100))+'%')}"  aria-valuemin="0" aria-valuemax="100">{{100-parseint(element.i/element.j*100)}}%</div>
                                 </div> -->
-                                <button (click)="showdetail(element)" class="btn btn-sm"><i *ngIf="check==null||check==false" class="fa fa-edit"></i><i *ngIf="check==true" class="fa fa-eye"></i></button>
+                                <button (click)="showdetail(element)" class="btn btn-sm p-0"><i *ngIf="check==null||check==false" class="fa fa-edit"></i><i *ngIf="check==true" class="fa fa-eye"></i></button>
                               </td>
                             </tr>
                           </ng-container>
@@ -110,6 +116,9 @@
                                 <td>{{element.RM0001!=null?element.RM0001.tenCongViec:""}}</td>
                                 <td>{{element.RM0001_2!=null?element.RM0001_2.tenCongViec:""}}</td>
                                 <td>{{element.count}}</td>
+                                <td>{{element.Headhunt}}</td>
+                                <td>{{element.Position}}</td>
+                                <td>{{element.Date}}</td>
                                 <td><textarea (change)="updatecomment(element)" [(ngModel)]="element.ghichu" rows="1" class="form-control none {{button14==null?'dis':''}}"></textarea></td>
                                 <td>
                                   <!-- <div class="progress" style="height: 20px;" (click)="showdetail(element)">

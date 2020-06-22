@@ -31,10 +31,10 @@ export class LoginComponent implements OnInit {
             data.bophan = dat
             if(data.ban_id==null)data.ban_id='sdsd'
             that.rest.Get207<MKV9991>('http://192.84.100.207/AsoftAPI/EC0002/' + data.ban_id).subscribe(dat2 => {
-              ////////////console.log(dat2)
+              //////////////console.log(dat2)
               if(dat2!=null)
               that.rest.PostDataToAPI({phong_id:dat2.id,bophan_ma:dat2.bophan_ma,bophan_ten:dat2.bophan_ten,idcha:dat2.idcha},'MKV9998/add').subscribe(dataa=>{
-                ////////////console.log(dataa)
+                //////////////console.log(dataa)
               })
               data.ban = dat2
               localStorage.setItem('KTX_User', JSON.stringify(data)); 
@@ -70,12 +70,12 @@ export class LoginComponent implements OnInit {
               data.forEach(val => {
                 if (val.manhansu + '' == $('#ID').val()||val.cmtnd_so==$('#ID').val()) {
                   checkf=false
-                  ////////////console.log(val)
+                  //////////////console.log(val)
                   val.matkhau = $('#PASS').val()
                   that.rest.PostDataToAPI<result<MKV9999>>(val, 'Account/add').subscribe(data1 => {
                     if (data1.code == "OK") {
                       //alert('Tài khoản của bạn đã được tạo')
-                      //////////console.log("1111111")
+                      ////////////console.log("1111111")
                       LOGIN(data1.data, true)
                     } else {
                       alert(data1.mess)
@@ -91,7 +91,7 @@ export class LoginComponent implements OnInit {
           }
           else {
             if( data.matkhau == $('#PASS').val()){
-            ////////////console.log("22222");
+            //////////////console.log("22222");
             LOGIN(data, false)
           }
             else{

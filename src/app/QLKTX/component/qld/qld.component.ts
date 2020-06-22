@@ -31,7 +31,7 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
     $(document).ready(function(){
       
       $('thead>tr>th>input:checkbox').change(function(){
-        ////////////console.log($(this).is(':checked'))
+        //////////////console.log($(this).is(':checked'))
         $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       ////
@@ -59,7 +59,7 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
           val.hotenbengiao=that.user.hodem+' '+that.user.ten
         })
         that.rest.PostDataToAPI<result<KTX0020>[]>(that.listdon.filter(c=>{return c.check===true}),'KTX0020/approval').subscribe(data=>{
-          ////////////console.log(data)
+          //////////////console.log(data)
           data.forEach(val=>{
             if(val.code=="OK"){
               that.listdon.forEach((c,index)=>{
@@ -81,32 +81,34 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
       })
       ////////////////
       $('.card').on('click','#disagree',function(){
-        ////////////console.log(that.listdon)
+        //////////////console.log(that.listdon)
       })
     })
   }
  async showdon(){
-    
+    this.loading=true
     let check=$('#filter').val()
     let startdate=$('#startdate').val()
     let enddate=$('#enddate').val()
     this.listdon=await this.rest.PostDataToAPI<KTX0020[]>({trangthai:check,startdate:startdate,enddate:enddate},'KTX0020/Getall').toPromise()
     this.listdontemp=this.listdon
   this.loading=false
-    for(const element of this.listdon){
+     this.listdon.map(async element  =>{
     let key=element.MKV9999.cmtnd_so!=null?element.MKV9999.cmtnd_so:
      (element.MKV9999.hochieu_so!=null?element.MKV9999.hochieu_so:
       (element.MKV9999.manhansu!=null?element.MKV9999.manhansu:(element.hotenkhaisinh))
       )
       element.check2=false
        element.timkiem=await this.rest.PostDataToAPI<valuesearch>({key:key},'Search/Search').toPromise()
+      // //console.log(element.timkiem)
         element.check2=true
       element.count= element.timkiem.KTX0020.filter(v=>{return v.trangthai===true}).length
-    }
+    })
     
+    this.loading=false
   }
   showdetaildon(element){
-        ////////////console.log(element)
+        //////////////console.log(element)
         this.ktx20temp=element
         this.form='formdangkyokytucxa';
         $('#myModalungvieninfo').modal()
@@ -116,7 +118,7 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
     let ok=0,ng=0
     let that=this
     this.rest.PutDataToAPI<result< KTX0020>[]>(this.listdon.filter(c=>{return c.check===true}),'KTX0020/delete').subscribe(data=>{
-    ////////////console.log(data)
+    //////////////console.log(data)
     data.forEach(val=>{
       if(val.code=="OK"){
         ok++
@@ -136,7 +138,7 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
     if(!confirm('Bạn có chắc chắn muốn xóa đơn này?'))return false
     let that=this
     this.rest.PutDataToAPI<result< KTX0020>[]>([element],'KTX0020/delete').subscribe(data=>{
-    ////////////console.log(data)
+    //////////////console.log(data)
     data.forEach(val=>{
       if(val.code=="OK"){
         let l=this.listdon.filter(c=>{return c.KTX0020_ID===val.data.KTX0020_ID})
@@ -154,7 +156,7 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
     
   this.ktx20tempprint=[]
   this.ktx20tempprint=await this.listdon.filter(c=>{return c.check===true})
-  ////////////console.log(this.ktx20tempprint)
+  //////////////console.log(this.ktx20tempprint)
   this.loading=true
     setTimeout(() => {
       this.loading=false
@@ -174,7 +176,7 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
   //      element.timkiem=await this.rest.PostDataToAPI<valuesearch>({key:key},'Search/Search').toPromise()
   //       element.check2=true
   //     element.count= element.timkiem.KTX0020.filter(v=>{return v.trangthai===true}).length
-  //    ////////////console.log(element.timkiem)
+  //    //////////////console.log(element.timkiem)
     
   // }
   export(){
@@ -183,7 +185,7 @@ this.user=JSON.parse(localStorage.getItem('KTX_User'))
     $('.ddd').css('display','none')
   }
   kj(){
-    ////////////console.log(this.start)
+    //////////////console.log(this.start)
   }
   getstart($event){
     this.start=$event

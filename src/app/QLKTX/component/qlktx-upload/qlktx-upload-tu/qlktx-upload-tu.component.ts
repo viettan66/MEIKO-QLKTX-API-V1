@@ -18,7 +18,7 @@ export class QlktxUploadTuComponent implements OnInit {
   getdata($event){
     $event.map(x=>{x.trangthai=false;x.ghichu=x.PHONG;x.MaKhoa=x.MATU,x.SoTu=x.SOTU})
     this.listKTX0003=$event
-    ////////////console.log($event)
+    //////////////console.log($event)
   }
  async edit(element){
     if( $('#edit'+element.MATU).find('i').hasClass('fa-edit')){
@@ -33,7 +33,7 @@ export class QlktxUploadTuComponent implements OnInit {
   
  async save(){
   let data=await this.rest.PostDataToAPI<result< KTX0003>[]>(this.listKTX0003,"KTX0003/Add").toPromise()
-    ////////////console.log(data)
+    //////////////console.log(data)
   //   let data=await this.rest.PostDataToAPI<result< KTX0003>[]>(listPhong,"KTX0003/add").toPromise()
   //   data.filter(c=>{return c.code==="OK"}).forEach(async val=>{
   //     let listTang=[]
@@ -41,7 +41,7 @@ export class QlktxUploadTuComponent implements OnInit {
   //       if(listTang.filter(c=>{return c['ten']===kkkk.TANG}).length==0)
   //       listTang.push({khu:kkkk.TOA=="A"?"N":"F",ten:kkkk.TANG,ghichu:"Tầng mới",idcha:val.data.KTX0003_ID,trangthai:true,type:3})
   //     })
-  //     ////////////console.log(listTang)
+  //     //////////////console.log(listTang)
   //   })
     
   }

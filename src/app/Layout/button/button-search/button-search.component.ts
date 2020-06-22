@@ -16,7 +16,7 @@ export class ButtonSearchComponent implements OnInit {
   ngOnInit() {
   }
   send($event){
-    //////////console.log(this.listdata)
+    ////////////console.log(this.listdata)
     let ra=[]
     this.listdata.map(x=>{
       Object.keys(x).forEach(key=>{

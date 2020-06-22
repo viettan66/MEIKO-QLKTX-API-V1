@@ -49,14 +49,15 @@ export class QLPComponent implements OnInit {
   public color=Global.color
   public datacount=new datacount
   ngOnInit() {
-    ////////////console.log()
+    //////////////console.log()
     let that = this
     that.rest.GetDataFromAPI<datacount>('KTX0002/getcount').subscribe(data => {
       that.datacount=data
+      //console.log(data)
     })
     that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/-1').subscribe(data => {
       this.listktx0001 = data
-      //////////////console.log(data)
+      ////////////////console.log(data)
     })
     document.addEventListener('mousemove', onMouseUpdate, false);
     document.addEventListener('mouseenter', onMouseUpdate, false);
@@ -71,7 +72,7 @@ export class QLPComponent implements OnInit {
       //////////////////
       $('body:not(#divtoshow):not(#divtoshowoptionphong):not(button)').click(function (e) {
         if (e.which == 1) {
-          //////////////console.log(e.which)
+          ////////////////console.log(e.which)
           $('#divtoshow').hide()
           $('#divtoshowoptionphong').hide()
           $('#divtoshowoptionkhoa').hide()
@@ -80,7 +81,7 @@ export class QLPComponent implements OnInit {
       //////////////////
       let tengiuong = ""
       let idgiuong = 0
-      $('.card').on('mousedown', '.giuongclick', function (e) {//////////////console.log(e.which)
+      $('.card').on('mousedown', '.giuongclick', function (e) {////////////////console.log(e.which)
         if (e.which == 3) {
           tengiuong = $(this).find('.card-title').text()
           idgiuong = $(this).attr('id')
@@ -88,17 +89,17 @@ export class QLPComponent implements OnInit {
           $('#divtoshow').css({ 'top': that.y, 'left': that.x - 100 }).show()
         }
       }) 
-      $('.card').on('mousedown', '.khoaclick', function (e) {//////////////console.log(e.which)
+      $('.card').on('mousedown', '.khoaclick', function (e) {////////////////console.log(e.which)
         if (e.which == 3) {
           let id=$(this).attr('id')
           that.khoadetail = that.listkhoa.filter(c=>{return c.KTX0003_ID===Number(id)}) [0]
           $('#divtoshowoptionkhoa').css({ 'top': that.y, 'left': that.x - 100 }).show()
-          //////////////console.log(that.khoadetail)
+          ////////////////console.log(that.khoadetail)
         }
       })
       $('#divtoshow').on('click', 'ul>button', function (e) {
         e.stopPropagation()
-        //////////////console.log('click ed')
+        ////////////////console.log('click ed')
         $('#divtoshow').hide()
       })
       //////////////////
@@ -116,7 +117,7 @@ export class QLPComponent implements OnInit {
       ////////////////// phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng phòng
       let tenphong = ""
       let idphong = 0
-      $('.card').on('mousedown', '.phongclick', function (e) {//////////////console.log(e.which)
+      $('.card').on('mousedown', '.phongclick', function (e) {////////////////console.log(e.which)
         if (e.which == 3) {
           tenphong = $(this).find('.card-title').text()
           idphong = $(this).attr('id')
@@ -129,7 +130,7 @@ export class QLPComponent implements OnInit {
       })
       $('#divtoshowoptionphong').on('click', 'ul>button', function (e) {
         e.stopPropagation()
-        //////////////console.log('click ed')
+        ////////////////console.log('click ed')
         $('#divtoshowoptionphong').hide()
       })
       //////////////////
@@ -137,9 +138,9 @@ export class QLPComponent implements OnInit {
         if (confirm('Bạn có muốn xóa phòng: ' + tenphong)) {
           that.rest.GetDataFromAPI<result<KTX0001>>('KTX0001/Delete/' + that.phong).subscribe(data => {
             if (data.code == "OK") {
-              ////////////console.log(data)
+              //////////////console.log(data)
               var length= that.listphong.filter(c=>{return c.KTX0001_ID===data.data.KTX0001_ID})
-              ////////////console.log(length)
+              //////////////console.log(length)
               if(length.length!=0){
                 that.listphong.splice(that.listphong.indexOf(length[0]),1)
               }
@@ -149,7 +150,7 @@ export class QLPComponent implements OnInit {
         }
       })
       //////////////////
-      $('#editroom').click(function (e) {//////////////console.log(e.which)
+      $('#editroom').click(function (e) {////////////////console.log(e.which)
         that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/'+that.phong).subscribe(dataa=>{
           that.phongdetail=dataa[0]
           $('#editphong').modal();
@@ -157,17 +158,17 @@ export class QLPComponent implements OnInit {
 
       })
       //////////////////
-      $('#editgiuong').click(function (e) {//////////////console.log(e.which)
+      $('#editgiuong').click(function (e) {////////////////console.log(e.which)
         that.rest.GetDataFromAPI<KTX0002>('KTX0002/Get/'+that.giuong).subscribe(dataa=>{
-          ////////////console.log(dataa)
+          //////////////console.log(dataa)
           that.giuongdetail=dataa
           $('#editgiuongmodal').modal();
         })
       })
       //////////////////
-      $('#updatebedinfo').click(function (e) {//////////////console.log(e.which)
+      $('#updatebedinfo').click(function (e) {////////////////console.log(e.which)
         that.rest.PutDataToAPI<result< KTX0002>>(that.giuongdetail,'KTX0002/update').subscribe(dataa=>{
-          ////////////console.log(dataa)
+          //////////////console.log(dataa)
           if(dataa.code=="OK"){
             var l=that.listgiuong.filter(c=>{return c.KTX0002_ID===dataa.data.KTX0002_ID})
             if(l.length!=0){
@@ -182,7 +183,7 @@ export class QLPComponent implements OnInit {
       })
       $('.filter').change(function () {
         that.rest.GetDataFromAPI<KTX0001[]>('KTX0001/Getall/' + $('#listkhu').val() + '/' + $('#listtoanhash').val() + '/' + $('#listtangsh').val()).subscribe(data => {
-          //////////////console.log(data)
+          ////////////////console.log(data)
           that.phong=0
           that.listphong = []
           that.listgiuong = []
@@ -202,7 +203,7 @@ export class QLPComponent implements OnInit {
               }
             })
           })
-         // ////////////console.log(that.listphongf)
+         // //////////////console.log(that.listphongf)
           that.ktx01out.emit(that.listphong)
         })
       })
@@ -243,7 +244,7 @@ export class QLPComponent implements OnInit {
           alert('Bạn hãy chọn phòng trước khi thêm khóa')
           return
         }
-        ////////////console.log(that.listkhoa)
+        //////////////console.log(that.listkhoa)
           that.listkhoaadd=[]
           that.listkhoaadd.push(new KTX0003({ktx0001_id:that.phong}))
         $('#themkhoamodal').modal();
@@ -275,7 +276,7 @@ export class QLPComponent implements OnInit {
         that.rest.PostDataToAPI<result<KTX0001>[]>(kt02, 'KTX0001/add').subscribe(data => {
           data.forEach(vla => {
             if (vla.code == "OK") {
-              ////////////console.log(vla.data)
+              //////////////console.log(vla.data)
               that.listphong.push(vla.data)
               //$('#themphongmodal2').modal('hide');
               let ten:string=$('#tenphong').val()
@@ -303,7 +304,7 @@ export class QLPComponent implements OnInit {
         toatemp = []
         toatemp = khutemp.filter(c => { return (c.idcha === Number($('#listtoanhash').val()) || $('#listtoanhash').val() == '0') })
         that.listtang = toatemp.filter(c => { return c.type === 3 })
-        //////////////console.log(toatemp)
+        ////////////////console.log(toatemp)
       })
       ////////////////////////
       $('#listtangsh').change(function () {
@@ -313,7 +314,7 @@ export class QLPComponent implements OnInit {
       function filttergiuong(){
         that.rest.GetDataFromAPI<KTX0002[]>('KTX0002/Getall/'+that.phong).subscribe(data=>{
           that.listgiuong=[]
-          //////////////console.log(data)
+          ////////////////console.log(data)
               that.listgiuong=data
           that.ktx02out.emit(that.listgiuong)
         })
@@ -321,7 +322,7 @@ export class QLPComponent implements OnInit {
       function filtterkhoa(){
         that.rest.GetDataFromAPI<KTX0003[]>('KTX0003/Get/onPhong/'+that.phong).subscribe(data=>{
           that.listkhoa=[]
-          //////////////console.log(data)
+          ////////////////console.log(data)
           that.listkhoa=data
           that.ktx03out.emit(that.listkhoa)
         })
@@ -338,7 +339,7 @@ export class QLPComponent implements OnInit {
         $(this).addClass('text-white')
         filttergiuong()
         filtterkhoa()
-        //////////////console.log(that.listphong.filter(c=>{return c.KTX0001_ID===Number($(this).attr('id'))})[0])
+        ////////////////console.log(that.listphong.filter(c=>{return c.KTX0001_ID===Number($(this).attr('id'))})[0])
         that.ktx01oneout.emit(that.listphong.filter(c=>{return c.KTX0001_ID===Number($(this).attr('id')) })[0])
       })
       ////////////////////////
@@ -352,7 +353,7 @@ export class QLPComponent implements OnInit {
       ////////////////////////
       $('#updateroominfo').click(function () {
         that.rest.PutDataToAPI<result<KTX0001>>(that.phongdetail, 'KTX0001/Update').subscribe(data => {
-          ////////////console.log(data)
+          //////////////console.log(data)
           if (data.code == "OK") {
             let k = that.listphong.filter(c => { return c.KTX0001_ID === data.data.KTX0001_ID })[0]
             k.KTX0001_ID = k.KTX0001_ID
@@ -380,17 +381,17 @@ export class QLPComponent implements OnInit {
         })
       })
       ///////////////////////////////////hidecolumn
-        $('#hidecolumn>button').click(function(){
-          $('#hidecolumn>button').removeClass('active')
-          $(this).addClass('active')
-          if($(this).index()==0) {
-            $('.tab2').css('display','none')
-            $('.tab1').css('display','')
-          }else if($(this).index()==1) {
-            $('.tab1').css('display','none')
-            $('.tab2').css('display','')
-          }
-        })
+        // $('#hidecolumn>button').click(function(){
+        //   $('#hidecolumn>button').removeClass('active')
+        //   $(this).addClass('active')
+        //   if($(this).index()==0) {
+        //     $('.tab2').css('display','none')
+        //     $('.tab1').css('display','')
+        //   }else if($(this).index()==1) {
+        //     $('.tab1').css('display','none')
+        //     $('.tab2').css('display','')
+        //   }
+        // })
       ///////////////
       $('#listkhu').change()
       $('#hidecolumn>button:eq(1)').click()
@@ -406,7 +407,7 @@ export class QLPComponent implements OnInit {
           let id=$(this).parent().parent().find('input[name=ID]').val()
           var f=that.listktx0001.filter(c=>{return c.KTX0001_ID===Number(id) })[0]
           that.rest.PutDataToAPI<result< KTX0001>>(f,'KTX0001/Update2').subscribe(data=>{
-            ////////////console.log(data)
+            //////////////console.log(data)
             if(data.code=="OK"){
               f.ten=data.data.ten
               $(this).parent().parent().find('input,textarea').addClass('none').attr('disabled',true)
@@ -425,7 +426,7 @@ export class QLPComponent implements OnInit {
         }
           let id=$(this).parent().parent().find('input[name=ID]').val()
           that.rest.GetDataFromAPI<result< KTX0001>>('KTX0001/Delete/'+id).subscribe(data=>{
-            ////////////console.log(data)
+            //////////////console.log(data)
             if(data.code=="OK"){
               that.listtoanha.splice(that.listktx0001.indexOf(that.listktx0001.filter(c=>{return c.KTX0001_ID==id})[0]),1)
               that.listtang.splice(that.listktx0001.indexOf(that.listktx0001.filter(c=>{return c.KTX0001_ID==id})[0]),1)
@@ -451,7 +452,7 @@ export class QLPComponent implements OnInit {
       })
       ///////////////////////////////////
       $('#tab1-toa').on('click','tr',function(){
-        //////////////console.log($(this).find('input').attr('name'))
+        ////////////////console.log($(this).find('input').attr('name'))
         $('#listtoanhash').val(that.listtoanha[$(this).attr('id')].KTX0001_ID)
         $('#listkhu').change()
       })
@@ -599,7 +600,7 @@ export class QLPComponent implements OnInit {
     }
     luukhoa(){
       this.rest.PostDataToAPI<result<KTX0003>[]>(this.listkhoaadd,'KTX0003/Add').subscribe(data=>{
-        ////////////console.log(data)
+        //////////////console.log(data)
         data.forEach(val=>{
           if(val.code=="OK"){
             this.listkhoa.push(val.data)
@@ -688,5 +689,13 @@ export class QLPComponent implements OnInit {
   }
   parseInt(h){
     return ~~h
+  }
+  public varphantang=false
+  phantang(){
+    this.varphantang=!this.varphantang
+  }
+  
+  tabchange(i){
+    this.tab=i
   }
 }

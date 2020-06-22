@@ -19,7 +19,7 @@ public tab=-1;
       function showdodung(){
         that.rest.GetDataFromAPI<KTX0010[]>('KTX0010/Getall').subscribe(data=>{
           that.ktx0010=data;
-          that.tab=2
+          that.tab=0
         })
       }
     $(document).ready(function(){
@@ -51,5 +51,9 @@ public tab=-1;
      var k= l[0]
      this.ktx0010.splice(this.ktx0010.indexOf(k),1)
    }
+  }
+  
+  tabchange(i){
+    this.tab=i
   }
 }

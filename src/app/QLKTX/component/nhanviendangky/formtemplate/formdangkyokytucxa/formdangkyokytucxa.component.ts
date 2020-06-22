@@ -35,12 +35,12 @@ export class FormdangkyokytucxaComponent implements OnInit {
     let that = this
     let user:MKV9999= JSON.parse(localStorage.getItem('KTX_User'))
     if(this.ktx20temp!=null){
-      ////////////console.log(this.ktx20temp)
+      //////////////console.log(this.ktx20temp)
       that.ktx0020=this.ktx20temp
       this.date=new Date(that.ktx20temp.ngaytaodon) 
     }else{
-      ////////////console.log('truyền vào null rồi')
-      ////////////console.log(user)
+      //////////////console.log('truyền vào null rồi')
+      //////////////console.log(user)
     that.ktx0020.KTX0021.push(new KTX0021)
     that.ktx0020.KTX0022.push(new KTX0022)
     that.ktx0020.MKV9999=user
@@ -69,7 +69,7 @@ export class FormdangkyokytucxaComponent implements OnInit {
       function showdodung() {
         that.rest.GetDataFromAPI<KTX0031[]>('KTX0031/Get/'+that.ktx0020.MKV9999_ID).subscribe(data => {
           that.ktx10 = data
-          ////////////console.log(data)
+          //////////////console.log(data)
         })
       }
       /////////////
@@ -103,7 +103,7 @@ export class FormdangkyokytucxaComponent implements OnInit {
         if(that.ktx0020.KTX0020_ID==null){
           that.rest.PostDataToAPI<result<KTX0020>>(that.ktx0020,'KTX0020/add').subscribe(data=>{
             if(data.code=="OK"){
-              ////////////console.log(data)
+              //////////////console.log(data)
               that.ktx20out.emit(data.data)
             }
             else{
@@ -120,7 +120,7 @@ export class FormdangkyokytucxaComponent implements OnInit {
             }
         })
         }
-        //////////////console.log(that.ktx0020)
+        ////////////////console.log(that.ktx0020)
       })
 
   }
@@ -132,5 +132,21 @@ export class FormdangkyokytucxaComponent implements OnInit {
   }
   removeitem(element){
     this.ktx0020.KTX0022.splice(this.ktx0020.KTX0022.indexOf(element),1)
+  }
+  getngayokytucxa($event){
+    this.ktx0020.ngayokitucxa = $event
+    console.log(this.ktx0020.ngayokitucxa)
+  }
+  getngayquaylaikytucxa($event){
+    this.ktx0020.ngayquaylaikytucxa = $event
+  }
+  getthoigiantralantruoc($event){
+    this.ktx0020.thoigiantralantruoc = $event
+  }
+  getngaysinh($event){
+    this.ktx0020.ngaysinh = $event
+  }
+  getcmtnd_ngaycap($event){
+    this.ktx0020.cmtnd_ngaycap = $event
   }
 }

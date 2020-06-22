@@ -29,6 +29,7 @@ export class QlnaComponent implements OnInit {
   public step = 50;
   public loaidanhsach = '0'
   public listMKV8002: MKV8002[] = []
+  public listMKV9998: MKV9998[] = []
   public newnhaan = new MKV8002()
   public loading = true
   async ngOnInit() {
@@ -40,6 +41,8 @@ export class QlnaComponent implements OnInit {
     this.listMKV8002 = await this.rest.PostDataToAPI<MKV8002[]>({ type: 1, trangthai: true }, 'MKV8002/Getall').toPromise()
     this.listMKV9999207 = await this.rest.Get207<MKV9999[]>('http://192.84.100.207/AsoftAPI/E00003/GetByStatus/1/100000/1').toPromise()
     this.listKTX0053=await this.rest.GetDataFromAPI<KTX0053[]>("KTX0053/Getall").toPromise()
+    this.listMKV9998=await this.rest.PostDataToAPI<MKV9998[]>({},"MKV9998/Getall").toPromise()
+    console.log( this.listMKV9998)
     this.loading=false
   }
   themnhaan() {
@@ -72,7 +75,7 @@ export class QlnaComponent implements OnInit {
          let lej= this.listMKV9999207.filter(c => { return c.manhansu === x.User_ID })
         for (const t of lej) {
           t.matkhau = "123456"
-          ////////////console.log(await this.rest.PostDataToAPI<result<MKV9999>>(t, 'Account/add').toPromise())
+          //////////////console.log(await this.rest.PostDataToAPI<result<MKV9999>>(t, 'Account/add').toPromise())
           x.MKV9999 = t
         x.id=x.MKV9999.manhansu
         x.ten=x.MKV9999.hodem+' '+x.MKV9999.ten
@@ -84,11 +87,15 @@ export class QlnaComponent implements OnInit {
         x.id=x.MKV9999.manhansu
         x.ten=x.MKV9999.hodem+' '+x.MKV9999.ten
       }
+      if(x.MKV9999!=null){
+        let kl=this.listMKV9998.filter(c=>c.phong_id===x.MKV9999.phong_id).map(c=>c.bophan_ten)
+        x.MKV9999.thetu_id=kl.length>0?kl[0]:''
+      }
     }
-    ////////console.log(this.listdatadatabase)
+    //////////console.log(this.listdatadatabase)
     //this.listMKV9999=this.listdatadatabase;
     // for(const x of this.listdatadatabase){
-    //   if(x.User_ID==null)//////console.log(x)
+    //   if(x.User_ID==null)////////console.log(x)
     //   let tien=await this.rest.PostDataToAPI<any>({values:{User_ID:x.User_ID,startdate:this.startdate,enddate:this.enddate},ip:(this.listMKV8002.map(x=>{return x.ip}))},'KTX0049/GetPay').toPromise()
   
     //   x.thanhtoan=tien.thanhtien
@@ -99,7 +106,7 @@ export class QlnaComponent implements OnInit {
     })
     Promise.all(this.listdatadatabase.map(async x => {
       if (x.User_ID == null) {
-        ////console.log(x)
+        //////console.log(x)
       }
       let tien = await this.rest.PostDataToAPI<any>({ values: { User_ID: x.User_ID, startdate: this.startdate, enddate: this.enddate }, ip: (this.listMKV8002.map(x => { return x.ip })) }, 'KTX0049/GetPay').toPromise()
 
@@ -118,7 +125,7 @@ export class QlnaComponent implements OnInit {
       }
 
       this.filter()
-      //////////console.log("done")
+      ////////////console.log("done")
       this.loading = false
     }
 
@@ -180,7 +187,7 @@ export class QlnaComponent implements OnInit {
   if(!confirm("Bạn có chắc chắn muốn xóa dữ liệu?"))return false
    this.listMKV8002.map(async x=>{
      let data=await this.rest.PostDataToAPI<any>({ip:x.ip,port:x.port,commkey:x.commkey,startdate:this.startdate,enddate:this.enddate},'FingerPrint/Deletedata').toPromise()
-     //////////console.log(data)
+     ////////////console.log(data)
    })
     
   }
@@ -204,7 +211,7 @@ export class QlnaComponent implements OnInit {
       $('#row' + element.MKV8002_ID).find('input:text,select').addClass('none').attr('disabled', true)
       $('#edit' + element.MKV8002_ID).find('i').removeClass('fa-save').addClass('fa-edit')
       let dataa = await this.rest.PutDataToAPI<result<MKV8002>>(element, 'MKV8002/update').toPromise()
-      ////////////console.log(dataa)
+      //////////////console.log(dataa)
       if (dataa.code == "OK") {
         {
           element = dataa.data
@@ -228,7 +235,7 @@ element.ngay=$event
       $('#editmocthoigiantr' + element.KTX0053_ID).find('input:text,select').addClass('none').attr('disabled', true)
       $('#editmocthoigian' + element.KTX0053_ID).find('i').removeClass('fa-save').addClass('fa-edit')
       let dataa = await this.rest.PutDataToAPI<result<KTX0053>>(element, 'KTX0053/update').toPromise()
-      ////////////console.log(dataa)
+      //////////////console.log(dataa)
       if (dataa.code == "OK") {
         {
           element = dataa.data
@@ -237,7 +244,7 @@ element.ngay=$event
     }
   }
 checkallelement($event){
-  ////////console.log($event.target.checked)
+  //////////console.log($event.target.checked)
   this.listMKV9999.map(x=>x.check=$event.target.checked)
   }
  async quyettoan(){
@@ -247,9 +254,9 @@ checkallelement($event){
     this.listMKV9999.filter(c=>c.check).map(p=>{
       arr.push({User_ID:(p.User_ID),startdate:this.startdate,enddate:this.enddate,ghichu:'',trangthai:true})
     })
-    ////////console.log(arr)
+    //////////console.log(arr)
     let data=await this.rest.PostDataToAPI<result<KTX0049>[]>(arr,"KTX0049/add").toPromise()
-    ////////console.log(data)
+    //////////console.log(data)
     alert("OK. hãy tải lại trang để đồng bộ lại dữ liệu.")
   }
   Downloadtable(){
@@ -278,9 +285,9 @@ checkallelement($event){
   public datashow=[]
   async detailrow(element){
     this.datashow=[]
-    //console.log(element)
+    ////console.log(element)
     let data=await this.rest.PostDataToAPI<any>({ip:this.listMKV8002,  startdate: this.startdate, enddate: this.enddate,id:element.iddd },'KTX0050/getdetail').toPromise()
-    //console.log(data)
+    ////console.log(data)
     this.datashow=data
     $("#detailrowmodal").modal()
   }

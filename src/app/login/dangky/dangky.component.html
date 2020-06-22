@@ -1,7 +1,7 @@
 <div class="row h-100  px-5 d-flex justify-content-center d-flex align-items-center no-gutters">
     <div class="col-xl-6" style="min-width: 720px;;height: auto;background-color: rgba(196, 196, 196, 0.13);padding: 50px;border-radius: 20px;border: 1px solid gray;">
         <div class="row  d-flex justify-content-center "><span class=""><h2>ĐĂNG KÝ THÀNH VIÊN MỚI</h2></span></div>
-              
+              <div  name="registration">
         <div class="row no-gutters">
             <div class="col">
                 <div class="col-12 my-1">
@@ -9,7 +9,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Mã ID</div>
                     </div>
-                    <input type="text" class="form-control"  placeholder="Mã ID" [(ngModel)]="newcomer.manhansu" >
+                    <input type="text" class="form-control" placeholder="Mã ID" [(ngModel)]="newcomer.manhansu" >
                     </div>
                 </div>
                 <div class="col-12 my-1">
@@ -17,7 +17,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Họ đệm</div>
                     </div>
-                    <input type="text" class="form-control"  placeholder="Họ đệm" [(ngModel)]="newcomer.hodem"  >
+                    <input type="text" class="form-control {{newcomer.hodem==null||newcomer.hodem.trim()==''?'notemty':''}}"     placeholder="Họ đệm" [(ngModel)]="newcomer.hodem" (click)="consolelog()" >
                     </div>
                 </div>
                 <div class="col-12 my-1">
@@ -25,7 +25,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Tên</div>
                     </div>
-                    <input type="text" class="form-control"  placeholder="Tên" [(ngModel)]="newcomer.ten"  >
+                    <input type="text" class="form-control {{newcomer.ten==null||newcomer.ten.trim()==''?'notemty':''}}"     placeholder="Tên" [(ngModel)]="newcomer.ten"  >
                     </div>
                 </div>
                 <div class="col-12 my-1">
@@ -33,7 +33,11 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Ngày sinh</div>
                     </div>
-                    <input type="date" class="form-control"  placeholder="Ngày sinh" [ngModel]="newcomer.ngaysinh|date:'yyyy-MM-dd'"    (ngModelChange)="newcomer.ngaysinh = $event"   >
+                    <!-- <input type="date" class="form-control"  placeholder="Ngày sinh" [ngModel]="newcomer.ngaysinh|date:'yyyy-MM-dd'"    (ngModelChange)="newcomer.ngaysinh = $event"   > -->
+                    
+                    <!-- <app-button-datetimepicker classs="btn btn-sm btn-outline-secondary mr-1 px-0" formats="Y-m-d"  ids="jkkjjjkdf"   (data)="newcomer.ngaysinh = $event"></app-button-datetimepicker> -->
+                    <!-- <input   type="text"    class="form-control timepic  {{(newcomer.ngaysinh==null||newcomer.ngaysinh.trim()=='')?'notemty':''}}"  [(ngModel)]="newcomer.ngaysinh" (change)="ff(newcomer.ngaysinh)" > -->
+                    <app-button-datetimepicker2 ids="jlfdkfcvfvfndkljkljl" (data)="getngaysinh($event)" ></app-button-datetimepicker2>
                     </div>
                 </div>
                 <div class="col-12 my-1">
@@ -41,7 +45,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Giới tính</div>
                     </div>
-                    <select class="form-control"  [(ngModel)]="newcomer.gioitinh" >
+                    <select class="form-control {{newcomer.gioitinh==null?'notemty':''}}"     [(ngModel)]="newcomer.gioitinh" >
                         <option >--Chọn--</option>
                         <option value="true">Nam</option>
                         <option value="false">Nữ</option>
@@ -54,7 +58,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Nơi sinh</div>
                     </div>
-                    <input type="text" class="form-control"  placeholder="Nơi sinh" list="datalistTP" [(ngModel)]="newcomer.noisinh" >
+                    <input type="text" class="form-control {{newcomer.noisinh==null||newcomer.noisinh.trim()==''?'notemty':''}}"     placeholder="Nơi sinh" list="datalistTP" [(ngModel)]="newcomer.noisinh" >
                     </div>
                 </div>
                 <div class="col-12 my-1">
@@ -62,7 +66,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Quê quán</div>
                     </div>
-                    <input type="text" class="form-control"  placeholder="Quê quán" list="datalistTP" [(ngModel)]="newcomer.quequan"  >
+                    <input type="text" class="form-control {{newcomer.quequan==null||newcomer.quequan.trim()==''?'notemty':''}}"     placeholder="Quê quán" list="datalistTP" [(ngModel)]="newcomer.quequan"  >
                     </div>
                 </div>
             </div>
@@ -72,7 +76,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Thường trú</div>
                     </div>
-                    <input type="text" class="form-control"  placeholder="Thường trú"  [(ngModel)]="newcomer.diachithuongtru" >
+                    <input type="text" class="form-control {{newcomer.diachithuongtru==null||newcomer.diachithuongtru.trim()==''?'notemty':''}}"  placeholder="Thường trú"  [(ngModel)]="newcomer.diachithuongtru" >
                     </div>
                 </div>
                 <div class="col-12 my-1">
@@ -88,7 +92,7 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">CMTND/Hộ chiếu</div>
                     </div>
-                    <input type="text" class="form-control"  placeholder="CMTND"  [(ngModel)]="newcomer.cmtnd_so" >
+                    <input type="text" class="form-control {{newcomer.cmtnd_so==null||newcomer.cmtnd_so.trim()==''?'notemty':''}}"     placeholder="CMTND"  [(ngModel)]="newcomer.cmtnd_so" >
                     </div>
                 </div>
                 <div class="col-12 my-1">
@@ -96,18 +100,20 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">Ngày cấp</div>
                     </div>
-                    <input type="date" class="form-control"  placeholder="Ngày cấp"  [(ngModel)]="newcomer.cmtnd_ngayhethan" >
-                    </div>
+                    <!-- <input type="date" class="form-control"  placeholder="Ngày cấp"  [(ngModel)]="newcomer.cmtnd_ngayhethan" > -->
+                    <!-- <input   type="text" value=""    class="form-control timepic  {{newcomer.cmtnd_ngayhethan==null||newcomer.cmtnd_ngayhethan.toString().trim()==''?'notemty':''}}"  (ngModelChange)="newcomer.cmtnd_ngayhethan = $event" > -->
+                    <app-button-datetimepicker2 ids="jlfdkndkljkljlsdsds" (data)="getngaycap($event)" ></app-button-datetimepicker2>
+                </div>
                 </div>
                 <div class="col-12 my-1">
                     <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Nơi cấp</div>
                     </div>
-                    <input type="text" class="form-control"  placeholder="Nơi cấp"  [(ngModel)]="newcomer.cmtnd_noicap" >
+                    <input type="text" class="form-control {{newcomer.cmtnd_noicap==null||newcomer.cmtnd_noicap.trim()==''?'notemty':''}}"     placeholder="Nơi cấp"  [(ngModel)]="newcomer.cmtnd_noicap" >
                     </div>
                 </div>
-                <div class="col-12 my-1">
+                <!-- <div class="col-12 my-1">
                     <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Bộ phận</div>
@@ -117,17 +123,36 @@
                             <option value="7335dd33-84b3-42c4-b554-b0ab2a5ea3db">HR (New Comer)</option>
                         </select>
                     </div>
-                </div>
-                
+                </div> -->
                 <div class="col-12 my-1">
                     <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Cấp bậc</div>
                     </div>
-                    <input type="number" class="form-control"  placeholder="Cấp bậc"  [(ngModel)]="newcomer.capbac" >
+                    <!-- <input type="number" class="form-control"  placeholder="Cấp bậc"  [(ngModel)]="newcomer.capbac" > -->
+                    <select class="form-control {{newcomer.capbac==null||newcomer.capbac.trim()==''?'notemty':''}}"     [(ngModel)]="newcomer.capbac" >
+                        <option >--Chọn--</option>
+                        <option value="1a">Công nhân thời vụ</option>
+                        <option value="1">Công nhân bậc 1</option>
+                        <option value="2">Công nhân bậc 2</option>
+                        <option value="3">Công nhân bậc 3</option>
+                        <option value="4">Nhân viên</option>
+                        <option value="5">Phó chủ nhiệm</option>
+                        <option value="6">Chủ nhiệm</option>
+                        <option value="7">Phó phòng</option>
+                        <option value="8">Trưởng phòng</option>
+                    </select>
                     </div>
                 </div>
                 
+                <div class="col-12 my-1">
+                    <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Mật khẩu</div>
+                    </div>
+                    <input  type="password" class="form-control {{newcomer.matkhau==null||newcomer.matkhau.trim()==''?'notemty':''}}"  placeholder="Mật khẩu đăng nhập"  [(ngModel)]="newcomer.matkhau" >
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row no-gutters">
@@ -142,31 +167,25 @@
                 </div>
             </div>
             <div class="col">
-                <div class="col-12 my-1">
-                    <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">Mật khẩu</div>
-                    </div>
-                    <input  type="password" class="form-control"  placeholder="Mật khẩu đăng nhập"  [(ngModel)]="newcomer.matkhau" >
-                    </div>
-                </div>
+               
                 <div class="col-12 my-1">
                     <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">Nhập lại mật khẩu</div>
                     </div>
-                    <input  type="password" class="form-control"  placeholder="Mật khẩu đăng nhập"  [(ngModel)]="checkpass" >
+                    <input  type="password" class="form-control  {{checkpass==null||checkpass.trim()==''?'notemty':''}}"  placeholder="Mật khẩu đăng nhập"  [(ngModel)]="checkpass" >
                     </div>
                 </div>
             </div>
         </div>
           <div class="col-12 my-1">
             <div class="input-group d-flex justify-content-between">
-                <button (click)="singin()"  class="btn btn-primary ">Đăng ký</button>
+                <button type="submit" (click)="singin()"  class="btn btn-primary ">Đăng ký</button>
+               
               <a class="float-right" href="/" style="cursor: pointer;"><u>Tôi không phải New Comer</u></a>
             </div>
           </div>
-          
+              </div>
     </div>
 </div>
 <datalist id="datalistTP">

@@ -27,13 +27,13 @@ export class FormketthucluutruComponent implements OnInit {
   public ktx0020:KTX0020=null
   public sum=0.1
    ngOnInit() {
-     //console.log(this.ktx0023temp)
+     ////console.log(this.ktx0023temp)
     if(this.check){
       $('.form1ketthuc').find('input').attr('readonly',true)
       $('.form1ketthuc').find('textarea').attr('readonly',true)
       $('.form1ketthuc').find('button').css('display','none')
     }
-    ////////////console.log(this.ktx0023temp)
+    //////////////console.log(this.ktx0023temp)
     let that = this
      this.user = JSON.parse(localStorage.getItem('KTX_User'))
     $(document).ready(function name() {
@@ -48,17 +48,17 @@ export class FormketthucluutruComponent implements OnInit {
   }
   async save(){
     
-    ////////////console.log(this.ktx0023temp.KTX0031)
+    //////////////console.log(this.ktx0023temp.KTX0031)
     let data= await  this.rest.PutDataToAPI<result< KTX0031>[]>(this.ktx0023temp.KTX0031,'KTX0031/Update').toPromise();
     
     this.ktx0023temp.MKV9999_ID=this.user.MKV9999_ID
     this.ktx0023temp.nldhoten=this.user.hodem+' '+this.user.ten
     this.ktx0023temp.trangthai=false
     let data2= await  this.rest.PostDataToAPI<result< KTX0023>>(this.ktx0023temp,'KTX0023/add').toPromise();
-    ////////////console.log(data2)
+    //////////////console.log(data2)
     if(data2.code=="OK"){
       data2.data.KTX0031=[]
-      ////////////console.log(data)
+      //////////////console.log(data)
       data.filter(c=>{return c.code==="OK"}).forEach(v=>{
         data2.data.KTX0031.push(this.ktx0023temp.KTX0031.filter(b=>{return b.KTX0010_ID===v.data.KTX0010_ID})[0] )
       })

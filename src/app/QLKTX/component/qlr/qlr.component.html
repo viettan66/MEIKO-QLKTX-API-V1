@@ -30,7 +30,7 @@
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
               <div class="row no-gutters">
-                <table class="table table-bordered tablelistdon" id="tabletoexport">
+                <table class="table table-bordered tablelistdon ddddddddddddddddddddd" style="font-size: 12px;" id="tabletoexport">
                   <thead><tr>
                     <th style="width: 20px;"><input type="checkbox" ></th>
                     <th style="width: 40px;">STT</th>
@@ -67,7 +67,7 @@
                       <td>{{element.ngaytaodon| date:'dd/MM/yyyy'}}</td>
                       <td>{{element.trangthai?"Đã duyệt":"Chưa duyệt"}}</td>
                       <td> <span class="ddd">{{element.nhanxet}}</span>
-                        <input type="text" list="datalisst" [(ngModel)]="element.nhanxet" class="form-control">
+                        <input type="text" list="datalisst" [(ngModel)]="element.nhanxet" class="w-100">
                         <datalist id="datalisst">
                           <option value="Trục xuất">
                           <option value="Nghỉ việc">
@@ -78,7 +78,7 @@
                       </td>
                       <td>
                         <!-- <button class="btn " (click)="delete(element)"><i class="fas fa-trash-alt"></i></button> -->
-                        <button style="padding: 0;"  class="btn  " (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
+                        <button style="padding: 0;"  class="btn btn-sm  " (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
                       </td>
                     </tr>
                     </ng-container>

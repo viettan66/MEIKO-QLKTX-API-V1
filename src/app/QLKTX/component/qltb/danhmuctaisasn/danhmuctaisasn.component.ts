@@ -23,7 +23,7 @@ export class DanhmuctaisasnComponent implements OnInit {
     $(document).ready(function(){
       
       $('thead>tr>td>input:checkbox').change(function(){
-        ////////////console.log($(this).is(':checked'))
+        //////////////console.log($(this).is(':checked'))
         $(this).parent().parent().parent().parent().find('tbody').find('input:checkbox').click()
       })
       $('.tabledodung').on('click','tbody>tr>td>input:checkbox',function(Event){
@@ -61,7 +61,7 @@ export class DanhmuctaisasnComponent implements OnInit {
     ////////////////
     $('.deleteitem').click(function(Event){
       if(!confirm("Bạn có chắc muốn xóa dữ liệu không?"))return false
-      ////////////console.log(that.ktx10temp)
+      //////////////console.log(that.ktx10temp)
       that.rest.PostDataToAPI<result<KTX0010>[]>(that.ktx10temp.filter(c=>{return c.check===true}),'KTX0010/delete').subscribe(data=>{
         data.forEach(val=>{
           if(val.code=='OK'){

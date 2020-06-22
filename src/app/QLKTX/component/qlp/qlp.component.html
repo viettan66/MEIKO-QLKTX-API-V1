@@ -1,94 +1,92 @@
 <div class="row no-gutters h-100 px-0">
     <app-menu></app-menu>
       <div class="col" id="contentmenu"> 
-        <div class="row no-gutters" id="hidecolumn">
+        <!-- <div class="row no-gutters" id="hidecolumn">
               <button class="list-group-item"><i class="fas fa-city"></i>&nbsp;<span>Danh mục phòng</span> </button>
               <button class="list-group-item"><i class="fas fa-sort-amount-up-alt"></i>&nbsp;<span>Phòng</span> </button>
 
-          </div>
+          </div> -->
+          <div class="row no-gutters align-items-center p-0" id="hidecolumn" style="height: auto;background-color: gray;">
+            <span class="p-2 btn-secondary h-100  {{tab==0?'bg-light text-dark ':''}}" (click)="tabchange(0)"><i class="fas fa-list"></i>&nbsp;Danh mục phòng</span>
+            <span class="p-2 btn-secondary h-100  {{tab==1?'bg-light text-dark ':''}}" (click)="tabchange(1)"><i class="fas fa-sort-amount-up-alt"></i>&nbsp;Phòng</span>
+        </div>
         <div class="row no-gutters"  style="padding: 10px;" >
          
-            <div class="col tab2"  >
+            <div class="col tab2" [ngStyle]="{'display':tab==1?'':'none'}" >
                 <div class="card cardcard  " id="testconvertPDF" style="background-color: rgba(255, 255, 255, 0.897);">
                   <div class="card-header">
                     <!-- DANH SÁCH PHÒNG  -->
-                    <span class="float-right">
-                      <button title="Thêm phòng" style="margin-left: 10px;"  id="themphongthemphong" class="btn btn-sm btn-secondary qlp"><i class="fa fa-plus"></i></button>&nbsp;
-                      <button title="Sắp phòng tự động" id="sapphongtudong"  class="btn btn-secondary qlsp"><i class="fas fa-magic"></i></button>
-                      <!-- <button title="test" id="testd"  class="btn btn-secondary"><i class="fas fa-minus"></i></button> -->
-                    </span>
-                    <span class="float-right">
-                      <select name="" id="listkhu" class="btn btn-sm btn-outline-secondary filter" >
-                        <option value="a">Khu ALL</option>
-                        <option value="F">Nữ</option>
-                        <option value="N">Nam</option>
-                      </select>&nbsp;
-                      <select name="" id="listtoanhash" class="btn btn-sm btn-outline-secondary filter">
-                        <option value="0">Tòa ALL</option>
-                        <option value="{{element.KTX0001_ID}}" *ngFor="let element of listtoanha">{{element.ten}}</option>
-                      </select>&nbsp;
-                      <select name="" id="listtangsh" class="btn btn-sm btn-outline-secondary  filter">
-                        <option value="0">Tầng ALL</option>
-                        <option value="{{element.KTX0001_ID}}" *ngFor="let element of listtang">{{element.ten}}</option>
-                        
-                      </select>
-                    </span>
-                <div class="col-3 float-right">
-                    <div class="input-group mb-2">
-                      <div class="input-group-prepend">
-                        <div class="input-group-text">Giường trống</div>
-                      </div>
-                      <input style="font-weight: bold;" disabled type="text" class="form-control" [(ngModel)]="datacount.countgiuongtrong">
-                    </div>
-                  </div>
-                    <div class="col-3 float-right">
-                      <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                          <div class="input-group-text">Tổng phòng</div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="row">
+                          <div class="col col-auto">
+                            <span style="position: relative;padding-right: 22px;font-size: 12px;"><span class="arrow1"></span>Công nhân</span>&nbsp;&nbsp;
+                            <span style="position: relative;padding-right: 22px;font-size: 12px"><span class="arrow2"></span>Trưởng nhóm</span>&nbsp;&nbsp;
+                            <span style="position: relative;padding-right: 22px;font-size: 12px"><span class="arrow3"></span>Chủ nhiệm</span>&nbsp;&nbsp;
+                            <span style="position: relative;padding-right: 22px;font-size: 12px"><span class="arrow4"></span>Trưởng phòng</span>&nbsp;&nbsp;
+                            <span style="position: relative;padding-right: 22px;font-size: 12px"><span class="arrow0"></span>Khác</span>&nbsp;&nbsp;
+                          </div>
+                          <div class="col"></div>
                         </div>
-                        <input style="font-weight: bold;" disabled type="text" class="form-control" [(ngModel)]="datacount.sumphong">
+                      </div>
+                      <div class="col col-auto">
+                        <button class="btn btn-sm btn-outline-secondary mr-1">Tổng phòng: {{datacount.sumphong}}</button>
+                        <button class="btn btn-sm btn-outline-secondary mr-5">Giường trống: {{datacount.countgiuongtrong}}/{{datacount.sumgiuong}}</button>
+                        <select name="" id="listkhu" class="btn btn-sm btn-outline-secondary filter mr-1" >
+                          <option value="a">Khu ALL</option>
+                          <option value="F">Nữ</option>
+                          <option value="N">Nam</option>
+                        </select>
+                        <select name="" id="listtoanhash" class="btn btn-sm btn-outline-secondary filter mr-1">
+                          <option value="0">Tòa ALL</option>
+                          <option value="{{element.KTX0001_ID}}" *ngFor="let element of listtoanha">{{element.ten}}</option>
+                        </select>
+                        <select name="" id="listtangsh" class="btn btn-sm btn-outline-secondary  filter mr-1">
+                          <option value="0">Tầng ALL</option>
+                          <option value="{{element.KTX0001_ID}}" *ngFor="let element of listtang">{{element.ten}}</option>
+                        </select>
+                        <button title="Thêm phòng" id="themphongthemphong" class="btn btn-sm btn-secondary qlp mr-1"><i class="fa fa-plus"></i></button>
+                        <button title="Sắp phòng tự động" id="sapphongtudong"  class="btn btn-sm btn-secondary qlsp mr-1"><i class="fas fa-magic"></i></button>
+                        <button title="Phân tầng"   class="btn btn-sm btn-secondary" (click)="phantang()"><i class="fas fa-sort-size-up-alt"></i></button>
+
                       </div>
                     </div>
-                    <!-- <SPAN class="float-right  btn" style="margin-right: 20px;">  
-                      Giường: <b>2584</b>  (Dùng: 1235, Trống: 1349)
-                    </SPAN>
-                    <SPAN class="float-right  btn" style="margin-right: 20px;">  
-                      Phòng: <b>354</b> 
-                    </SPAN>
-                    <SPAN class="float-right  btn" style="margin-right: 20px;">  
-                      Tòa nhà: <b> 2</b>
-                    </SPAN> -->
-                  </div>
+                    </div>
                   <div class="card-body" style="padding: 5px;">
-                    <!-- <div class="col no-gutters">
+                    <div class="col no-gutters" *ngIf="varphantang">
                       <ng-container *ngFor="let element2 of listphongf">
                         <div class="row d-flex justify-content-start">
                           <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}" *ngFor="let element of element2" style="width: 4em !important;" [ngStyle]="{'background-color':color[element.slotuse==null?0:((parseInt(element.slotuse/element.slot*10) ))]}">
-                        <input type="hidden" name="slotuse" value="{{element.slotuse}}">
-                        <div class="card-body" style="padding: 5px;">
-                          <h6 class="card-title">{{element.ten}}</h6>
-                          <p class="card-text">{{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </p>
-                        </div>
-                      </div>
+                            <input type="hidden" name="slotuse" value="{{element.slotuse}}">
+                            <div class="card-body" style="padding: 5px;">
+                              <h6 class="card-title mb-1" style="white-space: nowrap;">{{element.ten}}</h6>
+                              <span class="card-text" style="font-size: 14px;"><!-- <i class="fas fa-bed"></i> : -->{{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </span>
+                              <!-- <span class="card-text" style="font-size: 12px;"><i class="fas fa-cabinet-filing"></i> : {{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </span> -->
+                              <div class=" {{'arrow'+element.capbac}}"></div>
+                            </div>
+                          </div>
                         </div>
                       </ng-container>
-                    </div> -->
-                    <div class="row no-gutters d-flex justify-content-start">
+                    </div>
+                    <div class="row no-gutters d-flex justify-content-start" *ngIf="!varphantang">
                   
-                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}" *ngFor="let element of listphong" style="width: 4em;"
+                      <div class="card phongclick" id="{{element.KTX0001_ID}}" title="{{element.ten}}" *ngFor="let element of listphong" style="width: 4em;position: relative;"
                         [ngStyle]="{'background-color':color[element.slotuse==null?0:((parseInt(element.slotuse/element.slot*10) ))]}">
-                        <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+                        
                         <input type="hidden" name="slotuse" value="{{element.slotuse}}">
                         <div class="card-body" style="padding: 5px;">
-                          <h6 class="card-title" style="white-space: nowrap;">{{element.ten}}</h6>
-                          <p class="card-text">{{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </p>
+                          <h6 class="card-title mb-1" style="white-space: nowrap;">{{element.ten}}</h6>
+                          <span class="card-text" style="font-size: 14px;"><!-- <i class="fas fa-bed"></i> : -->{{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </span>
+                          <!-- <span class="card-text" style="font-size: 12px;"><i class="fas fa-cabinet-filing"></i> : {{element.slotuse==null?0:element.slotuse}}/{{element.slot}} </span> -->
+                          <div class=" {{'arrow'+element.capbac}}"></div>
                         </div>
                       </div>
                     </div>
+                    
                   </div>
                 </div>
             </div>
-            <div class="col-auto tab2"  >
+            <div class="col-auto tab2"   [ngStyle]="{'display':tab==1?'':'none'}" >
               <div class="card card-bodygiuong" style="width: 250px;background-color: rgba(255, 255, 255, 0.897);" >
                 <div class="card-header" (click)="hiddencard('card-bodygiuong')">
                   GIƯỜNG
@@ -144,7 +142,7 @@
               </div>
             </div>
 
-            <div class="col tab1" style="padding: 10px;" >
+            <div class="col tab1" style="padding: 10px;"  [ngStyle]="{'display':tab==0?'':'none'}"  >
               <div class="row no-gutters">
                 <div class="col-auto">
                   <div class="card" >
@@ -256,6 +254,7 @@
                           <option value="2">Trưởng nhóm</option>
                           <option value="3">Chủ nhiệm</option>
                           <option value="4">Trưởng phòng</option>
+                          <option value="0">Khác</option>
                         </select></td>
                       </tr>
                       <tr>
@@ -454,6 +453,7 @@
                         <option value="2">Trưởng nhóm</option>
                         <option value="3">Chủ nhiệm</option>
                         <option value="4">Trưởng phòng</option>
+                        <option value="0">Khác</option>
                       </select>
                       
                     </div>

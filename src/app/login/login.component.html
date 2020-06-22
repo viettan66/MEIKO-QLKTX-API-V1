@@ -6,7 +6,8 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">Tài khoản</div>
               </div>
-              <input type="text" class="form-control" id="ID" placeholder="Tài khoản" value="admin">
+              <input type="text" class="form-control" id="ID" placeholder="Tài khoản" value="" readonly  
+              onfocus="this.removeAttribute('readonly');" >
             </div>
           </div>
           <div class="col-12 my-1">
@@ -14,7 +15,8 @@
               <div class="input-group-prepend">
                 <div class="input-group-text">Mật khẩu</div>
               </div>
-              <input type="password" class="form-control" id="PASS" placeholder="Mật khẩu" value="1" (keydown)="kkkk($event)">
+              <input type="password" class="form-control" id="PASS" placeholder="Mật khẩu" value="" (keydown)="kkkk($event)" readonly  
+              onfocus="this.removeAttribute('readonly');">
             </div>
           </div>
           <div class="col-12 my-1">

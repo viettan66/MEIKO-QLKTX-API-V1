@@ -92,7 +92,7 @@
                     <td colspan="1">Số giường</td>
                     <td colspan="2"><input class="formcontrol" type="text"  [(ngModel)]="ktx0023temp.KTX0002.ten"></td>
                     <td colspan="1">Ngày có hiêu lực</td>
-                    <td colspan="2"><input class="formcontrol" type="text"  (ngModelChange)="ktx0023temp.ngaycohieuluc = $event"  [ngModel]="ktx0023temp.ngaycohieuluc | date:'yyyy-MM-dd'" ></td>
+                    <td colspan="2"><input class="formcontrol" type="date"  (ngModelChange)="ktx0023temp.ngaycohieuluc = $event"  [ngModel]="ktx0023temp.ngaycohieuluc | date:'yyyy-MM-dd'" ></td>
                 </tr>
             </table>
         </div>

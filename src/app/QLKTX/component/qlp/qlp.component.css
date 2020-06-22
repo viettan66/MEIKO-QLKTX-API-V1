@@ -14,3 +14,49 @@
 
 .boderbold{border:  solid 3px gray;}
 .card-header{cursor: pointer;}
+.b1{border-color: rgb(194, 194, 194) !important;}
+.b2{border-color: rgb(12, 59, 212) !important;}
+.b3{border-color: rgb(216, 194, 0) !important;}
+.b4{border-color: rgb(206, 120, 39) !important;}
+
+.arrow0{
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-bottom: 20px solid rgb(224, 0, 224);
+    position: absolute;
+    bottom: 0;right: 0;
+}
+.arrow1{
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-bottom: 20px solid rgb(194, 194, 194);
+    position: absolute;
+    bottom: 0;right: 0;
+}.arrow2{
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-bottom: 20px solid rgb(12, 59, 212);
+    position: absolute;
+    bottom: 0;right: 0;
+}.arrow3{
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-bottom: 20px solid rgb(229, 255, 0);
+    position: absolute;
+    bottom: 0;right: 0;
+}.arrow4{
+    width: 0; 
+    height: 0; 
+    border-left: 20px solid transparent;
+    border-bottom: 20px solid rgb(255, 136, 0);
+    position: absolute;
+    bottom: 0;right: 0;
+}
+
+
+#hidecolumn span {border-right: 1px solid rgb(78, 78, 78);cursor: pointer;border-radius: 5px 5px 0 0;margin-top: 4px;}
+#hidecolumn span:first-child {border-left: 1px solid rgb(78, 78, 78);margin-left: 30px;}

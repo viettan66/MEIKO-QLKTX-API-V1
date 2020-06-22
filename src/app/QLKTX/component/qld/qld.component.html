@@ -30,7 +30,7 @@
             </div>
             <div class="card-body" style="padding: 5px;background-color: rgba(255, 255, 255, 0) !important;">
               <div class="row no-gutters">
-                <table class="table table-bordered tablelistdon" id="tabletoexport">
+                <table class="table table-bordered tablelistdon ddddddddddddddddddddd" style="font-size: 12px;"  id="tabletoexport">
                   <thead><tr>
                     <th style="width: 20px;"><input type="checkbox" ></th>
                     <th style="width: 40px;">STT</th>
@@ -68,7 +68,7 @@
                                 <i *ngIf="element.trangthai" class="fa fa-check"></i><i *ngIf="!element.trangthai" class="fa fa-sync-alt fa-spin"></i></td>
                               <td style="text-align: center;">
                                 <!-- <button class="btn px-1" (click)="delete(element)"><i class="fas fa-trash-alt"></i></button> -->
-                                <button  class="btn  px-1" (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
+                                <button  class="btn btn-sm  p-0" (click)="showdetaildon(element)" ><i class="fas fa-eye"></i></button>
                               </td>
                             </tr>
 

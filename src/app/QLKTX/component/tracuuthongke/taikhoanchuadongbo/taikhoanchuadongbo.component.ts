@@ -40,10 +40,10 @@ async dongbo(){
         let ListProduct=[]
         for(const qqq of adata){await ListProduct.push({soLuong:qqq.soluongcap,donViTinh:qqq.KTX0010.donvi,WH0007_ID:qqq.KTX0010.WH0007_ID})}
         input.append('ListProduct',JSON.stringify(ListProduct) );
-        //////////console.log(input)
-        //////////console.log(data)
+        ////////////console.log(input)
+        ////////////console.log(data)
         let kkkk=await this.rest.Post<any>(input, Global.xuatkhoAPI).toPromise()
-        //////////console.log(kkkk)
+        ////////////console.log(kkkk)
       }
     }
   }
